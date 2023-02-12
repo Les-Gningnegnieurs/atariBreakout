@@ -6,7 +6,9 @@ int main()
 
     //menu.loadConfig();
 
+    //using namespace std;
     //cout << menu.get_modeAccelerometer() << endl;
+    //cout << menu.get_modeJoystick() << endl;
     //cout << menu.get_screenHeight() << endl;
     //cout << menu.get_screenWidth() << endl;
 
