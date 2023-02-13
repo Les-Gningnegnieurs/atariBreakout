@@ -37,25 +37,25 @@ public:
 	Menu();
 	~Menu();
 
-	void update_data();
-	void update_config();
+	void Update_data();
+	void Update_config();
 
 
-	bool loadConfig();
-	bool saveConfig();
+	bool LoadConfig();
+	bool SaveConfig();
 
 
-	void set_screenWidth(int value);
-	void set_screenHeight(int value);
-	void set_modeAccelerometer();
-	void set_modeJoystick();
+	void Set_screenWidth(int value);
+	void Set_screenHeight(int value);
+	void Set_modeAccelerometer();
+	void Set_modeJoystick();
 
 
-	int get_screenWidth();
-	int get_screenHeight();
+	int Get_screenWidth();
+	int Get_screenHeight();
 
-	bool is_modeAccelerometer();
-	bool is_modeJoystick();
+	bool Is_modeAccelerometer();
+	bool Is_modeJoystick();
 };
 
 

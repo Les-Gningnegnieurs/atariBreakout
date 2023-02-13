@@ -1,25 +1,26 @@
 #include "menu.h"
 
-int main()
+/*int main()
 {
     Menu menu;
 
-    //menu.loadConfig();
+    //menu.LoadConfig();
 
     //using namespace std;
-    //cout << menu.get_modeAccelerometer() << endl;
-    //cout << menu.get_modeJoystick() << endl;
-    //cout << menu.get_screenHeight() << endl;
-    //cout << menu.get_screenWidth() << endl;
+    //cout << menu.Get_modeAccelerometer() << endl;
+    //cout << menu.Get_modeJoystick() << endl;
+    //cout << menu.Get_screenHeight() << endl;
+    //cout << menu.Get_screenWidth() << endl;
 
-    menu.set_modeJoystick();
-    menu.set_screenHeight(900);
-    menu.set_screenWidth(1600);
+    menu.Set_modeJoystick();
+    menu.Set_screenHeight(900);
+    menu.Set_screenWidth(1600);
 
-    menu.saveConfig();
+    menu.SaveConfig();
 
     return 0;
-}
+}*/
+
 /* POUR AJOUTER OU RETIRER UN PARAMÈTRE DE LA CONFIG,
  * IL FAUT MODIFIER LES TROIS FONCTIONS SUIVANTES ET
  * AJOUTER L'ATTRIBUT CORRESPONDANT DANS LE .H
@@ -35,7 +36,7 @@ Menu::Menu()
     parameters[3].name = "MODE_JOYSTICK";
 }
 
-void Menu::update_data()
+void Menu::Update_data()
 {
     screenWidth = parameters[0].value;
     screenHeight = parameters[1].value;
@@ -43,7 +44,7 @@ void Menu::update_data()
     modeJoystick = parameters[3].value;
 }
 
-void Menu::update_config()
+void Menu::Update_config()
 {
     parameters[0].value = screenWidth;
     parameters[1].value = screenHeight;
@@ -53,7 +54,7 @@ void Menu::update_config()
 
 Menu::~Menu() { delete[] parameters; }
 
-bool Menu::loadConfig()
+bool Menu::LoadConfig()
 {
    std::ifstream file(CONFIG_PATH);
 
@@ -78,7 +79,7 @@ bool Menu::loadConfig()
         }
     }
 
-    update_data();
+    Update_data();
 
     file.close();
 
@@ -86,9 +87,9 @@ bool Menu::loadConfig()
 }		
 
 
-bool Menu::saveConfig()
+bool Menu::SaveConfig()
 {
-    update_config();
+    Update_config();
     
     std::ofstream file(CONFIG_PATH);
 
@@ -108,45 +109,45 @@ bool Menu::saveConfig()
     return true;
 }
 
-void Menu::set_screenWidth(int value)
+void Menu::Set_screenWidth(int value)
 {
     screenWidth = value;
 }
 
 
-void Menu::set_screenHeight(int value)
+void Menu::Set_screenHeight(int value)
 {
     screenHeight = value;
 }
 
-void Menu::set_modeAccelerometer()
+void Menu::Set_modeAccelerometer()
 {
     modeAccelerometer = true;
     modeJoystick = false;
 }
 
-void Menu::set_modeJoystick()
+void Menu::Set_modeJoystick()
 {
     modeJoystick = true;
     modeAccelerometer = false;
 }
 
-int Menu::get_screenWidth()
+int Menu::Get_screenWidth()
 {
     return screenWidth;
 }
 
-int Menu::get_screenHeight()
+int Menu::Get_screenHeight()
 {
     return screenHeight;
 }
 
-bool Menu::is_modeAccelerometer()
+bool Menu::Is_modeAccelerometer()
 {
     return modeAccelerometer;
 }
 
-bool Menu::is_modeJoystick()
+bool Menu::Is_modeJoystick()
 {
     return modeJoystick;
 }
