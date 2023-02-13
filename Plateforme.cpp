@@ -38,7 +38,7 @@ bool Plateforme::checkCollision(Position posHit)
     //j'assumes qu'il est dans le coin gauche inférieur.
     if(posHit.y<=pos.y+sizeY)
     {
-        if(posHit.x<=pos.x+sizeX) return true;
+        if((posHit.x>=pos.x)&&(posHit.x<=pos.x+sizeX)) return true;
     }
 
     return false;
