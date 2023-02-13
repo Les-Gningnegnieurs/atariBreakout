@@ -13,7 +13,7 @@ private:
     int maxSpeed;
 public:
     Plateforme(int length,int height);
-    bool checkCollision();
+    bool checkCollision(Position posHit);
     void update(float timeElapsed);
     void move(int joystickvalueX);
     void draw();

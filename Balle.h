@@ -19,7 +19,7 @@ public:
     void update(float timeElapsed);
     void draw();
     Position getPos() {return pos;}
-    bool checkCollision();
+    bool checkCollision(Position posHit);
     void outOfBounds();
 
 

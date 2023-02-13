@@ -11,7 +11,7 @@ Balle::Balle(float ray)
 }
 void Balle:: update(float timeElapsed)
 {
-    //
+
     if(speed.x>maxSpeed) speed.x=maxSpeed;
     else if(speed.x<-maxSpeed) speed.x=-maxSpeed;
     if(speed.y>maxSpeed) speed.y=maxSpeed;
@@ -19,6 +19,26 @@ void Balle:: update(float timeElapsed)
     position.x+= timeElapsed*speed.x;
     position.y+=timeElapsed*speed.y;
 }
+
+
+void Balle:: draw()
+{
+    cout<< "la vitesse en x est de "<<speed.x<< " la vitesse en y est de "<< speed.y<<endl;
+    cout<< "la position en x est "<<pos.x<<" la position en y est "<<pos.y<<endl;
+
+}
+bool Balle::checkCollision(Position posHit)
+{
+
+
+}
+
+void Balle::outOfBounds()
+{
+    //implémentation reste à définir;
+
+}
+
 
 
 
