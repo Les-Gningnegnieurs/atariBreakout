@@ -5,8 +5,8 @@
 #include "LevelInfo.h"
 #include <ostream>
 #include <istream>
-#define MAX_ROWS 4
-#define MAX_COLUMNS 8
+#define MAX_ROWS 128
+#define MAX_COLUMNS 128
 
 class Level{
     private: 
@@ -22,7 +22,19 @@ class Level{
 
         void setRows(int rows);
 
+        int getRows();
+
         void setColumns(int columns);
+        
+        int getColumns();
+
+        int getHeigth();
+
+        void setHeigth(int y);
+
+        int getLength();
+
+        void setLength(int x);
 
         bool checkCollision(int x, int y);
 

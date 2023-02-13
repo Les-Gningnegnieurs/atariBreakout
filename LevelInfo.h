@@ -4,6 +4,8 @@
 struct LevelInfos {
 	int rows;
     int columns;
+    int Brick_length;
+    int Brick_heigth;
 };
 
 #endif

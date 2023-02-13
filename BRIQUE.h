@@ -16,9 +16,10 @@ class Brique
 {
 public:
 	//on entre simplement les coordonnées. la hauteur et la largeur sont déja définies
-	Brique(int x, int y);
+	Brique(int x, int y, int l, int h);
 
 	virtual ~Brique();
+
 	
 	virtual bool checkCollision(int x, int y);
 
