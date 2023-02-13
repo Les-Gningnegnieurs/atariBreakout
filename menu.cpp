@@ -12,11 +12,11 @@ int main()
     //cout << menu.get_screenHeight() << endl;
     //cout << menu.get_screenWidth() << endl;
 
-    //menu.set_modeAccelerometer();
-    //menu.set_screenHeight(900);
-    //menu.set_screenWidth(1600);
+    menu.set_modeJoystick();
+    menu.set_screenHeight(900);
+    menu.set_screenWidth(1600);
 
-    //menu.saveConfig("config/new config.config");
+    menu.saveConfig();
 
     return 0;
 }
@@ -44,6 +44,7 @@ void Menu::update_config()
     parameters[0].value = screenWidth;
     parameters[1].value = screenHeight;
     parameters[2].value = modeAccelerometer;
+    parameters[3].value = modeJoystick;
 }
 
 Menu::~Menu() { delete[] parameters; }
@@ -59,7 +60,7 @@ bool Menu::loadConfig()
     }
 
     std::string parameter;
-    int value;
+    short value;
 
     while (!file.eof())
     {
@@ -81,15 +82,15 @@ bool Menu::loadConfig()
 }		
 
 
-bool Menu::saveConfig(std::string location)
+bool Menu::saveConfig()
 {
     update_config();
     
-    std::ofstream file(location);
+    std::ofstream file(CONFIG_PATH);
 
     if (!file.is_open())
     {
-        std::cout << "Creation du fichier config echoue a l'adresse: " << location << std::endl;
+        std::cout << "Creation du fichier config echoue a l'adresse: " << CONFIG_PATH << std::endl;
         return false;
     }
 
@@ -136,12 +137,12 @@ int Menu::get_screenHeight()
     return screenHeight;
 }
 
-bool Menu::get_modeAccelerometer()
+bool Menu::is_modeAccelerometer()
 {
     return modeAccelerometer;
 }
 
-bool Menu::get_modeJoystick()
+bool Menu::is_modeJoystick()
 {
     return modeJoystick;
 }

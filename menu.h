@@ -42,7 +42,7 @@ public:
 
 
 	bool loadConfig();
-	bool saveConfig(std::string location);
+	bool saveConfig();
 
 
 	void set_screenWidth(int value);
@@ -53,8 +53,9 @@ public:
 
 	int get_screenWidth();
 	int get_screenHeight();
-	bool get_modeAccelerometer();
-	bool get_modeJoystick();
+
+	bool is_modeAccelerometer();
+	bool is_modeJoystick();
 };
 
 
