@@ -1,7 +1,7 @@
 #include "Level.h"
 Level :: Level(){
-    _level. = MAX_ROWS;
-    newLevel.columns = MAX_COLUMNS;
+    _info.rows = MAX_ROWS;
+    _info.columns = MAX_COLUMNS;
 }
 Level :: ~Level(){
 
@@ -32,9 +32,16 @@ Brique* Level :: edit_Brique(int row, int column){
 }
 
 void Level :: afficher(ostream& s){
-    s << _level.rows << " , " << _level.columns << endl; 
+    s << _info.rows << " , " << _info.columns << endl; 
 }
 
-friend istream& operator >> (istream& s, Level& I){
+void Level :: setRows(int rows){
+    _info.rows = rows;
+}
 
+void Level :: setColumns(int columns){
+    _info.columns = columns;
+}
+
+std::istream& operator >> (istream& s, Level& I){
 }
