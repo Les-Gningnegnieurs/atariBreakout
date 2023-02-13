@@ -27,11 +27,11 @@ public:
 	virtual bool est_Detruite();
 
 	/// @brief
-	/// @return Healthy, Hurt, ou Broken
+	/// @return Destroyed ou autres
 	virtual PV getPV();
 
 	/// @brief 
-	/// @param L'état à devenir
+	/// @param l'état à devenir
 	/// @return true or false
 	virtual bool setPV(PV state);
 

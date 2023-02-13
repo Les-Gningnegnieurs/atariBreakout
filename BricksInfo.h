@@ -11,11 +11,13 @@ struct Hitbox {
 	x;
 	y;
 };
-/// @brief Healty(0) = initialise, Hurt(1)= damaged mais pas brisée, Destroyed(2) = brisée/deleted
+/// @brief Destroyed(0) = delete la brique, Hurt(1-4)= 4 niveau de vie pour l'instant
 enum PV{
-    Healthy,
-    Hurt,
-    Destroyed 
+    Destroyed,
+    Hp1,
+    Hp2,
+    Hp3,
+    Hp4, 
 };
 /// @brief def: pour les différentes textures des briques à plusieurs vies. Big number = big damage
 enum HurtType{
