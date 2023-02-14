@@ -75,7 +75,7 @@ bool Menu::LoadConfig()
         file >> parameter;
         file >> value;
 
-        for (int i = 0; i < NUMBER_OF_PARAMETERS; i++)
+        for (int i = 0; i < NUMBER_OF_PARAMETERS - 1; i++)
         {
             if (parameter == parameters[i].name)
                 parameters[i].value = value;
@@ -102,7 +102,7 @@ bool Menu::SaveConfig()
         return false;
     }
 
-    for (int i = 0; i < NUMBER_OF_PARAMETERS; i++)
+    for (int i = 0; i < NUMBER_OF_PARAMETERS - 1; i++)
     {
         file << parameters[i].name << " " << parameters[i].value << std::endl;
     }
