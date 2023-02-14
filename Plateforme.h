@@ -19,7 +19,6 @@ public:
     void draw();
 
 
-
 };
 
 #endif PLATEFORME_H

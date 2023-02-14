@@ -14,9 +14,9 @@ Plateforme:: Plateforme(int length, int height)
 
 Plateforme:: move(int joystickvalueX)
 {
-    //j'ai pas regarder comment le joystick retournait les valeurs
-    //j'assumes que c'est analogique de 0 à 1 mais c'est probablement pas sa
-    speed.x= joystickvalueX*maxspeed;
+    // calcul à verifier (512 est la valeur quand le joystick est au "repos")
+
+    speed.x= (joystickvalueX-512)*maxspeed))/512;
 }
 
 void Plateforme::update(float timeElapsed)
