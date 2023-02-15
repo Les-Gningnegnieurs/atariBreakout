@@ -29,6 +29,9 @@ void Balle:: draw()
 }
 bool Balle::checkCollision(Position posHit)
 {
+    double distance = sqrt(pow( posHit.x- pos.x, 2) + pow(posHit.y - pos.y, 2));
+    if(distance<=rayon) return true;
+    return false;
 
 
 }

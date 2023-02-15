@@ -18,9 +18,11 @@ public:
     float aire() {return rayon*rayon*M_PI;}
     void update(float timeElapsed);
     void draw();
-    Position getPos() {return pos;}
     bool checkCollision(Position posHit);
     void outOfBounds();
+    Velocity getSpeed(){return speed;}
+    Position getPos() {return pos;}
+
 
 
 };

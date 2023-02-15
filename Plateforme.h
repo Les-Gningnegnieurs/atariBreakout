@@ -17,7 +17,8 @@ public:
     void update(float timeElapsed);
     void move(int joystickvalueX);
     void draw();
-
+    Velocity getSpeed(){return speed;}
+    Position getPos(){return pos;}
 
 };
 
