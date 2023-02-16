@@ -12,7 +12,7 @@ Level :: ~Level(){
 void Level :: draw(){
     std::cout << "Informations sur le niveau" << std::endl;
     for (int i = 0; i < _info.rows; i++) {
-        for (int j = 0; j < _info.columns; i++) {
+        for (int j = 0; j < _info.columns; j++) {
             _board[i][j]->afficher(std::cout);
         }
         //std::cout << endl;

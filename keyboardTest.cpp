@@ -21,12 +21,8 @@ using namespace std;
 int main() {
     Level _lev;
     fstream myfile;
-    myfile.open("../ataribreakout/testNiveau.txt", ios::in);
-    if (!myfile)
-        myfile.close();
-    else {
-        myfile >> _lev;
-    }
+    myfile.open("testNiveau.txt", ios::in);
+    myfile >> _lev;
     myfile.close();
     _lev.draw();
     return 0;
