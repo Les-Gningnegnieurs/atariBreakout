@@ -5,7 +5,7 @@
 */
 #ifndef BRIQUE_H
 #define BRIQUE_H
-#include "BricksInfo.h"
+#include "Structs.h"
 
 
 class Brique

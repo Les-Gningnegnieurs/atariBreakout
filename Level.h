@@ -2,7 +2,8 @@
 #define LEVEL_H
 
 #include "Brique.h"
-#include "LevelInfo.h"
+#include "Structs.h"
+#include "Briquetest.h"
 #define MAX_ROWS 128
 #define MAX_COLUMNS 128
 
