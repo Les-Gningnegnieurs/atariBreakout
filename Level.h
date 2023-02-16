@@ -3,8 +3,6 @@
 
 #include "Brique.h"
 #include "LevelInfo.h"
-#include <ostream>
-#include <istream>
 #define MAX_ROWS 128
 #define MAX_COLUMNS 128
 
@@ -38,11 +36,10 @@ class Level{
 
         bool checkCollision(int x, int y);
 
-        bool addBrick(Brique *brick); //utile pour set le level au debut
+        Brique* getBrique(int row_idx, int column_idx); //utile pour set le level au debut
 
-        Brique* deleteBrick(int row, int column); //utile pour set le level au debut
+        bool setBrique(int row_idx, int column_idx, Brique* brique); //utile pour set le level au debut
 
-        Brique* edit_Brique(int row, int column); 
 
         void afficher(ostream& s);
 

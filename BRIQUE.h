@@ -5,12 +5,8 @@
 */
 #ifndef BRIQUE_H
 #define BRIQUE_H
-
-#include <iostream>
-#include <istream>
 #include "BricksInfo.h"
 
-using namespace std;
 
 class Brique
 {
@@ -29,12 +25,12 @@ public:
 
 	/// @brief
 	/// @return Destroyed ou autres
-	virtual PV getPV();
+	virtual state getstate();
 
 	/// @brief 
 	/// @param l'état à devenir
 	/// @return true or false
-	virtual bool setPV(PV state);
+	virtual bool setPV(state state);
 
 	virtual bool increase_Damage();
 
@@ -43,7 +39,7 @@ public:
 	virtual void afficher(ostream& s) = 0; //pour les test � l'�cran
 protected:
 	Hitbox _pos;
-	PV _pv;
+	state _etat;
 	int _sizeX;
 	int _sizeY;
 };

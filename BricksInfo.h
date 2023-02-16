@@ -11,21 +11,11 @@ struct Hitbox {
 	int x;
 	int y;
 };
-/// @brief Destroyed(0) = delete la brique, Hurt(1-4)= 4 niveau de vie pour l'instant
-enum PV{
+/// @brief Destroyed(0) = delete la brique, Hurt = touché, Alive = pas touché
+enum state{
     Destroyed,
-    Hp1,
-    Hp2,
-    Hp3,
-    Hp4, 
-};
-/// @brief def: pour les différentes textures des briques à plusieurs vies. Big number = big damage
-enum HurtType{
-    Hurt0,
-    Hurt1,
-    Hurt2,
-    Hurt3
-    //..... 
+    Hurt,
+    Alive, 
 };
 
 
