@@ -9,6 +9,7 @@ int main(){
         std::cout << "Joystick: " << k.getJoystick().x << " " << k.getJoystick().y << " ";
         std::cout << "Buttons: " << k.getButton(0) << " ";
         std::cout << std::endl;
+        
     }
     return 0;
 }
