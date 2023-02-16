@@ -7,41 +7,39 @@
 #define BRIQUE_H
 #include "Structs.h"
 
+#include <iostream>
 
 class Brique
 {
 public:
 	//on entre simplement les coordonnées. la hauteur et la largeur sont déja définies
-	Brique(int x, int y, int l, int h);
+	Brique(int x = 0, int y = 0, int l = 4, int h = 1);
 
 	virtual ~Brique();
 
 	
-	virtual bool checkCollision(int x, int y);
+	bool checkCollision(int x, int y);
 
-	virtual void update(float timeElapsed);
+	//virtual void update(float timeElapsed);
 
-	virtual bool est_Detruite();
+	bool est_Detruite();
 
 	/// @brief
 	/// @return Destroyed ou autres
-	virtual state getstate();
+	state getstate();
 
-	/// @brief 
-	/// @param l'état à devenir
-	/// @return true or false
-	virtual bool setPV(state state);
+	void setstate(state& s);
 
-	virtual bool increase_Damage();
+	//virtual bool increase_Damage();
 
-	virtual istream& importer(istream &s);
-
-	virtual void afficher(ostream& s) = 0; //pour les test � l'�cran
+	virtual void afficher(std::ostream& s) = 0; 
 protected:
 	Hitbox _pos;
 	state _etat;
 	int _sizeX;
 	int _sizeY;
+	int _PV;
+	int _PVini;
 };
 
 #endif

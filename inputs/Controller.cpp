@@ -1,6 +1,5 @@
 #include "Controller.h"
 
-
 Joystick Controller::getJoystick(){
     return _joystick;
 }
@@ -33,7 +32,7 @@ void Controller::receiveInputs(){
     //TODO
     std::string incomming;
 
-    //parse JSONString
+    //parse JSONString with nlohmann library
     json inputs = json::parse(incomming);
 
     Joystick j;
@@ -46,27 +45,31 @@ void Controller::receiveInputs(){
     a.angleDeg = inputs["accel"]["angle"];
     _accelerometre = a;
 
-    _buttons = inputs["buttons"];
+    for(int i = 0; i < 4; i++){
+        _buttons[i] = (bool)inputs["buttons"][i];
+    }
 }
 
 void Controller::sendOutputs(){
-    //build the json object
+    //build the json object with the nlohmann library and serialize it
+    json outputs;
+    outputs["Bargraph"] = _bargraph.status;
+    outputs["Leds"] = json::array();
+    for(int i = 0; i < 2; i++){
+        json led;
+        led["R"] = _leds[i].R;
+        led["G"] = _leds[i].G;
+        led["B"] = _leds[i].B;
+        outputs["Leds"].push_back(led);
+    }
 
-    json outputs = json{
-    "Bargraph" : _bargraph.status,
-    "Leds" : [
-            {
-                "R" : _leds[0].R,
-                "G" : _leds[0].G,
-                "B" : _leds[0].B
-            },
-            {
-                "R" : _leds[1].R,
-                "G" : _leds[1].G,
-                "B" : _leds[1].B
-            }
-        ]
-    };
+    //serialize the json object to string
+    std::string out = outputs.dump();
 
-    //envoyer l'objet Json par le port SATA
+    //send the string to the SATA
+    //TODO
 }
+
+Controller::Controller(){}
+
+Controller::~Controller(){}

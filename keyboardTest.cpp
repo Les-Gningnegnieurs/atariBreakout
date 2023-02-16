@@ -1,5 +1,5 @@
 #include "inputs/Keyboard.h"
-
+/*
 int main(){
     Keyboard k;
 
@@ -11,5 +11,19 @@ int main(){
         std::cout << std::endl;
         
     }
+    return 0;
+}*/
+#include "Level.h"
+#include <fstream>
+#include <iostream>
+
+using namespace std;
+int main() {
+    Level _lev;
+    fstream myfile;
+    myfile.open("testNiveau.txt", ios::in);
+    myfile >> _lev;
+    myfile.close();
+    _lev.draw();
     return 0;
 }
