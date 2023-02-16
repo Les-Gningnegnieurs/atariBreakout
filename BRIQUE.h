@@ -5,12 +5,8 @@
 */
 #ifndef BRIQUE_H
 #define BRIQUE_H
-
-#include <iostream>
-#include <istream>
 #include "BricksInfo.h"
 
-using namespace std;
 
 class Brique
 {
