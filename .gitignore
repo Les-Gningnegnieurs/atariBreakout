@@ -50,3 +50,16 @@ compile_commands.json
 
 # QtCreator local machine specific files for imported projects
 *creator.user*
+.idea/atariBreakout.iml
+*.xml
+
+.vs/
+.vscode/
+x64/
+release/
+debug/
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.*
+*.sln
+*.suo
