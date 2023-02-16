@@ -52,3 +52,14 @@ compile_commands.json
 *creator.user*
 .idea/atariBreakout.iml
 *.xml
+
+.vs/
+.vscode/
+x64/
+release/
+debug/
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.*
+*.sln
+*.suo
