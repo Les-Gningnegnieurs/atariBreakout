@@ -14,4 +14,4 @@ struct Velocity {
     int y;
 };
 
-#endif  STRUCTS_H
+#endif

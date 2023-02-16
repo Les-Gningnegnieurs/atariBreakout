@@ -1,4 +1,5 @@
 #include "Structs.h"
+#include <iostream>
 #ifndef PLATEFORME_H
 #define PLATEFORME_H
 
@@ -22,4 +23,4 @@ public:
 
 };
 
-#endif PLATEFORME_H
+#endif

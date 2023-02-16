@@ -4,7 +4,7 @@ Plateforme:: Plateforme(int length, int height)
 {
     sizeX= length;
     sizeY= height;
-    tiltangle=0;
+    tiltAngle=0;
     maxSpeed=10; // à déterminer
     speed.x=0;
     speed.y=0;
@@ -12,11 +12,11 @@ Plateforme:: Plateforme(int length, int height)
     pos.y=0;  // je sais pas s'il y a moyen de forcer la valeur à être consante étant donné que la struct n'est pas const
 }
 
-Plateforme:: move(int joystickvalueX)
+void Plateforme:: move(int joystickvalueX)
 {
     // calcul à verifier (512 est la valeur quand le joystick est au "repos")
 
-    speed.x= (joystickvalueX-512)*maxspeed))/512;
+    speed.x= ((joystickvalueX-512)*maxSpeed)/512;
 }
 
 void Plateforme::update(float timeElapsed)
@@ -27,8 +27,8 @@ void Plateforme::update(float timeElapsed)
 
 void Plateforme::draw()
 {
-    cout<<"Plateforme de"<< sizeX<< " de longeur et "<< sizeY<< "de hauteur"<<endl;
-    cout<<"La position est:"<<pos.x<<" la vitesse est:"<<speed.x<<endl;
+    std::cout<<"Plateforme de"<< sizeX<< " de longeur et "<< sizeY<< "de hauteur"<<std::endl;
+    std::cout<<"La position est:"<<pos.x<<" la vitesse est:"<<speed.x<<std::endl;
 
 }
 

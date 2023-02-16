@@ -16,15 +16,15 @@ void Balle:: update(float timeElapsed)
     else if(speed.x<-maxSpeed) speed.x=-maxSpeed;
     if(speed.y>maxSpeed) speed.y=maxSpeed;
     else if(speed.y<-maxSpeed) speed.y=-maxSpeed;
-    position.x+= timeElapsed*speed.x;
-    position.y+=timeElapsed*speed.y;
+    pos.x+= timeElapsed*speed.x;
+    pos.y+=timeElapsed*speed.y;
 }
 
 
 void Balle:: draw()
 {
-    cout<< "la vitesse en x est de "<<speed.x<< " la vitesse en y est de "<< speed.y<<endl;
-    cout<< "la position en x est "<<pos.x<<" la position en y est "<<pos.y<<endl;
+    std::cout<< "la vitesse en x est de "<<speed.x<< " la vitesse en y est de "<< speed.y<<std::endl;
+    std::cout<< "la position en x est "<<pos.x<<" la position en y est "<<pos.y<<std::endl;
 
 }
 bool Balle::checkCollision(Position posHit)

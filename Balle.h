@@ -4,6 +4,7 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include"Structs.h"
+#include <iostream>
 
 #ifndef BALLE_H
 #define BALLE_H
@@ -27,4 +28,4 @@ public:
 
 };
 
-#endif BALLE_H
+#endif
