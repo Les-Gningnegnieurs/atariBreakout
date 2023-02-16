@@ -18,7 +18,8 @@ private:
     int _livesLeft;
 
 public:
-    void update(float timeElapsed
+    GameLogic();
+    void update(float timeElapsed);
     void draw();
     void checkCollisions();
     bool isGameOver();
