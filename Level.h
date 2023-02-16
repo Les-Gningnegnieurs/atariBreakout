@@ -4,6 +4,7 @@
 #include "Brique.h"
 #include "Structs.h"
 #include "Briquetest.h"
+#include <iostream>
 #define MAX_ROWS 128
 #define MAX_COLUMNS 128
 
@@ -42,9 +43,9 @@ class Level{
         bool setBrique(int row_idx, int column_idx, Brique* brique); //utile pour set le level au debut
 
 
-        void afficher(ostream& s);
+        void afficher(std::ostream& s);
 
-        friend istream& operator >>(istream& s, Level& I);
+        friend std::istream& operator >>(std::istream& s, Level& I);
 
 };
 #endif
