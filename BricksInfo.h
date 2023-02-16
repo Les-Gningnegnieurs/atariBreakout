@@ -8,8 +8,8 @@
 #define BRICKSINFO_H
 /// @brief coordonnées du coin gauche
 struct Hitbox {
-	x;
-	y;
+	int x;
+	int y;
 };
 /// @brief Destroyed(0) = delete la brique, Hurt(1-4)= 4 niveau de vie pour l'instant
 enum PV{
