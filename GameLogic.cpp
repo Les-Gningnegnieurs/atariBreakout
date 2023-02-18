@@ -3,15 +3,19 @@
 GameLogic:: GameLogic()
 {
     _livesLeft=3;
+    _platform(5,3);
     _score=0;
     balls[0]=new balle(5);
+    fstream Myfile;
+    Myfile.open("level.txt",ios::in);
+    Myfile>>_level;
+    Myfile.close();
 
 
 }
 void GameLogic:: update(float timeElapsed)
 {
     _platform.update(timeElapsed);
-    _level.update(timeElapsed);
     for(int i=0; i<balls.size();i++)
     {
         balls[i]->update(timeElapsed);
