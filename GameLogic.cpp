@@ -32,7 +32,7 @@ void GameLogic:: update(float timeElapsed)
 
     //check les collisions une fois que les positions ont ete updatés
     checkCollisions(); 
-              
+
     //Update controller status (LED & bargrpah)
     //TODO quand on vas avoir déterminé une utilité
 
@@ -45,6 +45,7 @@ bool GameLogic::isGameOver()
     if (_livesLeft<0)  return true;
     else return false;
 }
+
 void GameLogic::checkCollisions() {
     Position pos;
     for(int i=0; i<balls.size();i++)
