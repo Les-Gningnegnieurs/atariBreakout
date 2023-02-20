@@ -23,6 +23,7 @@ public:
     void outOfBounds();
     Velocity getSpeed(){return speed;}
     Position getPos() {return pos;}
+    void changeVelocity(int x, int y);
 
 
 

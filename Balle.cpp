@@ -42,6 +42,15 @@ void Balle::outOfBounds()
 
 }
 
+void Balle::changeVelocity(bool x = 0, bool y = 0){
+    if(x)
+        speed.x *= -1;
+    
+    if(y)
+        speed.y *= -1;
+}
+
+
 
 
 

@@ -4,6 +4,8 @@
 #include "Plateforme.h"
 #include "Controller.h"
 #include <vector>
+#include "Keyboard.h"
+#include <iostream>
 
 
 #ifndef GAMELOGIC_H
@@ -16,16 +18,20 @@ private:
     Controller _controller;
     int _score;
     int _livesLeft;
+    const int maxSizeX;
+    const int maxSizeY;
 
+    void checkCollisions();
 public:
-    GameLogic();
+    GameLogic(int maxX, int maxY);
+    ~GameLogic();
     void update(float timeElapsed);
     void draw();
-    void checkCollisions();
     bool isGameOver();
     int getScoreInfo();
 
-
+    friend istream& operator>>(istream& s, GameLogic gl);
 };
+
 
 #endif
