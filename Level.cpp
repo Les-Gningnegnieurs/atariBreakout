@@ -31,14 +31,13 @@ void Level :: checkCollision(Balle& b, int& score){
         for (int j = 0; j < _info.columns; j++)
         {
             
-            if (_board[i][j]->checkCollision(b) && !_board[i][j]->est_Detruite())
+            if (!_board[i][j]->est_Detruite() && _board[i][j]->checkCollision(b) )
             {
                 score++;
                 _board[i][j]->increase_Damage();
                 
         }
     }
-    return false;
 }
 
 Brique* Level::getBrique(int row_idx, int column_idx) { //utile pour set le level au debut

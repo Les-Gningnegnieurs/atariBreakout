@@ -32,6 +32,11 @@ public:
 	state getstate();
 
 	void setstate(state& s);
+    bool checkTop(Position posB);
+    bool checkBot(Position posB);
+    bool checkRight(Position posB);
+    bool checkLeft(Position posB);
+
 
 	//virtual bool increase_Damage();
 
