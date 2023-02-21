@@ -1,6 +1,6 @@
 #include "Plateforme.h"
 
-Plateforme:: Plateforme(int length, int height)
+Plateforme:: Plateforme(int length, int height, int x=0, int y=0)
 {
     sizeX= length;
     sizeY= height;
@@ -8,8 +8,8 @@ Plateforme:: Plateforme(int length, int height)
     maxSpeed=10; // à déterminer
     speed.x=0;
     speed.y=0;
-    pos.x=0;
-    pos.y=0;  // je sais pas s'il y a moyen de forcer la valeur à être consante étant donné que la struct n'est pas const
+    pos.x=x;
+    pos.y=y;  // je sais pas s'il y a moyen de forcer la valeur à être consante étant donné que la struct n'est pas const
 }
 
 void Plateforme:: move(int joystickvalueX)

@@ -1,8 +1,8 @@
 #include "Balle.h"
-Balle::Balle(float ray)
+Balle::Balle(float ray, int x=0, int y=0)
 {
-    pos.x=0;
-    pos.y=0;
+    pos.x=x;
+    pos.y=y;
     speed.y=5;
     speed.x=5;
     rayon=ray;

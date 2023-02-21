@@ -5,6 +5,7 @@
 #include "Structs.h"
 #include "Briquetest.h"
 #include <iostream>
+#include "Balle.h"
 #define MAX_ROWS 128
 #define MAX_COLUMNS 128
 

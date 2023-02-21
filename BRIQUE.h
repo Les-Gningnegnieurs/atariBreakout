@@ -6,6 +6,7 @@
 #ifndef BRIQUE_H
 #define BRIQUE_H
 #include "Structs.h"
+#include "Balle.h"
 
 #include <iostream>
 
@@ -15,10 +16,12 @@ public:
 	//on entre simplement les coordonnées. la hauteur et la largeur sont déja définies
 	Brique(int x = 0, int y = 0, int l = 4, int h = 1);
 
+	bool increase_Damage();
+
 	virtual ~Brique();
 
 	
-	bool checkCollision(int x, int y);
+	bool checkCollision(Balle&b);
 
 	//virtual void update(float timeElapsed);
 

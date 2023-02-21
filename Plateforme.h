@@ -13,7 +13,7 @@ private:
     int tiltAngle;
     int maxSpeed;
 public:
-    Plateforme(int length,int height);
+    Plateforme(int length,int height, int x, int y);
     bool checkCollision(Position posHit);
     void update(float timeElapsed);
     void move(int joystickvalueX);

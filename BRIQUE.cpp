@@ -26,11 +26,27 @@ void Brique::setstate(state& s) {
     _etat = s;
 }
 
-bool Brique::checkCollision(int x, int y) {
-    if (_pos.y >= y && y <= _pos.y + _sizeY)
+bool Brique::checkCollision(Balle&b) {
+    Position posB = b.getPos();
+    if (_pos.y >=posB.y&& posB.y <= _pos.y + _sizeY)
     {
-        if (_pos.x >= x && x <= _pos.x + _sizeX)
-            return true;
+        if (_pos.x >= posB.x && posB.x <= _pos.x + _sizeX)
+        {
+            if (top)
+                t;
+            else if()
+        }
     }
     return false;
+}
+
+bool Brique::increase_Damage() {
+    if (_etat == Destroyed)
+        return false;
+    _PV--;
+    if (_PV == 0)
+        _etat = Destroyed;
+    else
+        _etat = Hurt;
+    return true;
 }

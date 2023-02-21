@@ -23,7 +23,10 @@ bool Briquetest::increase_Damage() {
     if (_etat == Destroyed)
         return false;
     _PV--;
-    _etat = Destroyed;
+    if (_PV == 0)
+        _etat = Destroyed;
+    else
+        _etat = Hurt;
     return true;
 }
 

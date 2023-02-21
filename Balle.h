@@ -15,7 +15,7 @@ private:
     Velocity speed;
     int maxSpeed;
 public:
-    Balle(float ray);
+    Balle(float ray, int x, int y);
     float aire() {return rayon*rayon*M_PI;}
     void update(float timeElapsed);
     void draw();
