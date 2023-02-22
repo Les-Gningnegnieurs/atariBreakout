@@ -6,7 +6,7 @@ Canevas::Canevas(GameLogic in)
 	_game = in;	
 }
 
-Canevas::~Canevas();
+Canevas::~Canevas()
 {}
 
 
@@ -17,7 +17,9 @@ std::istream& operator>>(std::istream& s, Level& l)
 }
 
 void Canevas::erase()
-{}
+{
+	system ("CLS");
+}
 
 
 // Affiche le tableau à l'écran

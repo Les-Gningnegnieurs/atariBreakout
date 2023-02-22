@@ -1,4 +1,6 @@
 #include "GameLogic.h"
+#include "stdlib.h"
+
 #define RESOLUTION_X 128
 #define RESOLUTION_Y 128
 
