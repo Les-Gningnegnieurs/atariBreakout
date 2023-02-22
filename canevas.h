@@ -12,11 +12,10 @@ private:
 	char userInterface [RESOLUTION_X] [RESOLUTION_Y];
 
 public:
-	Canevas(GameLogic in);
-	~Canevas();
-	friend std::istream& operator>>(std::istream& s, Level& l);
-	void erase();
-	void draw(ostream &s);
+	Canevas();
+	friend std::istream& operator>>(std::istream& s, Canevas& can);
+	void erase(std::ostream& s);
+	void draw(std::ostream &s);
 	void update (float ElapsedTime);
 	bool Is_GameOver();
 	

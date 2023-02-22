@@ -8,15 +8,15 @@
 #include "Structs.h"
 #include <fstream>
 #include <iostream>
-using  std::chrono;
+using  namespace std::chrono;
 
 
 class GameLoop {
 private:
-    high_resolution_clock;
+    high_resolution_clock clock;
     Canevas *_canevas;
     Menu _menu;
-    auto lasTickTime;
+    steady_clock::time_point lastTickTime;
     gameState _gameState;
 public:
     void Start();
@@ -25,10 +25,11 @@ public:
     void openMenu();
     void update();
     bool GameOver();
-    void restart();
+    void Restart();
     void draw(std::ostream &s);
-    void exit();
+    void Exit();
     void loadFile();
+    float GetTimeElapsed();
 
 
 };

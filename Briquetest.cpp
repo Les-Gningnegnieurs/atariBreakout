@@ -32,18 +32,18 @@ bool Briquetest::increase_Damage() {
 
 
 void Briquetest::draw(std::ostream& s) {
-    if(_etat == Destroyed)
-        for(int i = 0; i < sizeX; i++) {
+    if (_etat == Destroyed)
+        for (int i = 0; i < _sizeX; i++) {
             s << " ";
         }
 
     else
     {
-        if(sizeX = 1)
+        if (_sizeX = 1)
             s << "□";
         else {
             s << "|";
-            for(int i = 1; i < sizeX-1; i++) {
+            for (int i = 1; i < _sizeX - 1; i++) {
                 if (_etat == Alive)
                     s << "-";
                 else if (_etat == Hurt)
@@ -52,5 +52,5 @@ void Briquetest::draw(std::ostream& s) {
             s << "|";
         }
     }
-}
+
 }

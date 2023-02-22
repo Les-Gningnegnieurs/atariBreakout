@@ -14,16 +14,12 @@ int main(){
     return 0;
 }*/
 #include "Level.h"
+#include "GameLogic.h"
 #include <fstream>
 #include <iostream>
 
 using namespace std;
 int main() {
-    Level _lev;
-    fstream myfile;
-    myfile.open("testNiveau.txt", ios::in);
-    myfile >> _lev;
-    myfile.close();
-    _lev.draw();
-    return 0;
+    GameLogic Game();
+
 }

@@ -1,18 +1,17 @@
 #include "canevas.h"
 
 
-Canevas::Canevas(GameLogic in)
+Canevas::Canevas()
 {
-	_game = in;	
+	_game=GameLogic(7,17);
 }
 
-Canevas::~Canevas();
-{}
 
 
-std::istream& operator>>(std::istream& s, Level& l)
+
+std::istream& operator>>(std::istream& s, Canevas& can)
 {
-	s >> _game._level;
+	s >> can._game;
     return s;
 }
 
@@ -23,14 +22,14 @@ void Canevas::erase(std::ostream &s)
 
 
 // Affiche le tableau à l'écran
-void Canevas::draw(ostream &s)
+void Canevas::draw(std::ostream &s)
 {
 	_game.draw(s);
 }
 
 void Canevas::update (float ElapsedTime)
 {
-	_game.update()
+	_game.update(ElapsedTime);
 }
 
 bool Canevas::Is_GameOver()

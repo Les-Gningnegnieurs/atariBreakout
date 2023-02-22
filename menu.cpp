@@ -152,7 +152,7 @@ int Menu::Get_screenHeight()
 {
     return screenHeight;
 }
-int Menu::Get_Level();
+int Menu::Get_Level()
 {
     return level;
 }

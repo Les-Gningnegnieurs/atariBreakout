@@ -14,7 +14,7 @@ public:
 
 	bool increase_Damage();
 
-	void afficher(std::ostream& s); //pour les testcran
+	void draw(std::ostream& s); //pour les testcran
 protected:
 	Hitbox _posBTest;
 	state _etat;

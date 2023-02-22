@@ -4,18 +4,23 @@
 
 void GameLoop:: Start(){
     _gameState=Running;
-    lastTickTime= high_resolution_clock::now();
 }
 void GameLoop:: Pause()
 {
     _gameState=Paused;
 }
-
+float GameLoop::GetTimeElapsed()
+{
+     auto tick = clock.now();
+     auto int_ms = duration_cast<std::chrono::milliseconds>(tick - lastTickTime);
+     float elapsed = int_ms.count();
+     return elapsed;
+}
 void GameLoop::Stop() {
     _gameState=Stopped;
 }
 
-void GameLoop:: Restart()
+void GameLoop::Restart()
 {
     delete _canevas;
     _canevas= new Canevas;
@@ -26,7 +31,7 @@ void GameLoop:: Restart()
 
 }
 void GameOver(){
-    if(_canevas.Is_GameOver())
+    if(_canevas->Is_GameOver())
     {
         Stop();
         _canevas.erase();
@@ -41,9 +46,8 @@ void GameOver(){
 void GameLoop:: update() {
 
     if (_gameState==Running) {
-        _canevas.update(high_resolution_clock::now() - lasTickTime);
-        lasTickTime=high_resolution_clock::now();
-
+        float elapsed = GetTimeElapsed();
+        _canevas->update(elapsed);
     }
     GameOver();
 
@@ -57,7 +61,9 @@ void GameLoop:: loadFile(){
     myfile>>_canevas;
 }
 
-void GameLoop:: draw(std::ostream &s)
+void GameLoop:: draw()
 {
+    std::ostream s;
     _canevas.draw(s);
+    std::cout << s;
 }

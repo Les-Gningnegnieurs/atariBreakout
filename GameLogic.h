@@ -24,6 +24,7 @@ private:
 
     void checkCollisions();
 public:
+    GameLogic();
     GameLogic(int maxX, int maxY);
     ~GameLogic();
     void update(float timeElapsed);
