@@ -12,8 +12,6 @@ public:
 
 	void update(float timeElapsed);
 
-	bool increase_Damage();
-
 	void afficher(std::ostream& s); //pour les testcran
 protected:
 	Hitbox _posBTest;

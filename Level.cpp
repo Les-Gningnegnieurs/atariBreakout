@@ -9,14 +9,7 @@ Level :: ~Level(){
 
 }
 
-void Level :: draw(){
-    std::cout << "Informations sur le niveau" << std::endl;
-    for (int i = 0; i < _info.rows; i++) {
-        for (int j = 0; j < _info.columns; j++) {
-            _board[i][j]->afficher(std::cout);
-        }
-        //std::cout << endl;
-    }
+void Level :: draw(std::ostream& s){
 
 }
 
@@ -51,7 +44,12 @@ bool Level::setBrique(int row_idx, int column_idx, Brique* brique) { //utile pou
     _board[row_idx][column_idx] = brique;
 }
 void Level :: afficher(std::ostream& s){
-    s << _info.rows << " , " << _info.columns << std::endl; 
+    s << "Informations sur le niveau" << std::endl;
+    for (int i = 0; i < _info.rows; i++) {
+        for (int j = 0; j < _info.columns; j++) {
+            _board[i][j]->afficher(s);
+        }
+    }
 }
 
 void Level :: setRows(int rows){

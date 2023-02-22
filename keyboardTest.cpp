@@ -24,6 +24,6 @@ int main() {
     myfile.open("testNiveau.txt", ios::in);
     myfile >> _lev;
     myfile.close();
-    _lev.draw();
+    _lev.draw(std::cout);
     return 0;
 }

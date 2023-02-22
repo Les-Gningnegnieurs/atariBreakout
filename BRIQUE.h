@@ -37,7 +37,7 @@ public:
     bool checkRight(Position posB);
     bool checkLeft(Position posB);
 
-
+	void draw(std::ostream& s);
 	//virtual bool increase_Damage();
 
 	virtual void afficher(std::ostream& s) = 0; 

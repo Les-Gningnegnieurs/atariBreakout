@@ -19,18 +19,6 @@ void Briquetest::update(float timeElapsed) {
 }
 
 
-bool Briquetest::increase_Damage() {
-    if (_etat == Destroyed)
-        return false;
-    _PV--;
-    if (_PV == 0)
-        _etat = Destroyed;
-    else
-        _etat = Hurt;
-    return true;
-}
-
-
 void Briquetest::afficher(std::ostream& s) {
     s << "A:" << _posBTest.x << ", " << _posBTest.y << ", " << _sizeX << ", " << _sizeY << std::endl;
 }
