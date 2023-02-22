@@ -24,18 +24,18 @@ void Level :: update(float timeElapsed){
 
 }
 
-void Level :: checkCollision(Balle& b, int& score){
+void Level :: checkCollision(Balle *b, int& score){
   
     for (int i = 0; i < _info.rows; i++)
     {
         for (int j = 0; j < _info.columns; j++)
         {
             
-            if (!_board[i][j]->est_Detruite() && _board[i][j]->checkCollision(b) )
+            if (!_board[i][j]->est_Detruite() && _board[i][j]->checkCollision(b))
             {
                 score++;
                 _board[i][j]->increase_Damage();
-                
+            }
         }
     }
 }

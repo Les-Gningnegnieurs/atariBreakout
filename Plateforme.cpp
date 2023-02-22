@@ -1,6 +1,15 @@
 #include "Plateforme.h"
-
-Plateforme:: Plateforme(int length, int height, int x=0, int y=0)
+Plateforme::Plateforme() {
+    sizeX = 0;
+    sizeY = 0;
+    tiltAngle = 0;
+    maxSpeed = 10; // à déterminer
+    speed.x = 0;
+    speed.y = 0;
+    pos.x = 0;
+    pos.y = 0;
+}
+Plateforme:: Plateforme(int length, int height, int x, int y)
 {
     sizeX= length;
     sizeY= height;

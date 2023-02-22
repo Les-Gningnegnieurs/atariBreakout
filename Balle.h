@@ -15,15 +15,15 @@ private:
     Velocity speed;
     int maxSpeed;
 public:
-    Balle(float ray, int x, int y);
-    float aire() {return rayon*rayon*M_PI;}
+    Balle(float ray, int x=0, int y=0);
+    float aire() { return rayon * rayon * 3.141593; }
     void update(float timeElapsed);
     void draw();
     bool checkCollision(Position posHit);
     void outOfBounds();
     Velocity getSpeed(){return speed;}
     Position getPos() {return pos;}
-    void changeVelocity(int x, int y);
+    void changeVelocity(bool x = 0, bool y = 0);
 
 
 

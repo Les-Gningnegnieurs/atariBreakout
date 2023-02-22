@@ -1,8 +1,8 @@
 #include "Brique.h"
 
 Brique:: Brique(int x, int y, int l, int h){
-    _pos.x = x;
-    _pos.y = y;
+    _posBrique.x = x;
+    _posBrique.y = y;
     _sizeX = l;
     _sizeY = h;
     _PV = 0;
@@ -26,30 +26,30 @@ void Brique::setstate(state& s) {
     _etat = s;
 }
 
-bool Brique::checkCollision(Balle&b) {
-    Position posB = b.getPos();
-    if (_pos.y >=posB.y&& posB.y <= _pos.y + _sizeY)
+bool Brique::checkCollision(Balle *b) {
+    Position posB = b->getPos();
+    if (_posBrique.y >=posB.y&& posB.y <= _posBrique.y + _sizeY)
     {
-        if (_pos.x >= posB.x && posB.x <= _pos.x + _sizeX)
+        if (_posBrique.x >= posB.x && posB.x <= _posBrique.x + _sizeX)
         {
             if (checkTop(posB))
             {
-                b.changeVelocity(0,1);
+                b->changeVelocity(0,1);
                 return true;
             }
             else if(checkBot(posB))
             {
-                b.changeVelocity(0,1);
+                b->changeVelocity(0,1);
                 return true;
             }
             else if (checkRight(posB))
             {
-                b.changeVelocity(1,0);
+                b->changeVelocity(1,0);
                 return true;
             }
             else if(checkLeft(posB))
             {
-                b.changeVelocity(1,0);
+                b->changeVelocity(1,0);
                 return true;
             }
 
@@ -60,7 +60,7 @@ bool Brique::checkCollision(Balle&b) {
 
 bool Brique:: checkTop(Position posB)
 {
-    if (posB.y<=(1/20*(Hitbox.y+_sizeY))) return true;
+    if (posB.y<=(1/20*(_posBrique.y+_sizeY))) return true;
     return false;
 
 
@@ -68,7 +68,7 @@ bool Brique:: checkTop(Position posB)
 
 bool Brique:: checkBot(Position posB)
 {
-    if (posB.y>=(19/20*(Hitbox.y+_sizeY))) return true;
+    if (posB.y>=(19/20*(_posBrique.y+_sizeY))) return true;
     return false;
 
 
@@ -76,7 +76,7 @@ bool Brique:: checkBot(Position posB)
 
 bool Brique:: checkRight(Position posB)
 {
-    if (posB.x>=(19/20*(Hitbox.x+_sizex))) return true;
+    if (posB.x>=(19/20*(_posBrique.x+_sizeX))) return true;
     return false;
 
 
@@ -84,7 +84,7 @@ bool Brique:: checkRight(Position posB)
 
 bool Brique:: checkLeft(Position posB)
 {
-    if (posB.x<=(1/20*(Hitbox.x+_sizex))) return true;
+    if (posB.x<=(1/20*(_posBrique.x+_sizeX))) return true;
     return false;
 
 }

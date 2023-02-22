@@ -21,7 +21,7 @@ public:
 	virtual ~Brique();
 
 	
-	bool checkCollision(Balle&b);
+	bool checkCollision(Balle*b);
 
 	//virtual void update(float timeElapsed);
 
@@ -42,7 +42,7 @@ public:
 
 	virtual void afficher(std::ostream& s) = 0; 
 protected:
-	Hitbox _pos;
+	Hitbox _posBrique;
 	state _etat;
 	int _sizeX;
 	int _sizeY;

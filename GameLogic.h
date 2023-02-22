@@ -8,18 +8,19 @@
 #include <iostream>
 
 
+
 #ifndef GAMELOGIC_H
 #define GAMELOGIC_H
 class GameLogic {
 private:
-    std::vector<Balle*> balls;
+    std::vector<Balle*> _balls;
     Level _level;
     Plateforme _platform;
     Controller _controller;
     int _score;
     int _livesLeft;
-    const int maxSizeX;
-    const int maxSizeY;
+    int maxSizeX;
+    int maxSizeY;
 
     void checkCollisions();
 public:
@@ -30,7 +31,7 @@ public:
     bool isGameOver();
     int getScoreInfo();
 
-    friend istream& operator>>(istream& s, GameLogic gl);
+    friend std::istream& operator>>(std::istream& s, GameLogic gl);
 };
 
 

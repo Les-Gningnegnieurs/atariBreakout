@@ -37,7 +37,7 @@ class Level{
 
         void setLength(int x);
 
-        void checkCollision(Balle& b, int& score);
+        void checkCollision(Balle *b, int& score);
 
         Brique* getBrique(int row_idx, int column_idx); //utile pour set le level au debut
 

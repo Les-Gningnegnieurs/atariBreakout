@@ -1,5 +1,5 @@
 #include "Balle.h"
-Balle::Balle(float ray, int x=0, int y=0)
+Balle::Balle(float ray, int x, int y)
 {
     pos.x=x;
     pos.y=y;
@@ -42,7 +42,7 @@ void Balle::outOfBounds()
 
 }
 
-void Balle::changeVelocity(bool x = 0, bool y = 0){
+void Balle::changeVelocity(bool x, bool y){
     if(x)
         speed.x *= -1;
     

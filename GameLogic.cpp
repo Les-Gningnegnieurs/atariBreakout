@@ -5,14 +5,14 @@ GameLogic:: GameLogic(const int maxX, const int maxY)
     maxSizeX = maxX;
     maxSizeY = maxY;
     _livesLeft=3;
-    _platform(5,3);
+    Plateforme _platform(5, 3);
     _score=0;
-    balls[0]=new balle(5);
+    _balls[0]=new Balle(5);
     _controller = Keyboard(); //à changer lorsqu'on vas utiliser une manette
 }
 
 GameLogic::~GameLogic(){
-    balls.clear();
+    _balls.clear();
 }
 
 void GameLogic:: update(float timeElapsed)
@@ -24,9 +24,9 @@ void GameLogic:: update(float timeElapsed)
     _platform.update(timeElapsed);
 
     //update Game / do logic
-    for(int i=0; i<balls.size();i++)
+    for(int i=0; i< _balls.size();i++)
     {
-        balls[i]->update(timeElapsed);
+        _balls[i]->update(timeElapsed);
     }
     _level.update(timeElapsed);
 
@@ -48,13 +48,13 @@ bool GameLogic::isGameOver()
 
 void GameLogic::checkCollisions() {
     Position pos;
-    for(int i=0; i<balls.size();i++)
+    for(int i=0; i< _balls.size();i++)
     {
-        pos=balls[i]->getPos();
+        pos= _balls[i]->getPos();
         if (pos.y>maxSizeY) //le [0,0] est dans le coin Haut-Gauche
         {
-            delete balls[i];
-            balls.erase(balls.begin()+i);
+            delete _balls[i];
+            _balls.erase(_balls.begin()+i);
         }
         else
         {
@@ -67,14 +67,14 @@ void GameLogic::checkCollisions() {
             if(pos.x <= 0 || pos.x >= maxSizeX) //one of the walls hit
                 _balls[i]->changeVelocity(1, 0); //inverse le vecteur X pour éloigner du mur
             
-
+            //Balle *b = _balls[i];
             _level.checkCollision(_balls[i], _score);
         }
     }
-    if(balls.empty())
+    if(_balls.empty())
     {
         _livesLeft--;
-        balls[0]=new balle(5);
+        _balls[0]=new Balle(5);
     }
 
 }
@@ -88,14 +88,15 @@ void GameLogic::draw(){
     _level.draw();
     
     //draw balls
-    for(int i = 0; i < balls.size(); i++){
-        balls[i]->draw();
+    for(int i = 0; i < _balls.size(); i++){
+        _balls[i]->draw();
     }
 
     //draw plateform
     _platform.draw();
 }
 
- friend istream& operator>>(istream& s, GameLogic gl){
+std::istream& operator>>(std::istream& s, GameLogic gl){
     s >> gl._level;
+    return s;
  }

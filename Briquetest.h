@@ -16,7 +16,7 @@ public:
 
 	void afficher(std::ostream& s); //pour les testcran
 protected:
-	Hitbox _pos;
+	Hitbox _posBTest;
 	state _etat;
 	int _sizeX;
 	int _sizeY;
