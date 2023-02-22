@@ -32,6 +32,12 @@ enum state{
     Hurt,
     Alive,
 };
+enum gameState{
+    Stopped,
+    Paused,
+    Running,
+
+};
 
 
 #endif
