@@ -38,7 +38,7 @@ public:
     bool checkLeft(Position posB);
     int GetHauteur(){return _sizeY;}
 
-
+	void draw(std::ostream& s);
 	//virtual bool increase_Damage();
 
 	virtual void draw(std::ostream& s) = 0;

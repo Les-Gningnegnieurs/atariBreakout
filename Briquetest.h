@@ -12,9 +12,9 @@ public:
 
 	void update(float timeElapsed);
 
-	bool increase_Damage();
 
 	void draw(std::ostream& s); //pour les testcran
+	void afficher(std::ostream& s); //pour les testcran
 protected:
 	Hitbox _posBTest;
 	state _etat;

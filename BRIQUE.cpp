@@ -21,7 +21,10 @@ bool Brique::est_Detruite() {
 state Brique::getstate() {
     return _etat;
 }
-
+/// <summary>
+/// Alive(1):PV=PVMAX,   Hurt(1): PV entre PVMAX et 0,    Destroyed(0): PV=0
+/// </summary>
+/// <param name="s"></param>
 void Brique::setstate(state& s) {
     _etat = s;
 }
@@ -93,10 +96,35 @@ bool Brique:: checkLeft(Position posB)
 bool Brique::increase_Damage() {
     if (_etat == Destroyed)
         return false;
-    _PV--;
-    if (_PV == 0)
-        _etat = Destroyed;
-    else
-        _etat = Hurt;
-    return true;
+    else if (_etat != Indestructible)
+    {
+        _PV--;
+        if (_PV <= 0)
+            _etat = Destroyed;
+        else
+            _etat = Hurt;
+        return true;
+    }
+}
+
+void Brique::draw(std::ostream& s) {
+    if (_etat == Destroyed) {
+        for (int i = 0; i < _sizeX; i++)
+            s << " ";
+    }
+    else {
+        if (_sizeX == 1)
+            s << "â-i"; //print ca pour une brique de longueur ille 1(va jamais etre longueur 1)
+        else {
+            s << "|";
+            for (int i = 1; i < _sizeX - 1; i++) //ex: _sizeX=8-> va print 6 "-" 
+            {
+                if (_etat == Alive)
+                    s << "-";
+                else //si la brique est "Hurt"
+                    s << "X";
+            }
+            s << "|";
+        }
+    }
 }
