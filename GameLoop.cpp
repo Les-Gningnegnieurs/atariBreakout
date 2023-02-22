@@ -41,7 +41,8 @@ void GameLoop:: update() {
         _canevas.erase();
     }
     else
-    draw();
+        _canevas.erase();
+        draw();
 
 }
 
