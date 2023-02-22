@@ -5,9 +5,9 @@ GameLogic:: GameLogic(const int maxX, const int maxY)
     maxSizeX = maxX;
     maxSizeY = maxY;
     _livesLeft=3;
-    Plateforme _platform(5, 3);
+    Plateforme _platform(5, 3,(maxX/2)-(5/2),MAXY);
     _score=0;
-    _balls[0]=new Balle(5);
+    _balls[0]=new Balle(5,(maxX/2)-(5/2),MAXY-3);
     _controller = Keyboard(); //à changer lorsqu'on vas utiliser une manette
 }
 

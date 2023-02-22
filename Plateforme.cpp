@@ -6,8 +6,8 @@ Plateforme::Plateforme() {
     maxSpeed = 10; // à déterminer
     speed.x = 0;
     speed.y = 0;
-    pos.x = 0;
-    pos.y = 0;
+    pos.x = x;
+    pos.y = y;
 }
 Plateforme:: Plateforme(int length, int height, int x, int y)
 {
