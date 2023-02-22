@@ -105,6 +105,17 @@ std::istream& operator >> (std::istream& s, Level& I){
                 }
             }
         }
+        for (int i = I.getRows(); i < MAX_ROWS; i++)
+        {
+            for (int j = I.getColumns(); j < MAX_COLUMNS; j++)
+            {
+                 //pourrait faire dequoi avec le 128 pour ajuster l'écran
+                 //si == 0 : pas de brique a cette position
+                 // REMPLIR LE RESTE AVEC DES BRIQUES DEFAULT
+                //I._board[i][j] = new Briquetest(j * I.getLength(), i * I.getHeigth(), I.getLength(), I.getHeigth());
+                
+            }
+        }
     }
     return s;
 }
