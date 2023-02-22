@@ -1,8 +1,8 @@
 #include "BriqueA.h"
 
 BriqueA::BriqueA(int x, int y, int l, int h) {
-    _posA.x = x;
-    _posA.y = y;
+    _posBrique.x = x;
+    _posBrique.y = y;
     _sizeX = l;
     _sizeY = h;
     _PV = 1;
@@ -20,5 +20,5 @@ void BriqueA::update(float timeElapsed) {
 
 
 void BriqueA::afficher(std::ostream& s) {
-    s << "A:" << _posA.x << ", " << _posA.y << ", " << _sizeX << ", " << _sizeY << std::endl;
+    s << "A:" << _posBrique.x << ", " << _posBrique.y << ", " << _sizeX << ", " << _sizeY << std::endl;
 }

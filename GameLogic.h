@@ -32,7 +32,7 @@ public:
     bool isGameOver();
     int getScoreInfo();
 
-    friend std::istream& operator>>(std::istream& s, GameLogic gl);
+    friend std::istream& operator>>(std::istream& s, GameLogic &gl);
 };
 
 

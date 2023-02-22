@@ -104,7 +104,7 @@ void GameLogic::draw(std::ostream &s){
     _platform.draw(s);
 }
 
-std::istream& operator>>(std::istream& s, GameLogic gl){
+std::istream& operator>>(std::istream& s, GameLogic &gl){
     s >> gl._level;
     return s;
  }

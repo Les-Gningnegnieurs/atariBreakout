@@ -10,13 +10,9 @@ public:
 
 	void update(float timeElapsed);
 
+	void draw(std::ostream& s);
+
 	void afficher(std::ostream& s); //pour les testcran
-protected:
-	Hitbox _posBVoid;
-	state _etat;
-	int _sizeX;
-	int _sizeY;
-	int _PV;
-	int _PVini;
+
 };
 #endif

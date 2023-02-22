@@ -4,12 +4,6 @@ Level :: Level(){
     _info.columns = MAX_COLUMNS;
     _info.Brick_length = 6;
     _info.Brick_heigth = 2;
-    for (int i = 0; i < _info.rows; i++) {
-        for (int j = 0; j < _info.columns; j++)
-        {
-            _board[i][j] = new BriqueVoid(j * _info.Brick_length, i * _info.Brick_heigth, _info.Brick_length, _info.Brick_heigth);
-        }
-    }
 }
 Level :: ~Level(){
 
@@ -119,17 +113,7 @@ std::istream& operator >> (std::istream& s, Level& I){
                 }
             }
         }
-        for (int i = I.getRows(); i < MAX_ROWS; i++)
-        {
-            for (int j = I.getColumns(); j < MAX_COLUMNS; j++)
-            {
-                 //pourrait faire dequoi avec le 128 pour ajuster l'écran
-                 //si == 0 : pas de brique a cette position
-                 // REMPLIR LE RESTE AVEC DES BRIQUES DEFAULT
-                //I._board[i][j] = new Briquetest(j * I.getLength(), i * I.getHeigth(), I.getLength(), I.getHeigth());
-                
-            }
-        }
+        
     }
     return s;
 }

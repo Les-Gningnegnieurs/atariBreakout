@@ -14,13 +14,6 @@ public:
 	void update(float timeElapsed);
 
 	void afficher(std::ostream& s); //pour les testcran
-protected:
-	Hitbox _posC;
-	state _etat;
-	int _sizeX;
-	int _sizeY;
-	int _PV;
-	int _PVini;
 };
 
 #endif
