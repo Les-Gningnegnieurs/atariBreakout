@@ -36,8 +36,18 @@ void Plateforme::update(float timeElapsed)
 
 void Plateforme::draw(std::ostream &s)
 {
-    s<<"Plateforme de"<< sizeX<< " de longeur et "<< sizeY<< "de hauteur";
-    s<<"La position est:"<<pos.x<<" la vitesse est:"<<speed.x;
+    if(sizeX = 1)
+        s << "_";
+
+    for(int i = 1; i <sizeX-1; i++)
+    {
+        s << "-";
+    }
+
+
+    s << "|";
+}
+
 
 }
 

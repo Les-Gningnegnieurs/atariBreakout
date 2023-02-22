@@ -36,6 +36,7 @@ public:
     bool checkBot(Position posB);
     bool checkRight(Position posB);
     bool checkLeft(Position posB);
+    int GetHauteur(){return _sizeY;}
 
 
 	//virtual bool increase_Damage();

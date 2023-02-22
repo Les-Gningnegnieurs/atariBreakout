@@ -85,7 +85,11 @@ int GameLogic::getScoreInfo() {
 
 void GameLogic::draw(std::ostream &s){
     //draw bricks
-    _level.draw(s);
+    for(int i=0; i<_level.getRows();i++)
+    {
+        _level.levelDrawline(s,i);
+        s<<endl;
+    }
     
     //draw balls
     for(int i = 0; i < _balls.size(); i++){

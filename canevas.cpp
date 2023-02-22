@@ -16,8 +16,10 @@ std::istream& operator>>(std::istream& s, Level& l)
     return s;
 }
 
-void Canevas::erase()
-{}
+void Canevas::erase(std::ostream &s)
+{
+
+}
 
 
 // Affiche le tableau à l'écran

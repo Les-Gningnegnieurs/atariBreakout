@@ -119,3 +119,20 @@ std::istream& operator >> (std::istream& s, Level& I){
     }
     return s;
 }
+
+void Level::levelDrawline(std::ostream &s, int ligne) {
+             Brique b= _board[ligne][0];
+
+             for(int i=0;i<b.GetHauteur();i++)
+             {
+                 for(int j=0;j<_info.columns;j++)
+                 {
+                      b.draw(s);
+                 }
+            s<<endl;
+
+
+
+            }
+        }
+

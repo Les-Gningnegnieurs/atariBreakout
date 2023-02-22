@@ -25,24 +25,27 @@ void GameLoop:: Restart()
 
 
 }
-bool GameOver(){
-    return _canevas.isGameOver();
+void GameOver(){
+    if(_canevas.Is_GameOver())
+    {
+        Stop();
+        _canevas.erase();
+        //ouvrir le menu
+
+    }
+    else draw();
 
 
 }
 
 void GameLoop:: update() {
+
     if (_gameState==Running) {
         _canevas.update(high_resolution_clock::now() - lasTickTime);
         lasTickTime=high_resolution_clock::now();
 
     }
-    if(GameOver()) {
-        _canevas.erase();
-    }
-    else
-        _canevas.erase();
-        draw();
+    GameOver();
 
 }
 

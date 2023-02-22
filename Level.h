@@ -45,6 +45,8 @@ class Level{
 
 
         void afficher(std::ostream& s);
+        void levelDrawline(ostream &s,int ligne );
+
 
         friend std::istream& operator >>(std::istream& s, Level& I);
 

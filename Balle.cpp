@@ -23,10 +23,10 @@ void Balle:: update(float timeElapsed)
 
 void Balle:: draw(std::ostream &s)
 {
-    s<< "la vitesse en x est de "<<speed.x<< " la vitesse en y est de "<< speed.y;
-    s<< "la position en x est "<<pos.x<<" la position en y est "<<pos.y;
-
+  s<<"o";
 }
+
+
 bool Balle::checkCollision(Position posHit)
 {
     double distance = sqrt(pow( posHit.x- pos.x, 2) + pow(posHit.y - pos.y, 2));
