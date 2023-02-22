@@ -9,13 +9,13 @@ Level :: ~Level(){
 
 }
 
-void Level :: draw(){
-    std::cout << "Informations sur le niveau" << std::endl;
+void Level :: draw(std::ostream &s){
+
     for (int i = 0; i < _info.rows; i++) {
         for (int j = 0; j < _info.columns; j++) {
-            _board[i][j]->afficher(std::cout);
+            _board[i][j]->draw(s);
         }
-        //std::cout << endl;
+
     }
 
 }

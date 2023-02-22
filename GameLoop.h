@@ -26,7 +26,7 @@ public:
     void update();
     bool GameOver();
     void restart();
-    void draw();
+    void draw(std::ostream &s);
     void exit();
     void loadFile();
 

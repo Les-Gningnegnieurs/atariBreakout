@@ -83,17 +83,17 @@ int GameLogic::getScoreInfo() {
     return _score;
 }
 
-void GameLogic::draw(){
+void GameLogic::draw(std::ostream &s){
     //draw bricks
-    _level.draw();
+    _level.draw(s);
     
     //draw balls
     for(int i = 0; i < _balls.size(); i++){
-        _balls[i]->draw();
+        _balls[i]->draw(s);
     }
 
     //draw plateform
-    _platform.draw();
+    _platform.draw(s);
 }
 
 std::istream& operator>>(std::istream& s, GameLogic gl){

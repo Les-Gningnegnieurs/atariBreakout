@@ -37,6 +37,10 @@ void GameLoop:: update() {
         lasTickTime=high_resolution_clock::now();
 
     }
+    if(GameOver()) {
+        _canevas.erase();
+    }
+    else
     draw();
 
 }
@@ -49,7 +53,7 @@ void GameLoop:: loadFile(){
     myfile>>_canevas;
 }
 
-void GameLoop:: draw()
+void GameLoop:: draw(std::ostream &s)
 {
-    _canevas.draw();
+    _canevas.draw(s);
 }

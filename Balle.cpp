@@ -21,10 +21,10 @@ void Balle:: update(float timeElapsed)
 }
 
 
-void Balle:: draw()
+void Balle:: draw(std::ostream &s)
 {
-    std::cout<< "la vitesse en x est de "<<speed.x<< " la vitesse en y est de "<< speed.y<<std::endl;
-    std::cout<< "la position en x est "<<pos.x<<" la position en y est "<<pos.y<<std::endl;
+    s<< "la vitesse en x est de "<<speed.x<< " la vitesse en y est de "<< speed.y;
+    s<< "la position en x est "<<pos.x<<" la position en y est "<<pos.y;
 
 }
 bool Balle::checkCollision(Position posHit)

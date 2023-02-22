@@ -14,7 +14,7 @@ Plateforme:: Plateforme(int length, int height, int x, int y)
     sizeX= length;
     sizeY= height;
     tiltAngle=0;
-    maxSpeed=10; // à déterminer
+    maxSpeed=30; // à déterminer
     speed.x=0;
     speed.y=0;
     pos.x=x;
@@ -25,7 +25,7 @@ void Plateforme:: move(int joystickvalueX)
 {
     // calcul à verifier (512 est la valeur quand le joystick est au "repos")
 
-    speed.x= ((joystickvalueX-512)*maxSpeed)/512;
+    speed.x= (joystickvalueX*maxSpeed)/100;
 }
 
 void Plateforme::update(float timeElapsed)
@@ -34,10 +34,10 @@ void Plateforme::update(float timeElapsed)
 
 }
 
-void Plateforme::draw()
+void Plateforme::draw(std::ostream &s)
 {
-    std::cout<<"Plateforme de"<< sizeX<< " de longeur et "<< sizeY<< "de hauteur"<<std::endl;
-    std::cout<<"La position est:"<<pos.x<<" la vitesse est:"<<speed.x<<std::endl;
+    s<<"Plateforme de"<< sizeX<< " de longeur et "<< sizeY<< "de hauteur";
+    s<<"La position est:"<<pos.x<<" la vitesse est:"<<speed.x;
 
 }
 

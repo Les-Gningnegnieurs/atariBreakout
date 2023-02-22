@@ -40,7 +40,7 @@ public:
 
 	//virtual bool increase_Damage();
 
-	virtual void afficher(std::ostream& s) = 0; 
+	virtual void draw(std::ostream& s) = 0;
 protected:
 	Hitbox _posBrique;
 	state _etat;
