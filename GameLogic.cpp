@@ -9,7 +9,7 @@ GameLogic:: GameLogic(const int maxX, const int maxY)
     maxSizeX = maxX;
     maxSizeY = maxY;
     _livesLeft=3;
-    Plateforme _platform(5, 3,(maxX/2)-(5/2),maxY);
+     _platform=Plateforme(5, 3,(maxX/2)-(5/2),maxY);
     _score=0;
     _balls.push_back(new Balle(5,(maxX/2)-(5/2),maxY-3));
     _controller = Keyboard(); //à changer lorsqu'on vas utiliser une manette

@@ -7,8 +7,8 @@
 #include "BriqueVoid.h"
 #include <iostream>
 #include "Balle.h"
-#define MAX_ROWS 17
-#define MAX_COLUMNS 7
+#define MAX_ROWS 10
+#define MAX_COLUMNS 10
 
 class Level{
     private: 

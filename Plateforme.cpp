@@ -36,16 +36,28 @@ void Plateforme::update(float timeElapsed)
 
 void Plateforme::draw(std::ostream &s)
 {
-    if(sizeX = 1)
-        s << "_";
+   
+    for(int i=0;i<128;i++)
+    { 
+        if (i == pos.x)
+        {
+            s << "[";
+            if (sizeX == 1)
+                s << "_";
+            for (int j = 1; j < sizeX - 1; j++)
+            {
+                s << "-";
+            }
+            s << "]";
+        }
+        else
+            s << " ";
 
-    for(int i = 1; i <sizeX-1; i++)
-    {
-        s << "-";
+       
     }
 
 
-    s << "|";
+ 
 }
 
 

@@ -3,8 +3,8 @@ Balle::Balle(float ray, int x, int y)
 {
     pos.x=x;
     pos.y=y;
-    speed.y=5;
-    speed.x=5;
+    speed.y=50;
+    speed.x=50;
     rayon=ray;
     maxSpeed=10; // à définir plus tard;
 
@@ -23,6 +23,7 @@ void Balle:: update(float timeElapsed)
 
 void Balle:: draw(std::ostream &s)
 {
+    
   s<<"o";
 }
 

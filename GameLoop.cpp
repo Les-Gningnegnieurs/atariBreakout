@@ -55,7 +55,7 @@ void GameLoop:: update() {
         _canevas->update(elapsed);
     }
     GameOver();
-    Sleep(4000);
+   // Sleep(4000);
 }
 
 void GameLoop:: loadFile(){
