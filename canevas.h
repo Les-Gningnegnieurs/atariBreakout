@@ -16,7 +16,7 @@ public:
 	~Canevas();
 	friend istream& operator>>(istream& s, Level& l);
 	void erase();
-	void draw();
+	void draw(ostream &s);
 	void update (float ElapsedTime);
 	bool Is_GameOver();
 	

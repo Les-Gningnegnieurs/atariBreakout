@@ -17,16 +17,9 @@ void Canevas::erase()
 
 
 // Affiche le tableau à l'écran
-void Canevas::draw()
+void Canevas::draw(ostream &s)
 {
-	for (int i = 0; i < RESOLUTION_Y - 1; i++)
-	{
-		for (int j = 0; j < RESOLUTION_X - 1; j++)
-		{
-			std::cout << userInterface [i] [j];
-		}
-		std::cout << endl;
-	}
+	_game.draw(s);
 }
 
 void Canevas::update (float ElapsedTime)
