@@ -9,8 +9,12 @@ Canevas::Canevas(GameLogic in)
 Canevas::~Canevas();
 {}
 
-istream& Canevas::operator>>(istream& s, Level& l)
-{}
+
+std::istream& operator>>(std::istream& s, Level& l)
+{
+	s >> _game._level;
+    return s;
+}
 
 void Canevas::erase()
 {}

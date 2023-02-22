@@ -14,7 +14,7 @@ private:
 public:
 	Canevas(GameLogic in);
 	~Canevas();
-	friend istream& operator>>(istream& s, Level& l);
+	friend std::istream& operator>>(std::istream& s, Level& l);
 	void erase();
 	void draw(ostream &s);
 	void update (float ElapsedTime);
