@@ -31,6 +31,6 @@ bool Briquetest::increase_Damage() {
 }
 
 
-void Briquetest::afficher(std::ostream& s) {
+void Briquetest::draw(std::ostream& s) {
     s << "A:" << _posBTest.x << ", " << _posBTest.y << ", " << _sizeX << ", " << _sizeY << std::endl;
 }

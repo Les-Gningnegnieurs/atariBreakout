@@ -32,6 +32,7 @@ private:
 	bool modeJoystick;
 	int screenWidth;
 	int screenHeight;
+    int level;
 
 public:
 	Menu();
@@ -49,10 +50,12 @@ public:
 	void Set_screenHeight(int value);
 	void Set_modeAccelerometer();
 	void Set_modeJoystick();
+    void Set_Level(int value);
 
 
 	int Get_screenWidth();
 	int Get_screenHeight();
+    int Get_Level();
 
 	bool Is_modeAccelerometer();
 	bool Is_modeJoystick();

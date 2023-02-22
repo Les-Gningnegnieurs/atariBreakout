@@ -37,6 +37,7 @@ Menu::Menu()
     parameters[1].name = "SCREEN_HEIGHT";
     parameters[2].name = "MODE_ACCELEROMETER";
     parameters[3].name = "MODE_JOYSTICK";
+    parameters[4].name = "SELECT_LEVEL";
 }
 
 void Menu::Update_data()
@@ -45,6 +46,8 @@ void Menu::Update_data()
     screenHeight = parameters[1].value;
     modeAccelerometer = parameters[2].value;
     modeJoystick = parameters[3].value;
+    parameters[4].value=level;
+
 }
 
 void Menu::Update_config()
@@ -53,6 +56,7 @@ void Menu::Update_config()
     parameters[1].value = screenHeight;
     parameters[2].value = modeAccelerometer;
     parameters[3].value = modeJoystick;
+    parameters[4].value=level;
 }
 
 Menu::~Menu() { delete[] parameters; }
@@ -134,6 +138,10 @@ void Menu::Set_modeJoystick()
     modeJoystick = true;
     modeAccelerometer = false;
 }
+void Menu::Set_Level(int value)
+{
+    level=value;
+}
 
 int Menu::Get_screenWidth()
 {
@@ -143,6 +151,10 @@ int Menu::Get_screenWidth()
 int Menu::Get_screenHeight()
 {
     return screenHeight;
+}
+int Menu::Get_Level();
+{
+    return level;
 }
 
 bool Menu::Is_modeAccelerometer()

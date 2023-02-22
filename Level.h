@@ -17,7 +17,7 @@ class Level{
         Level();
         ~Level();
 
-        void draw();
+        void draw(std::ostream &s);
 
         void update(float timeElapsed);
 
