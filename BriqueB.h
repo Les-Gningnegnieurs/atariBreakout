@@ -7,7 +7,7 @@
 /// </summary>
 class BriqueB : public Brique {
 public:
-	BriqueB(int x = 0, int y = 0, int l = 4, int h = 1);
+	BriqueB(int x = 0, int y = 0, int l = 6, int h = 2);
 
 	~BriqueB();
 

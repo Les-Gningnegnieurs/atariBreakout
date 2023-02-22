@@ -1,4 +1,5 @@
 #include "BriqueB.h"
+
 BriqueB::BriqueB(int x, int y, int l, int h) {
     _posB.x = x;
     _posB.y = y;

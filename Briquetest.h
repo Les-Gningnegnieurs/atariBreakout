@@ -6,7 +6,7 @@
 //brique de longueur 4, hauteur 1
 class Briquetest : public Brique {
 public:
-	Briquetest(int x = 0, int y = 0, int l = 4, int h = 1);
+	Briquetest(int x = 0, int y = 0, int l = 6, int h = 2, state s = Alive);
 
 	~Briquetest();
 

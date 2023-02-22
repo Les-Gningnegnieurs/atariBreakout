@@ -4,6 +4,7 @@
 
 GameLoop::GameLoop() {
     _canevas = new Canevas();
+    loadFile();
 }
 void GameLoop:: Start(){
     _gameState=Running;
@@ -37,11 +38,11 @@ void GameLoop:: GameOver(){
     if(_canevas->Is_GameOver())
     {
         Stop();
-        _canevas->erase(std::cout);
+        _canevas->erase();
         //ouvrir le menu
 
     }
-    else draw(std::cout);
+    else draw();
 
 
 }
@@ -54,11 +55,12 @@ void GameLoop:: update() {
         _canevas->update(elapsed);
     }
     GameOver();
-
+    Sleep(4000);
 }
 
 void GameLoop:: loadFile(){
-    int value= _menu.Get_Level();
+    //int value= _menu.Get_Level();
+    int value = 1;
     std::stringstream str;
     std::string levelPath;
     str << "level/" << value << ".txt";
@@ -68,13 +70,9 @@ void GameLoop:: loadFile(){
     myfile>>*_canevas;
 }
 
-void GameLoop::draw(std::ostream& s)
+void GameLoop::draw()
 {
-<<<<<<< HEAD
-    _canevas->draw(s);
-=======
     std::stringstream s;
     _canevas->draw(s);
     std::cout << s.str();
->>>>>>> 7246d0f73eb0c320ee80d6110d83c8193452f26d
 }

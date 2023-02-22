@@ -14,7 +14,7 @@ Elles permet de :
 #ifndef MENU_H
 #define MENU_H
 #define CONFIG_PATH "./config/game.config"		//Location du fichier config
-#define NUMBER_OF_PARAMETERS 4
+#define NUMBER_OF_PARAMETERS 5
 
 struct Config
 {

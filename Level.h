@@ -4,10 +4,11 @@
 #include "Brique.h"
 #include "Structs.h"
 #include "Briquetest.h"
+#include "BriqueVoid.h"
 #include <iostream>
 #include "Balle.h"
-#define MAX_ROWS 128
-#define MAX_COLUMNS 128
+#define MAX_ROWS 17
+#define MAX_COLUMNS 7
 
 class Level{
     private: 

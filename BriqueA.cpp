@@ -1,4 +1,5 @@
 #include "BriqueA.h"
+
 BriqueA::BriqueA(int x, int y, int l, int h) {
     _posA.x = x;
     _posA.y = y;
@@ -6,7 +7,7 @@ BriqueA::BriqueA(int x, int y, int l, int h) {
     _sizeY = h;
     _PV = 1;
     _PVini = _PV;
-    _etat = Indestructible;
+    _etat = Alive;
     //length et height peut-etre a definir
 }
 

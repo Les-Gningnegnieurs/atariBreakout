@@ -14,7 +14,7 @@ class Brique
 {
 public:
 	//on entre simplement les coordonnées. la hauteur et la largeur sont déja définies
-	Brique(int x = 0, int y = 0, int l = 4, int h = 1);
+	Brique(int x = 0, int y = 0, int l = 6, int h = 2, state s = Alive);
 
 	bool increase_Damage();
 
@@ -31,17 +31,15 @@ public:
 	/// @return Destroyed ou autres
 	state getstate();
 
-	void setstate(state& s);
+	void setstate(state s);
     bool checkTop(Position posB);
     bool checkBot(Position posB);
     bool checkRight(Position posB);
     bool checkLeft(Position posB);
-    int GetHauteur(){return _sizeY;}
+	int GetHauteur() { return _sizeY; }
 
-	void draw(std::ostream& s);
-	//virtual bool increase_Damage();
-
-	virtual void draw(std::ostream& s) = 0;
+	virtual void draw(std::ostream& s);
+	virtual void afficher(std::ostream& s) = 0;
 protected:
 	Hitbox _posBrique;
 	state _etat;

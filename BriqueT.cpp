@@ -6,7 +6,7 @@ BriqueT::BriqueT(int x, int y, int l, int h) {
     _sizeY = h;
     _PV = 1;
     _PVini = _PV;
-    _etat = Alive;
+    _etat = Indestructible;
     //length et height peut-etre a definir
 }
 

@@ -15,15 +15,16 @@ std::istream& operator>>(std::istream& s, Canevas& can)
     return s;
 }
 
-void Canevas::erase(std::ostream &s)
+void Canevas::erase()
 {
-
+	system("CLS");
 }
 
 
 // Affiche le tableau à l'écran
 void Canevas::draw(std::ostream &s)
 {
+	erase();
 	_game.draw(s);
 }
 

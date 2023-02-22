@@ -2,8 +2,14 @@
 Level :: Level(){
     _info.rows = MAX_ROWS;
     _info.columns = MAX_COLUMNS;
-    _info.Brick_length = 4;
-    _info.Brick_heigth = 1;
+    _info.Brick_length = 6;
+    _info.Brick_heigth = 2;
+    for (int i = 0; i < _info.rows; i++) {
+        for (int j = 0; j < _info.columns; j++)
+        {
+            _board[i][j] = new BriqueVoid(j * _info.Brick_length, i * _info.Brick_heigth, _info.Brick_length, _info.Brick_heigth);
+        }
+    }
 }
 Level :: ~Level(){
 
@@ -108,6 +114,9 @@ std::istream& operator >> (std::istream& s, Level& I){
                     //si == 0 : pas de brique a cette position
                     I._board[i][j] = new Briquetest(j*I.getLength(), i*I.getHeigth(), I.getLength(), I.getHeigth()); 
                 }
+                else if (x == 0) {
+                    I._board[i][j] = new BriqueVoid(j * I.getLength(), i * I.getHeigth(), I.getLength(), I.getHeigth());
+                }
             }
         }
         for (int i = I.getRows(); i < MAX_ROWS; i++)
@@ -126,15 +135,13 @@ std::istream& operator >> (std::istream& s, Level& I){
 }
 
 void Level::levelDrawline(std::ostream &s, int ligne) {
-            
-
-             for(int i=0;i< _board[ligne][0]->GetHauteur();i++)
+             for(int i=0;i< _info.Brick_heigth;i++)
              {
                  for(int j=0;j<_info.columns;j++)
                  {
                      _board[ligne][j]->draw(s);
                  }
-            s<<std::endl;
+                s<<std::endl;
 
 
 

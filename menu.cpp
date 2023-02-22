@@ -38,6 +38,8 @@ Menu::Menu()
     parameters[2].name = "MODE_ACCELEROMETER";
     parameters[3].name = "MODE_JOYSTICK";
     parameters[4].name = "SELECT_LEVEL";
+
+    Update_data();
 }
 
 void Menu::Update_data()

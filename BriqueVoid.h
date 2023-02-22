@@ -4,7 +4,7 @@
 #include "Brique.h"
 class BriqueVoid : public Brique {
 public:
-	BriqueVoid(int x = 0, int y = 0, int l = 4, int h = 1);
+	BriqueVoid(int x = 0, int y = 0, int l = 6, int h = 2);
 
 	~BriqueVoid();
 

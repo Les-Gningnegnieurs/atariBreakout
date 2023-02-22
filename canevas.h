@@ -1,4 +1,5 @@
 #include "GameLogic.h"
+#include <stdlib.h>
 #define RESOLUTION_X 128
 #define RESOLUTION_Y 128
 
@@ -14,7 +15,7 @@ private:
 public:
 	Canevas();
 	friend std::istream& operator>>(std::istream& s, Canevas& can);
-	void erase(std::ostream& s);
+	void erase();
 	void draw(std::ostream &s);
 	void update (float ElapsedTime);
 	bool Is_GameOver();
