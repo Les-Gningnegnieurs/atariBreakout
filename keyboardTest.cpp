@@ -14,12 +14,16 @@ int main(){
     return 0;
 }*/
 #include "Level.h"
-#include "GameLogic.h"
+#include "GameLoop.h"
 #include <fstream>
 #include <iostream>
 
 using namespace std;
 int main() {
-    GameLogic Game();
-
+    GameLoop game;
+    while (true)
+    {
+        game.update();
+       
+    }
 }

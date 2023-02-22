@@ -2,19 +2,22 @@
 
 #include "GameLoop.h"
 
+GameLoop::GameLoop() {
+    _canevas = new Canevas();
+}
 void GameLoop:: Start(){
     _gameState=Running;
+    elapsed = 0;
 }
 void GameLoop:: Pause()
 {
     _gameState=Paused;
 }
-float GameLoop::GetTimeElapsed()
+void GameLoop::GetTimeElapsed()
 {
      auto tick = clock.now();
      auto int_ms = duration_cast<std::chrono::milliseconds>(tick - lastTickTime);
-     float elapsed = int_ms.count();
-     return elapsed;
+     elapsed = int_ms.count();
 }
 void GameLoop::Stop() {
     _gameState=Stopped;
@@ -30,11 +33,11 @@ void GameLoop::Restart()
 
 
 }
-void GameOver(){
+void GameLoop:: GameOver(){
     if(_canevas->Is_GameOver())
     {
         Stop();
-        _canevas.erase();
+        _canevas->erase(std::cout);
         //ouvrir le menu
 
     }
@@ -44,9 +47,10 @@ void GameOver(){
 }
 
 void GameLoop:: update() {
-
+    GetTimeElapsed();
+    if (_gameState == Starting)
+        Start();
     if (_gameState==Running) {
-        float elapsed = GetTimeElapsed();
         _canevas->update(elapsed);
     }
     GameOver();
@@ -55,15 +59,18 @@ void GameLoop:: update() {
 
 void GameLoop:: loadFile(){
     int value= _menu.Get_Level();
-    std::string levelPath= "level/"+value+".txt";
-    fstream myfile;
-    myfile.open(levelPath,ios::in);
-    myfile>>_canevas;
+    std::stringstream str;
+    std::string levelPath;
+    str << "level/" << value << ".txt";
+    levelPath = str.str();
+    std::fstream myfile;
+    myfile.open(levelPath,std::ios::in);
+    myfile>>*_canevas;
 }
 
 void GameLoop:: draw()
 {
-    std::ostream s;
-    _canevas.draw(s);
-    std::cout << s;
+    std::stringstream s;
+    _canevas->draw(s);
+    std::cout << s.str();
 }

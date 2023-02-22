@@ -8,6 +8,8 @@
 #include "Structs.h"
 #include <fstream>
 #include <iostream>
+#include <sstream>
+
 using  namespace std::chrono;
 
 
@@ -18,18 +20,20 @@ private:
     Menu _menu;
     steady_clock::time_point lastTickTime;
     gameState _gameState;
+    float elapsed;
 public:
+    GameLoop();
     void Start();
     void Stop();
     void Pause();
     void openMenu();
     void update();
-    bool GameOver();
+    void GameOver();
     void Restart();
-    void draw(std::ostream &s);
+    void draw();
     void Exit();
     void loadFile();
-    float GetTimeElapsed();
+    void GetTimeElapsed();
 
 
 };
