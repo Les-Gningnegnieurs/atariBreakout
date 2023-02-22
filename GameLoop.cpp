@@ -30,15 +30,15 @@ void GameLoop::Restart()
 
 
 }
-void GameOver(){
-    if(_canevas->Is_GameOver())
+bool GameLoop::GameOver(){
+    if (_canevas->Is_GameOver())
     {
         Stop();
-        _canevas.erase();
+        _canevas->erase(std::cout);
         //ouvrir le menu
 
     }
-    else draw();
+    else draw(std::cout);
 
 
 }
@@ -61,9 +61,7 @@ void GameLoop:: loadFile(){
     myfile>>_canevas;
 }
 
-void GameLoop:: draw()
+void GameLoop::draw(std::ostream& s)
 {
-    std::ostream s;
-    _canevas.draw(s);
-    std::cout << s;
+    _canevas->draw(s);
 }
