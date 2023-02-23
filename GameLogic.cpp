@@ -2,7 +2,6 @@
 
 GameLogic::GameLogic()
 {
-
 }
 GameLogic:: GameLogic(const int maxX, const int maxY)
 {
@@ -12,19 +11,17 @@ GameLogic:: GameLogic(const int maxX, const int maxY)
      _platform=Plateforme(5, 3,(maxX/2)-(5/2),maxY);
     _score=0;
     _balls.push_back(new Balle(5,(maxX/2)-(5/2),maxY-3));
-    _controller = Keyboard(); //à changer lorsqu'on vas utiliser une manette
 }
 
 GameLogic::~GameLogic(){
     _balls.clear();
 }
 
-void GameLogic:: update(float timeElapsed)
+void GameLogic:: update(float timeElapsed, Controller& c)
 {
-    _controller.receiveInputs(); //get inputs
-
     //move plateform
-    _platform.move(_controller.getJoystick().x);
+    if(c.getJoystick().x != 0)
+        _platform.move(c.getJoystick().x);
     _platform.update(timeElapsed);
 
     //update Game / do logic
@@ -39,9 +36,6 @@ void GameLogic:: update(float timeElapsed)
 
     //Update controller status (LED & bargrpah)
     //TODO quand on vas avoir déterminé une utilité
-
-    //send outputs
-    _controller.sendOutputs();
 }
 
 bool GameLogic::isGameOver()

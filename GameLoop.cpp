@@ -4,6 +4,7 @@
 
 GameLoop::GameLoop() {
     _canevas = new Canevas();
+    _keyboard = new Keyboard();
     loadFile();
 }
 void GameLoop:: Start(){
@@ -18,6 +19,7 @@ void GameLoop::GetTimeElapsed()
 {
      auto tick = clock.now();
      auto int_ms = duration_cast<std::chrono::milliseconds>(tick - lastTickTime);
+     lastTickTime = tick;
      elapsed = int_ms.count();
 }
 void GameLoop::Stop() {
@@ -30,17 +32,14 @@ void GameLoop::Restart()
     _canevas= new Canevas;
     loadFile();
 
-
-
-
 }
+
 void GameLoop:: GameOver(){
     if(_canevas->Is_GameOver())
     {
         Stop();
         _canevas->erase();
         //ouvrir le menu
-
     }
     else draw();
 
@@ -48,14 +47,16 @@ void GameLoop:: GameOver(){
 }
 
 void GameLoop:: update() {
+    _keyboard->receiveInputs();
     GetTimeElapsed();
     if (_gameState == Starting)
         Start();
     if (_gameState==Running) {
-        _canevas->update(elapsed);
+        _canevas->update(elapsed, *_keyboard);
     }
     GameOver();
-   // Sleep(4000);
+    _keyboard->sendOutputs();
+
 }
 
 void GameLoop:: loadFile(){
@@ -72,7 +73,9 @@ void GameLoop:: loadFile(){
 
 void GameLoop::draw()
 {
-    std::stringstream s;
-    _canevas->draw(s);
-    std::cout << s.str();
+    if (elapsed >= 100) {
+        std::stringstream s;
+        _canevas->draw(s);
+        std::cout << s.str();
+    }
 }

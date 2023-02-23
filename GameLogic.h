@@ -16,7 +16,6 @@ private:
     std::vector<Balle*> _balls;
     Level _level;
     Plateforme _platform;
-    Controller _controller;
     int _score;
     int _livesLeft;
     int maxSizeX;
@@ -27,7 +26,7 @@ public:
     GameLogic();
     GameLogic(int maxX, int maxY);
     ~GameLogic();
-    void update(float timeElapsed);
+    void update(float timeElapsed, Controller& c);
     void draw(std::ostream& s);
     bool isGameOver();
     int getScoreInfo();

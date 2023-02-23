@@ -9,6 +9,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include "inputs/Keyboard.h"
 
 using  namespace std::chrono;
 
@@ -22,6 +23,8 @@ private:
     gameState _gameState;
     float elapsed;
 public:
+    Controller* _keyboard;
+
     GameLoop();
     void Start();
     void Stop();
