@@ -22,6 +22,7 @@ private:
     steady_clock::time_point lastTickTime;
     gameState _gameState;
     float elapsed;
+    float elapsedDraw;
 public:
     Controller* _keyboard;
 

@@ -72,7 +72,8 @@ void GameLogic::checkCollisions() {
     if(_balls.empty())
     {
         _livesLeft--;
-        _balls[0]=new Balle(5);
+        Balle* p1 = new Balle(5, 64, 64);
+        _balls.push_back(p1);
     }
 
 }
