@@ -6,8 +6,8 @@ Plateforme::Plateforme() {
     maxSpeed = 10; // à déterminer
     speed.x = 0;
     speed.y = 0;
-    pos.x = 0;
-    pos.y = 0;
+    pos.x = 30;
+    pos.y = 20;
 }
 Plateforme:: Plateforme(int length, int height, int x, int y)
 {
@@ -40,6 +40,15 @@ void Plateforme::update(float timeElapsed)
 
 void Plateforme::draw(std::ostream&s)
 {
+    std::stringstream ss;
+    ss << s.rdbuf();
+    std::string myString = ss.str();
+    for (int i = pos.x; i < pos.x + sizeX; i++)
+    {
+        myString[i] = '_';
+    }
+    s.flush();
+    s << myString;
    
     
 

@@ -16,10 +16,10 @@ void Balle::update(float timeElapsed)
     speedX = ((timeElapsed * speed.x) / 100000);
     speedY = ((timeElapsed * speed.y) / 100000);
 
-    if (speedX >= 1) speedX = 0.1;
-    else if (speedX <= -1)speedX = -0.1;
-    if (speedY >= 1)speedY = 0.1;
-    else if (speedY <= -1)speedY = -0.1;
+    if (speedX >= 1) speedX = 1;
+    else if (speedX <= -1)speedX = -1;
+    if (speedY >= 1)speedY = 1;
+    else if (speedY <= -1)speedY = -1;
 
     pos.x += speedX;
     pos.y += speedY;
@@ -36,7 +36,7 @@ void Balle:: draw(std::ostream &s)
         ss << s.rdbuf();
         std::string myString = ss.str();
         myString[(pos.x * pos.y) + pos.y] = 'O';
-
+        s.flush();
         s << myString;
     
     

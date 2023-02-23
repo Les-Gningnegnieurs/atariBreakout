@@ -1,5 +1,6 @@
 #include "Structs.h"
 #include <iostream>
+#include <sstream>
 #ifndef PLATEFORME_H
 #define PLATEFORME_H
 

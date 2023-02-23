@@ -88,7 +88,7 @@ void GameLogic::draw(std::ostream&s){
     for(int i=0; i<_level.getRows();i++)
     {
         _level.levelDrawline(s,i);
-        s<<std::endl;
+         s<<std::endl;
     }
     
     //draw balls
