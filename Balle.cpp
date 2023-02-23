@@ -3,8 +3,8 @@ Balle::Balle(float ray, int x, int y)
 {
     pos.x=x;
     pos.y=y;
-    speed.y=50;
-    speed.x=50;
+    speed.y = 0;
+    speed.x=0;
     rayon=ray;
     maxSpeed=10; // à définir plus tard;
 
