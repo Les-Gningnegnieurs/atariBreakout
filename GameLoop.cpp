@@ -5,7 +5,6 @@
 GameLoop::GameLoop() {
     _canevas = new Canevas();
     _keyboard = new Keyboard();
-    elapsedDraw = 0;
     loadFile();
 }
 void GameLoop:: Start(){
@@ -22,7 +21,6 @@ void GameLoop::GetTimeElapsed()
      auto int_ms = duration_cast<std::chrono::milliseconds>(tick - lastTickTime);
      lastTickTime = tick;
      elapsed = int_ms.count();
-     elapsedDraw += int_ms.count();
 }
 void GameLoop::Stop() {
     _gameState=Stopped;
@@ -75,12 +73,12 @@ void GameLoop:: loadFile(){
 
 void GameLoop::draw()
 {
-    if (elapsedDraw >= 300)
-    {
+    if (drawElapsed >= 200) {
+        drawElapsed = 0;
         std::stringstream s;
         _canevas->draw(s);
         std::cout << s.str();
-        elapsedDraw = 0;
     }
-    
+    else
+        drawElapsed += elapsed;
 }

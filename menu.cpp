@@ -48,7 +48,7 @@ void Menu::Update_data()
     screenHeight = parameters[1].value;
     modeAccelerometer = parameters[2].value;
     modeJoystick = parameters[3].value;
-    parameters[4].value=level;
+    level = parameters[4].value;
 
 }
 
@@ -58,7 +58,7 @@ void Menu::Update_config()
     parameters[1].value = screenHeight;
     parameters[2].value = modeAccelerometer;
     parameters[3].value = modeJoystick;
-    parameters[4].value=level;
+    parameters[4].value = level;
 }
 
 Menu::~Menu() { delete[] parameters; }
