@@ -30,7 +30,11 @@ void Plateforme:: move(int joystickvalueX)
 
 void Plateforme::update(float timeElapsed)
 {
-    pos.x+= speed.x*timeElapsed;
+    pos.x+= (speed.x*timeElapsed)/1000;
+    if (pos.x >= 128)
+        pos.x = 64;
+    else if (pos.x <= 0)
+        pos.x = 0;
 
 }
 

@@ -1,10 +1,10 @@
 #include "Balle.h"
 Balle::Balle(float ray, int x, int y)
 {
-    pos.x=x;
-    pos.y=y;
-    speed.y = 0;
-    speed.x=0;
+    pos.x=3;
+    pos.y=7;
+    speed.y = -10;
+    speed.x=-10;
     rayon=ray;
     maxSpeed=10; // à définir plus tard;
 
@@ -16,8 +16,9 @@ void Balle:: update(float timeElapsed)
     else if(speed.x<-maxSpeed) speed.x=-maxSpeed;
     if(speed.y>maxSpeed) speed.y=maxSpeed;
     else if(speed.y<-maxSpeed) speed.y=-maxSpeed;
-    pos.x+= timeElapsed*speed.x;
-    pos.y+=timeElapsed*speed.y;
+   // if (timeElapsed >= 100)timeElapsed = 100;
+    pos.x+= (timeElapsed*speed.x)/1000;
+    pos.y+=(timeElapsed*speed.y)/1000;
 }
 
 
