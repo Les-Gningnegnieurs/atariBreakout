@@ -73,12 +73,12 @@ void GameLoop:: loadFile(){
 
 void GameLoop::draw()
 {
-    if (drawElapsed >= 200) {
+    if (drawElapsed >= 50) {
         drawElapsed = 0;
         std::stringstream s;
         _canevas->draw(s);
         std::cout << s.str();
-    }
+   }
     else
         drawElapsed += elapsed;
 }

@@ -31,21 +31,22 @@ void Brique::setstate(state s) {
 
 bool Brique::checkCollision(Balle *b) {
     Position posB = b->getPos();
-    if (_posBrique.y >=posB.y&& posB.y <= _posBrique.y + _sizeY)
+    if (_posBrique.y +_sizeY >=posB.y&& posB.y >= _posBrique.y )
     {
-        if (_posBrique.x >= posB.x && posB.x <= _posBrique.x + _sizeX)
+        if (_posBrique.x +_sizeX>= posB.x && posB.x >= _posBrique.x )
         {
-            if (checkTop(posB))
+           if (checkBot(posB))
+            {
+                b->changeVelocity(0, 1);
+                return true;
+            }
+           else if (checkTop(posB))
             {
                 b->changeVelocity(0,1);
                 return true;
             }
-            else if(checkBot(posB))
-            {
-                b->changeVelocity(0,1);
-                return true;
-            }
-            else if (checkRight(posB))
+            
+             if (checkRight(posB))
             {
                 b->changeVelocity(1,0);
                 return true;

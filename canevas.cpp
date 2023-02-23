@@ -3,7 +3,7 @@
 
 Canevas::Canevas()
 {
-	_game=GameLogic(7,17);
+	_game=GameLogic(10,10);
 }
 
 
@@ -22,7 +22,7 @@ void Canevas::erase()
 
 
 // Affiche le tableau à l'écran
-void Canevas::draw(std::ostream &s)
+void Canevas::draw(std::ostream&s)
 {
 	erase();
 	_game.draw(s);

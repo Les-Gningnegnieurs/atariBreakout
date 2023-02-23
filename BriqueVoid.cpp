@@ -17,6 +17,7 @@ void BriqueVoid::update(float timeElapsed) {
 }
 void BriqueVoid::draw(std::ostream& s) {
     if (_etat == Destroyed)
+        
         for (int i = 0; i < _sizeX; i++) {
             s << " ";
         }

@@ -5,18 +5,19 @@
 #include <cmath>
 #include"Structs.h"
 #include <iostream>
-
+#include <string>
+#include <sstream>
 #ifndef BALLE_H
 #define BALLE_H
 class Balle{
 private:
     Position pos;
-    float rayon;
+    double rayon;
     Velocity speed;
     int maxSpeed;
 public:
     Balle(float ray, int x=0, int y=0);
-    float aire() { return rayon * rayon * 3.141593; }
+    double aire() { return rayon * rayon * 3.141593; }
     void update(float timeElapsed);
     void draw(std::ostream &s);
     bool checkCollision(Position posHit);

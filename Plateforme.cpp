@@ -38,27 +38,10 @@ void Plateforme::update(float timeElapsed)
 
 }
 
-void Plateforme::draw(std::ostream &s)
+void Plateforme::draw(std::ostream&s)
 {
    
-    for(int i=0;i<128;i++)
-    { 
-        if (i == pos.x)
-        {
-            s << "[";
-            if (sizeX == 1)
-                s << "_";
-            for (int j = 1; j < sizeX - 1; j++)
-            {
-                s << "-";
-            }
-            s << "]";
-        }
-        else
-            s << " ";
-
-       
-    }
+    
 
 
  
@@ -71,7 +54,7 @@ bool Plateforme::checkCollision(Position posHit)
 {
     //l'implémentation dépend de ou se situe notre point d'ancrage.
     //j'assumes qu'il est dans le coin gauche inférieur.
-    if(posHit.y<=pos.y+sizeY)
+    if(posHit.y>=pos.y)
     {
         if((posHit.x>=pos.x)&&(posHit.x<=pos.x+sizeX)) return true;
     }

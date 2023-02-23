@@ -2,6 +2,7 @@
 
 GameLogic::GameLogic()
 {
+    
 }
 GameLogic:: GameLogic(const int maxX, const int maxY)
 {
@@ -49,7 +50,7 @@ void GameLogic::checkCollisions() {
     for(int i=0; i< _balls.size();i++)
     {
         pos= _balls[i]->getPos();
-        if (pos.y>maxSizeY) //le [0,0] est dans le coin Haut-Gauche
+        if (pos.y>25) //le [0,0] est dans le coin Haut-Gauche
         {
             delete _balls[i];
             _balls.erase(_balls.begin()+i);
@@ -62,7 +63,7 @@ void GameLogic::checkCollisions() {
             }
 
             //check walls collision
-            if(pos.x <= 0 || pos.x >= maxSizeX) //one of the walls hit
+            if(pos.x <= 0 || pos.x >= 80) //one of the walls hit
                 _balls[i]->changeVelocity(1, 0); //inverse le vecteur X pour éloigner du mur
             
             //Balle *b = _balls[i];
@@ -72,7 +73,8 @@ void GameLogic::checkCollisions() {
     if(_balls.empty())
     {
         _livesLeft--;
-        _balls.push_back(new Balle(5));
+        Balle* p1 = new Balle(5, 5, 5);
+        _balls.push_back(p1);
     }
 
 }
@@ -81,7 +83,7 @@ int GameLogic::getScoreInfo() {
     return _score;
 }
 
-void GameLogic::draw(std::ostream &s){
+void GameLogic::draw(std::ostream&s){
     //draw bricks
     for(int i=0; i<_level.getRows();i++)
     {

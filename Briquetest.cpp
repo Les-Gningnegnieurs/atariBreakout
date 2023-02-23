@@ -7,7 +7,7 @@ Briquetest::Briquetest(int x, int y, int l, int h, state s) {
     _sizeY = h;
     _PV = 1;
     _PVini = _PV;
-    _etat == s;
+    _etat = s;
     //length et height peut-etre a definir
 }
 
