@@ -3,7 +3,7 @@
 
 Canevas::Canevas()
 {
-	_game=GameLogic(10,10);
+	_game=GameLogic(RESOLUTION_X,RESOLUTION_Y);
 }
 
 

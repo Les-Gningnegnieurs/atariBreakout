@@ -51,11 +51,6 @@ void Plateforme::draw(std::ostream&s)
     }
     s.flush();
     s << myString;
-   
-    
-
-
- 
 }
 
 

@@ -4,6 +4,7 @@ GameLogic::GameLogic()
 {
     
 }
+
 GameLogic:: GameLogic(const int maxX, const int maxY)
 {
     maxSizeX = maxX;
