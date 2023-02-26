@@ -28,9 +28,9 @@ void Canevas::draw(std::ostream&s)
 	_game.draw(s);
 }
 
-void Canevas::update (float ElapsedTime, Controller& c)
+void Canevas::update (Controller& c)
 {
-	_game.update(ElapsedTime, c);
+	_game.update(c);
 }
 
 bool Canevas::Is_GameOver()

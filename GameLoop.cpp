@@ -9,19 +9,12 @@ GameLoop::GameLoop() {
 }
 void GameLoop:: Start(){
     _gameState=Running;
-    elapsed = 0;
 }
 void GameLoop:: Pause()
 {
     _gameState=Paused;
 }
-void GameLoop::GetTimeElapsed()
-{
-     auto tick = clock.now();
-     auto int_ms = duration_cast<std::chrono::milliseconds>(tick - lastTickTime);
-     lastTickTime = tick;
-     elapsed = int_ms.count();
-}
+
 void GameLoop::Stop() {
     _gameState=Stopped;
 }
@@ -48,11 +41,10 @@ void GameLoop:: GameOver(){
 
 void GameLoop:: update() {
     _keyboard->receiveInputs();
-    GetTimeElapsed();
     if (_gameState == Starting)
         Start();
     if (_gameState==Running) {
-        _canevas->update(elapsed, *_keyboard);
+        _canevas->update(*_keyboard);
     }
     GameOver();
     _keyboard->sendOutputs();
@@ -73,12 +65,7 @@ void GameLoop:: loadFile(){
 
 void GameLoop::draw()
 {
-    if (drawElapsed >= 60.0) {
-        drawElapsed = 0;
         std::stringstream s;
         _canevas->draw(s);
         std::cout << s.str();
-   }
-    else
-        drawElapsed += elapsed;
 }

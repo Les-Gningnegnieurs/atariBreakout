@@ -17,7 +17,7 @@ public:
     Plateforme();
     Plateforme(int length,int height, int x=0, int y=0);
     bool checkCollision(Position posHit);
-    void update(float timeElapsed);
+    void update();
     void move(int joystickvalueX);
     void draw(std::ostream &s);
     Velocity getSpeed(){return speed;}

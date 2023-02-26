@@ -9,24 +9,15 @@ Balle::Balle(float ray, int x, int y)
     maxSpeed=12; // à définir plus tard;
 
 }
-void Balle::update(float timeElapsed)
+void Balle::update()
 {
     float speedX;
     float speedY;
-    speedX = ((timeElapsed * speed.x) / 100000);
-    speedY = ((timeElapsed * speed.y) / 100000);
-
-    if (speedX >= 1) speedX = 1;
-    else if (speedX <= -1)speedX = -1;
-    if (speedY >= 1)speedY = 1;
-    else if (speedY <= -1)speedY = -1;
+    speedX = 1 * speed.x;
+    speedY = 1 * speed.y;
 
     pos.x += speedX;
     pos.y += speedY;
-    if (pos.x >= 80)pos.x = 80;
-    else if (pos.x <= 0)pos.x = 0;
-    if (pos.y >= 25)pos.y = 25;
-    else if (pos.y <= 0)pos.y;
 }
 
 void Balle:: draw(std::ostream &s)

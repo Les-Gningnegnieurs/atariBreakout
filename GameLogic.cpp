@@ -18,19 +18,18 @@ GameLogic::~GameLogic(){
     _balls.clear();
 }
 
-void GameLogic:: update(float timeElapsed, Controller& c)
+void GameLogic:: update(Controller& c)
 {
     //move plateform
-    if(c.getJoystick().x != 0)
-        _platform.move(c.getJoystick().x);
-    _platform.update(timeElapsed);
+    _platform.move(c.getJoystick().x);
+    _platform.update();
 
     //update Game / do logic
     for(int i=0; i< _balls.size();i++)
     {
-        _balls[i]->update(timeElapsed);
+        _balls[i]->update();
     }
-    _level.update(timeElapsed);
+    _level.update();
 
     //check les collisions une fois que les positions ont ete updatés
     checkCollisions(); 
@@ -45,6 +44,9 @@ bool GameLogic::isGameOver()
     else return false;
 }
 
+//Retirer les valeurs de limite hardcodé et enovyer balle en reference 
+//dans les check collision pour utiliser leur vélocité pour savoir d'ou elles arrivent pour le check colision
+//et determiner l'angle de renvoi
 void GameLogic::checkCollisions() {
     Position pos;
     for(int i=0; i< _balls.size();i++)

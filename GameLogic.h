@@ -26,7 +26,7 @@ public:
     GameLogic();
     GameLogic(int maxX, int maxY);
     ~GameLogic();
-    void update(float timeElapsed, Controller& c);
+    void update(Controller& c);
     void draw(std::ostream& s);
     bool isGameOver();
     int getScoreInfo();

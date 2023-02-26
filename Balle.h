@@ -18,7 +18,7 @@ private:
 public:
     Balle(float ray, int x=0, int y=0);
     double aire() { return rayon * rayon * 3.141593; }
-    void update(float timeElapsed);
+    void update();
     void draw(std::ostream &s);
     bool checkCollision(Position posHit);
     void outOfBounds();

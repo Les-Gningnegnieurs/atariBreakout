@@ -20,7 +20,7 @@ class Level{
 
         void draw(std::ostream &s);
 
-        void update(float timeElapsed);
+        void update();
 
         void setRows(int rows);
 

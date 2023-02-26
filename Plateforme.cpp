@@ -25,12 +25,14 @@ void Plateforme:: move(int joystickvalueX)
 {
     // calcul à verifier (512 est la valeur quand le joystick est au "repos")
 
-    speed.x= (joystickvalueX*maxSpeed)/100;
+    speed.x= joystickvalueX;
 }
 
 void Plateforme::update(float timeElapsed)
-{
-    pos.x+= (speed.x*timeElapsed)/1000;
+{   
+    pos.x += speed.x;
+
+    //revérifier ces limites (pas bon d'avoir des valeurs hardcodé
     if (pos.x >= 128)
         pos.x = 64;
     else if (pos.x <= 0)

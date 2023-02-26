@@ -20,7 +20,7 @@ void Level :: draw(std::ostream &s){
 
 }
 
-void Level :: update(float timeElapsed){
+void Level :: update(){
 
 }
 

@@ -16,13 +16,9 @@ using  namespace std::chrono;
 
 class GameLoop {
 private:
-    high_resolution_clock clock;
     Canevas *_canevas;
     Menu _menu;
-    steady_clock::time_point lastTickTime;
     gameState _gameState;
-    float elapsed;
-    long long drawElapsed;
 public:
     Controller* _keyboard;
 
@@ -37,7 +33,6 @@ public:
     void draw();
     void Exit();
     void loadFile();
-    void GetTimeElapsed();
 
 
 };
