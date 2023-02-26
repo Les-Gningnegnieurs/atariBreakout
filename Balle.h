@@ -1,23 +1,30 @@
-#ifndef BALLE_H
-#define BALLE_H
+//
+// Created by stao0901 on 2023-02-11.
+//
+#define _USE_MATH_DEFINES
+#include <cmath>
 #include"Structs.h"
 #include <iostream>
-#define HORIZONTAL 1
-#define VERTICAL 2
-#define CORNER 3
 
-
+#ifndef BALLE_H
+#define BALLE_H
 class Balle{
 private:
-    Coordonnees pos;
-    Coordonnees speed;
-    int lives;
+    Position pos;
+    float rayon;
+    Velocity speed;
+    int maxSpeed;
 public:
-    Balle();
-    bool Update();
-    bool Collision(int sens);
-    Coordonnees getSpeed(){return speed;}
-    Coordonnees getPos() {return pos;}
+    Balle(float ray);
+    float aire() {return rayon*rayon*M_PI;}
+    void update(float timeElapsed);
+    void draw();
+    bool checkCollision(Position posHit);
+    void outOfBounds();
+    Velocity getSpeed(){return speed;}
+    Position getPos() {return pos;}
+
+
 
 };
 

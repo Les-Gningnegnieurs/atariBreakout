@@ -4,11 +4,8 @@
 #include "Brique.h"
 #include "Structs.h"
 #include "Briquetest.h"
-#include "BriqueVoid.h"
-#include <iostream>
-#include "Balle.h"
-#define MAX_ROWS 10
-#define MAX_COLUMNS 10
+#define MAX_ROWS 128
+#define MAX_COLUMNS 128
 
 class Level{
     private: 
@@ -18,7 +15,7 @@ class Level{
         Level();
         ~Level();
 
-        void draw(std::ostream &s);
+        void draw();
 
         void update(float timeElapsed);
 
@@ -38,18 +35,16 @@ class Level{
 
         void setLength(int x);
 
-        void checkCollision(Balle *b, int& score);
+        bool checkCollision(int x, int y);
 
         Brique* getBrique(int row_idx, int column_idx); //utile pour set le level au debut
 
         bool setBrique(int row_idx, int column_idx, Brique* brique); //utile pour set le level au debut
 
 
-        void afficher(std::ostream& s);
-        void levelDrawline(std::ostream &s,int ligne );
+        void afficher(ostream& s);
 
-
-        friend std::istream& operator >>(std::istream& s, Level& I);
+        friend istream& operator >>(istream& s, Level& I);
 
 };
 #endif

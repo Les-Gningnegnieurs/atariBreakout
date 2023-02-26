@@ -1,24 +1,25 @@
 #include "Structs.h"
-
-
+#include <iostream>
 #ifndef PLATEFORME_H
 #define PLATEFORME_H
-#define LEFT 1
-#define RIGHT 2
+
 
 class Plateforme {
 private:
-    Coordonnees pos;
+    Position pos;
+    Velocity speed;
     int sizeX;
     int sizeY;
+    int tiltAngle;
+    int maxSpeed;
 public:
-    Plateforme();
-    bool Move(int keyboardValue);
-    Coordonnees GetPos(){return pos;}
-    
-    int Get_X() {return pos.x;};
-    int Get_Y() {return pos.y;};
-    int Get_SizeX() {return sizeX;};
+    Plateforme(int length,int height);
+    bool checkCollision(Position posHit);
+    void update(float timeElapsed);
+    void move(int joystickvalueX);
+    void draw();
+    Velocity getSpeed(){return speed;}
+    Position getPos(){return pos;}
 
 };
 

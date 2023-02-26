@@ -2,21 +2,14 @@
 Level :: Level(){
     _info.rows = MAX_ROWS;
     _info.columns = MAX_COLUMNS;
-    _info.Brick_length = 6;
-    _info.Brick_heigth = 2;
+    _info.Brick_length = 4;
+    _info.Brick_heigth = 1;
 }
 Level :: ~Level(){
 
 }
 
-void Level :: draw(std::ostream &s){
-
-    for (int i = 0; i < _info.rows; i++) {
-        for (int j = 0; j < _info.columns; j++) {
-            _board[i][j]->draw(s);
-        }
-
-    }
+void Level :: draw(){
 
 }
 
@@ -24,20 +17,16 @@ void Level :: update(float timeElapsed){
 
 }
 
-void Level :: checkCollision(Balle *b, int& score){
-  
+bool Level :: checkCollision(int x, int y){
     for (int i = 0; i < _info.rows; i++)
     {
         for (int j = 0; j < _info.columns; j++)
         {
-            
-            if (!_board[i][j]->est_Detruite() && _board[i][j]->checkCollision(b))
-            {
-                score++;
-                _board[i][j]->increase_Damage();
-            }
+            if (_board[i][j]->checkCollision(x, y))
+                return true;
         }
     }
+    return false;
 }
 
 Brique* Level::getBrique(int row_idx, int column_idx) { //utile pour set le level au debut
@@ -50,13 +39,8 @@ bool Level::setBrique(int row_idx, int column_idx, Brique* brique) { //utile pou
         return false;
     _board[row_idx][column_idx] = brique;
 }
-void Level :: afficher(std::ostream& s){
-    s << "Informations sur le niveau" << std::endl;
-    for (int i = 0; i < _info.rows; i++) {
-        for (int j = 0; j < _info.columns; j++) {
-            _board[i][j]->afficher(s);
-        }
-    }
+void Level :: afficher(ostream& s){
+    s << _info.rows << " , " << _info.columns << endl; 
 }
 
 void Level :: setRows(int rows){
@@ -87,48 +71,34 @@ int Level :: getLength(){
 void Level :: setLength(int x){
     _info.Brick_length = x;
 }
-std::istream& operator >> (std::istream& s, Level& I){
+std::istream& operator >> (istream& s, Level& I){
+    string ch;
     int x;
-    s >> x;    //rows
+    s >> ch;    //rows
+    x = atoi(ch.c_str());
     I.setRows(x); 
-    s >> x;    //columns
+    s >> ch;    //columns
+    x=atoi(ch.c_str());
     I.setColumns(x); 
-    s >> x; //length
+    s >> ch; //length
+    x = atoi(ch.c_str());
     I.setLength(x);
-    s>>x; //heigth
+    s>>ch; //heigth
+    x = atoi(ch.c_str());
     I.setHeigth(x);
-    while(!s.eof()){
+    while(!eof()){
         for(int i=0; i< I.getRows(); i++)
         {
             for(int j=0; j<I.getColumns(); j++)
             {
-                s >> x;
-                if(x == 1){
+                s >> ch;
+                if(ch == "1"){
                     //pourrait faire dequoi avec le 128 pour ajuster l'écran
                     //si == 0 : pas de brique a cette position
-                    I._board[i][j] = new Briquetest(j*I.getLength(), i*I.getHeigth(), I.getLength(), I.getHeigth()); 
-                }
-                else if (x == 0) {
-                    I._board[i][j] = new BriqueVoid(j * I.getLength(), i * I.getHeigth(), I.getLength(), I.getHeigth());
+                    I._board[i][j] = new Brique(j*I.getLength(), i*I.getHeigth(), I.getLength(), I.getHeigth()); 
                 }
             }
         }
-        
     }
     return s;
 }
-
-void Level::levelDrawline(std::ostream &s, int ligne) {
-             for(int i=0;i< _info.Brick_heigth;i++)
-             {
-                 for(int j=0;j<_info.columns;j++)
-                 {
-                     _board[ligne][j]->draw(s);
-                 }
-                s<<std::endl;
-
-
-
-            }
-        }
-
