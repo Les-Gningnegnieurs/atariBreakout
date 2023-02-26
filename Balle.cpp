@@ -1,49 +1,45 @@
 #include "Balle.h"
-Balle::Balle(float ray)
+Balle::Balle() //Checker la position
 {
-    pos.x=0;
-    pos.y=0;
-    speed.y=5;
-    speed.x=5;
-    rayon=ray;
-    maxSpeed=10; // à définir plus tard;
-
-}
-void Balle:: update(float timeElapsed)
-{
-
-    if(speed.x>maxSpeed) speed.x=maxSpeed;
-    else if(speed.x<-maxSpeed) speed.x=-maxSpeed;
-    if(speed.y>maxSpeed) speed.y=maxSpeed;
-    else if(speed.y<-maxSpeed) speed.y=-maxSpeed;
-    pos.x+= timeElapsed*speed.x;
-    pos.y+=timeElapsed*speed.y;
+    pos.x = 18;
+    pos.y = 28;
+    speed.y = -1;
+    speed.x = -1;
+	lives = 5;
 }
 
-
-void Balle:: draw()
+bool Balle::Update()
 {
-    std::cout<< "la vitesse en x est de "<<speed.x<< " la vitesse en y est de "<< speed.y<<std::endl;
-    std::cout<< "la position en x est "<<pos.x<<" la position en y est "<<pos.y<<std::endl;
-
-}
-bool Balle::checkCollision(Position posHit)
-{
-    double distance = sqrt(pow( posHit.x- pos.x, 2) + pow(posHit.y - pos.y, 2));
-    if(distance<=rayon) return true;
-    return false;
-
-
-}
-
-void Balle::outOfBounds()
-{
-    //implémentation reste à définir;
-
+	pos.x += speed.x;
+	pos.y += speed.y;
+	
+	if (pos.x == 0 || pos.x == RESOLUTION_X - 1) Collision(HORIZONTAL);
+	if (pos.y == 0) Collision(VERTICAL);
+	if (pos.y == RESOLUTION_Y - 1) return false;
+	return true;
 }
 
 
-
-
-
-
+bool Balle::Collision(int sens)
+{
+	switch (sens)
+	{
+		case HORIZONTAL:
+			speed.x = -speed.x;
+			break;
+		
+		case VERTICAL:
+			speed.y = -speed.y;
+			break;
+			
+		case CORNER:
+			speed.x = -speed.x;
+			speed.y = -speed.y;
+			break;
+			
+		default:
+			return false;
+			break;
+	}
+	return true;
+}
