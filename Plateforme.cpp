@@ -28,7 +28,7 @@ void Plateforme:: move(int joystickvalueX)
     speed.x= joystickvalueX;
 }
 
-void Plateforme::update(float timeElapsed)
+void Plateforme::update()
 {   
     pos.x += speed.x;
 

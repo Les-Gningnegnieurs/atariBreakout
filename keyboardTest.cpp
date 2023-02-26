@@ -10,6 +10,7 @@ int main(){
     game.Start();
     while(true){
         game.update();
+        Sleep(50);
     }
     return 0;
 }
