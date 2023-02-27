@@ -11,9 +11,7 @@ BriqueVoid::BriqueVoid(int x, int y, int l, int h) {
 BriqueVoid::~BriqueVoid() {
 
 }
-void BriqueVoid::update(float timeElapsed) {
 
-}
 
 void BriqueVoid::afficher(std::ostream& s) {
     s << "V:" << _posBrique.x << ", " << _posBrique.y << ", " << _sizeX << ", " << _sizeY << std::endl;

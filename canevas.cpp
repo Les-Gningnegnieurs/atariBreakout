@@ -11,31 +11,20 @@ Canevas::Canevas()
 
 std::istream& operator>>(std::istream& s, Canevas& can)
 {
-	int x;
-	s >> x;    //rows
-	can._info.rows = x;
-	s >> x;    //columns
-	can._info.columns=x;
-	s >> x; //length
-	can._info.Brick_length = x;
-	s >> x;
-	can._info.Brick_heigth = x;
-	s >> x;
-	can._info.pos_Plat_iniX = x;
-	s >> x;
-	can._info.pos_Plat_iniY = x;
-	s >> x;
-	can._info.Plat_length = x;
-	s >> x;
-	can._info.Plat_heigth= x;
-	s >> x;
-	can._info.pos_Ball_iniX = x;
-	s >> x;
-	can._info.pos_Ball_iniY = x;
-	s >> x;
-	can._info.ball_radius = x;
+	 
+	s >> can._info.rows;
+	s >> can._info.columns;
+	s >> can._info.Brick_length;
+	s >> can._info.Brick_heigth;
+	s >> can._info.pos_Plat_iniX;
+	s >> can._info.pos_Plat_iniY;
+	s >> can._info.Plat_length;
+	s >> can._info.Plat_heigth;
+	s >> can._info.pos_Ball_iniX;
+	s >> can._info.pos_Ball_iniY;
+	s >> can._info.ball_radius;
 	//on as set tt ce dont les constructeurs ont besoin et ensuite on px read le reste
-	GameLogic _game(can._info);
+	can._game= GameLogic(can._info);
 	s >> can._game;
     return s;
 }

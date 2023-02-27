@@ -14,8 +14,7 @@ BriqueB::~BriqueB() {
 
 }
 
-void BriqueB::update(float timeElapsed) {
-}
+
 
 
 void BriqueB::afficher(std::ostream& s) {

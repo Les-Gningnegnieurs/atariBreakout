@@ -10,7 +10,7 @@ public:
 
 	~Briquetest();
 
-	void update(float timeElapsed);
+	void update();
 	void afficher(std::ostream& s); //pour les testcran
 
 };

@@ -14,8 +14,7 @@ Briquetest::~Briquetest() {
 
 }
 
-void Briquetest::update(float timeElapsed) {
-}
+
 
 void Briquetest::afficher(std::ostream& s) {
     s << "A:" << _posBrique.x << ", " << _posBrique.y << ", " << _sizeX << ", " << _sizeY << std::endl;

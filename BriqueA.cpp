@@ -14,8 +14,6 @@ BriqueA::~BriqueA() {
 
 }
 
-void BriqueA::update(float timeElapsed) {
-}
 
 
 void BriqueA::afficher(std::ostream& s) {

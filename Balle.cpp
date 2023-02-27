@@ -13,8 +13,8 @@ Balle::Balle(float radius, int posX, int posY)
 }
 void Balle::update()
 {
-    float speedX;
-    float speedY;
+    int speedX;
+    int speedY;
     speedX = 1 * speed.x;
     speedY = 1 * speed.y;
     oldPosX = pos.x;

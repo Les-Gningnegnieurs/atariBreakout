@@ -13,8 +13,7 @@ BriqueT::~BriqueT() {
 
 }
 
-void BriqueT::update(float timeElapsed) {
-}
+
 
 
 void BriqueT::afficher(std::ostream& s) {
