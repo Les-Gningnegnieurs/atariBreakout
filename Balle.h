@@ -21,7 +21,7 @@ private:
 public:
     Balle(float radius=1, int posX=8, int posY=8);
 
-    double aire() { return rayon * rayon * 3.141593; }
+    double getrayon() { return rayon; }
     void update();
     int getoldPosX() { return oldPosX;  };
     int getoldPosY() { return oldPosY;  };

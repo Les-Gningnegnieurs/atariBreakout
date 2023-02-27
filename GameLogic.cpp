@@ -26,6 +26,7 @@ GameLogic::~GameLogic(){
 
 void GameLogic:: update(Controller& c)
 {
+    _level.draw(UI);
     //move plateform
     _platform.move(c.getJoystick().x);
     _platform.update(); //update la position
@@ -37,11 +38,10 @@ void GameLogic:: update(Controller& c)
         _balls[i]->update();
         _balls[i]->draw(UI);
     }
-    _level.draw(UI);
 
     //check les collisions une fois que les positions ont ete updatés
     checkCollisions(); 
-
+    draw(std::cout);
     //Update controller status (LED & bargrpah)
     //TODO quand on vas avoir déterminé une utilité
 }
@@ -60,20 +60,22 @@ void GameLogic::checkCollisions() {
     for(int i=0; i< _balls.size();i++)
     {
         pos= _balls[i]->getPos();
-        if (pos.y>25) //le [0,0] est dans le coin Haut-Gauche
+        if (pos.y + _balls[i]->getrayon() >= maxSizeY-1) //le [0,0] est dans le coin Haut-Gauche
         {
-            delete _balls[i];
-            _balls.erase(_balls.begin()+i);
+            _balls[i]->changeVelocity(0, 1); //faire bounce dans le bas
+            /*delete _balls[i];
+            _balls.erase(_balls.begin()+i);*/
         }
         else
         {
-            if(_platform.checkCollision(pos) || pos.y <= 0) //Hit plateforme ou plafond
+            _platform.checkCollision(_balls[i]);
+            if(pos.y - _balls[i]->getrayon() <= 0) //Hit plateforme ou plafond
             {
                 _balls[i]->changeVelocity(0, 1);//inverser direction de la balle en Y
             }
 
             //check walls collision
-            if(pos.x <= 0 || pos.x >= 80) //one of the walls hit
+            if(pos.x - _balls[i]->getrayon() <= 0 || pos.x + _balls[i]->getrayon() >= maxSizeX -1) //one of the walls hit
                 _balls[i]->changeVelocity(1, 0); //inverse le vecteur X pour éloigner du mur
             
             //Balle *b = _balls[i];

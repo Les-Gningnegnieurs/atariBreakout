@@ -1,4 +1,5 @@
 #include "Structs.h"
+#include "Balle.h"
 #include <iostream>
 #include <sstream>
 #ifndef PLATEFORME_H
@@ -18,7 +19,7 @@ private:
 public:
     Plateforme();
     Plateforme(LevelInfos I);
-    bool checkCollision(Position posHit);
+    void checkCollision(Balle *b);
     void update();
     void move(int joystickvalueX);
     void draw(char UI[RESMAX_Y][RESMAX_X]);
