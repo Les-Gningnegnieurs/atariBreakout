@@ -30,7 +30,6 @@ struct LevelInfos{
     int pos_Ball_iniY;
     float ball_radius;
 };
-LevelInfos _info;
 
 /// @brief coordonnées du coin gauche
 struct Hitbox {

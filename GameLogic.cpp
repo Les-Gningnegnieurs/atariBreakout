@@ -9,9 +9,10 @@ GameLogic:: GameLogic(LevelInfos _info)
     maxSizeX = _info.columns;
     maxSizeY = _info.rows;
     _livesLeft=3;
-     _platform=Plateforme(_info.Plat_length, _info.Plat_heigth,_info.pos_Plat_iniX,_info.pos_Plat_iniY);
+     _platform=Plateforme(_info);
     _score=0;
     _balls.push_back(new Balle(_info.ball_radius,_info.pos_Ball_iniX, _info.pos_Ball_iniY));
+    _level = Level(_info);
     for (int i = 0; i < maxSizeY; i++) {
         for (int j = 0; j < maxSizeX; j++) {
             UI[i][j] = ' ';

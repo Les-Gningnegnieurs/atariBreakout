@@ -12,8 +12,13 @@
 class Level{
     private: 
         //LevelInfos _info;
+        int rows;
+        int columns;
+        int BrickHeigth;
+        int BrickLength;
         Brique *_board[RESMAX_Y][RESMAX_X];
     public:
+        Level(LevelInfos I);
         Level();
         ~Level();
 
@@ -29,11 +34,8 @@ class Level{
 
         int getHeigth();
 
-        void setHeigth(int y);
-
         int getLength();
 
-        void setLength(int x);
 
         void checkCollision(Balle *b, int& score);
 

@@ -1,24 +1,18 @@
 #include "Plateforme.h"
 Plateforme::Plateforme() {
-    sizeX = 0;
-    sizeY = 0;
-    tiltAngle = 0;
-    maxSpeed = 10; // à déterminer
-    speed.x = 0;
-    speed.y = 0;
-    pos.x = 30;
-    pos.y = 20;
 }
-Plateforme:: Plateforme(int length, int height, int x, int y)
+Plateforme:: Plateforme(LevelInfos I)
 {
-    sizeX= length;
-    sizeY= height;
+    sizeX= I.Plat_length;
+    sizeY= I.Plat_heigth;
+    rows = I.rows;
+    columns = I.columns;
     tiltAngle=0;
-    maxSpeed=30; // à déterminer
+    maxSpeed=1; // à déterminer
     speed.x=0;
     speed.y=0;
-    pos.x=x;
-    pos.y=y;  // je sais pas s'il y a moyen de forcer la valeur à être consante étant donné que la struct n'est pas const
+    pos.x=I.pos_Plat_iniX;
+    pos.y=I.pos_Ball_iniY;  // je sais pas s'il y a moyen de forcer la valeur à être consante étant donné que la struct n'est pas const
 }
 
 void Plateforme:: move(int joystickvalueX)
@@ -42,13 +36,13 @@ void Plateforme::update()
 void Plateforme::draw(char UI[RESMAX_Y][RESMAX_X])
 {
     //clear la ligne de la plateforme (plus simple que clear tout le UI
-    for (int i = 0; i < _info.columns; i++)
+    for (int i = 0; i < columns; i++)
     {
-        UI[_info.rows - 1][i] = ' ';
+        UI[rows - 1][i] = ' ';
     }
     for (int i = pos.x; i < pos.x + sizeX; i++)
     {
-        UI[_info.rows-1][i] = '_';
+        UI[rows-1][i] = '_';
     }
 }
 

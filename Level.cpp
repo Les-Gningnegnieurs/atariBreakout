@@ -1,5 +1,11 @@
 #include "Level.h"
-Level :: Level(){
+Level :: Level(LevelInfos I){
+    rows = I.rows;
+    columns = I.columns;
+    BrickHeigth = I.Brick_heigth;
+    BrickLength = I.Brick_length;
+}
+Level::Level() {
 }
 Level :: ~Level(){
 
@@ -7,8 +13,8 @@ Level :: ~Level(){
 
 void Level :: draw(char UI[RESMAX_Y][RESMAX_X]) {
 
-    for (int i = 0; i < _info.rows; i++) {
-        for (int j = 0; j < _info.columns; j++) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
             _board[i][j]->draw(UI);
         }
 
@@ -20,9 +26,9 @@ void Level :: draw(char UI[RESMAX_Y][RESMAX_X]) {
 
 void Level :: checkCollision(Balle *b, int& score){
   
-    for (int i = 0; i < _info.rows; i++)
+    for (int i = 0; i < rows; i++)
     {
-        for (int j = 0; j < _info.columns; j++)
+        for (int j = 0; j < columns; j++)
         {
             
             if (!_board[i][j]->est_Detruite() && _board[i][j]->checkCollision(b))
@@ -35,51 +41,37 @@ void Level :: checkCollision(Balle *b, int& score){
 }
 
 Brique* Level::getBrique(int row_idx, int column_idx) { //utile pour set le level au debut
-    if (row_idx >= _info.rows || column_idx >= _info.columns)
+    if (row_idx >= rows || column_idx >= columns)
         return nullptr;
     return _board[row_idx][column_idx];
 }
 bool Level::setBrique(int row_idx, int column_idx, Brique* brique) { //utile pour set le level au debut
-    if (row_idx >= _info.rows || column_idx >= _info.columns)
+    if (row_idx >= rows || column_idx >= columns)
         return false;
     _board[row_idx][column_idx] = brique;
 }
 void Level :: afficher(std::ostream& s){
     s << "Informations sur le niveau" << std::endl;
-    for (int i = 0; i < _info.rows; i++) {
-        for (int j = 0; j < _info.columns; j++) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
             _board[i][j]->afficher(s);
         }
     }
 }
 
-void Level :: setRows(int rows){
-    _info.rows = rows;
-}
-
-void Level :: setColumns(int columns){
-    _info.columns = columns;
-}
-
 int Level :: getRows(){
-    return _info.rows;
+    return rows;
 }
 int Level :: getColumns(){
-    return _info.columns;
+    return columns;
 }
 
 int Level :: getHeigth(){
-    return _info.Brick_heigth;
-}
-void Level :: setHeigth(int y){
-    _info.Brick_heigth = y;
+    return BrickHeigth;
 }
 
 int Level :: getLength(){
-    return _info.Brick_length;
-}
-void Level :: setLength(int x){
-    _info.Brick_length = x;
+    return BrickLength;
 }
 std::istream& operator >> (std::istream& s, Level& I){
     //on est rendu aux infos sur le level

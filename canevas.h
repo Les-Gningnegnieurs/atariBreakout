@@ -10,6 +10,7 @@ private:
 	GameLogic _game;
 	int _windowResolutionX = RESOLUTION_X;
 	int _windowResolutionY = RESOLUTION_Y;
+	LevelInfos _info;
 
 public:
 	Canevas();

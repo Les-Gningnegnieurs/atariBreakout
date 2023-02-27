@@ -9,13 +9,15 @@ class Plateforme {
 private:
     Position pos;
     Velocity speed;
+    int rows;
+    int columns;
     int sizeX;
     int sizeY;
     int tiltAngle;
     int maxSpeed;
 public:
     Plateforme();
-    Plateforme(int length,int height, int x=0, int y=0);
+    Plateforme(LevelInfos I);
     bool checkCollision(Position posHit);
     void update();
     void move(int joystickvalueX);
