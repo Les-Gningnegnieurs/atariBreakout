@@ -5,7 +5,6 @@ BriqueC::BriqueC(int x, int y, int l, int h) {
     _sizeX = l;
     _sizeY = h;
     _PV = 3;
-    _PVini = _PV;
     _etat = Alive;
     //length et height peut-etre a definir
 }

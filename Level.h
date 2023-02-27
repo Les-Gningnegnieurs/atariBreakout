@@ -7,20 +7,17 @@
 #include "BriqueVoid.h"
 #include <iostream>
 #include "Balle.h"
-#define MAX_ROWS 10
-#define MAX_COLUMNS 10
+
 
 class Level{
     private: 
-        LevelInfos _info;
-        Brique *_board[MAX_ROWS][MAX_COLUMNS];
+        //LevelInfos _info;
+        Brique *_board[RESMAX_Y][RESMAX_X];
     public:
         Level();
         ~Level();
 
-        void draw(std::ostream &s);
-
-        void update();
+        void draw(char UI[RESMAX_Y][RESMAX_X]);
 
         void setRows(int rows);
 

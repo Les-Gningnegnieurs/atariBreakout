@@ -31,7 +31,6 @@ void Plateforme:: move(int joystickvalueX)
 void Plateforme::update()
 {   
     pos.x += speed.x;
-
     //revérifier ces limites (pas bon d'avoir des valeurs hardcodé
     if (pos.x >= 128)
         pos.x = 64;
@@ -40,17 +39,17 @@ void Plateforme::update()
 
 }
 
-void Plateforme::draw(std::ostream&s)
+void Plateforme::draw(char UI[RESMAX_Y][RESMAX_X])
 {
-    std::stringstream ss;
-    ss << s.rdbuf();
-    std::string myString = ss.str();
+    //clear la ligne de la plateforme (plus simple que clear tout le UI
+    for (int i = 0; i < _info.columns; i++)
+    {
+        UI[_info.rows - 1][i] = ' ';
+    }
     for (int i = pos.x; i < pos.x + sizeX; i++)
     {
-        myString[i] = '_';
+        UI[_info.rows-1][i] = '_';
     }
-    s.flush();
-    s << myString;
 }
 
 

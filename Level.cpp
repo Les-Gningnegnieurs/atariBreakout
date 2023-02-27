@@ -1,28 +1,22 @@
 #include "Level.h"
 Level :: Level(){
-    _info.rows = MAX_ROWS;
-    _info.columns = MAX_COLUMNS;
-    _info.Brick_length = 6;
-    _info.Brick_heigth = 2;
 }
 Level :: ~Level(){
 
 }
 
-void Level :: draw(std::ostream &s){
+void Level :: draw(char UI[RESMAX_Y][RESMAX_X]) {
 
     for (int i = 0; i < _info.rows; i++) {
         for (int j = 0; j < _info.columns; j++) {
-            _board[i][j]->draw(s);
+            _board[i][j]->draw(UI);
         }
 
     }
 
 }
 
-void Level :: update(){
 
-}
 
 void Level :: checkCollision(Balle *b, int& score){
   
@@ -88,15 +82,8 @@ void Level :: setLength(int x){
     _info.Brick_length = x;
 }
 std::istream& operator >> (std::istream& s, Level& I){
-    int x;
-    s >> x;    //rows
-    I.setRows(x); 
-    s >> x;    //columns
-    I.setColumns(x); 
-    s >> x; //length
-    I.setLength(x);
-    s>>x; //heigth
-    I.setHeigth(x);
+    //on est rendu aux infos sur le level
+    int x=0;
     while(!s.eof()){
         for(int i=0; i< I.getRows(); i++)
         {
@@ -117,8 +104,8 @@ std::istream& operator >> (std::istream& s, Level& I){
     }
     return s;
 }
-
-void Level::levelDrawline(std::ostream &s, int ligne) {
+//pour les briques de hauteur plus que 1.. comprend pas trop comment ca fonctionne donc on en va pas l'utiliser pour live
+/*void Level::levelDrawline(std::ostream& s, int ligne) {
              for(int i=0;i< _info.Brick_heigth;i++)
              {
                  for(int j=0;j<_info.columns;j++)
@@ -131,4 +118,4 @@ void Level::levelDrawline(std::ostream &s, int ligne) {
 
             }
         }
-
+        */

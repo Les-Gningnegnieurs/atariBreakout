@@ -19,7 +19,7 @@ public:
     bool checkCollision(Position posHit);
     void update();
     void move(int joystickvalueX);
-    void draw(std::ostream &s);
+    void draw(char UI[RESMAX_Y][RESMAX_X]);
     Velocity getSpeed(){return speed;}
     Position getPos(){return pos;}
 

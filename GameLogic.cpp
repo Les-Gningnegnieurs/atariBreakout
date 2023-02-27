@@ -2,17 +2,21 @@
 
 GameLogic::GameLogic()
 {
-    
 }
 
-GameLogic:: GameLogic(const int maxX, const int maxY)
+GameLogic:: GameLogic(LevelInfos _info)
 {
-    maxSizeX = maxX;
-    maxSizeY = maxY;
+    maxSizeX = _info.columns;
+    maxSizeY = _info.rows;
     _livesLeft=3;
-     _platform=Plateforme(5, 3,(maxX/2)-(5/2),maxY);
+     _platform=Plateforme(_info.Plat_length, _info.Plat_heigth,_info.pos_Plat_iniX,_info.pos_Plat_iniY);
     _score=0;
-    _balls.push_back(new Balle(5,(maxX/2)-(5/2),maxY-3));
+    _balls.push_back(new Balle(_info.ball_radius,_info.pos_Ball_iniX, _info.pos_Ball_iniY));
+    for (int i = 0; i < maxSizeY; i++) {
+        for (int j = 0; j < maxSizeX; j++) {
+            UI[i][j] = ' ';
+        }
+    }
 }
 
 GameLogic::~GameLogic(){
@@ -23,14 +27,16 @@ void GameLogic:: update(Controller& c)
 {
     //move plateform
     _platform.move(c.getJoystick().x);
-    _platform.update();
+    _platform.update(); //update la position
+    _platform.draw(UI); //update le dessin dans le tableau
 
     //update Game / do logic
     for(int i=0; i< _balls.size();i++)
     {
         _balls[i]->update();
+        _balls[i]->draw(UI);
     }
-    _level.update();
+    _level.draw(UI);
 
     //check les collisions une fois que les positions ont ete updatés
     checkCollisions(); 
@@ -86,24 +92,18 @@ int GameLogic::getScoreInfo() {
     return _score;
 }
 
-void GameLogic::draw(std::ostream&s){
+void GameLogic::draw(std::ostream& s) {
     //draw bricks
-    for(int i=0; i<_level.getRows();i++)
-    {
-        _level.levelDrawline(s,i);
-         s<<std::endl;
+    for (int i = 0; i < maxSizeY; i++) {
+        for (int j = 0; j < maxSizeX; j++) {
+            s << UI[i][j];
+        }
+        s << std::endl;
     }
-    
-    //draw balls
-    for(int i = 0; i < _balls.size(); i++){
-        _balls[i]->draw(s);
-    }
-
-    //draw plateform
-    _platform.draw(s);
 }
 
 std::istream& operator>>(std::istream& s, GameLogic &gl){
+    
     s >> gl._level;
     return s;
  }

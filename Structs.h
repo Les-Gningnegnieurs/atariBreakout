@@ -5,6 +5,9 @@
 #ifndef STRUCTS_H
 #define STRUCTS_H
 
+#define RESMAX_X 80
+#define RESMAX_Y 25
+
 struct Position {
     int x;
     int y;
@@ -14,12 +17,20 @@ struct Velocity {
     int y;
 };
 
-struct LevelInfos {
+struct LevelInfos{
     int rows;
     int columns;
     int Brick_length; //in pixels
     int Brick_heigth; //in pixels
+    int pos_Plat_iniX;
+    int pos_Plat_iniY;
+    int Plat_length;
+    int Plat_heigth;
+    int pos_Ball_iniX;
+    int pos_Ball_iniY;
+    float ball_radius;
 };
+LevelInfos _info;
 
 /// @brief coordonnées du coin gauche
 struct Hitbox {

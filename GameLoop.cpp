@@ -65,7 +65,6 @@ void GameLoop:: loadFile(){
 
 void GameLoop::draw()
 {
-        std::stringstream s;
-        _canevas->draw(s);
-        std::cout << s.str();
+        _canevas->draw(std::cout);
 }
+

@@ -6,7 +6,6 @@ Brique:: Brique(int x, int y, int l, int h, state s){
     _sizeX = l;
     _sizeY = h;
     _PV = 0;
-    _PVini = _PV;
     _etat = s;
     //length et height peut-etre a definir
 }
@@ -108,25 +107,28 @@ bool Brique::increase_Damage() {
     }
 }
 
-void Brique::draw(std::ostream& s) {
-    if (_etat == Destroyed)
-        for (int i = 0; i < _sizeX; i++) {
-            s << " ";
+void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
+    if (est_Detruite())
+        for (int i = _posBrique.x; i <_posBrique.x+_sizeX; i++) {
+            UI[_posBrique.y][i] = ' ';
         }
 
     else
     {
         if (_sizeX == 1)
-            s << "*";
+            UI[_posBrique.y][_posBrique.x] = 'X';
         else {
-            s << "|";
-            for (int i = 1; i < _sizeX - 1; i++) {
+            UI[_posBrique.y][_posBrique.x] = '|';
+            for (int i = _posBrique.x+1; i < _posBrique.x + _sizeX-1; i++) {
                 if (_etat == Alive)
-                    s << "-";
+                    UI[_posBrique.y][i] = '-';
                 else if (_etat == Hurt)
-                    s << "X";
+                    UI[_posBrique.y][i] = 'x';
+                else if (_etat == Indestructible) {
+                    UI[_posBrique.y][i] = '#';
+                }
             }
-            s << "|";
+            UI[_posBrique.y][_posBrique.x+_sizeX-1] = '|';
         }
     }
 }

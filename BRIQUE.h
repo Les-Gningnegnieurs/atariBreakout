@@ -38,7 +38,7 @@ public:
     bool checkLeft(Position posB);
 	int GetHauteur() { return _sizeY; }
 
-	virtual void draw(std::ostream& s);
+	void draw(char UI[RESMAX_Y][RESMAX_X]);
 	virtual void afficher(std::ostream& s) = 0;
 protected:
 	Hitbox _posBrique;
@@ -46,7 +46,6 @@ protected:
 	int _sizeX;
 	int _sizeY;
 	int _PV;
-	int _PVini;
 };
 
 #endif

@@ -1,11 +1,13 @@
 #include "Balle.h"
-Balle::Balle(float ray, int x, int y)
+Balle::Balle(float radius, int posX, int posY)
 {
-    pos.x = 40;
-    pos.y = 12;
+    pos.x = posX;
+    pos.y = posY;
+    oldPosX = pos.x;
+    oldPosY = pos.y;
     speed.y =-1;
-    speed.x= -1;
-    rayon=ray;
+    speed.x = -1;
+    rayon = radius;
     maxSpeed=12; // à définir plus tard;
 
 }
@@ -15,22 +17,17 @@ void Balle::update()
     float speedY;
     speedX = 1 * speed.x;
     speedY = 1 * speed.y;
+    oldPosX = pos.x;
+    oldPosY = pos.y;
 
     pos.x += speedX;
     pos.y += speedY;
 }
 
-void Balle:: draw(std::ostream &s)
+void Balle:: draw(char UI[RESMAX_Y][RESMAX_X])
 {
-    
-        std::stringstream ss;
-        ss << s.rdbuf();
-        std::string myString = ss.str();
-        myString[(pos.x * pos.y) + pos.y] = 'O';
-        s.flush();
-        s << myString;
-    
-    
+    UI[getoldPosY()][getoldPosX()] = ' '; //espace a l'ancienne pos de la balle
+    UI[getPos().y][getPos().x] = 'O'; //update la nouvelle pos de la balle dans l'array 
 }
 
 
