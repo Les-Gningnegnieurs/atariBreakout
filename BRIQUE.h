@@ -21,7 +21,7 @@ public:
 	virtual ~Brique();
 
 	
-	bool checkCollision(Balle*b);
+	Collision checkCollision(Balle*b);
 
 	//virtual void update(float timeElapsed);
 
@@ -32,10 +32,6 @@ public:
 	state getstate();
 
 	void setstate(state s);
-    bool checkTop(Position posB);
-    bool checkBot(Position posB);
-    bool checkRight(Position posB);
-    bool checkLeft(Position posB);
 	int GetHauteur() { return _sizeY; }
 
 	void draw(char UI[RESMAX_Y][RESMAX_X]);

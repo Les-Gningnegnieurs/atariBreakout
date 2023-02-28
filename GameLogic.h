@@ -14,6 +14,7 @@ class GameLogic {
 private:
     std::vector<Balle*> _balls;
     Level _level;
+    LevelInfos _info;
     Plateforme _platform;
     char UI[RESMAX_Y][RESMAX_X];
     int _score;

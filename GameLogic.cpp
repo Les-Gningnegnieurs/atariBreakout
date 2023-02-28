@@ -4,14 +4,15 @@ GameLogic::GameLogic()
 {
 }
 
-GameLogic:: GameLogic(LevelInfos _info)
+GameLogic:: GameLogic(LevelInfos i)
 {
+    _info = i;
     maxSizeX = _info.columns;
     maxSizeY = _info.rows;
     _livesLeft=3;
      _platform=Plateforme(_info);
     _score=0;
-    _balls.push_back(new Balle(_info.ball_radius,_info.pos_Ball_iniX, _info.pos_Ball_iniY));
+    _balls.push_back(new Balle(_info));
     _level = Level(_info);
     for (int i = 0; i < maxSizeY; i++) {
         for (int j = 0; j < maxSizeX; j++) {
@@ -60,11 +61,11 @@ void GameLogic::checkCollisions() {
     for(int i=0; i< _balls.size();i++)
     {
         pos= _balls[i]->getPos();
-        if (pos.y + _balls[i]->getrayon() >= maxSizeY) //le [0,0] est dans le coin Haut-Gauche
+        if (pos.y >= maxSizeY) //check si mort
         {
-            _balls[i]->changeVelocity(0, 1); //faire bounce dans le bas
-            /*delete _balls[i];
-            _balls.erase(_balls.begin()+i);*/
+            //_balls[i]->changeVelocity(0, 1); //faire bounce dans le bas
+            delete _balls[i];
+            _balls.erase(_balls.begin()+i);
         }
         else
         {
@@ -75,7 +76,7 @@ void GameLogic::checkCollisions() {
             }
 
             //check walls collision
-            if(pos.x - _balls[i]->getrayon() <= 0 || pos.x + _balls[i]->getrayon() >= maxSizeX -1) //one of the walls hit
+            if(pos.x - _balls[i]->getrayon() <= 0 || pos.x + _balls[i]->getrayon() >= maxSizeX) // CETAIT MAXSIZEX-1 AVANT!!!!!!
                 _balls[i]->changeVelocity(1, 0); //inverse le vecteur X pour éloigner du mur
             
             //Balle *b = _balls[i];
@@ -85,7 +86,8 @@ void GameLogic::checkCollisions() {
     if(_balls.empty())
     {
         _livesLeft--;
-        Balle* p1 = new Balle(5, 5, 5);
+        Sleep(200);
+        Balle* p1 = new Balle(_info);
         _balls.push_back(p1);
     }
 

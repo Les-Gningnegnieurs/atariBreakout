@@ -13,12 +13,13 @@ Level :: ~Level(){
 
 void Level :: draw(char UI[RESMAX_Y][RESMAX_X]) {
 
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < columns; j++) {
+    for (int i = 0; i < rows/BrickHeigth; i++) {
+        for (int j = 0; j < columns/BrickLength; j++) {
             _board[i][j]->draw(UI);
         }
 
     }
+
 
 }
 
@@ -31,10 +32,33 @@ void Level :: checkCollision(Balle *b, int& score){
         for (int j = 0; j < columns; j++)
         {
             
-            if (!_board[i][j]->est_Detruite() && _board[i][j]->checkCollision(b))
+            if (!_board[i][j]->est_Detruite())
             {
-                score++;
-                _board[i][j]->increase_Damage();
+                Collision check = _board[i][j]->checkCollision(b);
+                switch (check) {
+                case LT:
+                    score++;
+                    b->changeVelocity(1, 0);
+                    _board[i][j]->increase_Damage();
+                    break;
+                case RT:
+                    score++;
+                    b->changeVelocity(1, 0);
+                    _board[i][j]->increase_Damage();
+                    break;
+                case DN:
+                    score++;
+                    b->changeVelocity(0, 1);
+                    _board[i][j]->increase_Damage();
+                    break;
+                case UP:
+                    score++;
+                    b->changeVelocity(0, 1);
+                    _board[i][j]->increase_Damage();
+                    break;
+                case NO:
+                    break;
+                }
             }
         }
     }

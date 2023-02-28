@@ -42,7 +42,7 @@ void Plateforme::draw(char UI[RESMAX_Y][RESMAX_X])
     }
     for (int i = pos.x; i < pos.x + sizeX; i++)
     {
-        UI[rows - 1][i] = '_';
+        UI[rows - 1][i] = '#';
     }
 }
 

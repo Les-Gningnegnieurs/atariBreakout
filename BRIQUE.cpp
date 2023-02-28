@@ -28,68 +28,50 @@ void Brique::setstate(state s) {
     _etat = s;
 }
 
-bool Brique::checkCollision(Balle *b) {
-    Position posB = b->getPos();
-    if (_posBrique.y +_sizeY >=posB.y&& posB.y >= _posBrique.y )
-    {
-        if (_posBrique.x +_sizeX>= posB.x && posB.x >= _posBrique.x )
-        {
-           if (checkBot(posB))
-            {
-                b->changeVelocity(0, 1);
-                return true;
-            }
-           else if (checkTop(posB))
-            {
-                b->changeVelocity(0,1);
-                return true;
-            }
-            
-             if (checkRight(posB))
-            {
-                b->changeVelocity(1,0);
-                return true;
-            }
-            else if(checkLeft(posB))
-            {
-                b->changeVelocity(1,0);
-                return true;
-            }
-
+Collision Brique::checkCollision(Balle* b) {
+    Position posBa = b->getPos();
+    int rayon = b->getrayon();
+    Velocity speed = b->getSpeed();
+    /*if ((posBa.x >= _posBrique.x - rayon) &&
+        (posBa.x <= _posBrique.x + _sizeX + rayon) &&
+        (posBa.y >= _posBrique.y - rayon) &&
+        (posBa.y <= _posBrique.y + _sizeY + rayon)) {
+        if (posBa.x >= _posBrique.x + _sizeX) {
+            return LT;
+        }
+        else if (posBa.x <= _posBrique.x) {
+            return RT;
+        }
+        else if (posBa.y <= _posBrique.y) {
+            return DN;
+        }
+        else if (posBa.y >= _posBrique.y + _sizeY) {
+            return UP;
         }
     }
-    return false;
-}
+    return NO;*/
+    if (posBa.y + rayon >= _posBrique.y && posBa.y - rayon <= _posBrique.y)
+    {
+        if (_posBrique.x + _sizeX >= posBa.x - rayon && posBa.x + rayon >= _posBrique.x)
+        {
+            //checkbot
+            if (speed.y <= 0) {
+                if (speed.x >= 0 && posBa.y == _posBrique.y) return LT;//côté gauche 
+                    //c'est un calcul d'intervalles, pas un test d'égalité**
+                else if (speed.x <= 0 && posBa.y == _posBrique.y) return RT; //côté droit
+                else return DN; //sinon = hit du bottom
 
-bool Brique:: checkTop(Position posB)
-{
-    if (posB.y<=(1/20*(_posBrique.y+_sizeY))) return true;
-    return false;
-
-
-}
-
-bool Brique:: checkBot(Position posB)
-{
-    if (posB.y>=(19/20*(_posBrique.y+_sizeY))) return true;
-    return false;
-
-
-}
-
-bool Brique:: checkRight(Position posB)
-{
-    if (posB.x>=(19/20*(_posBrique.x+_sizeX))) return true;
-    return false;
-
-
-}
-
-bool Brique:: checkLeft(Position posB)
-{
-    if (posB.x<=(1/20*(_posBrique.x+_sizeX))) return true;
-    return false;
-
+            }
+            else if (speed.y >= 0) {//checktop
+                if (speed.x >= 0 && posBa.y == _posBrique.y) return LT;//côté gauche 
+                    //c'est un calcul d'intervalles, pas un test d'égalité**
+                else if (speed.x <= 0 && posBa.y == _posBrique.y)return RT; //côté droit
+                else return UP ; //sinon = hit du top
+            }
+        }
+    }
+    return NO;
+    
 }
 
 
@@ -108,27 +90,31 @@ bool Brique::increase_Damage() {
 }
 
 void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
-    if (est_Detruite())
-        for (int i = _posBrique.x; i <_posBrique.x+_sizeX; i++) {
-            UI[_posBrique.y][i] = ' ';
+    if (est_Detruite()){
+        for (int i = 0; i < _sizeY; i++) {
+            UI[_posBrique.y + i][_posBrique.x] = ' ';
+            for (int j = _posBrique.x; j < _posBrique.x + _sizeX; j++) {
+                UI[_posBrique.y + i][j] = ' ';
+            }
         }
+    }
 
     else
     {
         if (_sizeX == 1)
             UI[_posBrique.y][_posBrique.x] = 'X';
         else {
-            UI[_posBrique.y][_posBrique.x] = '|';
-            for (int i = _posBrique.x+1; i < _posBrique.x + _sizeX-1; i++) {
-                if (_etat == Alive)
-                    UI[_posBrique.y][i] = '-';
-                else if (_etat == Hurt)
-                    UI[_posBrique.y][i] = 'x';
-                else if (_etat == Indestructible) {
-                    UI[_posBrique.y][i] = '#';
+            for (int i = 0; i < _sizeY; i++) {
+                for (int j = _posBrique.x; j < _posBrique.x + _sizeX; j++) {
+                    if (_etat == Alive)
+                        UI[_posBrique.y+i][j] = 'X';
+                    else if (_etat == Hurt)
+                        UI[_posBrique.y+i][j] = 'x';
+                    else if (_etat == Indestructible) {
+                        UI[_posBrique.y+i][j] = '#';
+                    }
                 }
             }
-            UI[_posBrique.y][_posBrique.x+_sizeX-1] = '|';
         }
     }
 }

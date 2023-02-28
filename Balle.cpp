@@ -1,13 +1,13 @@
 #include "Balle.h"
-Balle::Balle(float radius, int posX, int posY)
+Balle::Balle(LevelInfos I)
 {
-    pos.x = posX;
-    pos.y = posY;
+    pos.x = I.pos_Ball_iniX;
+    pos.y = I.pos_Ball_iniY;
     oldPosX = pos.x;
     oldPosY = pos.y;
     speed.y =-1;
     speed.x = -1;
-    rayon = radius;
+    rayon = I.ball_radius;
     maxSpeed=12; // à définir plus tard;
 
 }

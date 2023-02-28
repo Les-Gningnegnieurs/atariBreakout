@@ -50,6 +50,12 @@ enum gameState {
     Running,
 
 };
-
+enum Collision {
+    LT,
+    RT,
+    DN,
+    UP,
+    NO,
+};
 
 #endif

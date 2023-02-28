@@ -13,15 +13,15 @@
 class Balle{
 private:
     Position pos;
-    double rayon;
+    int rayon;
     Velocity speed;
     int maxSpeed;
     int oldPosX;
     int oldPosY;
 public:
-    Balle(float radius=1, int posX=8, int posY=8);
+    Balle(LevelInfos I);
 
-    double getrayon() { return rayon; }
+    int getrayon() { return rayon; }
     void update();
     int getoldPosX() { return oldPosX;  };
     int getoldPosY() { return oldPosY;  };
