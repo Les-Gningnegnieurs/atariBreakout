@@ -12,8 +12,8 @@ La première rangée définie les paramèmtre dans l'ordre suivant:
 - Position initiale de la balle sur l'axe Y
 - Rayon de la balle
 
-Les lignes qui suive représente les briques contenues dans l'interface utilisateur (Tableau 2D de caractères).
-L'état de ces briques sont données par:
+Les lignes qui suivent représentent les briques contenues dans l'interface utilisateur (Tableau 2D de caractères).
+L'état de ces briques est donné par:
 - 0: Absence de brique
 - 1: Brique ayant 1 vie
 - 2: Brique ayant 2 vies
