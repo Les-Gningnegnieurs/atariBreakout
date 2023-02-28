@@ -60,7 +60,7 @@ void GameLogic::checkCollisions() {
     for(int i=0; i< _balls.size();i++)
     {
         pos= _balls[i]->getPos();
-        if (pos.y + _balls[i]->getrayon() >= maxSizeY-1) //le [0,0] est dans le coin Haut-Gauche
+        if (pos.y + _balls[i]->getrayon() >= maxSizeY) //le [0,0] est dans le coin Haut-Gauche
         {
             _balls[i]->changeVelocity(0, 1); //faire bounce dans le bas
             /*delete _balls[i];
@@ -69,7 +69,7 @@ void GameLogic::checkCollisions() {
         else
         {
             _platform.checkCollision(_balls[i]);
-            if(pos.y - _balls[i]->getrayon() <= 0) //Hit plateforme ou plafond
+            if(pos.y - _balls[i]->getrayon() <= 0) //Hit  plafond
             {
                 _balls[i]->changeVelocity(0, 1);//inverser direction de la balle en Y
             }
