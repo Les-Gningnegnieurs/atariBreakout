@@ -56,6 +56,10 @@ void Level :: checkCollision(Balle *b, int& score){
                     b->changeVelocity(0, 1);
                     _board[i][j]->increase_Damage();
                     break;
+                case CN:
+                    score++;
+                    b->changeVelocity(1, 1);
+                    _board[i][j]->increase_Damage();
                 case NO:
                     break;
                 }

@@ -32,25 +32,38 @@ Collision Brique::checkCollision(Balle* b) {
     Position posBa = b->getPos();
     int rayon = b->getrayon();
     Velocity speed = b->getSpeed();
-    /*if ((posBa.x >= _posBrique.x - rayon) &&
-        (posBa.x <= _posBrique.x + _sizeX + rayon) &&
-        (posBa.y >= _posBrique.y - rayon) &&
-        (posBa.y <= _posBrique.y + _sizeY + rayon)) {
-        if (posBa.x >= _posBrique.x + _sizeX) {
-            return LT;
-        }
-        else if (posBa.x <= _posBrique.x) {
-            return RT;
-        }
-        else if (posBa.y <= _posBrique.y) {
+    //collision down
+    if (posBa.y == _posBrique.y + rayon)
+    {
+        if (posBa.x == _posBrique.x)
             return DN;
-        }
-        else if (posBa.y >= _posBrique.y + _sizeY) {
-            return UP;
-        }
     }
-    return NO;*/
-    if (posBa.y + rayon >= _posBrique.y && posBa.y - rayon <= _posBrique.y)
+    //collision top
+    if (posBa.y == _posBrique.y - rayon)
+    {
+        if (posBa.x == _posBrique.x)
+            return UP;
+    }
+    //collision left
+    if (posBa.x == _posBrique.x - rayon)
+    {
+        if (posBa.y == _posBrique.y)
+            return LT;
+    }
+    //collision right
+    if (posBa.x == _posBrique.x + rayon)
+    {
+        if (posBa.y == _posBrique.y)
+            return RT;
+    }
+    //collision coin
+    if (posBa.x + speed.x == _posBrique.x
+        && posBa.y + speed.y == _posBrique.y)
+    {
+        return CN;
+    }
+    return NO;
+    /*if (posBa.y + rayon >= _posBrique.y && posBa.y - rayon <= _posBrique.y)
     {
         if (_posBrique.x + _sizeX >= posBa.x - rayon && posBa.x + rayon >= _posBrique.x)
         {
@@ -70,7 +83,7 @@ Collision Brique::checkCollision(Balle* b) {
             }
         }
     }
-    return NO;
+    return NO;*/
     
 }
 
@@ -90,11 +103,17 @@ bool Brique::increase_Damage() {
 }
 
 void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
-    if (est_Detruite()){
-        for (int i = 0; i < _sizeY; i++) {
-            UI[_posBrique.y + i][_posBrique.x] = ' ';
-            for (int j = _posBrique.x; j < _posBrique.x + _sizeX; j++) {
-                UI[_posBrique.y + i][j] = ' ';
+    if (est_Detruite()) {
+        if (_sizeX == 1 && _sizeY == 1)
+        {
+            UI[_posBrique.y][_posBrique.x] = ' ';
+        }
+        else {
+            for (int i = 0; i < _sizeY; i++) {
+                UI[_posBrique.y + i][_posBrique.x] = ' ';
+                for (int j = _posBrique.x; j < _posBrique.x + _sizeX; j++) {
+                    UI[_posBrique.y + i][j] = ' ';
+                }
             }
         }
     }

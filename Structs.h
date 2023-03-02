@@ -55,6 +55,7 @@ enum Collision {
     RT,
     DN,
     UP,
+    CN,
     NO,
 };
 
