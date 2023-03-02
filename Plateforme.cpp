@@ -53,7 +53,7 @@ void Plateforme::checkCollision(Balle *b)
 {
     //l'implémentation dépend de ou se situe notre point d'ancrage.
     //j'assumes qu'il est dans le coin gauche inférieur.
-    if (b->getPos().y + b->getrayon() >= pos.y)
+    if (b->getPos().y + b->getrayon() >= pos.y - sizeY)
     {
         if (pos.x <= b->getPos().x && pos.x + sizeX / 2 >= b->getPos().x) //on est a gauche
         {

@@ -32,36 +32,39 @@ Collision Brique::checkCollision(Balle* b) {
     Position posBa = b->getPos();
     int rayon = b->getrayon();
     Velocity speed = b->getSpeed();
+
     //collision down
-    if (posBa.y == _posBrique.y + rayon)
+    if (posBa.y - rayon <= _posBrique.y + _sizeY && posBa.y - rayon >= _posBrique.y)
     {
-        if (posBa.x == _posBrique.x)
+        if (posBa.x >= _posBrique.x && posBa.x <= _posBrique.x + _sizeX)
             return DN;
     }
     //collision top
-    if (posBa.y == _posBrique.y - rayon)
+    if (posBa.y + rayon <= _posBrique.y + _sizeY && posBa.y + rayon >= _posBrique.y)
     {
-        if (posBa.x == _posBrique.x)
+        if (posBa.x >= _posBrique.x && posBa.x <= _posBrique.x + _sizeX)
             return UP;
     }
+
     //collision left
-    if (posBa.x == _posBrique.x - rayon)
+    if (posBa.x + rayon <= _posBrique.x + _sizeX && posBa.x + rayon >= _posBrique.x)
     {
-        if (posBa.y == _posBrique.y)
+        if (posBa.y >= _posBrique.y && posBa.y <= _posBrique.y + _sizeY)
             return LT;
     }
     //collision right
-    if (posBa.x == _posBrique.x + rayon)
+    if (posBa.x - rayon <= _posBrique.x + _sizeX && posBa.x - rayon >= _posBrique.x)
     {
-        if (posBa.y == _posBrique.y)
+        if (posBa.y >= _posBrique.y && posBa.y <= _posBrique.y + _sizeY)
             return RT;
     }
     //collision coin
-    if (posBa.x + speed.x == _posBrique.x
-        && posBa.y + speed.y == _posBrique.y)
+    if (posBa.x + speed.x <= _posBrique.x + _sizeX && posBa.x + speed.x >= _posBrique.x
+        && posBa.y + speed.y <= _posBrique.y + _sizeY && posBa.y + speed.y >= _posBrique.y)
     {
         return CN;
     }
+
     return NO;
     /*if (posBa.y + rayon >= _posBrique.y && posBa.y - rayon <= _posBrique.y)
     {

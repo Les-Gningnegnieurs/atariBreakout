@@ -13,15 +13,11 @@ Balle::Balle(LevelInfos I)
 }
 void Balle::update()
 {
-    int speedX;
-    int speedY;
-    speedX = 1 * speed.x;
-    speedY = 1 * speed.y;
     oldPosX = pos.x;
     oldPosY = pos.y;
 
-    pos.x += speedX;
-    pos.y += speedY;
+    pos.x += speed.x;
+    pos.y += speed.y;
 }
 
 void Balle:: draw(char UI[RESMAX_Y][RESMAX_X])
