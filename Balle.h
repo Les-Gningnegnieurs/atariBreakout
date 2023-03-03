@@ -15,7 +15,6 @@ private:
     Position pos;
     int rayon;
     Velocity speed;
-    int maxSpeed;
     int oldPosX;
     int oldPosY;
 public:
@@ -27,12 +26,9 @@ public:
     int getoldPosY() { return oldPosY;  };
     void draw(char UI[RESMAX_Y][RESMAX_X]);
     bool checkCollision(Position posHit);
-    void outOfBounds();
     Velocity getSpeed(){return speed;}
     Position getPos() {return pos;}
     void changeVelocity(bool x = 0, bool y = 0);
-
-
 
 };
 
