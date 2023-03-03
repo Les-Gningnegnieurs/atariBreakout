@@ -8,16 +8,18 @@ Balle::Balle(LevelInfos I)
     speed.y =-1;
     speed.x = -1;
     rayon = I.ball_radius;
-    maxSpeed=12; // à définir plus tard;
-
 }
 void Balle::update()
 {
+    int speedX;
+    int speedY;
+    speedX = 1 * speed.x;
+    speedY = 1 * speed.y;
     oldPosX = pos.x;
     oldPosY = pos.y;
 
-    pos.x += speed.x;
-    pos.y += speed.y;
+    pos.x += speedX;
+    pos.y += speedY;
 }
 
 void Balle:: draw(char UI[RESMAX_Y][RESMAX_X])
@@ -36,12 +38,6 @@ bool Balle::checkCollision(Position posHit)
 
 }
 
-void Balle::outOfBounds()
-{
-    //implémentation reste à définir;
-
-}
-
 void Balle::changeVelocity(bool x, bool y){
     if(x)
         speed.x *= -1;
@@ -49,10 +45,4 @@ void Balle::changeVelocity(bool x, bool y){
     if(y)
         speed.y *= -1;
 }
-
-
-
-
-
-
 
