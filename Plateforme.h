@@ -1,10 +1,10 @@
+#ifndef PLATEFORME_H
+#define PLATEFORME_H
+
 #include "Structs.h"
 #include "Balle.h"
 #include <iostream>
 #include <sstream>
-#ifndef PLATEFORME_H
-#define PLATEFORME_H
-
 
 class Plateforme {
 private:
@@ -14,8 +14,6 @@ private:
     int columns;
     int sizeX;
     int sizeY;
-    int tiltAngle;
-    int maxSpeed;
 public:
     Plateforme();
     Plateforme(LevelInfos I);
