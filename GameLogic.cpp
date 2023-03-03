@@ -70,17 +70,18 @@ void GameLogic::checkCollisions() {
         else
         {
             _platform.checkCollision(_balls[i]);
-            if(pos.y - _balls[i]->getrayon() <= 0) //Hit  plafond
+            
+            //Balle *b = _balls[i];
+            _level.checkCollision(_balls[i], _score);
+
+            if (pos.y - _balls[i]->getrayon() <= 0) //Hit  plafond
             {
                 _balls[i]->changeVelocity(0, 1);//inverser direction de la balle en Y
             }
 
             //check walls collision
-            if(pos.x - _balls[i]->getrayon() <= 0 || pos.x + _balls[i]->getrayon() >= maxSizeX) // CETAIT MAXSIZEX-1 AVANT!!!!!!
+            if (pos.x - _balls[i]->getrayon() <= 0 || pos.x + _balls[i]->getrayon() >= maxSizeX - 1)
                 _balls[i]->changeVelocity(1, 0); //inverse le vecteur X pour éloigner du mur
-            
-            //Balle *b = _balls[i];
-            _level.checkCollision(_balls[i], _score);
         }
     }
     if(_balls.empty())
