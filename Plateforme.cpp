@@ -7,8 +7,6 @@ Plateforme::Plateforme(LevelInfos I)
     sizeY = I.Plat_heigth;
     rows = I.rows;
     columns = I.columns;
-    tiltAngle = 0;
-    maxSpeed = 1; // à déterminer
     speed.x = 0;
     speed.y = 0;
     pos.x = I.pos_Plat_iniX;
@@ -53,17 +51,20 @@ void Plateforme::checkCollision(Balle *b)
 {
     //l'implémentation dépend de ou se situe notre point d'ancrage.
     //j'assumes qu'il est dans le coin gauche inférieur.
-    if (b->getPos().y + b->getrayon() >= pos.y - sizeY)
+    if (b->getPos().y + b->getrayon() == pos.y - 1)
     {
-        if (pos.x <= b->getPos().x && pos.x + sizeX / 2 >= b->getPos().x) //on est a gauche
+        if (b->getPos().x + b->getrayon() >= pos.x && b->getPos().x - b->getrayon() <= pos.x + sizeX) // on frappe la plateforme
         {
-            if (b->getSpeed().x >= 0) b->changeVelocity(1, 1);//il allait vers la droite
-            else b->changeVelocity(0, 1);
+            if (pos.x + sizeX / 2 >= b->getPos().x) //on est a gauche
+            {
+                if (b->getSpeed().x >= 0) b->changeVelocity(1, 1);//il allait vers la droite
+                else b->changeVelocity(0, 1);
+            }
+            else //on est a droite
+            {
+                if (b->getSpeed().x <= 0) b->changeVelocity(1, 1);//il allait vers la gauche
+                else b->changeVelocity(0, 1);
+            }
         }
-        else if (pos.x + sizeX / 2 <= b->getPos().x && pos.x + sizeX >= b->getPos().x) {
-            if (b->getSpeed().x <= 0) b->changeVelocity(1, 1);//il allait vers la gauche
-            else b->changeVelocity(0, 1);
-        }
-            
     }
 }
