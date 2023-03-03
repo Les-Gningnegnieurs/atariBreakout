@@ -1,5 +1,5 @@
 #include "Level.h"
-Level :: Level(LevelInfos I){
+Level::Level(LevelInfos I){
     rows = I.rows;
     columns = I.columns;
     BrickHeigth = I.Brick_heigth;
@@ -11,7 +11,7 @@ Level :: ~Level(){
 
 }
 
-void Level :: draw(char UI[RESMAX_Y][RESMAX_X]) {
+void Level::draw(char UI[RESMAX_Y][RESMAX_X]) {
 
     for (int i = 0; i < rows/BrickHeigth; i++) {
         for (int j = 0; j < columns/BrickLength; j++) {
