@@ -10,7 +10,7 @@ int main(){
     game.Start();
     while(true){
         game.update();
-        Sleep(500);
+        Sleep(150);
     }
     return 0;
 }
