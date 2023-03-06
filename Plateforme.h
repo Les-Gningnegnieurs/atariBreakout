@@ -1,23 +1,26 @@
-#include "Structs.h"
-#include <iostream>
 #ifndef PLATEFORME_H
 #define PLATEFORME_H
 
+#include "Structs.h"
+#include "Balle.h"
+#include <iostream>
+#include <sstream>
 
 class Plateforme {
 private:
     Position pos;
     Velocity speed;
+    int rows;
+    int columns;
     int sizeX;
     int sizeY;
-    int tiltAngle;
-    int maxSpeed;
 public:
-    Plateforme(int length,int height);
-    bool checkCollision(Position posHit);
-    void update(float timeElapsed);
+    Plateforme();
+    Plateforme(LevelInfos I);
+    void checkCollision(Balle *b);
+    void update();
     void move(int joystickvalueX);
-    void draw();
+    void draw(char UI[RESMAX_Y][RESMAX_X]);
     Velocity getSpeed(){return speed;}
     Position getPos(){return pos;}
 

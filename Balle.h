@@ -1,30 +1,34 @@
 //
 // Created by stao0901 on 2023-02-11.
 //
+#ifndef BALLE_H
+#define BALLE_H
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include"Structs.h"
 #include <iostream>
+#include <string>
+#include <sstream>
 
-#ifndef BALLE_H
-#define BALLE_H
 class Balle{
 private:
     Position pos;
-    float rayon;
+    int rayon;
     Velocity speed;
-    int maxSpeed;
+    int oldPosX;
+    int oldPosY;
 public:
-    Balle(float ray);
-    float aire() {return rayon*rayon*M_PI;}
-    void update(float timeElapsed);
-    void draw();
+    Balle(LevelInfos I);
+
+    int getrayon() { return rayon; }
+    void update();
+    int getoldPosX() { return oldPosX;  };
+    int getoldPosY() { return oldPosY;  };
+    void draw(char UI[RESMAX_Y][RESMAX_X]);
     bool checkCollision(Position posHit);
-    void outOfBounds();
     Velocity getSpeed(){return speed;}
     Position getPos() {return pos;}
-
-
+    void changeVelocity(bool x = 0, bool y = 0);
 
 };
 

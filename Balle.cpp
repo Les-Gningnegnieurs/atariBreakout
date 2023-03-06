@@ -1,32 +1,34 @@
 #include "Balle.h"
-Balle::Balle(float ray)
+Balle::Balle(LevelInfos I)
 {
-    pos.x=0;
-    pos.y=0;
-    speed.y=5;
-    speed.x=5;
-    rayon=ray;
-    maxSpeed=10; // à définir plus tard;
-
+    pos.x = I.pos_Ball_iniX;
+    pos.y = I.pos_Ball_iniY;
+    oldPosX = pos.x;
+    oldPosY = pos.y;
+    speed.y =-1;
+    speed.x = -1;
+    rayon = I.ball_radius;
 }
-void Balle:: update(float timeElapsed)
+void Balle::update()
 {
+    int speedX;
+    int speedY;
+    speedX = 1 * speed.x;
+    speedY = 1 * speed.y;
+    oldPosX = pos.x;
+    oldPosY = pos.y;
 
-    if(speed.x>maxSpeed) speed.x=maxSpeed;
-    else if(speed.x<-maxSpeed) speed.x=-maxSpeed;
-    if(speed.y>maxSpeed) speed.y=maxSpeed;
-    else if(speed.y<-maxSpeed) speed.y=-maxSpeed;
-    pos.x+= timeElapsed*speed.x;
-    pos.y+=timeElapsed*speed.y;
+    pos.x += speedX;
+    pos.y += speedY;
 }
 
-
-void Balle:: draw()
+void Balle:: draw(char UI[RESMAX_Y][RESMAX_X])
 {
-    std::cout<< "la vitesse en x est de "<<speed.x<< " la vitesse en y est de "<< speed.y<<std::endl;
-    std::cout<< "la position en x est "<<pos.x<<" la position en y est "<<pos.y<<std::endl;
-
+    UI[getoldPosY()][getoldPosX()] = ' '; //espace a l'ancienne pos de la balle
+    UI[getPos().y][getPos().x] = 'O'; //update la nouvelle pos de la balle dans l'array 
 }
+
+
 bool Balle::checkCollision(Position posHit)
 {
     double distance = sqrt(pow( posHit.x- pos.x, 2) + pow(posHit.y - pos.y, 2));
@@ -36,14 +38,11 @@ bool Balle::checkCollision(Position posHit)
 
 }
 
-void Balle::outOfBounds()
-{
-    //implémentation reste à définir;
-
+void Balle::changeVelocity(bool x, bool y){
+    if(x)
+        speed.x *= -1;
+    
+    if(y)
+        speed.y *= -1;
 }
-
-
-
-
-
 

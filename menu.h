@@ -14,7 +14,7 @@ Elles permet de :
 #ifndef MENU_H
 #define MENU_H
 #define CONFIG_PATH "./config/game.config"		//Location du fichier config
-#define NUMBER_OF_PARAMETERS 4
+#define NUMBER_OF_PARAMETERS 5
 
 struct Config
 {
@@ -32,6 +32,7 @@ private:
 	bool modeJoystick;
 	int screenWidth;
 	int screenHeight;
+    int level;
 
 public:
 	Menu();
@@ -49,10 +50,12 @@ public:
 	void Set_screenHeight(int value);
 	void Set_modeAccelerometer();
 	void Set_modeJoystick();
+    void Set_Level(int value);
 
 
 	int Get_screenWidth();
 	int Get_screenHeight();
+    int Get_Level();
 
 	bool Is_modeAccelerometer();
 	bool Is_modeJoystick();
