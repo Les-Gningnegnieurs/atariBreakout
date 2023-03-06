@@ -5,8 +5,10 @@ Joystick Controller::getJoystick(){
 }
 
 void Controller::setBargraph(int id, bool val){
-    if(id >=0 && id < 10)
+    if(id >=0 && id < 10){
         _bargraph.status[id] = val;
+        _outputChanged.bargraph = true;
+    }
 }
 
 void Controller::setLED(int id, int R, int G, int B){
@@ -15,6 +17,7 @@ void Controller::setLED(int id, int R, int G, int B){
         _leds[id].R = R;
         _leds[id].G = G;
         _leds[id].B = B;
+        _outputChanged.leds = true;
     }
 }
 

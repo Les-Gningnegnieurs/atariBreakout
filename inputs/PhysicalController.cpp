@@ -23,12 +23,14 @@ bool PhysicalController::sendOutputs(){
     //{"b" : [0..9]} (0/1)
     if(_outputChanged.bargraph){
         j_msg_send["b"] = _bargraph.status;
+        _outputChanged.bargraph = false;
     }
 
     //{"l" : [l1,l2]} (0/1)
     //{"l" : [[0/1, R, G, B], [0/1, R, G, B]]}
     if(_outputChanged.leds){
         j_msg_send["l"] = {{_leds[0].status, _leds[0].R, _leds[0].G, _leds[0].B}, {_leds[1].status, _leds[1].R, _leds[1].G, _leds[1].B}};
+        _outputChanged.leds = false;
     }
 
     if(j_msg_send==json::value_t::null){
