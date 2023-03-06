@@ -5,6 +5,10 @@
 #include "Structs.h"
 #include "Briquetest.h"
 #include "BriqueVoid.h"
+#include "BriqueA.h"
+#include "BriqueB.h"
+#include "BriqueT.h"
+#include "BriqueC.h"
 #include <iostream>
 #include "Balle.h"
 

@@ -118,6 +118,9 @@ std::istream& operator >> (std::istream& s, Level& I){
                 else if (x == 0) {
                     I._board[i][j] = new BriqueVoid(j * I.getLength(), i * I.getHeigth(), I.getLength(), I.getHeigth());
                 }
+                else if (x == 8) {
+                    I._board[i][j] = new BriqueT(j * I.getLength(), i * I.getHeigth(), I.getLength(), I.getHeigth());
+                }
             }
         }
         

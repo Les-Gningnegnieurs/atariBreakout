@@ -7,6 +7,7 @@ Brique:: Brique(int x, int y, int l, int h, state s){
     _sizeY = h;
     _PV = 0;
     _etat = s;
+
     //length et height peut-etre a definir
 }
 Brique::~Brique() {
@@ -60,7 +61,7 @@ Collision Brique::checkCollision(Balle* b) {
     if (posBa.x + speed.x == _posBrique.x
         && posBa.y + speed.y == _posBrique.y)
     {
-        return CN;
+        return NO;
     }
     return NO;
     /*if (posBa.y + rayon >= _posBrique.y && posBa.y - rayon <= _posBrique.y)
@@ -89,9 +90,7 @@ Collision Brique::checkCollision(Balle* b) {
 
 
 bool Brique::increase_Damage() {
-    if (_etat == Destroyed)
-        return false;
-    else if (_etat != Indestructible)
+    if (_etat != Indestructible && _etat != Destroyed)
     {
         _PV--;
         if (_PV <= 0)
@@ -100,6 +99,7 @@ bool Brique::increase_Damage() {
             _etat = Hurt;
         return true;
     }
+    return false;
 }
 
 void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
@@ -120,7 +120,12 @@ void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
     else
     {
         if (_sizeX == 1)
-            UI[_posBrique.y][_posBrique.x] = 'X';
+        {
+            if(_etat == Alive)
+                UI[_posBrique.y][_posBrique.x] = 'X';
+            else if(_etat == Indestructible)
+                UI[_posBrique.y][_posBrique.x] = 'X';
+        }
         else {
             for (int i = _posBrique.y; i < _posBrique.y + _sizeY; i++) {
                 for (int j = _posBrique.x; j < _posBrique.x + _sizeX; j++) {
