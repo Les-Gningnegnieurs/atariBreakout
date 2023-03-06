@@ -6,7 +6,7 @@
 
 class Keyboard : public Controller{
 public:
-    void receiveInputs();
-    void sendOutputs();
+    bool receiveInputs();
+    bool sendOutputs();
 };
 #endif

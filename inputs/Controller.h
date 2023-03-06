@@ -3,21 +3,21 @@
 
 #include "../components/components.h"
 #include <iostream>
-#include "../lib/nlohmann/json.hpp"
-using json = nlohmann::json;
+
 
 
 class Controller{
 protected:
     Joystick _joystick;
-    Bargraph _bargraph;
-    LedRGB _leds[2];
     bool _buttons[4];
     Accelerometre _accelerometre;
+    Bargraph _bargraph;
+    LedRGB _leds[2];
+    OuputChanged _outputChanged;
 
 public:
-    virtual void receiveInputs();
-    virtual void sendOutputs();
+    virtual bool receiveInputs();
+    virtual bool sendOutputs();
 
     Controller();
     ~Controller();

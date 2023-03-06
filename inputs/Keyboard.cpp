@@ -1,6 +1,6 @@
 #include "Keyboard.h"
 
-void Keyboard::receiveInputs(){
+bool Keyboard::receiveInputs(){
     //Controles de base 
 
     //Joystick X
@@ -42,8 +42,11 @@ void Keyboard::receiveInputs(){
     else{
         _buttons[0] = 0;
     }
+
+    return true;
 };
 
-void Keyboard::sendOutputs(){
+bool Keyboard::sendOutputs(){
     //do nothing
+    return false;
 }
