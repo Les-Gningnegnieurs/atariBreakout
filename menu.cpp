@@ -1,25 +1,5 @@
 #include "menu.h"
 
-/*int main()
-{
-    Menu menu;
-
-    //menu.LoadConfig();
-
-    //using namespace std;
-    //cout << menu.Get_modeAccelerometer() << endl;
-    //cout << menu.Get_modeJoystick() << endl;
-    //cout << menu.Get_screenHeight() << endl;
-    //cout << menu.Get_screenWidth() << endl;
-
-    menu.Set_modeJoystick();
-    menu.Set_screenHeight(900);
-    menu.Set_screenWidth(1600);
-
-    menu.SaveConfig();
-
-    return 0;
-}*/
 
 /* ----------- PARAMÈTRE DE LA CONFIG --------------
  *
@@ -40,6 +20,8 @@ Menu::Menu()
     parameters[4].name = "SELECT_LEVEL";
 
     Update_data();
+    choice_done = 0;
+    index = 1;
 }
 
 void Menu::Update_data()
@@ -116,6 +98,80 @@ bool Menu::SaveConfig()
     file.close();
 
     return true;
+}
+
+void Menu::print(std::ostream& os)
+{
+    system("CLS");
+
+    os << std::endl << std::endl << std::endl;
+    switch (index)
+    {
+    case 1:
+        os << "\x1B[32mPlay game\033[0m\n";
+        os << "Exit";
+        break;
+    case 2:
+        os << "Play game\n";
+        os << "\x1B[32mExit\033[0m\n";
+        break;
+    default:
+        break;
+    }
+    
+    Input in = Navigate();
+
+    switch (in)
+    {
+    case _UP:
+        if (index > 1) index--;
+        break;
+    case _DOWN:
+        if (index < 2) index++;
+        break;
+    case _ESC:
+        break;
+    case _ENTER:
+        choice_done = true;
+        if (index == 1) play = true;
+        if (index == 2) play = false;
+        break;
+    default:
+        break;
+    }
+
+}
+
+
+Input Menu::Navigate()
+{
+    choice = getch();
+    if (choice == 72) return _UP;
+    if (choice == 80) return _DOWN;
+    if (choice == 13) return _ENTER;
+    if (choice == 27) return _ESC;
+}
+
+void Menu::Intro(std::ostream& os)
+{
+    os << std::endl << std::endl << std::endl;
+    os << "\x1B[32m                                     LL      EEEEEE  SSSSSS\033[0m\n";
+    os << "\x1B[32m                                     LL      EE      SS\033[0m\n";
+    os << "\x1B[32m                                     LL      EEEE    SSSSSS\033[0m\n";
+    os << "\x1B[32m                                     LL      EE          SS\033[0m\n";
+    os << "\x1B[32m                                     LLLLLL  EEEEEE  SSSSSS\033[0m\n";
+
+    std::cout << std::endl << std::endl << std::endl;
+
+    os << "\x1B[32mGGGGGGG  NN   NN  II  GGGGGGG  NN   NN  EEEEEE  GGGGGGG  NN   NN  EEEEEE  UU  UU  RRRRRR  SSSSSS\033[0m\n";
+    os << "\x1B[32mGG       NNN  NN  II  GG       NNN  NN  EE      GG       NNN  NN  EE      UU  UU  RR  RR  SS\033[0m\n";
+    os << "\x1B[32mGG   GG  NNNNNNN  II  GG   GG  NNNNNNN  EEEE    GG   GG  NNNNNNN  EEEE    UU  UU  RRRRR   SSSSSS\033[0m\n";
+    os << "\x1B[32mGG    G  NN  NNN  II  GG    G  NN  NNN  EE      GG    G  NN  NNN  EE      UU  UU  RR  RR      SS\033[0m\n";
+    os << "\x1B[32mGGGGGGG  NN   NN  II  GGGGGGG  NN   NN  EEEEEE  GGGGGGG  NN   NN  EEEEEE  UUUUUU  RR   R  SSSSSS\033[0m\n";
+
+    Sleep(1000);
+    system("CLS");
+
 }
 
 void Menu::Set_screenWidth(int value)

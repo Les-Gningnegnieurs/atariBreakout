@@ -8,7 +8,16 @@ GameLoop::GameLoop() {
     loadFile();
 }
 void GameLoop:: Start(){
-    _gameState=Running;
+    _menu.Intro(std::cout);
+    while (!_menu.Is_choice_done())
+    {
+        _menu.print(std::cout);
+    }
+
+    if (_menu.Is_playing())
+        _gameState = Running;
+    else
+        Stop();
 }
 void GameLoop:: Pause()
 {

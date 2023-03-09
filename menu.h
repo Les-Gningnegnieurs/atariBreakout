@@ -9,12 +9,18 @@ Elles permet de :
 ///		Libraries
 #include <iostream>
 #include <fstream>
+#include "GameLoop.h"
+#include <conio.h>
+
 ///
 
 #ifndef MENU_H
 #define MENU_H
 #define CONFIG_PATH "./config/game.config"		//Location du fichier config
 #define NUMBER_OF_PARAMETERS 5
+
+
+enum Input { _UP, _DOWN, _ESC, _ENTER };
 
 struct Config
 {
@@ -33,6 +39,10 @@ private:
 	int screenWidth;
 	int screenHeight;
     int level;
+	bool play;
+	short choice;
+	bool choice_done;
+	short index;
 
 public:
 	Menu();
@@ -41,6 +51,9 @@ public:
 	void Update_data();
 	void Update_config();
 
+	void print(std::ostream & os);
+	void Intro(std::ostream& os);
+	Input Navigate();
 
 	bool LoadConfig();
 	bool SaveConfig();
@@ -51,14 +64,19 @@ public:
 	void Set_modeAccelerometer();
 	void Set_modeJoystick();
     void Set_Level(int value);
+	void Set_playing(bool p) { play = p; };
+	void Set_choice(short c) { choice = c; };
 
 
 	int Get_screenWidth();
 	int Get_screenHeight();
     int Get_Level();
+	short Get_choice() { return choice; };
 
 	bool Is_modeAccelerometer();
 	bool Is_modeJoystick();
+	bool Is_playing() { return play; };
+	bool Is_choice_done() { return choice_done; };
 };
 
 
