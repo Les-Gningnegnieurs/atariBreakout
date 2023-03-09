@@ -1,10 +1,17 @@
 #include "Powerups.h"
-Powerups::Powerups(Position positionDestroyed, int _height = 1, int _lenght = 1)
+
+Powerups::Powerups()
 {
+
+}
+Powerups::Powerups(Position positionDestroyed, LevelInfos i,int _height , int _lenght  )
+{
+	maxSizeY = i.rows;
 	pos = positionDestroyed;
 	state = Inactive;
 	lenght = _lenght;
 	height = _height;
+	timer = 0;
 	
 }
 
@@ -13,12 +20,15 @@ void Powerups::update()
 	if (state == Falling)
 	{
 		pos.y -= 1;
-		timer += 50;
+		
 	}
 	if (timer >= PTIMELIMIT)
 	{
 		state = Inactive;
+		resetPowerups();
 	}
+	if (state == Active)
+		timer += 50;
 }
 
 void Powerups::checkCollisions(Plateforme _plateforme)
@@ -34,11 +44,15 @@ void Powerups::checkCollisions(Plateforme _plateforme)
 			if (pos.x + lenght >= posPlat.x && pos.x <= posPlat.x + platLenght)
 			{
 				setPowerups();
+				state = Active;
 
 			}
 		}
 
-
+		if (pos.y - height >= maxSizeY)
+		{
+			state = Inactive;
+		}
 	}
 
 
