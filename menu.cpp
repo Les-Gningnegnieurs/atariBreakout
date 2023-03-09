@@ -1,25 +1,5 @@
 #include "menu.h"
 
-/*int main()
-{
-    Menu menu;
-
-    //menu.LoadConfig();
-
-    //using namespace std;
-    //cout << menu.Get_modeAccelerometer() << endl;
-    //cout << menu.Get_modeJoystick() << endl;
-    //cout << menu.Get_screenHeight() << endl;
-    //cout << menu.Get_screenWidth() << endl;
-
-    menu.Set_modeJoystick();
-    menu.Set_screenHeight(900);
-    menu.Set_screenWidth(1600);
-
-    menu.SaveConfig();
-
-    return 0;
-}*/
 
 /* ----------- PARAMÈTRE DE LA CONFIG --------------
  *
@@ -40,6 +20,8 @@ Menu::Menu()
     parameters[4].name = "SELECT_LEVEL";
 
     Update_data();
+    over = 0;
+    index = 1;
 }
 
 void Menu::Update_data()
@@ -118,6 +100,177 @@ bool Menu::SaveConfig()
     return true;
 }
 
+void Menu::print(std::ostream& os)
+{
+    system("CLS");
+    os << "FROM KEYBOARD : UP\tDOWN\tENTER\tESC\t";
+    Main_Menu(os);
+}
+
+void Menu::Main_Menu(std::ostream& os)
+{
+    os << std::endl << std::endl << std::endl;
+    switch (index)
+    {
+    case 1:
+        os << "\x1B[32mPlay game\033[0m\n";
+        os << "Settings\n";
+        os << "Exit\n";
+        break;
+    case 2:
+        os << "Play game\n";
+        os << "\x1B[32mSettings\033[0m\n";
+        os << "Exit\n";
+        break;
+    case 3:
+        os << "Play game\n";
+        os << "Settings\n";
+        os << "\x1B[32mExit\033[0m\n";
+        break;
+    default:
+        break;
+    }
+
+    Input in = Navigate();
+
+    switch (in)
+    {
+    case _UP:
+        if (index > 1) index--;
+        break;
+    case _DOWN:
+        if (index < NBR_CHOICE_MAIN) index++;
+        break;
+    case _ESC:
+        break;
+    case _ENTER:
+        switch (index)
+        {
+        case PLAY_GAME:
+            over = true;
+            play = true;
+            break;
+        case SETTINGS:
+            index = 1;
+            while (Settings_Menu(std::cout));
+            index = 1;
+            break;
+        case EXIT_MENU:
+            over = true;
+            play = false;
+            break;
+        }
+        break;
+    }
+}
+
+bool Menu::Settings_Menu(std::ostream& os)
+{
+    system("CLS");
+    os << std::endl << std::endl << std::endl;
+    switch (index)
+    {
+    case 1:
+        os << "\x1B[32mPlaying Mode\033[0m\t";
+        if (Is_modeJoystick()) os << "\x1B[32m[JOYSTICK]\033[0m\n";
+        else os << "\x1B[32m[ACCELEROMETER]\033[0m\n";
+        os << "Load Configuration\n";
+        os << "Save Configuration\n";
+        os << "Exit\n";
+        break;
+    case 2:
+        os << "Playing Mode\t";
+        if (Is_modeJoystick()) os << "[JOYSTICK]\n";
+        else os << "[ACCELEROMETER]\n";
+        os << "\x1B[32mLoad Configuration\033[0m\n";
+        os << "Save Configuration\n";
+        os << "Exit\n";
+        break;
+    case 3:
+        os << "Playing Mode\t";
+        if (Is_modeJoystick()) os << "[JOYSTICK]\n";
+        else os << "[ACCELEROMETER]\n";
+        os << "Load Configuration\n";
+        os << "\x1B[32mSave Configuration\033[0m\n";
+        os << "Exit\n";
+        break;
+    case 4:
+        os << "Playing Mode\t";
+        if (Is_modeJoystick()) os << "[JOYSTICK]\n";
+        else os << "[ACCELEROMETER]\n";
+        os << "Load Configuration\n";
+        os << "Save Configuration\n";
+        os << "\x1B[32mExit\033[0m\n";
+        break;
+    default:
+        break;
+    }
+
+    Input in = Navigate();
+    switch (in)
+    {
+    case _UP:
+        if (index > 1) index--;
+        break;
+    case _DOWN:
+        if (index < NBR_CHOICE_SETTINGS) index++;
+        break;
+    case _ESC:
+        break;
+    case _ENTER:
+        switch (index)
+        {
+        case PLAYING_MODE:
+            Change_mode();
+            break;
+        case LOAD_CONFIGURATION:
+            LoadConfig();
+            break;
+        case SAVE_CONFIGURATION:
+            SaveConfig();
+            break;
+        case EXIT_SETTINGS:
+            return false;
+            break;
+        }
+        break;
+    }
+    
+    return true;
+}
+
+
+Input Menu::Navigate()
+{
+    choice = getch();
+    if (choice == 72) return _UP;
+    if (choice == 80) return _DOWN;
+    if (choice == 13) return _ENTER;
+    if (choice == 27) return _ESC;
+}
+
+void Menu::Intro(std::ostream& os)
+{
+    os << std::endl << std::endl << std::endl;
+    os << "\x1B[32m                                     LL      EEEEEE  SSSSSS\033[0m\n";
+    os << "\x1B[32m                                     LL      EE      SS\033[0m\n";
+    os << "\x1B[32m                                     LL      EEEE    SSSSSS\033[0m\n";
+    os << "\x1B[32m                                     LL      EE          SS\033[0m\n";
+    os << "\x1B[32m                                     LLLLLL  EEEEEE  SSSSSS\033[0m\n";
+
+    std::cout << std::endl << std::endl << std::endl;
+
+    os << "\x1B[32mGGGGGGG  NN   NN  II  GGGGGGG  NN   NN  EEEEEE  GGGGGGG  NN   NN  EEEEEE  UU  UU  RRRRRR  SSSSSS\033[0m\n";
+    os << "\x1B[32mGG       NNN  NN  II  GG       NNN  NN  EE      GG       NNN  NN  EE      UU  UU  RR  RR  SS\033[0m\n";
+    os << "\x1B[32mGG   GG  NNNNNNN  II  GG   GG  NNNNNNN  EEEE    GG   GG  NNNNNNN  EEEE    UU  UU  RRRRR   SSSSSS\033[0m\n";
+    os << "\x1B[32mGG    G  NN  NNN  II  GG    G  NN  NNN  EE      GG    G  NN  NNN  EE      UU  UU  RR  RR      SS\033[0m\n";
+    os << "\x1B[32mGGGGGGG  NN   NN  II  GGGGGGG  NN   NN  EEEEEE  GGGGGGG  NN   NN  EEEEEE  UUUUUU  RR   R  SSSSSS\033[0m\n";
+
+    Sleep(1000);
+    system("CLS");
+
+}
+
 void Menu::Set_screenWidth(int value)
 {
     screenWidth = value;
@@ -140,6 +293,13 @@ void Menu::Set_modeJoystick()
     modeJoystick = true;
     modeAccelerometer = false;
 }
+
+void Menu::Change_mode()
+{
+    if (modeJoystick) Set_modeAccelerometer();
+    else Set_modeJoystick();
+}
+
 void Menu::Set_Level(int value)
 {
     level=value;

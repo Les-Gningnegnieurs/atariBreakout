@@ -10,12 +10,12 @@ Plateforme::Plateforme(LevelInfos I)
     speed.x = 0;
     speed.y = 0;
     pos.x = I.pos_Plat_iniX;
-    pos.y = I.pos_Plat_iniY;  // je sais pas s'il y a moyen de forcer la valeur à être consante étant donné que la struct n'est pas const
+    pos.y = I.pos_Plat_iniY;  
 }
 
 void Plateforme::move(int joystickvalueX)
 {
-    // calcul à verifier (512 est la valeur quand le joystick est au "repos")
+  
 
     speed.x = joystickvalueX;
 }
@@ -23,7 +23,7 @@ void Plateforme::move(int joystickvalueX)
 void Plateforme::update()
 {
     pos.x += speed.x;
-    //revérifier ces limites (pas bon d'avoir des valeurs hardcodé
+    
     if (pos.x >= columns - 1 - sizeX)
         pos.x = columns - sizeX - 1;
     else if (pos.x <= 0)
