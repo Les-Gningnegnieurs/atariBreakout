@@ -17,8 +17,19 @@ Elles permet de :
 #ifndef MENU_H
 #define MENU_H
 #define CONFIG_PATH "./config/game.config"		//Location du fichier config
+
 #define NUMBER_OF_PARAMETERS 5
-#define NBR_CHOICE 3
+#define NBR_CHOICE_MAIN 3
+#define NBR_CHOICE_SETTINGS 4
+
+#define PLAY_GAME 1
+#define SETTINGS 2
+#define EXIT_MENU 3
+
+#define PLAYING_MODE 1
+#define LOAD_CONFIGURATION 2
+#define SAVE_CONFIGURATION 3
+#define EXIT_SETTINGS 4
 
 
 enum Input { _UP, _DOWN, _ESC, _ENTER };
@@ -55,6 +66,9 @@ public:
 	void print(std::ostream & os);
 	void Intro(std::ostream& os);
 	Input Navigate();
+	void Main_Menu(std::ostream& os);
+	bool Settings_Menu(std::ostream& os);
+		
 
 	bool LoadConfig();
 	bool SaveConfig();
