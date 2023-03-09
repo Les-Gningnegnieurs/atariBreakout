@@ -2,7 +2,8 @@
 #ifndef POWERUPS_H
 #define POWERUPS_H
 #include "Structs.h"
-#include "GameLogic.h"
+//#include "GameLogic.h"
+#include "Plateforme.h"
 
 class Powerups
 {

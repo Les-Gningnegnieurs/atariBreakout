@@ -16,6 +16,7 @@
 class GameLogic {
 private:
     std::vector<Balle*> _balls;
+    std::vector<Powerups*> _powers;
     Level _level;
     LevelInfos _info;
     Plateforme _platform;
@@ -24,7 +25,7 @@ private:
     int _livesLeft;
     int maxSizeX;
     int maxSizeY;
-    //std::vector<Powerups*> _powers;
+    
  
 
     void checkCollisions();
