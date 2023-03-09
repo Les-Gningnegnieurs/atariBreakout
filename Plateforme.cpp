@@ -55,16 +55,43 @@ void Plateforme::checkCollision(Balle *b)
     {
         if (b->getPos().x + b->getrayon() >= pos.x && b->getPos().x - b->getrayon() <= pos.x + sizeX) // on frappe la plateforme
         {
-            if (pos.x + sizeX / 2 >= b->getPos().x) //on est a gauche
+            if (b->getPos().x == pos.x + sizeX / 2 || b->getPos().x == pos.x + sizeX / 2 - 1)//milieu POSITION:(2 et 3)
+                b->setVelocity(0, -1); //straight
+
+            else if (pos.x == b->getPos().x) //coin gauche dans tt les cas on l'envoie a gauche POSITION:(0)
             {
-                if (b->getSpeed().x >= 0) b->changeVelocity(1, 1);//il allait vers la droite
-                else b->changeVelocity(0, 1);
+                b->setVelocity(-1, -1);
             }
-            else //on est a droite
+            else if (b->getPos().x == pos.x + sizeX - 1) // coin droit on l'envoie a droite POSITION:(5)
             {
-                if (b->getSpeed().x <= 0) b->changeVelocity(1, 1);//il allait vers la gauche
-                else b->changeVelocity(0, 1);
+                b->setVelocity(1, -1);
             }
+            else if (b->getPos().x == pos.x + 1) //normal gauche (entre coin et milieu) POSITION:1
+            {
+                if (b->getSpeed().x > 0)
+                    b->changeVelocity(1, 1);
+                else
+                    b->changeVelocity(0, 1);
+            }
+            else if (b->getPos().x == pos.x + sizeX - 2) //normal droit (entre coin et milieu) POSITION:4
+            {
+                if (b->getSpeed().x < 0)
+                    b->changeVelocity(1, 1);
+                else
+                    b->changeVelocity(0, 1);
+            }
+
+
+            //if (pos.x + sizeX / 2 >= b->getPos().x) //on est a gauche
+            //{
+            //    if (b->getSpeed().x >= 0) b->changeVelocity(1, 1);//il allait vers la droite
+            //    else b->changeVelocity(0, 1);
+            //}
+            //else //on est a droite
+            //{
+            //    if (b->getSpeed().x <= 0) b->changeVelocity(1, 1);//il allait vers la gauche
+            //    else b->changeVelocity(0, 1);
+            //}
         }
     }
 }
