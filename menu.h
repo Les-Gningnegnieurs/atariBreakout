@@ -88,6 +88,7 @@ public:
     int Get_Level();
 	short Get_choice() { return choice; };
 
+	void Change_mode();
 	bool Is_modeAccelerometer();
 	bool Is_modeJoystick();
 	bool Is_playing() { return play; };

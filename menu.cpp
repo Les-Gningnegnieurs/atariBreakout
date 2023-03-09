@@ -103,13 +103,8 @@ bool Menu::SaveConfig()
 void Menu::print(std::ostream& os)
 {
     system("CLS");
-
+    os << "FROM KEYBOARD : UP\tDOWN\tENTER\tESC\t";
     Main_Menu(os);
-    
-    
-
-    
-
 }
 
 void Menu::Main_Menu(std::ostream& os)
@@ -176,25 +171,33 @@ bool Menu::Settings_Menu(std::ostream& os)
     switch (index)
     {
     case 1:
-        os << "\x1B[32mPlaying Mode\033[0m\n";
+        os << "\x1B[32mPlaying Mode\033[0m\t";
+        if (Is_modeJoystick()) os << "\x1B[32m[JOYSTICK]\033[0m\n";
+        else os << "\x1B[32m[ACCELEROMETER]\033[0m\n";
         os << "Load Configuration\n";
         os << "Save Configuration\n";
         os << "Exit\n";
         break;
     case 2:
-        os << "Playing Mode\n";
+        os << "Playing Mode\t";
+        if (Is_modeJoystick()) os << "[JOYSTICK]\n";
+        else os << "[ACCELEROMETER]\n";
         os << "\x1B[32mLoad Configuration\033[0m\n";
         os << "Save Configuration\n";
         os << "Exit\n";
         break;
     case 3:
-        os << "Playing Mode\n";
+        os << "Playing Mode\t";
+        if (Is_modeJoystick()) os << "[JOYSTICK]\n";
+        else os << "[ACCELEROMETER]\n";
         os << "Load Configuration\n";
         os << "\x1B[32mSave Configuration\033[0m\n";
         os << "Exit\n";
         break;
     case 4:
-        os << "Playing Mode\n";
+        os << "Playing Mode\t";
+        if (Is_modeJoystick()) os << "[JOYSTICK]\n";
+        else os << "[ACCELEROMETER]\n";
         os << "Load Configuration\n";
         os << "Save Configuration\n";
         os << "\x1B[32mExit\033[0m\n";
@@ -218,6 +221,7 @@ bool Menu::Settings_Menu(std::ostream& os)
         switch (index)
         {
         case PLAYING_MODE:
+            Change_mode();
             break;
         case LOAD_CONFIGURATION:
             LoadConfig();
@@ -289,6 +293,13 @@ void Menu::Set_modeJoystick()
     modeJoystick = true;
     modeAccelerometer = false;
 }
+
+void Menu::Change_mode()
+{
+    if (modeJoystick) Set_modeAccelerometer();
+    else Set_modeJoystick();
+}
+
 void Menu::Set_Level(int value)
 {
     level=value;
