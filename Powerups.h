@@ -9,14 +9,19 @@ class Powerups
 private:
 	Position pos;
 	Status state; 
+	int lenght;
+	int height;
+	int timer;
 	
 public:
-	Powerups(Position positionDestroyed);
+	Powerups(Position positionDestroyed, int height =1 ,int lenght = 1);
 	~Powerups();
-	bool checkCollisions();
-	void updatePos();
+	void checkCollisions(Plateforme _plateforme);
+	void update();
 	virtual void setPowerups();
 	virtual void resetPowerups();
+	void setFalling() { state = Falling; }
+	void draw();
 	
 	
 };
