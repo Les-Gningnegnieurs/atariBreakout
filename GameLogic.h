@@ -6,6 +6,7 @@
 #include <vector>
 #include "Keyboard.h"
 #include <iostream>
+#include "Powerups.h"
 
 
 #ifndef GAMELOGIC_H
@@ -21,6 +22,7 @@ private:
     int _livesLeft;
     int maxSizeX;
     int maxSizeY;
+    std::vector<Powerups> _powers;
 
     void checkCollisions();
 public:

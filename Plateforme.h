@@ -23,6 +23,8 @@ public:
     void draw(char UI[RESMAX_Y][RESMAX_X]);
     Velocity getSpeed(){return speed;}
     Position getPos(){return pos;}
+    int getLenght() { return sizeX; }
+    int getHeight() { return sizeY; }
 
 };
 
