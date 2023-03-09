@@ -1,6 +1,8 @@
 #include "Powerups.h"
-Powerups:Powerups(Position positionDestroyed)
+Powerups::Powerups(Position positionDestroyed)
 {
 	pos = positionDestroyed;
 	
 }
+
+
