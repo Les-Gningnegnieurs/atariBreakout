@@ -9,7 +9,7 @@ GameLoop::GameLoop() {
 }
 void GameLoop:: Start(){
     _menu.Intro(std::cout);
-    while (!_menu.Is_choice_done())
+    while (!_menu.Is_over())
     {
         _menu.print(std::cout);
     }

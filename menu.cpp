@@ -20,7 +20,7 @@ Menu::Menu()
     parameters[4].name = "SELECT_LEVEL";
 
     Update_data();
-    choice_done = 0;
+    over = 0;
     index = 1;
 }
 
@@ -127,12 +127,12 @@ void Menu::print(std::ostream& os)
         if (index > 1) index--;
         break;
     case _DOWN:
-        if (index < 2) index++;
+        if (index < NBR_CHOICE) index++;
         break;
     case _ESC:
         break;
     case _ENTER:
-        choice_done = true;
+        over = true;
         if (index == 1) play = true;
         if (index == 2) play = false;
         break;

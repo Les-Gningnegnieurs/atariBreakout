@@ -18,6 +18,7 @@ Elles permet de :
 #define MENU_H
 #define CONFIG_PATH "./config/game.config"		//Location du fichier config
 #define NUMBER_OF_PARAMETERS 5
+#define NBR_CHOICE 3
 
 
 enum Input { _UP, _DOWN, _ESC, _ENTER };
@@ -41,7 +42,7 @@ private:
     int level;
 	bool play;
 	short choice;
-	bool choice_done;
+	bool over;
 	short index;
 
 public:
@@ -76,7 +77,7 @@ public:
 	bool Is_modeAccelerometer();
 	bool Is_modeJoystick();
 	bool Is_playing() { return play; };
-	bool Is_choice_done() { return choice_done; };
+	bool Is_over() { return over; };
 };
 
 
