@@ -46,3 +46,7 @@ void Balle::changeVelocity(bool x, bool y){
         speed.y *= -1;
 }
 
+void Balle::setVelocity(int x, int y) {
+    speed.x = x;
+    speed.y = y;
+}
