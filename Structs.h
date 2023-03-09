@@ -7,6 +7,7 @@
 
 #define RESMAX_X 80
 #define RESMAX_Y 25
+#define SLEEP 150
 
 struct Position {
     int x;
@@ -57,6 +58,12 @@ enum Collision {
     UP,
     CN,
     NO,
+};
+
+enum Status {
+    Falling,
+    Active,
+    Inactive
 };
 
 #endif

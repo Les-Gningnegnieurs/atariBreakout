@@ -8,6 +8,8 @@ class Powerups
 {
 private:
 	Position pos;
+	Status state; 
+	
 public:
 	Powerups(Position positionDestroyed);
 	~Powerups();
