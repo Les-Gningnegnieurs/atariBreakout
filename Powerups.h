@@ -2,9 +2,9 @@
 #ifndef POWERUPS_H
 #define POWERUPS_H
 #include "Structs.h"
-//#include "GameLogic.h"
-#include "Plateforme.h"
 
+#include "Plateforme.h"
+class GameLogic;
 class Powerups
 {
 private:
@@ -19,10 +19,10 @@ public:
 	Powerups();
 	Powerups(Position positionDestroyed, LevelInfos i, int height =1 ,int lenght = 1);
 	~Powerups();
-	void checkCollisions(Plateforme _plateforme);
-	void update();
-	virtual void setPowerups() = 0;
-	virtual void resetPowerups() = 0;
+	void checkCollisions(Plateforme _plateforme, GameLogic& gm);
+	void update(GameLogic& gm);
+	virtual void setPowerups(GameLogic &gm) = 0;
+	virtual void resetPowerups(GameLogic& gm) = 0;
 	void setFalling() { state = Falling; }
 	void draw();
 	Status getState(){ return state; }
