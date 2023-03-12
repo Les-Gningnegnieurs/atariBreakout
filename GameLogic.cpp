@@ -128,3 +128,5 @@ std::istream& operator>>(std::istream& s, GameLogic &gl){
     s >> gl._level;
     return s;
  }
+
+

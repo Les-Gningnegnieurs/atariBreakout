@@ -4,7 +4,7 @@
 #include "Structs.h"
 
 #include "Plateforme.h"
-class GameLogic;
+#include "GameLogic.h"
 class Powerups
 {
 private:

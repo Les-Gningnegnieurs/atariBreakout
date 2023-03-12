@@ -12,7 +12,8 @@
 #include <vector>
 #include "Keyboard.h"
 #include <iostream>
-#include "Powerups.h"
+class Powerups;
+
 class GameLogic {
 private:
     std::vector<Balle*> _balls;
@@ -37,6 +38,7 @@ public:
     void draw(std::ostream &s);
     bool isGameOver();
     int getScoreInfo();
+    Plateforme& getplaform() { return _platform; }
 
     friend std::istream& operator>>(std::istream& s, GameLogic &gl);
 };

@@ -8,7 +8,7 @@ Powerups::Powerups(Position positionDestroyed, LevelInfos i,int _height , int _l
 {
 	maxSizeY = i.rows;
 	pos = positionDestroyed;
-	state = Inactive;
+	state = Falling;
 	lenght = _lenght;
 	height = _height;
 	timer = 0;

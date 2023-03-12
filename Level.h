@@ -11,6 +11,8 @@
 #include "BriqueC.h"
 #include <iostream>
 #include "Balle.h"
+#include <vector>
+#include "Powerups.h"
 
 
 class Level{
@@ -41,7 +43,7 @@ class Level{
         int getLength();
 
 
-        void checkCollision(Balle *b, int& score);
+        void checkCollision(Balle *b, int& score,std::vector <Powerups*> p);
 
         Brique* getBrique(int row_idx, int column_idx); //utile pour set le level au debut
 

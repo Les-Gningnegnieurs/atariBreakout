@@ -7,8 +7,12 @@
 #define BRIQUE_H
 #include "Structs.h"
 #include "Balle.h"
+#include <vector>
+#include <Extendplatform.h>
+
 
 #include <iostream>
+
 
 class Brique
 {
@@ -16,7 +20,7 @@ public:
 	//on entre simplement les coordonnées. la hauteur et la largeur sont déja définies
 	Brique(int x = 0, int y = 0, int l = 6, int h = 2, state s = Alive);
 
-	bool increase_Damage();
+	bool increase_Damage(std::vector<Powerups*> p);
 
 	virtual ~Brique();
 
