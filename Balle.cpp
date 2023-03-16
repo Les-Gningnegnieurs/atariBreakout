@@ -6,7 +6,7 @@ Balle::Balle(LevelInfos I)
     oldPosX = pos.x;
     oldPosY = pos.y;
     speed.y =-1;
-    speed.x = -1;
+    speed.x = 0;
     rayon = I.ball_radius;
 }
 void Balle::update()

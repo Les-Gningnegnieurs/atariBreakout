@@ -14,6 +14,7 @@ Powerups::Powerups(Position positionDestroyed, LevelInfos i,int _height , int _l
 	timer = 0;
 	
 }
+Powerups::~Powerups() {}
 
 void Powerups::update(GameLogic& gm)
 {

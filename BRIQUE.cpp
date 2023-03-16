@@ -34,32 +34,69 @@ Collision Brique::checkCollision(Balle* b) {
     int rayon = b->getrayon();
     Velocity speed = b->getSpeed();
     //collision down
-    if (posBa.y == _posBrique.y + rayon)
-    {
-        if (posBa.x == _posBrique.x)
-            return DN;
+    if (_sizeX == 1) {
+        if (posBa.y == _posBrique.y + rayon)
+        {
+            if (posBa.x == _posBrique.x)
+                return DN;
+        }
+        //collision top
+        if (posBa.y == _posBrique.y - rayon)
+        {
+            if (posBa.x == _posBrique.x)
+                return UP;
+        }
+        //collision left
+        if (posBa.x == _posBrique.x - rayon)
+        {
+            if (posBa.y == _posBrique.y)
+                return LT;
+        }
+        //collision right
+        if (posBa.x == _posBrique.x + rayon)
+        {
+            if (posBa.y == _posBrique.y)
+                return RT;
+        }
+        //collision coin
+        if (posBa.x + speed.x == _posBrique.x
+            && posBa.y + speed.y == _posBrique.y)
+        {
+            return CN;
+        }
+        return NO;
     }
+    else
+        //collision down
+        if (posBa.y == _posBrique.y + rayon && speed.y < 0)  
+        {
+            if (posBa.x >= _posBrique.x && posBa.x <=_posBrique.x+_sizeX-1 )
+                return DN;
+        }
     //collision top
-    if (posBa.y == _posBrique.y - rayon)
+    if (posBa.y == _posBrique.y - rayon && speed.y > 0) 
     {
-        if (posBa.x == _posBrique.x)
+        if (posBa.x >= _posBrique.x && posBa.x <= _posBrique.x + _sizeX-1)
             return UP;
     }
     //collision left
-    if (posBa.x == _posBrique.x - rayon)
+    if (posBa.x == _posBrique.x - rayon && speed.x > 0)
     {
         if (posBa.y == _posBrique.y)
             return LT;
     }
     //collision right
-    if (posBa.x == _posBrique.x + rayon)
+    if (posBa.x == _posBrique.x + (_sizeX-1) +rayon && speed.x < 0)
     {
         if (posBa.y == _posBrique.y)
             return RT;
     }
     //collision coin
-    if (posBa.x + speed.x == _posBrique.x
-        && posBa.y + speed.y == _posBrique.y)
+    if ((posBa.x == _posBrique.x-rayon && posBa.y == _posBrique.y-rayon && speed.x > 0 && speed.y > 0 )|| //coin superieur gauche
+        (posBa.x == _posBrique.x-rayon && posBa.y == _posBrique.y+rayon && speed.x > 0 && speed.y < 0)|| //coin inferieur gauche
+        (posBa.x == _posBrique.x+(_sizeX-1)+rayon && posBa.y == _posBrique.y-rayon && speed.x < 0 && speed.y > 0)||//coin superieur droit
+        (posBa.x == _posBrique.x+(_sizeX-1)+rayon && posBa.y == _posBrique.y+rayon) && speed.x < 0 && speed.y < 0) //coin inferieur droit (il faut que la balle aille en diagonal gauche)
+
     {
         return CN;
     }
@@ -127,8 +164,11 @@ void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
                 UI[_posBrique.y][_posBrique.x] = '¼';
         }
         else {
+            int j = _posBrique.x;
             for (int i = _posBrique.y; i < _posBrique.y + _sizeY; i++) {
-                for (int j = _posBrique.x; j < _posBrique.x + _sizeX; j++) {
+                UI[i][j] = '[';
+                j++;
+                for (j; j < _posBrique.x + _sizeX-1; j++) {
                     if (_etat == Alive)
                         UI[i][j] = 'X';
                     else if (_etat == Hurt)
@@ -137,6 +177,7 @@ void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
                         UI[i][j] = '¼';
                     }
                 }
+                UI[i][j] = ']';
             }
         }
     }
