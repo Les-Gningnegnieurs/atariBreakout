@@ -1,0 +1,63 @@
+3 mars
+Class Balle
+Liste des attributs:
+-Position (structure int x et int y du centre de la balle)
+-Rayon (valeur entière désignant le rayon de la balle en pixel, excluant le centre)
+-Speed (représente le sens de la direction horizontal et verticale, les normes pour chacune des composantes H et V sont unitaires
+-oldPosX et oldPosY (valeur de l'ancienne valeur de position en X et Y: utile pour l'update du UI)
+
+
+3 mars
+Class Plateforme
+Liste des attributs:
+-Position (structure int x et int y du coin gauche de la plateforme)
+-Speed (structure int x et int y permettant de déplacer la plateforme)
+-Rows (Hauteur du UI)
+-Columns (Largeur du UI)
+-SizeX (Largeur de la plateforme)
+-SizeY (Hauteur de la plateforme: FONCTIONNALITÉ NON ACCESSIBLE)
+
+
+3 mars
+Class Brique
+Liste des attributs:
+-Position (Coordonnées du coin suppérieur gauche)
+-Etat (Énumération prenant la valeur: Destroyed, Hurt, Alive ou  Indestructible)
+-SizeX (Largeur de la brique : FONCTIONNALITÉ NON ACCESSIBLE)
+-SizeY (Hauteur de la brique : FONCTIONNALITÉ NON ACCESSIBLE)
+-PV (Nombre de vies de la brique)
+
+
+3 mars
+Class Level
+Liste des attributs:
+-Rows (Nombre de rangées de pixels de briques : DOIT ÊTRE UN MULTIPLE DE BrickHeight)
+-Columns (Nombre de colonne de pixels de briques : DOIT ÊTRE UN MULTIPLE DE BrickLenght)
+-BrickHeight (Hauteur de chaque brique)
+-BrickLenght (Largeur de chaque brique)
+-_board (Matrice de briques de dimensions RESMAX_Y et RESMAX_X : Permet de contenir le nombre max de briques)
+
+
+3 mars
+Class GameLogic
+Liste des attributs:
+-_balls (Vecteur de balle)
+-_level (Objet level contenant les valeurs rows, columns, BrickHeigth et BrickLength de _info)
+-_info (Structure contenant les différents paramètres envoyé en arguments à la classe GameLogic : Ces paramètre sont décrits dans la première rangée du fichier .txt)
+-_platform (Objet Plateforme contenant les valeurs Plat_length, Plat_heigth, rows, columns, pos_Plat_iniX et pos_Plat_iniY de _info)
+-UI (Matrice 2D contenant l'ensemble de caractères permettant de représenter l'interface utilisateur)
+-_score (Pointage de la partie)
+-_livesLeft (Indique le nombre de vie restante)
+-maxSizeX (Largeur du UI : PAS DIRECTEMENT LIÉE AU UI)
+-maxSizeY (Hauteur du UI : PAS DIRECTEMENT LIÉE AU UI)
+
+
+
+
+
+
+
+
+
+
+
