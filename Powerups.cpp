@@ -19,6 +19,7 @@ Powerups::Powerups(Position positionDestroyed,int _height , int _lenght  )
 	timer = 0;
 	
 }
+Powerups::~Powerups() {}
 
 void Powerups::update()
 {

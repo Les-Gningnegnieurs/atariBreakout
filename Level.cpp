@@ -27,9 +27,9 @@ void Level::draw(char UI[RESMAX_Y][RESMAX_X]) {
 
 void Level :: checkCollision(Balle *b, int& score,std::vector<Powerups*> &p){
   
-    for (int i = 0; i < rows; i++)
+    for (int i = 0; i < rows/BrickHeigth; i++)
     {
-        for (int j = 0; j < columns; j++)
+        for (int j = 0; j < columns/BrickLength; j++)
         {
             
             if (!_board[i][j]->est_Detruite())
@@ -60,6 +60,7 @@ void Level :: checkCollision(Balle *b, int& score,std::vector<Powerups*> &p){
                     score++;
                     b->changeVelocity(1, 1);
                     _board[i][j]->increase_Damage(p);
+                    break;
                 case NO:
                     break;
                 }
@@ -104,10 +105,10 @@ int Level :: getLength(){
 std::istream& operator >> (std::istream& s, Level& I){
     //on est rendu aux infos sur le level
     int x=0;
-    while(!s.eof()){
-        for(int i=0; i< I.getRows(); i++)
+    //while(!s.eof()){
+        for(int i=0; i< I.getRows()/I.getHeigth(); i++)
         {
-            for(int j=0; j<I.getColumns(); j++)
+            for(int j=0; j<I.getColumns()/I.getLength(); j++)
             {
                 s >> x;
                 if(x == 1){
@@ -124,7 +125,7 @@ std::istream& operator >> (std::istream& s, Level& I){
             }
         }
         
-    }
+   // }
     return s;
 }
 //pour les briques de hauteur plus que 1.. comprend pas trop comment ca fonctionne donc on en va pas l'utiliser pour live

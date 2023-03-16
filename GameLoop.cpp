@@ -5,6 +5,7 @@
 GameLoop::GameLoop() {
     _canevas = new Canevas();
     _keyboard = new Keyboard();
+    //_manette = new Manette();
     loadFile();
 }
 void GameLoop:: Start(){
@@ -50,19 +51,22 @@ void GameLoop:: GameOver(){
 
 void GameLoop:: update() {
     _keyboard->receiveInputs();
+    //_manette->receiveInputs();
     if (_gameState == Starting)
         Start();
     if (_gameState==Running) {
+        //remplacer par _canevas->update(_menu.getModeManette() ? *_manette : *_keyboard);
         _canevas->update(*_keyboard);
     }
     GameOver();
     _keyboard->sendOutputs();
+    //_manette->sendOutputs();
 
 }
 
 void GameLoop:: loadFile(){
     //int value= _menu.Get_Level();
-    int value = 2;
+    int value = 3;
     std::stringstream str;
     std::string levelPath;
     str << "level/" << value << ".txt";
