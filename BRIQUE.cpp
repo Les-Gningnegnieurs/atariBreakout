@@ -109,7 +109,7 @@ void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
             UI[_posBrique.y][_posBrique.x] = ' ';
         }
         else {
-            for (int i = _posBrique.y + 0; i < _posBrique.y + _sizeY; i++) {
+            for (int i = _posBrique.y; i < _posBrique.y + _sizeY; i++) {
                 for (int j = _posBrique.x; j < _posBrique.x + _sizeX; j++) {
                     UI[i][j] = ' ';
                 }
