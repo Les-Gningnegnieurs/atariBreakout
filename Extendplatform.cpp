@@ -1,12 +1,16 @@
 #include "Extendplatform.h"
 
-void Extendplatform::setPowerups(GameLogic& gm)
+void Extendplatform::modifyPlateform(Plateforme& platform, bool reset)
 {
-	Plateforme p = gm.getplaform();
-	p.setLenght(p.getLenght() * EXTENDFACTOR);
+	if (reset)
+	
+		platform.setLenght(platform.getLenght() /EXTENDFACTOR);
+	
+	else 
+		platform.setLenght(platform.getLenght() * EXTENDFACTOR);
 }
-void Extendplatform::resetPowerups(GameLogic& gm)
+
+Extendplatform::Extendplatform(Position positionDestroyed,  int height , int lenght ) :Powerups( positionDestroyed,    height ,  lenght )
 {
-	Plateforme p = gm.getplaform();
-	p.setLenght(p.getLenght() * (1/EXTENDFACTOR));
+
 }

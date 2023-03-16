@@ -12,7 +12,7 @@
 #include <vector>
 #include "Keyboard.h"
 #include <iostream>
-class Powerups;
+#include "Powerups.h"
 
 class GameLogic {
 private:
@@ -29,7 +29,7 @@ private:
     
  
 
-    void checkCollisions();
+    void checkCollisions(Controller& control);
 public:
     GameLogic();
     GameLogic(LevelInfos _info);
@@ -38,7 +38,7 @@ public:
     void draw(std::ostream &s);
     bool isGameOver();
     int getScoreInfo();
-    Plateforme& getplaform() { return _platform; }
+    Plateforme& getPlaform();
 
     friend std::istream& operator>>(std::istream& s, GameLogic &gl);
 };

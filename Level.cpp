@@ -25,7 +25,7 @@ void Level::draw(char UI[RESMAX_Y][RESMAX_X]) {
 
 
 
-void Level :: checkCollision(Balle *b, int& score,std::vector<Powerups*> p){
+void Level :: checkCollision(Balle *b, int& score,std::vector<Powerups*> &p){
   
     for (int i = 0; i < rows; i++)
     {

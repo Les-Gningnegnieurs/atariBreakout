@@ -1,5 +1,4 @@
 #include "Brique.h"
-
 Brique:: Brique(int x, int y, int l, int h, state s){
     _posBrique.x = x;
     _posBrique.y = y;
@@ -89,16 +88,16 @@ Collision Brique::checkCollision(Balle* b) {
 }
 
 
-bool Brique::increase_Damage(std::vector<Powerups*> p) {
+bool Brique::increase_Damage(std::vector<Powerups*>& p) {
     if (_etat != Indestructible && _etat != Destroyed)
     {
         _PV--;
         if (_PV <= 0)
         {
-            int y = rand();
+            int y = rand()*100;
             _etat = Destroyed;
-            if (y % 100 < 15)
-                p.push_back(new Extendplatform);
+            if (y % 100 <= 100)
+                p.push_back(new Extendplatform(_posBrique));
         }
         else
             _etat = Hurt;

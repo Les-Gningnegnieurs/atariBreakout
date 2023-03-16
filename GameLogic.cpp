@@ -35,11 +35,17 @@ void GameLogic:: update(Controller& c)
 
     for (int i = 0; i < _powers.size(); i++)
     {
-        _powers[i]->update(*this);
-        if (_powers[i]->getState() == Inactive)
+        _powers[i]->update();
+        _powers[i]->draw(UI);
+        if (_powers[i]->getState() == Done || _powers[i]->getState() == OutOfBounds)
         {
+            if (_powers[i]->getState() == Done)
+            
+                _powers[i]->resetPowerups(_balls, _platform, c);
+            UI[_powers[i]->getPos().y][_powers[i]->getPos().x] = ' ';
             delete _powers[i];
 ;             _powers.erase(_powers.begin() + i);
+            
         }
     }
 
@@ -51,7 +57,7 @@ void GameLogic:: update(Controller& c)
     }
 
     //check les collisions une fois que les positions ont ete updatés
-    checkCollisions(); 
+    checkCollisions(c);
     draw(std::cout);
     //Update controller status (LED & bargrpah)
     //TODO quand on vas avoir déterminé une utilité
@@ -66,12 +72,18 @@ bool GameLogic::isGameOver()
 //Retirer les valeurs de limite hardcodé et enovyer balle en reference 
 //dans les check collision pour utiliser leur vélocité pour savoir d'ou elles arrivent pour le check colision
 //et determiner l'angle de renvoi
-void GameLogic::checkCollisions() {
+void GameLogic::checkCollisions(Controller &control) {
     Position pos;
 
     for (int i = 0; i < _powers.size(); i++)
     {
-        _powers[i]->checkCollisions(_platform,*this);
+        if (_powers[i]->getPos().y + _powers[i]->getHeight() >= maxSizeY)
+            _powers[i]->setState(OutOfBounds); 
+        
+        if (_powers[i]->checkCollisions(_platform)) {
+            UI[_powers[i]->getPos().y][_powers[i]->getPos().x] = ' ';
+            _powers[i]->setPowerups(_balls, _platform, control);
+        }
     }
     for(int i=0; i< _balls.size();i++)
     {
@@ -130,3 +142,4 @@ std::istream& operator>>(std::istream& s, GameLogic &gl){
  }
 
 
+Plateforme& GameLogic::getPlaform() { return _platform; }

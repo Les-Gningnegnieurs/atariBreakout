@@ -4,9 +4,14 @@ Powerups::Powerups()
 {
 
 }
-Powerups::Powerups(Position positionDestroyed, LevelInfos i,int _height , int _lenght  )
+
+Powerups::~Powerups()
 {
-	maxSizeY = i.rows;
+
+}
+Powerups::Powerups(Position positionDestroyed,int _height , int _lenght  )
+{
+
 	pos = positionDestroyed;
 	state = Falling;
 	lenght = _lenght;
@@ -15,23 +20,24 @@ Powerups::Powerups(Position positionDestroyed, LevelInfos i,int _height , int _l
 	
 }
 
-void Powerups::update(GameLogic& gm)
+void Powerups::update()
 {
 	if (state == Falling)
 	{
-		pos.y -= 1;
+		oldpos = pos;
+		pos.y += 1;
 		
 	}
 	if (timer >= PTIMELIMIT)
 	{
-		state = Inactive;
-		resetPowerups(gm);
+		state = Done;
+		
 	}
 	if (state == Active)
 		timer += SLEEP;
 }
 
-void Powerups::checkCollisions(Plateforme _plateforme, GameLogic& gm)
+bool Powerups::checkCollisions(Plateforme _plateforme)
 {
 	Position posPlat = _plateforme.getPos();
 	int platHeight = _plateforme.getHeight();
@@ -43,17 +49,50 @@ void Powerups::checkCollisions(Plateforme _plateforme, GameLogic& gm)
 		{
 			if (pos.x + lenght >= posPlat.x && pos.x <= posPlat.x + platLenght)
 			{
-				setPowerups(gm);
+
 				state = Active;
+				return true;
 
 			}
 		}
-
-		if (pos.y - height >= maxSizeY)
-		{
-			state = Inactive;
-		}
 	}
+	return false;
+
+}
 
 
+void Powerups::modifyBall(std::vector<Balle*> ball, bool reset )
+{
+
+}
+void Powerups::modifyPlateform(Plateforme& platform, bool reset )
+{
+
+}
+void Powerups::modifyControler(Controller& controller, bool reset )
+{
+
+}
+
+void Powerups::setPowerups(std::vector<Balle*> ball, Plateforme& platform, Controller& controller)
+{
+	modifyBall(ball);
+	modifyPlateform(platform);
+	modifyControler(controller);
+
+}
+void Powerups::resetPowerups(std::vector<Balle*> ball, Plateforme& platform, Controller& controller)
+{
+	modifyBall(ball,true);
+	modifyPlateform(platform,true);
+	modifyControler(controller,true);
+
+}
+void Powerups::draw(char UI[RESMAX_Y][RESMAX_X])
+{
+	if (state == Falling)
+	{
+		UI[oldpos.y][oldpos.x] = ' '; //espace a l'ancienne pos de la balle
+		UI[pos.y][pos.x] = 'O'; //update la nouvelle pos de la balle dans l'array 
+	}
 }

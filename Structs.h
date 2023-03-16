@@ -33,11 +33,8 @@ struct LevelInfos{
     float ball_radius;
 };
 
-/// @brief coordonnées du coin gauche
-struct Hitbox {
-    int x;
-    int y;
-};
+
+
 /// @brief Destroyed(0) = delete la brique, Hurt = touché, Alive = pas touché, Indestructible
 enum state{
     Destroyed,
@@ -64,7 +61,8 @@ enum Collision {
 enum Status {
     Falling,
     Active,
-    Inactive
+    Done,
+    OutOfBounds
 };
 
 #endif

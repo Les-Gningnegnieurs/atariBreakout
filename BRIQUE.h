@@ -20,7 +20,7 @@ public:
 	//on entre simplement les coordonnées. la hauteur et la largeur sont déja définies
 	Brique(int x = 0, int y = 0, int l = 6, int h = 2, state s = Alive);
 
-	bool increase_Damage(std::vector<Powerups*> p);
+	bool increase_Damage(std::vector<Powerups*>& p);
 
 	virtual ~Brique();
 
@@ -41,11 +41,12 @@ public:
 	void draw(char UI[RESMAX_Y][RESMAX_X]);
 	virtual void afficher(std::ostream& s) = 0;
 protected:
-	Hitbox _posBrique;
+	Position _posBrique;
 	state _etat;
 	int _sizeX;
 	int _sizeY;
 	int _PV;
+	
 };
 
 #endif

@@ -4,10 +4,9 @@
 #include "Powerups.h"
 
 class Extendplatform :public Powerups {
-
-	void setPowerups(GameLogic& gm);
-	void resetPowerups(GameLogic& gm);
-
+public:
+	Extendplatform(Position positionDestroyed, int height = 1, int lenght = 1);
+	void modifyPlateform(Plateforme& platform, bool reset);
 };
 
 #endif

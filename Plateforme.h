@@ -25,7 +25,7 @@ public:
     Position getPos(){return pos;}
     int getLenght() { return sizeX; }
     int getHeight() { return sizeY; }
-    int setLenght(int l) { sizeX = l; }
+    void setLenght(int l) { sizeX = l; }
 
 };
 

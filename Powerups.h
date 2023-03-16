@@ -2,31 +2,44 @@
 #ifndef POWERUPS_H
 #define POWERUPS_H
 #include "Structs.h"
-
+#include "Balle.h"
 #include "Plateforme.h"
-#include "GameLogic.h"
+#include "Controller.h"
+
+class GameLogic;
+
+
 class Powerups
 {
-private:
+protected:
 	Position pos;
+	Position oldpos;
 	Status state; 
 	int lenght;
 	int height;
 	int timer;
 	int maxSizeY;
+	virtual void modifyBall(std::vector<Balle*> ball, bool reset = false);
+	virtual void modifyPlateform(Plateforme& platform, bool reset = false);
+	virtual void modifyControler(Controller& controller, bool reset = false);
+	
 	
 public:
 	Powerups();
-	Powerups(Position positionDestroyed, LevelInfos i, int height =1 ,int lenght = 1);
+	Powerups(Position positionDestroyed,  int height =1 ,int lenght = 1);
 	~Powerups();
-	void checkCollisions(Plateforme _plateforme, GameLogic& gm);
-	void update(GameLogic& gm);
-	virtual void setPowerups(GameLogic &gm) = 0;
-	virtual void resetPowerups(GameLogic& gm) = 0;
+	bool checkCollisions(Plateforme _plateforme);
+	void update();
+	void setPowerups(std::vector<Balle*> ball, Plateforme& platform, Controller& controller);
+	void resetPowerups(std::vector<Balle*> ball, Plateforme& platform, Controller& controller);
 	void setFalling() { state = Falling; }
-	void draw();
-	Status getState(){ return state; }
+	virtual void draw(char UI[RESMAX_Y][RESMAX_X]);
+	Status getState() { return state; };
+	void setState(Status s) { state = s; };
+	Position getPos() { return pos; };
+	int getHeight() { return height; };
 	
+
 	
 };
 #endif
