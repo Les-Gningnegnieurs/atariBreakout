@@ -33,6 +33,16 @@ void GameLogic:: update(Controller& c)
     _platform.update(); //update la position
     _platform.draw(UI); //update le dessin dans le tableau
 
+    for (int i = 0; i < _powers.size(); i++)
+    {
+        _powers[i]->update(*this);
+        if (_powers[i]->getState() == Inactive)
+        {
+            delete _powers[i];
+;             _powers.erase(_powers.begin() + i);
+        }
+    }
+
     //update Game / do logic
     for(int i=0; i< _balls.size();i++)
     {
@@ -58,6 +68,11 @@ bool GameLogic::isGameOver()
 //et determiner l'angle de renvoi
 void GameLogic::checkCollisions() {
     Position pos;
+
+    for (int i = 0; i < _powers.size(); i++)
+    {
+        _powers[i]->checkCollisions(_platform,*this);
+    }
     for(int i=0; i< _balls.size();i++)
     {
         pos= _balls[i]->getPos();
@@ -72,7 +87,7 @@ void GameLogic::checkCollisions() {
             _platform.checkCollision(_balls[i]);
             
             //Balle *b = _balls[i];
-            _level.checkCollision(_balls[i], _score);
+            _level.checkCollision(_balls[i], _score,_powers);
 
             if (pos.y - _balls[i]->getrayon() <= 0) //Hit  plafond
             {

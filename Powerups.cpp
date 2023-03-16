@@ -15,7 +15,7 @@ Powerups::Powerups(Position positionDestroyed, LevelInfos i,int _height , int _l
 	
 }
 
-void Powerups::update()
+void Powerups::update(GameLogic& gm)
 {
 	if (state == Falling)
 	{
@@ -25,13 +25,13 @@ void Powerups::update()
 	if (timer >= PTIMELIMIT)
 	{
 		state = Inactive;
-		resetPowerups();
+		resetPowerups(gm);
 	}
 	if (state == Active)
-		timer += 50;
+		timer += SLEEP;
 }
 
-void Powerups::checkCollisions(Plateforme _plateforme)
+void Powerups::checkCollisions(Plateforme _plateforme, GameLogic& gm)
 {
 	Position posPlat = _plateforme.getPos();
 	int platHeight = _plateforme.getHeight();
@@ -43,7 +43,7 @@ void Powerups::checkCollisions(Plateforme _plateforme)
 		{
 			if (pos.x + lenght >= posPlat.x && pos.x <= posPlat.x + platLenght)
 			{
-				setPowerups();
+				setPowerups(gm);
 				state = Active;
 
 			}
