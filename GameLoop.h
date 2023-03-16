@@ -21,6 +21,7 @@ private:
     gameState _gameState;
 public:
     Controller* _keyboard;
+    Controller* _manette;
 
     GameLoop();
     void Start();
