@@ -40,6 +40,7 @@ public:
 
 	void draw(char UI[RESMAX_Y][RESMAX_X]);
 	virtual void afficher(std::ostream& s) = 0;
+	virtual void addPowerUp(std::vector<Powerups*>& p);
 protected:
 	Position _posBrique;
 	state _etat;

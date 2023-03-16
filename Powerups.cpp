@@ -19,7 +19,7 @@ Powerups::Powerups(Position positionDestroyed,int _height , int _lenght  )
 	timer = 0;
 	
 }
-Powerups::~Powerups() {}
+
 
 void Powerups::update()
 {
@@ -94,6 +94,6 @@ void Powerups::draw(char UI[RESMAX_Y][RESMAX_X])
 	if (state == Falling)
 	{
 		UI[oldpos.y][oldpos.x] = ' '; //espace a l'ancienne pos de la balle
-		UI[pos.y][pos.x] = 'O'; //update la nouvelle pos de la balle dans l'array 
+		UI[pos.y][pos.x] = 'P'; //update la nouvelle pos de la balle dans l'array 
 	}
 }

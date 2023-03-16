@@ -99,7 +99,7 @@ void GameLogic::checkCollisions(Controller &control) {
             _platform.checkCollision(_balls[i]);
             
             //Balle *b = _balls[i];
-            _level.checkCollision(_balls[i], _score);
+            _level.checkCollision(_balls[i], _score,_powers);
 
             if (pos.y <= 0) //Hit  plafond
             {
@@ -126,12 +126,29 @@ int GameLogic::getScoreInfo() {
 }
 
 void GameLogic::draw(std::ostream& s) {
+    DWORD dw;
+    COORD here;
+    HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
     //draw bricks
     for (int i = 0; i < maxSizeY; i++) {
         for (int j = 0; j < maxSizeX; j++) {
-            s << UI[i][j];
+            here.Y = i;
+            here.X = j;
+
+            TCHAR strFromConsole[1];
+            ReadConsoleOutputCharacter(hStdOut, strFromConsole, 1, here, &dw);
+            char c = strFromConsole[0];
+            if (c != UI[i][j])
+            {
+                char text[1];
+                text[0] = UI[i][j];
+                wchar_t wtext[1];
+                mbstowcs(wtext, text, 2);
+                LPWSTR ptr = wtext;
+                WriteConsoleOutputCharacter(hStdOut, ptr, 1, here, &dw);
+            }
         }
-        s << std::endl;
     }
 }
 

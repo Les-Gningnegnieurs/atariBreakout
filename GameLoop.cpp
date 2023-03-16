@@ -14,7 +14,7 @@ void GameLoop:: Start(){
     {
         _menu.print(std::cout);
     }
-
+    _canevas->erase();
     if (_menu.Is_playing())
         _gameState = Running;
     else

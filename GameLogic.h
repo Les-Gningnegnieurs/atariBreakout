@@ -13,6 +13,7 @@
 #include "Keyboard.h"
 #include <iostream>
 #include "Powerups.h"
+#include <Windows.h>
 
 class GameLogic {
 private:
