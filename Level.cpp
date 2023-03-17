@@ -25,44 +25,173 @@ void Level::draw(char UI[RESMAX_Y][RESMAX_X]) {
 
 
 
-void Level :: checkCollision(Balle *b, int& score,std::vector<Powerups*> &p){
-  
-    for (int i = 0; i < rows/BrickHeigth; i++)
+void Level :: checkCollision(Balle *b, int& score){
+    //On va faire une fonction qui décide les valeurs du for loop pour chaque cas
+    //pour simplifier le code mais dans le fond g fait 4 facons différentes de checker l'Array qui dépende de la 
+    //vitesse de la balle. Cette methode permet d'empecher qu'une balle qui est supposé frapper le bas d'une brique
+    //detecte dabord la collision de coin de la prochaine brique et fasse une collision qui fait pas de sens
+    if (b->getSpeed().y > 0 && b->getSpeed().x >= 0) // si la balle descend et va vers la droite
     {
-        for (int j = 0; j < columns/BrickLength; j++)
+        for (int i = 0; i < rows / BrickHeigth; i++) //haut en bas
         {
-            
-            if (!_board[i][j]->est_Detruite())
+            for (int j = 0; j < columns / BrickLength; j++) //gauche a droite
             {
-                Collision check = _board[i][j]->checkCollision(b);
-                switch (check) {
-                case LT:
-                    score++;
-                    b->changeVelocity(1, 0);
-                    _board[i][j]->increase_Damage(p);
-                    break;
-                case RT:
-                    score++;
-                    b->changeVelocity(1, 0);
-                    _board[i][j]->increase_Damage(p);
-                    break;
-                case DN:
-                    score++;
-                    b->changeVelocity(0, 1);
-                    _board[i][j]->increase_Damage(p);
-                    break;
-                case UP:
-                    score++;
-                    b->changeVelocity(0, 1);
-                    _board[i][j]->increase_Damage(p);
-                    break;
-                case CN:
-                    score++;
-                    b->changeVelocity(1, 1);
-                    _board[i][j]->increase_Damage(p);
-                    break;
-                case NO:
-                    break;
+                if (!_board[i][j]->est_Detruite())
+                {
+                    Collision check = _board[i][j]->checkCollision(b);
+                    switch (check) {
+                    case LT:
+                        score++;
+                        b->changeVelocity(1, 0);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case RT:
+                        score++;
+                        b->changeVelocity(1, 0);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case DN:
+                        score++;
+                        b->changeVelocity(0, 1);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case UP:
+                        score++;
+                        b->changeVelocity(0, 1);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case CN:
+                        score++;
+                        b->changeVelocity(1, 1);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case NO:
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    if (b->getSpeed().y > 0 && b->getSpeed().x <= 0) // si la balle descend et va vers la gauche
+    {
+        for (int i = 0; i < rows / BrickHeigth; i++) //haut en bas
+        {
+            for (int j = (columns / BrickLength)-1; j >= 0 ; j--) //droite a gauche
+            {
+                if (!_board[i][j]->est_Detruite())
+                {
+                    Collision check = _board[i][j]->checkCollision(b);
+                    switch (check) {
+                    case LT:
+                        score++;
+                        b->changeVelocity(1, 0);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case RT:
+                        score++;
+                        b->changeVelocity(1, 0);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case DN:
+                        score++;
+                        b->changeVelocity(0, 1);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case UP:
+                        score++;
+                        b->changeVelocity(0, 1);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case CN:
+                        score++;
+                        b->changeVelocity(1, 1);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case NO:
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    else if(b->getSpeed().y <= 0 && b->getSpeed().x >= 0){ //si la balle monte et va vers la droite
+        for (int i = (rows / BrickHeigth)-1; i >= 0; i--) //bas vers le haut
+        {
+            for (int j = 0; j < columns / BrickLength; j++) //gauche a droite
+            {
+                if (!_board[i][j]->est_Detruite())
+                {
+                    Collision check = _board[i][j]->checkCollision(b);
+                    switch (check) {
+                    case LT:
+                        score++;
+                        b->changeVelocity(1, 0);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case RT:
+                        score++;
+                        b->changeVelocity(1, 0);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case DN:
+                        score++;
+                        b->changeVelocity(0, 1);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case UP:
+                        score++;
+                        b->changeVelocity(0, 1);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case CN:
+                        score++;
+                        b->changeVelocity(1, 1);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case NO:
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    else if (b->getSpeed().y <= 0 && b->getSpeed().x <= 0) { //si la balle monte et va vers la gauche
+        for (int i = (rows / BrickHeigth) - 1; i >= 0; i--) //bas vers le haut
+        {
+            for (int j = (columns / BrickLength) - 1; j >= 0; j--) //droite vers la gauche
+            {
+                if (!_board[i][j]->est_Detruite())
+                {
+                    Collision check = _board[i][j]->checkCollision(b);
+                    switch (check) {
+                    case LT:
+                        score++;
+                        b->changeVelocity(1, 0);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case RT:
+                        score++;
+                        b->changeVelocity(1, 0);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case DN:
+                        score++;
+                        b->changeVelocity(0, 1);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case UP:
+                        score++;
+                        b->changeVelocity(0, 1);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case CN:
+                        score++;
+                        b->changeVelocity(1, 1);
+                        _board[i][j]->increase_Damage();
+                        break;
+                    case NO:
+                        break;
+                    }
                 }
             }
         }
@@ -116,12 +245,18 @@ std::istream& operator >> (std::istream& s, Level& I){
                     //si == 0 : pas de brique a cette position
                     I._board[i][j] = new Briquetest(j*I.getLength(), i*I.getHeigth(), I.getLength(), I.getHeigth()); 
                 }
-                else if (x == 0) {
+                else if (x == 0) 
                     I._board[i][j] = new BriqueVoid(j * I.getLength(), i * I.getHeigth(), I.getLength(), I.getHeigth());
-                }
-                else if (x == 8) {
+                
+                else if (x == 2)
+                    I._board[i][j] = new BriqueB(j * I.getLength(), i * I.getHeigth(), I.getLength(), I.getHeigth());
+                
+                else if(x == 3)
+                    I._board[i][j] = new BriqueC(j * I.getLength(), i * I.getHeigth(), I.getLength(), I.getHeigth());
+
+                else if (x == 8) 
                     I._board[i][j] = new BriqueT(j * I.getLength(), i * I.getHeigth(), I.getLength(), I.getHeigth());
-                }
+                
             }
         }
         

@@ -52,7 +52,7 @@ Collision Brique::checkCollision(Balle* b) {
                 return LT;
         }
         //collision right
-        if (posBa.x == _posBrique.x + rayon)
+        if (posBa.x == _posBrique.x + _sizeX + rayon)
         {
             if (posBa.y == _posBrique.y)
                 return RT;
@@ -159,10 +159,12 @@ void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
     {
         if (_sizeX == 1)
         {
-            if(_etat == Alive)
+            if (_etat == Alive)
                 UI[_posBrique.y][_posBrique.x] = 'X';
-            else if(_etat == Indestructible)
+            else if (_etat == Indestructible)
                 UI[_posBrique.y][_posBrique.x] = '¼';
+            else if (_etat == Hurt)
+                UI[_posBrique.y][_posBrique.x] = '#';
         }
         else {
             int j = _posBrique.x;
@@ -171,11 +173,11 @@ void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
                 j++;
                 for (j; j < _posBrique.x + _sizeX-1; j++) {
                     if (_etat == Alive)
-                        UI[i][j] = 'X';
+                        UI[i][j] = '-';
                     else if (_etat == Hurt)
                         UI[i][j] = 'x';
                     else if (_etat == Indestructible) {
-                        UI[i][j] = '¼';
+                        UI[i][j] = '%';
                     }
                 }
                 UI[i][j] = ']';
