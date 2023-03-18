@@ -5,6 +5,7 @@
 #include "Balle.h"
 #include "Plateforme.h"
 #include "Controller.h"
+#include <chrono>
 
 class GameLogic;
 
@@ -17,8 +18,10 @@ protected:
 	Status state; 
 	int lenght;
 	int height;
-	int timer;
+	double timer;
 	int maxSizeY;
+	std::chrono::steady_clock clock;
+	std::chrono::time_point<std::chrono::steady_clock> last_time;
 	virtual void modifyBall(std::vector<Balle*> &ball, Plateforme _plat, bool reset = false);
 	virtual void modifyPlateform(Plateforme& platform, bool reset = false);
 	virtual void modifyControler(Controller& controller, bool reset = false);
