@@ -19,20 +19,28 @@ Elles permet de :
 #define CONFIG_PATH "./config/game.config"		//Location du fichier config
 
 #define NUMBER_OF_PARAMETERS 5
-#define NBR_CHOICE_MAIN 3
+#define NBR_CHOICE_MAIN 4
 #define NBR_CHOICE_SETTINGS 4
+#define NBR_CHOICE_LEVEL 3
+#define NBR_LEVEL_MODES 4
 
 #define PLAY_GAME 1
-#define SETTINGS 2
-#define EXIT_MENU 3
+#define CHOOSE_LEVEL 2
+#define SETTINGS 3
+#define EXIT_MENU 4
 
 #define PLAYING_MODE 1
 #define LOAD_CONFIGURATION 2
 #define SAVE_CONFIGURATION 3
 #define EXIT_SETTINGS 4
 
+#define LEVEL_STATUS 1
+#define SAVE_LEVEL 2
+#define EXIT_LEVEL 3
 
-enum Input { _UP, _DOWN, _ESC, _ENTER };
+
+
+enum Input { _UP, _DOWN, _LEFT, _RIGHT, _ESC, _ENTER };
 
 struct Config
 {
@@ -55,6 +63,7 @@ private:
 	short choice;
 	bool over;
 	short index;
+	int index_x;
 
 public:
 	Menu();
@@ -68,6 +77,7 @@ public:
 	Input Navigate();
 	void Main_Menu(std::ostream& os);
 	bool Settings_Menu(std::ostream& os);
+	bool Choose_Level_Menu(std::ostream& os);
 		
 
 	bool LoadConfig();

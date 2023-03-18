@@ -19,7 +19,8 @@ Menu::Menu()
     parameters[3].name = "MODE_JOYSTICK";
     parameters[4].name = "SELECT_LEVEL";
 
-    Update_data();
+    LoadConfig();
+
     over = 0;
     index = 1;
 }
@@ -63,7 +64,7 @@ bool Menu::LoadConfig()
         file >> parameter;
         file >> value;
 
-        for (int i = 0; i < NUMBER_OF_PARAMETERS - 1; i++)
+        for (int i = 0; i < NUMBER_OF_PARAMETERS; i++)
         {
             if (parameter == parameters[i].name)
                 parameters[i].value = value;
@@ -90,7 +91,7 @@ bool Menu::SaveConfig()
         return false;
     }
 
-    for (int i = 0; i < NUMBER_OF_PARAMETERS - 1; i++)
+    for (int i = 0; i < NUMBER_OF_PARAMETERS; i++)
     {
         file << parameters[i].name << " " << parameters[i].value << std::endl;
     }
@@ -114,16 +115,25 @@ void Menu::Main_Menu(std::ostream& os)
     {
     case 1:
         os << "\x1B[32mPlay game\033[0m\n";
+        os << "Change Level\n";
         os << "Settings\n";
         os << "Exit\n";
         break;
     case 2:
         os << "Play game\n";
-        os << "\x1B[32mSettings\033[0m\n";
+        os << "\x1B[32mChange Level\033[0m\n";
+        os << "Settings\n";
         os << "Exit\n";
         break;
     case 3:
         os << "Play game\n";
+        os << "Change Level\n";
+        os << "\x1B[32mSettings\033[0m\n";
+        os << "Exit\n";
+        break;
+    case 4:
+        os << "Play game\n";
+        os << "Change Level\n";
         os << "Settings\n";
         os << "\x1B[32mExit\033[0m\n";
         break;
@@ -150,6 +160,12 @@ void Menu::Main_Menu(std::ostream& os)
             over = true;
             play = true;
             break;
+        case CHOOSE_LEVEL:
+            index = 1;
+            index_x = level;
+            while (Choose_Level_Menu(std::cout));
+            index = 1;
+            break;
         case SETTINGS:
             index = 1;
             while (Settings_Menu(std::cout));
@@ -162,6 +178,69 @@ void Menu::Main_Menu(std::ostream& os)
         }
         break;
     }
+}
+
+bool Menu::Choose_Level_Menu(std::ostream& os)
+{
+    system("CLS");
+    os << std::endl << std::endl << std::endl;
+    switch (index)
+    {
+    case 1:
+        os << "\x1B[32mLevel\033[0m\t";
+        os << "\x1B[32m" << index_x << "\033[0m\n";
+        os << "Set Level\n";
+        os << "Exit\n";
+        break;
+    case 2:
+        os << "Level\t";
+        os << index_x << "\n";
+        os << "\x1B[32mSet Level\033[0m\n";
+        os << "Exit\n";
+        break;
+    case 3:
+        os << "Level\t";
+        os << index_x << "\n";
+        os << "Set Level\n";
+        os << "\x1B[32mExit\033[0m\n";
+        break;
+    }
+
+    Input in = Navigate();
+
+    switch (in)
+    {
+    case _UP:
+        if (index > 1) index--;
+        break;
+    case _DOWN:
+        if (index < NBR_CHOICE_LEVEL) index++;
+        break;
+    case _LEFT:
+        if (index == 1 && index_x > 1) index_x--;
+        break;
+    case _RIGHT:
+        if (index == 1 && index_x < NBR_LEVEL_MODES) index_x++;
+        break;
+    case _ESC:
+        break;
+    case _ENTER:
+        switch (index)
+        {
+        case LEVEL_STATUS:
+            break;
+        case SAVE_LEVEL:
+            level = index_x;
+            SaveConfig();
+            break;
+        case EXIT_LEVEL:
+            return false;
+            break;
+        }
+        break;
+    }
+
+    return true;
 }
 
 bool Menu::Settings_Menu(std::ostream& os)
@@ -202,11 +281,10 @@ bool Menu::Settings_Menu(std::ostream& os)
         os << "Save Configuration\n";
         os << "\x1B[32mExit\033[0m\n";
         break;
-    default:
-        break;
     }
 
     Input in = Navigate();
+
     switch (in)
     {
     case _UP:
@@ -247,6 +325,8 @@ Input Menu::Navigate()
     if (choice == 80) return _DOWN;
     if (choice == 13) return _ENTER;
     if (choice == 27) return _ESC;
+    if (choice == 75) return _LEFT;
+    if (choice == 77) return _RIGHT;
 }
 
 void Menu::Intro(std::ostream& os)
