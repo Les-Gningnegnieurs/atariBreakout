@@ -60,8 +60,8 @@ void Plateforme::checkCollision(Balle *b)
         {
             if (posBa.x == pos.x)    //coin gauche
                 b->setVelocity(-1, -1);
-            else if (posBa.x == pos.x + 1 && speed.x > 0)  //renvoie du meme bord si allait vers la droite
-                b->changeVelocity(1, 1);
+            else if (posBa.x >= pos.x + 1 && posBa.x < pos.x + (sizeX) / 2 - 1 && speed.x >= 0)  //renvoie du meme bord si allait vers la droite
+                b->setVelocity(-1, -1);
             else
                 b->changeVelocity(0, 1);    //sinon change juste le y
         }
@@ -71,8 +71,8 @@ void Plateforme::checkCollision(Balle *b)
         {
             if (posBa.x == pos.x + sizeX - 1)   //coin droit
                 b->setVelocity(1, -1);
-            else if (posBa.x == pos.x + sizeX - 1 - 1 && speed.x < 0) //renvoie du meme bord si allait vers la gauche
-                b->changeVelocity(1, 1);
+            else if (posBa.x > pos.x + (sizeX) / 2 &&posBa.x <= pos.x + sizeX - 1 - 1 && speed.x <= 0) //renvoie du meme bord si allait vers la gauche
+                b->setVelocity(1, -1);
             else
                 b->changeVelocity(0, 1);    //sinon change juste le y
 
