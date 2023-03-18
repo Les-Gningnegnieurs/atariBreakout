@@ -57,6 +57,17 @@ void GameLoop:: update() {
     if (_gameState==Running) {
         //remplacer par _canevas->update(_menu.getModeManette() ? *_manette : *_keyboard);
         _canevas->update(*_keyboard);
+        if (_keyboard->getButton(2))
+        {
+            bool start_end = false;
+            while (!start_end)
+            {
+                Sleep(100);
+                _keyboard->receiveInputs();
+                start_end = _keyboard->getButton(2);
+            }
+            Sleep(100);
+        }
     }
     GameOver();
     _keyboard->sendOutputs();
