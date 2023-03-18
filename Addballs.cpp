@@ -10,7 +10,7 @@ void Addballs::modifyBall(std::vector<Balle*> &ball, Plateforme _plat, bool rese
 			int rayon = ball[0]->getrayon();
 			Position posP = _plat.getPos();
 			int sizeX = _plat.getLenght() / 2;
-
+			posP.y--;
 			posP.x += sizeX;
 			
 			
