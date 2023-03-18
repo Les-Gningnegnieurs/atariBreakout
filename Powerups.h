@@ -22,6 +22,7 @@ protected:
 	virtual void modifyBall(std::vector<Balle*> &ball, Plateforme _plat, bool reset = false);
 	virtual void modifyPlateform(Plateforme& platform, bool reset = false);
 	virtual void modifyControler(Controller& controller, bool reset = false);
+	bool isStackable;
 	
 	
 public:
@@ -38,6 +39,8 @@ public:
 	void setState(Status s) { state = s; };
 	Position getPos() { return pos; };
 	int getHeight() { return height; };
+	void resetTimer() { timer = 0; }
+	bool getStackable(){ return isStackable; }
 	
 
 	

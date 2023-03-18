@@ -17,6 +17,7 @@ Powerups::Powerups(Position positionDestroyed,int _height , int _lenght  )
 	lenght = _lenght;
 	height = _height;
 	timer = 0;
+	isStackable = true;
 	
 }
 
@@ -36,6 +37,7 @@ void Powerups::update()
 	}
 	if (state == Active)
 		timer += SLEEP;
+
 }
 
 bool Powerups::checkCollisions(Plateforme _plateforme)
