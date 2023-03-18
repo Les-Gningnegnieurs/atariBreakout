@@ -19,7 +19,7 @@ protected:
 	int height;
 	int timer;
 	int maxSizeY;
-	virtual void modifyBall(std::vector<Balle*> &ball, bool reset = false);
+	virtual void modifyBall(std::vector<Balle*> &ball, Plateforme _plat, bool reset = false);
 	virtual void modifyPlateform(Plateforme& platform, bool reset = false);
 	virtual void modifyControler(Controller& controller, bool reset = false);
 	

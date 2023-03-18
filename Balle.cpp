@@ -1,12 +1,12 @@
 #include "Balle.h"
-Balle::Balle(Position posB, int radius)
+Balle::Balle(Position posB, int radius, int speedX , int speedY)
 {
     pos.x = posB.x;
     pos.y = posB.y;
     oldPosX = pos.x;
     oldPosY = pos.y;
-    speed.y = -1;
-    speed.x = -1;
+    speed.y = speedY;
+    speed.x = speedX;
     rayon = radius;
 }
 void Balle::update()

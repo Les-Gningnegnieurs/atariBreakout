@@ -1,20 +1,26 @@
 #include "Addballs.h"
 
 
-void Addballs::modifyBall(std::vector<Balle*> &ball, bool reset)
+void Addballs::modifyBall(std::vector<Balle*> &ball, Plateforme _plat, bool reset)
 {
 	if (!reset) {
-		if (!ball.empty())
+		if(!ball.empty())
+		
 		{
-			Position pos = ball[0]->getPos();
 			int rayon = ball[0]->getrayon();
-			for (int i = 0; i < NUMBER_BALLS; i++)
-			{
-				pos.x -= i;
-				pos.y -= i;
-				ball.push_back(new Balle(pos, rayon));
+			Position posP = _plat.getPos();
+			int sizeX = _plat.getLenght() / 2;
 
-			}
+			posP.x += sizeX;
+			
+			
+				
+				
+				ball.push_back(new Balle(posP, rayon,-1,-1));
+				ball.push_back(new Balle(posP, rayon, 1, -1));
+				ball.push_back(new Balle(posP, rayon, 0, -1));
+
+		
 		}
 	}
 }

@@ -8,7 +8,7 @@ class Addballs:public Powerups
 {
 public:
 	Addballs(Position positionDestroyed, int height = 1, int lenght = 1);
-	void modifyBall(std::vector<Balle*> & ball, bool reset = false);
+	void modifyBall(std::vector<Balle*> & ball, Plateforme _plat, bool reset = false);
 
 
 };
