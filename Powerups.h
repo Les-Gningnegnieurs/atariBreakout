@@ -19,7 +19,7 @@ protected:
 	int height;
 	int timer;
 	int maxSizeY;
-	virtual void modifyBall(std::vector<Balle*> ball, bool reset = false);
+	virtual void modifyBall(std::vector<Balle*> &ball, bool reset = false);
 	virtual void modifyPlateform(Plateforme& platform, bool reset = false);
 	virtual void modifyControler(Controller& controller, bool reset = false);
 	
@@ -30,8 +30,8 @@ public:
 	~Powerups();
 	bool checkCollisions(Plateforme _plateforme);
 	void update();
-	void setPowerups(std::vector<Balle*> ball, Plateforme& platform, Controller& controller);
-	void resetPowerups(std::vector<Balle*> ball, Plateforme& platform, Controller& controller);
+	void setPowerups(std::vector<Balle*> &ball, Plateforme& platform, Controller& controller);
+	void resetPowerups(std::vector<Balle*> & ball, Plateforme& platform, Controller& controller);
 	void setFalling() { state = Falling; }
 	virtual void draw(char UI[RESMAX_Y][RESMAX_X]);
 	Status getState() { return state; };

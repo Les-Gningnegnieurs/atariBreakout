@@ -8,7 +8,8 @@
 #include "Structs.h"
 #include "Balle.h"
 #include <vector>
-#include <Extendplatform.h>
+#include "Extendplatform.h"
+#include "Addballs.h"
 
 
 #include <iostream>

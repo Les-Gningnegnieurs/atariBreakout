@@ -189,6 +189,6 @@ void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
 void Brique::addPowerUp(std::vector<Powerups*>& p) {
     int y = rand() ;
     _etat = Destroyed;
-    if (y % 100 <= 20)
-        p.push_back(new Extendplatform(_posBrique));
+    if (y % 100 <= 100)
+        p.push_back(new Addballs(_posBrique));
 }

@@ -62,7 +62,7 @@ bool Powerups::checkCollisions(Plateforme _plateforme)
 }
 
 
-void Powerups::modifyBall(std::vector<Balle*> ball, bool reset )
+void Powerups::modifyBall(std::vector<Balle*> & ball, bool reset )
 {
 
 }
@@ -75,14 +75,14 @@ void Powerups::modifyControler(Controller& controller, bool reset )
 
 }
 
-void Powerups::setPowerups(std::vector<Balle*> ball, Plateforme& platform, Controller& controller)
+void Powerups::setPowerups(std::vector<Balle*>& ball, Plateforme& platform, Controller& controller)
 {
 	modifyBall(ball);
 	modifyPlateform(platform);
 	modifyControler(controller);
 
 }
-void Powerups::resetPowerups(std::vector<Balle*> ball, Plateforme& platform, Controller& controller)
+void Powerups::resetPowerups(std::vector<Balle*> &ball, Plateforme& platform, Controller& controller)
 {
 	modifyBall(ball,true);
 	modifyPlateform(platform,true);

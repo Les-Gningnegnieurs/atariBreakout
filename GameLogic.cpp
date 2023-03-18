@@ -12,7 +12,10 @@ GameLogic:: GameLogic(LevelInfos i)
     _livesLeft=3;
      _platform=Plateforme(_info);
     _score=0;
-    _balls.push_back(new Balle(_info));
+    Position posB;
+    posB.x = i.pos_Ball_iniX;
+    posB.y = i.pos_Ball_iniY;
+    _balls.push_back(new Balle(posB,i.ball_radius));
     _level = Level(_info);
     for (int i = 0; i < maxSizeY; i++) {
         for (int j = 0; j < maxSizeX; j++) {
@@ -115,7 +118,10 @@ void GameLogic::checkCollisions(Controller &control) {
     {
         _livesLeft--;
         Sleep(200);
-        Balle* p1 = new Balle(_info);
+        Position posb; 
+        posb.x = _info.pos_Ball_iniX;
+        posb.y = _info.pos_Ball_iniY;
+        Balle* p1 = new Balle(posb,_info.ball_radius);
         _balls.push_back(p1);
     }
 

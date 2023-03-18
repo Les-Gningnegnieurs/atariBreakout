@@ -18,7 +18,7 @@ private:
     int oldPosX;
     int oldPosY;
 public:
-    Balle(LevelInfos I);
+    Balle(Position posB, int radius);
     void setVelocity(int x, int y);
     int getrayon() { return rayon; }
     void update();
