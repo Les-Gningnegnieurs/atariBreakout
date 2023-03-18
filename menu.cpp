@@ -1,16 +1,18 @@
 #include "menu.h"
 
 
-/* ----------- PARAMÈTRE DE LA CONFIG --------------
+/* ------------------- PARAMÈTRE DE LA CONFIG -------------------
  *
- * POUR AJOUTER OU RETIRER UN PARAMÈTRE DE LA CONFIG,
- * IL FAUT MODIFIER LES TROIS FONCTIONS SUIVANTES ET
- * AJOUTER L'ATTRIBUT CORRESPONDANT DANS LE .H.
- * DE PLUS IL FAUT DÉFINIR LES GETTERS/SETTERS.
+ * POUR AJOUTER OU RETIRER UN PARAMÈTRE DE LA CONFIG, IL FAUT
+ * MODIFIER LES TROIS FONCTIONS SUIVANTES ET AJOUTER L'ATTRIBUT
+ * CORRESPONDANT DANS LE .H. DE PLUS, IL FAUT MODIFIER LA CONSTANTE
+ * NUMBER_OF_PARAMETERS DANS LE FICHIER MENU.H VOIR ALEX SI DES
+ * PROBLÈMES S'IMPOSENT.
  */
 
 Menu::Menu()
 {
+    _keyboard = new Keyboard();
     parameters = new Config[NUMBER_OF_PARAMETERS];
 
     parameters[0].name = "SCREEN_WIDTH";
@@ -32,7 +34,6 @@ void Menu::Update_data()
     modeAccelerometer = parameters[2].value;
     modeJoystick = parameters[3].value;
     level = parameters[4].value;
-
 }
 
 void Menu::Update_config()
@@ -44,7 +45,13 @@ void Menu::Update_config()
     parameters[4].value = level;
 }
 
-Menu::~Menu() { delete[] parameters; }
+/* ---------------------- SAVE/LOAD CONFIG ----------------------
+ *
+ * LES DEUX FONCTIONS SUIVANTES PERMETTENT DE CHARGER ET
+ * D'ENRERISTRER LES PARAMÈTRES DU JEU. LE CHEMIN VERS LE FICHIER
+ * CONTENANT CES PARAMÈTRES EST SPÉCIFIER PAR LA CONSTANTE
+ * CONFIG_PATH DANS LE FICHIER MENU.H.
+ */
 
 bool Menu::LoadConfig()
 {
@@ -97,10 +104,15 @@ bool Menu::SaveConfig()
     }
 
     file.close();
-
+    
     return true;
 }
 
+
+/* ---------------------- INTERFACE DU MENU ----------------------
+ *
+ * 
+ */
 void Menu::print(std::ostream& os)
 {
     system("CLS");
@@ -141,7 +153,9 @@ void Menu::Main_Menu(std::ostream& os)
         break;
     }
 
+
     Input in = Navigate();
+    std::this_thread::sleep_for(std::chrono::milliseconds(150));
 
     switch (in)
     {
@@ -207,6 +221,7 @@ bool Menu::Choose_Level_Menu(std::ostream& os)
     }
 
     Input in = Navigate();
+    std::this_thread::sleep_for(std::chrono::milliseconds(150));
 
     switch (in)
     {
@@ -284,6 +299,7 @@ bool Menu::Settings_Menu(std::ostream& os)
     }
 
     Input in = Navigate();
+    std::this_thread::sleep_for(std::chrono::milliseconds(150));
 
     switch (in)
     {
@@ -320,13 +336,16 @@ bool Menu::Settings_Menu(std::ostream& os)
 
 Input Menu::Navigate()
 {
-    choice = getch();
-    if (choice == 72) return _UP;
-    if (choice == 80) return _DOWN;
-    if (choice == 13) return _ENTER;
-    if (choice == 27) return _ESC;
-    if (choice == 75) return _LEFT;
-    if (choice == 77) return _RIGHT;
+    while (1) // APPUYEZ SUR UNE TOUCHE VALIDE POUR SORTIR DE LA BOUCLE
+    { 
+        _keyboard->receiveInputs();
+        if (_keyboard->getJoystick().y == -1) return _UP;
+        if (_keyboard->getJoystick().y == 1) return _DOWN;
+        if (_keyboard->getJoystick().x == -1) return _LEFT;
+        if (_keyboard->getJoystick().x == 1) return _RIGHT;
+        if (_keyboard->getButton(1) == 1) return _ENTER;
+        if (_keyboard->getButton(2) == 1) return _ESC;
+    }
 }
 
 void Menu::Intro(std::ostream& os)
@@ -351,60 +370,3 @@ void Menu::Intro(std::ostream& os)
 
 }
 
-void Menu::Set_screenWidth(int value)
-{
-    screenWidth = value;
-}
-
-
-void Menu::Set_screenHeight(int value)
-{
-    screenHeight = value;
-}
-
-void Menu::Set_modeAccelerometer()
-{
-    modeAccelerometer = true;
-    modeJoystick = false;
-}
-
-void Menu::Set_modeJoystick()
-{
-    modeJoystick = true;
-    modeAccelerometer = false;
-}
-
-void Menu::Change_mode()
-{
-    if (modeJoystick) Set_modeAccelerometer();
-    else Set_modeJoystick();
-}
-
-void Menu::Set_Level(int value)
-{
-    level=value;
-}
-
-int Menu::Get_screenWidth()
-{
-    return screenWidth;
-}
-
-int Menu::Get_screenHeight()
-{
-    return screenHeight;
-}
-int Menu::Get_Level()
-{
-    return level;
-}
-
-bool Menu::Is_modeAccelerometer()
-{
-    return modeAccelerometer;
-}
-
-bool Menu::Is_modeJoystick()
-{
-    return modeJoystick;
-}
