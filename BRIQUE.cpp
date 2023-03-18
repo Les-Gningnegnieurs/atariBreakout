@@ -173,7 +173,7 @@ void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
                 j++;
                 for (j; j < _posBrique.x + _sizeX-1; j++) {
                     if (_etat == Alive)
-                        UI[i][j] = '-';
+                        UI[i][j] = 'X';
                     else if (_etat == Hurt)
                         UI[i][j] = 'x';
                     else if (_etat == Indestructible) {

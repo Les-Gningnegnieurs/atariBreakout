@@ -5,7 +5,7 @@ Balle::Balle(Position posB, int radius)
     pos.y = posB.y;
     oldPosX = pos.x;
     oldPosY = pos.y;
-    speed.y =-1;
+    speed.y = -1;
     speed.x = -1;
     rayon = radius;
 }
