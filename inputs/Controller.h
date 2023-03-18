@@ -14,6 +14,7 @@ protected:
     LedRGB _leds[2];
     bool _buttons[4];
     Accelerometre _accelerometre;
+    bool reversemode;
 
 public:
     virtual void receiveInputs();
@@ -26,5 +27,6 @@ public:
     void setLED(int id, int R, int G, int B);
     bool getButton(int id);
     Accelerometre getAccelerometre();
+    void setReverse(bool mode) { reversemode = mode; }
 };
 #endif 

@@ -6,12 +6,18 @@ void Keyboard::receiveInputs(){
     //Joystick X
     if(GetAsyncKeyState(VK_LEFT) & 0x8000 )
     {
+        if (reversemode)
+            _joystick.x = 1;
         //left arrow or A key held down 
+        else
         _joystick.x = -1;
     }
     else if(GetAsyncKeyState(VK_RIGHT) & 0x8000 )
     {
+        if (reversemode)
+            _joystick.x = -1;
         //left arrow or A key held down 
+        else
         _joystick.x = 1;
     }
     else{

@@ -10,6 +10,7 @@
 #include <vector>
 #include "Extendplatform.h"
 #include "Addballs.h"
+#include "Swapcontrol.h"
 
 
 #include <iostream>
@@ -21,7 +22,7 @@ public:
 	//on entre simplement les coordonnées. la hauteur et la largeur sont déja définies
 	Brique(int x = 0, int y = 0, int l = 6, int h = 2, state s = Alive);
 
-	bool increase_Damage(std::vector<Powerups*>& p);
+	bool increase_Damage(std::vector<Powerups*>& p,int &score);
 
 	virtual ~Brique();
 

@@ -38,7 +38,14 @@ void Controller::receiveInputs(){
     Joystick j;
     j.x = inputs["joystick"]["x"];
     j.y = inputs["joystick"]["y"];
-    _joystick = j;
+    if (reversemode)
+    {
+        _joystick.x = -1 * j.x;
+        _joystick.y = j.y;
+    }
+    else
+        _joystick = j;
+
 
     Accelerometre a;
     a.deltaVitesse = inputs["accel"]["deltaS"];
