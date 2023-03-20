@@ -43,6 +43,24 @@ bool Keyboard::receiveInputs(){
         _buttons[0] = 0;
     }
 
+    if(GetAsyncKeyState(VK_RETURN) & 0x8000 )
+    {
+        //left arrow or A key held down 
+        _buttons[1] = 1;
+    }
+    else{
+        _buttons[1] = 0;
+    }
+
+    if(GetAsyncKeyState(VK_ESCAPE) & 0x8000 )
+    {
+        //left arrow or A key held down 
+        _buttons[2] = 1;
+    }
+    else{
+        _buttons[2] = 0;
+    }
+
     return true;
 };
 

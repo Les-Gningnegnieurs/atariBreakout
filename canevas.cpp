@@ -38,7 +38,6 @@ void Canevas::erase()
 // Affiche le tableau à l'écran
 void Canevas::draw(std::ostream&s)
 {
-	erase();
 	_game.draw(s);
 }
 

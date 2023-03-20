@@ -1,3 +1,9 @@
+
+
+
+#ifndef GAMELOGIC_H
+#define GAMELOGIC_H
+
 #include "Balle.h"
 #include "Level.h"
 #include "BRIQUE.H"
@@ -6,13 +12,13 @@
 #include <vector>
 #include "Keyboard.h"
 #include <iostream>
+#include "Powerups.h"
+#include <Windows.h>
 
-
-#ifndef GAMELOGIC_H
-#define GAMELOGIC_H
 class GameLogic {
 private:
     std::vector<Balle*> _balls;
+    std::vector<Powerups*> _powers;
     Level _level;
     LevelInfos _info;
     Plateforme _platform;
@@ -21,8 +27,10 @@ private:
     int _livesLeft;
     int maxSizeX;
     int maxSizeY;
+    
+ 
 
-    void checkCollisions();
+    void checkCollisions(Controller& control);
 public:
     GameLogic();
     GameLogic(LevelInfos _info);
@@ -31,6 +39,7 @@ public:
     void draw(std::ostream &s);
     bool isGameOver();
     int getScoreInfo();
+    Plateforme& getPlaform();
 
     friend std::istream& operator>>(std::istream& s, GameLogic &gl);
 };

@@ -14,6 +14,7 @@ protected:
     Bargraph _bargraph;
     LedRGB _leds[2];
     OuputChanged _outputChanged;
+    bool _reversemode;
 
 public:
     virtual bool receiveInputs();
@@ -26,5 +27,6 @@ public:
     void setLED(int id, int R, int G, int B);
     bool getButton(int id);
     Accelerometre getAccelerometre();
+    void setReverse(bool mode) { _reversemode = mode; }
 };
 #endif 

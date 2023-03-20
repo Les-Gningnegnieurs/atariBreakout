@@ -1,6 +1,11 @@
 #include "Controller.h"
 
 Joystick Controller::getJoystick(){
+    if (_reversemode)
+    {
+        _joystick.x = -1 * _joystick.x;
+    }
+
     return _joystick;
 }
 
@@ -31,9 +36,7 @@ Accelerometre Controller::getAccelerometre(){
 }
 
 
-Controller::Controller(){
-
-}
+Controller::Controller(){}
 
 Controller::~Controller(){}
 

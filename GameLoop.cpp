@@ -5,10 +5,20 @@
 GameLoop::GameLoop() {
     _canevas = new Canevas();
     _keyboard = new Keyboard();
+    //_manette = new Manette();
     loadFile();
 }
 void GameLoop:: Start(){
-    _gameState=Running;
+    _menu.Intro(std::cout);
+    while (!_menu.Is_over())
+    {
+        _menu.print(std::cout);
+    }
+    _canevas->erase();
+    if (_menu.Is_playing())
+        _gameState = Running;
+    else
+        Stop();
 }
 void GameLoop:: Pause()
 {
@@ -41,19 +51,32 @@ void GameLoop:: GameOver(){
 
 void GameLoop:: update() {
     _keyboard->receiveInputs();
+    //_manette->receiveInputs();
     if (_gameState == Starting)
         Start();
     if (_gameState==Running) {
+        //remplacer par _canevas->update(_menu.getModeManette() ? *_manette : *_keyboard);
         _canevas->update(*_keyboard);
+        if (_keyboard->getButton(2))
+        {
+            bool start_end = false;
+            while (!start_end)
+            {
+                Sleep(100);
+                _keyboard->receiveInputs();
+                start_end = _keyboard->getButton(2);
+            }
+            Sleep(100);
+        }
     }
     GameOver();
     _keyboard->sendOutputs();
+    //_manette->sendOutputs();
 
 }
 
 void GameLoop:: loadFile(){
-    //int value= _menu.Get_Level();
-    int value = 2;
+    int value= _menu.Get_Level();
     std::stringstream str;
     std::string levelPath;
     str << "level/" << value << ".txt";

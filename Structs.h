@@ -7,6 +7,8 @@
 
 #define RESMAX_X 80
 #define RESMAX_Y 25
+#define SLEEP 16
+#define PTIMELIMIT 10000
 
 struct Position {
     int x;
@@ -31,11 +33,8 @@ struct LevelInfos{
     float ball_radius;
 };
 
-/// @brief coordonnées du coin gauche
-struct Hitbox {
-    int x;
-    int y;
-};
+
+
 /// @brief Destroyed(0) = delete la brique, Hurt = touché, Alive = pas touché, Indestructible
 enum state{
     Destroyed,
@@ -57,6 +56,13 @@ enum Collision {
     UP,
     CN,
     NO,
+};
+
+enum Status {
+    Falling,
+    Active,
+    Done,
+    OutOfBounds
 };
 
 #endif

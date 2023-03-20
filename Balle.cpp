@@ -1,13 +1,13 @@
 #include "Balle.h"
-Balle::Balle(LevelInfos I)
+Balle::Balle(Position posB, int radius, int speedX , int speedY)
 {
-    pos.x = I.pos_Ball_iniX;
-    pos.y = I.pos_Ball_iniY;
+    pos.x = posB.x;
+    pos.y = posB.y;
     oldPosX = pos.x;
     oldPosY = pos.y;
-    speed.y =-1;
-    speed.x = -1;
-    rayon = I.ball_radius;
+    speed.y = speedY;
+    speed.x = speedX;
+    rayon = radius;
 }
 void Balle::update()
 {
@@ -46,3 +46,7 @@ void Balle::changeVelocity(bool x, bool y){
         speed.y *= -1;
 }
 
+void Balle::setVelocity(int x, int y) {
+    speed.x = x;
+    speed.y = y;
+}
