@@ -17,8 +17,8 @@ protected:
     bool _reversemode;
 
 public:
-    virtual bool receiveInputs();
-    virtual bool sendOutputs();
+    virtual bool receiveInputs() = 0;
+    virtual bool sendOutputs() = 0;
 
     Controller();
     ~Controller();

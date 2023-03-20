@@ -10,6 +10,7 @@
 #include <iostream>
 #include <sstream>
 #include "inputs/Keyboard.h"
+#include "inputs/PhysicalController.h"
 
 using  namespace std::chrono;
 
@@ -20,19 +21,16 @@ private:
     Menu _menu;
     gameState _gameState;
 public:
-    Controller* _keyboard;
-    Controller* _manette;
+    Controller* _controller;
 
     GameLoop();
     void Start();
     void Stop();
     void Pause();
-    void openMenu();
     void update();
     void GameOver();
     void Restart();
     void draw();
-    void Exit();
     void loadFile();
 
 

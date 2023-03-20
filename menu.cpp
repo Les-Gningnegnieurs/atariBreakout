@@ -9,10 +9,25 @@
  * NUMBER_OF_PARAMETERS DANS LE FICHIER MENU.H VOIR ALEX SI DES
  * PROBLÈMES S'IMPOSENT.
  */
-
 Menu::Menu()
 {
-    _keyboard = new Keyboard();
+    parameters = new Config[NUMBER_OF_PARAMETERS];
+
+    parameters[0].name = "SCREEN_WIDTH";
+    parameters[1].name = "SCREEN_HEIGHT";
+    parameters[2].name = "MODE_ACCELEROMETER";
+    parameters[3].name = "MODE_JOYSTICK";
+    parameters[4].name = "SELECT_LEVEL";
+
+    LoadConfig();
+
+    over = 0;
+    index = 1;
+}
+
+Menu::Menu(Controller* c)
+{
+    _keyboard = c;
     parameters = new Config[NUMBER_OF_PARAMETERS];
 
     parameters[0].name = "SCREEN_WIDTH";
@@ -129,24 +144,35 @@ void Menu::Main_Menu(std::ostream& os)
         os << "\x1B[32mPlay game\033[0m\n";
         os << "Change Level\n";
         os << "Settings\n";
+        os << "Change controller mode\n";
         os << "Exit\n";
         break;
     case 2:
         os << "Play game\n";
         os << "\x1B[32mChange Level\033[0m\n";
         os << "Settings\n";
+        os << "Change controller mode\n";
         os << "Exit\n";
         break;
     case 3:
         os << "Play game\n";
         os << "Change Level\n";
         os << "\x1B[32mSettings\033[0m\n";
+        os << "Change controller mode\n";
         os << "Exit\n";
         break;
     case 4:
         os << "Play game\n";
         os << "Change Level\n";
         os << "Settings\n";
+        os << "\x1B[32mChange controller mode\033[0m\n";
+        os << "Exit\n";
+    break;
+    case 5:
+        os << "Play game\n";
+        os << "Change Level\n";
+        os << "Settings\n";
+        os << "Change controller mode\n";
         os << "\x1B[32mExit\033[0m\n";
         break;
     default:
@@ -183,6 +209,14 @@ void Menu::Main_Menu(std::ostream& os)
         case SETTINGS:
             index = 1;
             while (Settings_Menu(std::cout));
+            index = 1;
+            break;
+        case CHOOSE_CONTROLLER:
+            index = 1;
+            index_x = comPort;
+            temp = false;
+            while (Choose_Controller_Menu(std::cout));
+            temp = false;
             index = 1;
             break;
         case EXIT_MENU:
@@ -249,6 +283,102 @@ bool Menu::Choose_Level_Menu(std::ostream& os)
             SaveConfig();
             break;
         case EXIT_LEVEL:
+            return false;
+            break;
+        }
+        break;
+    }
+
+    return true;
+}
+
+bool Menu::Choose_Controller_Menu(std::ostream& os)
+{
+    system("CLS");
+    os << std::endl << std::endl << std::endl;
+    std::string m = temp ? "< Controller" : "Keyboard >"; 
+
+    switch (index)
+    {
+    case 1:
+        os << "\x1B[32mCOM :\033[0m\t";
+        os << "\x1B[32m" << index_x << "\033[0m\n";
+        os << "Set COM\n";
+        os << "INPUT :\t";
+        os << m << "\n";
+        os << "Set Input\n";
+        os << "Exit\n";
+        break;
+    case 2:
+        os << "COM\t";
+        os << index_x << "\n";
+        os << "\x1B[32mSet COM\033[0m\n";
+        os << "INPUT :\t";
+        os << m << "\n";
+        os << "Set Input\n";
+        os << "Exit\n";
+        break;
+    case 3:
+        os << "COM\t";
+        os << index_x << "\n";
+        os << "Set COM\n";
+        os << "\x1B[32mINPUT :\033[0m\t";
+        os << "\x1B[32m" << m << "\033[0m\n";
+        os << "Set Input\n";
+        os << "Exit\n";
+        break;
+    case 4:
+        os << "COM\t";
+        os << index_x << "\n";
+        os << "Set COM\n";
+        os << "INPUT :\t";
+        os << m << "\n";
+        os << "\x1B[32mSet Input\033[0m\n";
+        os << "Exit\n";
+        break;
+    case 5:
+        os << "COM\t";
+        os << index_x << "\n";
+        os << "Set COM\n";
+        os << "INPUT :\t";
+        os << m << "\n";
+        os << "Set Input\n";
+        os << "\x1B[32mExit\033[0m\n";
+        break;
+    }
+
+    Input in = Navigate();
+    std::this_thread::sleep_for(std::chrono::milliseconds(150));
+
+    switch (in)
+    {
+    case _UP:
+        if (index > 1) index--;
+        break;
+    case _DOWN:
+        if (index < NBR_CHOICE_CONTROLLER) index++;
+        break;
+    case _LEFT:
+        if (index == 1 && index_x > 0) index_x--;
+        if (index == 3) temp = !temp;
+        break;
+    case _RIGHT:
+        if (index == 1 && index_x < NBR_COM) index_x++;
+        if (index == 3) temp = !temp;
+        break;
+    case _ESC:
+        break;
+    case _ENTER:
+        switch (index)
+        {
+        case 2:
+            Set_comPort(index_x);
+            break;
+        case 4:
+            Set_controllerMode(temp);
+            Change_Controller();
+            break;
+        case 5:
             return false;
             break;
         }
@@ -368,5 +498,14 @@ void Menu::Intro(std::ostream& os)
     Sleep(1000);
     system("CLS");
 
+}
+
+void Menu::Change_Controller() {
+    if (Get_controllerMode()) {
+        std::string c = std::to_string(Get_comPort());
+        _keyboard = new PhysicalController(c);
+    }
+    else
+        _keyboard = new Keyboard();
 }
 

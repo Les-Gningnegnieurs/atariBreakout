@@ -6,6 +6,7 @@
 #include "Plateforme.h"
 #include "Controller.h"
 #include <chrono>
+#include <vector>
 
 class GameLogic;
 

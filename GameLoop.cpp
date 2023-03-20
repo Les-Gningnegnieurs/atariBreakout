@@ -4,16 +4,20 @@
 
 GameLoop::GameLoop() {
     _canevas = new Canevas();
-    _keyboard = new Keyboard();
-    //_manette = new Manette();
+    _controller = new Keyboard();
+    _menu.Set_Controller(_controller);
     loadFile();
 }
+
 void GameLoop:: Start(){
     _menu.Intro(std::cout);
     while (!_menu.Is_over())
     {
         _menu.print(std::cout);
     }
+
+    _controller = _menu.Get_Controller();
+
     _canevas->erase();
     if (_menu.Is_playing())
         _gameState = Running;
@@ -50,29 +54,25 @@ void GameLoop:: GameOver(){
 }
 
 void GameLoop:: update() {
-    _keyboard->receiveInputs();
-    //_manette->receiveInputs();
+    _controller->receiveInputs();
     if (_gameState == Starting)
         Start();
     if (_gameState==Running) {
-        //remplacer par _canevas->update(_menu.getModeManette() ? *_manette : *_keyboard);
-        _canevas->update(*_keyboard);
-        if (_keyboard->getButton(2))
+        _canevas->update(*_controller);
+        if (_controller->getButton(2))
         {
             bool start_end = false;
             while (!start_end)
             {
                 Sleep(100);
-                _keyboard->receiveInputs();
-                start_end = _keyboard->getButton(2);
+                _controller->receiveInputs();
+                start_end = _controller->getButton(2);
             }
             Sleep(100);
         }
     }
     GameOver();
-    _keyboard->sendOutputs();
-    //_manette->sendOutputs();
-
+    _controller->sendOutputs();
 }
 
 void GameLoop:: loadFile(){
@@ -88,6 +88,6 @@ void GameLoop:: loadFile(){
 
 void GameLoop::draw()
 {
-        _canevas->draw(std::cout);
+   _canevas->draw(std::cout);
 }
 

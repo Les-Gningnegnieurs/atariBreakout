@@ -26,7 +26,6 @@ bool PhysicalController::sendOutputs(){
         _outputChanged.bargraph = false;
     }
 
-    //{"l" : [l1,l2]} (0/1)
     //{"l" : [[0/1, R, G, B], [0/1, R, G, B]]}
     if(_outputChanged.leds){
         j_msg_send["l"] = {{_leds[0].status, _leds[0].R, _leds[0].G, _leds[0].B}, {_leds[1].status, _leds[1].R, _leds[1].G, _leds[1].B}};
@@ -57,40 +56,34 @@ bool PhysicalController::receiveInputs(){
         return false;
     }
 
-    //Verification du message (null ou pas)
-    if (j_msg_rcv==json::value_t::null)
-    {
-        return false;
+    //parse the updated inputs
+
+    //a vérifier
+    //{"j": [x,y]} //map 0..100
+    if(j_msg_rcv["j"] != json::value_t::null){
+        //update joystick values
+        _joystick.x = j_msg_rcv["j"][0] != 0 ? j_msg_rcv["j"][0] > 0 ? 1 : -1 : 0;
+        _joystick.y = j_msg_rcv["j"][1] != 0 ? j_msg_rcv["j"][1] > 0 ? 1 : -1 : 0;
     }
-    else{
-        //parse the updated inputs
 
-        //a vérifier
-        //{"j": [x,y]} //map 0..100
-        if(j_msg_rcv["j"] != json::value_t::null){
-            //update joystick values
-            _joystick.x = j_msg_rcv["j"][0];
-            _joystick.y = j_msg_rcv["j"][1];
-        }
-
-        //{"b": [b1,b2,b3,b4]} (0/1)
-        if(j_msg_rcv["b"] != json::value_t::null){
-            _buttons[0] = j_msg_rcv["b"][0];
-            _buttons[1] = j_msg_rcv["b"][1];
-            _buttons[2] = j_msg_rcv["b"][2];
-            _buttons[3] = j_msg_rcv["b"][3];
-        }
-
-        //{"a" : [x,y,z]} 
-        if(j_msg_rcv["a"] != json::value_t::null){
-            //update accelerometer values
-            _accelerometre.x = j_msg_rcv["a"][0];
-            _accelerometre.y = j_msg_rcv["a"][1];
-            _accelerometre.z = j_msg_rcv["a"][2];
-        }
-
-        return true;
+    //{"b": [b1,b2,b3,b4]} (0/1)
+    if(j_msg_rcv["b"] != json::value_t::null){
+        _buttons[0] = j_msg_rcv["b"][0];
+        _buttons[1] = j_msg_rcv["b"][1];
+        _buttons[2] = j_msg_rcv["b"][2];
+        _buttons[3] = j_msg_rcv["b"][3];
     }
+
+    //{"a" : [x,y,z]} 
+    if(j_msg_rcv["a"] != json::value_t::null){
+        //update accelerometer values
+        _accelerometre.x = j_msg_rcv["a"][0];
+        _accelerometre.y = j_msg_rcv["a"][1];
+        _accelerometre.z = j_msg_rcv["a"][2];
+    }
+
+    return true;
+    
 }
 
 /*---------------------------Definition de fonctions ------------------------*/
