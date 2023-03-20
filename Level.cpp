@@ -51,29 +51,26 @@ void Level::checkColl_DOWN_RIGHT(Balle* b, int& score, std::vector <Powerups*>& 
                 Collision check = _board[i][j]->checkCollision(b);
                 switch (check) {
                 case LT:
-                    score++;
                     b->changeVelocity(1, 0);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case RT:
-                    score++;
                     b->changeVelocity(1, 0);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case DN:
-                    score++;
                     b->changeVelocity(0, 1);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case UP:
                     score++;
                     b->changeVelocity(0, 1);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case CN:
                     score++;
                     b->changeVelocity(1, 1);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case NO:
                     break;
@@ -92,29 +89,24 @@ void Level::checkColl_DOWN_LEFT(Balle* b, int& score, std::vector <Powerups*>& p
                 Collision check = _board[i][j]->checkCollision(b);
                 switch (check) {
                 case LT:
-                    score++;
                     b->changeVelocity(1, 0);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case RT:
-                    score++;
                     b->changeVelocity(1, 0);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case DN:
-                    score++;
                     b->changeVelocity(0, 1);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case UP:
-                    score++;
                     b->changeVelocity(0, 1);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case CN:
-                    score++;
                     b->changeVelocity(1, 1);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case NO:
                     break;
@@ -133,29 +125,24 @@ void Level::checkColl_UP_RIGHT(Balle* b, int& score, std::vector <Powerups*>& p)
                 Collision check = _board[i][j]->checkCollision(b);
                 switch (check) {
                 case LT:
-                    score++;
                     b->changeVelocity(1, 0);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case RT:
-                    score++;
                     b->changeVelocity(1, 0);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case DN:
-                    score++;
                     b->changeVelocity(0, 1);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case UP:
-                    score++;
                     b->changeVelocity(0, 1);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case CN:
-                    score++;
                     b->changeVelocity(1, 1);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case NO:
                     break;
@@ -174,29 +161,24 @@ void Level::checkColl_UP_LEFT(Balle* b, int& score, std::vector <Powerups*>& p){
                 Collision check = _board[i][j]->checkCollision(b);
                 switch (check) {
                 case LT:
-                    score++;
                     b->changeVelocity(1, 0);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case RT:
-                    score++;
                     b->changeVelocity(1, 0);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case DN:
-                    score++;
                     b->changeVelocity(0, 1);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case UP:
-                    score++;
                     b->changeVelocity(0, 1);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case CN:
-                    score++;
                     b->changeVelocity(1, 1);
-                    _board[i][j]->increase_Damage(p);
+                    _board[i][j]->increase_Damage(p,score);
                     break;
                 case NO:
                     break;

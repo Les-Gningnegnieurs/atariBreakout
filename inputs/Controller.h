@@ -3,21 +3,22 @@
 
 #include "../components/components.h"
 #include <iostream>
-#include "../lib/nlohmann/json.hpp"
-using json = nlohmann::json;
+
 
 
 class Controller{
 protected:
     Joystick _joystick;
-    Bargraph _bargraph;
-    LedRGB _leds[2];
     bool _buttons[4];
     Accelerometre _accelerometre;
+    Bargraph _bargraph;
+    LedRGB _leds[2];
+    OuputChanged _outputChanged;
+    bool _reversemode;
 
 public:
-    virtual void receiveInputs();
-    virtual void sendOutputs();
+    virtual bool receiveInputs() = 0;
+    virtual bool sendOutputs() = 0;
 
     Controller();
     ~Controller();
@@ -26,5 +27,6 @@ public:
     void setLED(int id, int R, int G, int B);
     bool getButton(int id);
     Accelerometre getAccelerometre();
+    void setReverse(bool mode) { _reversemode = mode; }
 };
 #endif 

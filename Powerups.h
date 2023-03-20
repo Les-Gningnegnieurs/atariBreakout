@@ -5,6 +5,8 @@
 #include "Balle.h"
 #include "Plateforme.h"
 #include "Controller.h"
+#include <chrono>
+#include <vector>
 
 class GameLogic;
 
@@ -17,11 +19,14 @@ protected:
 	Status state; 
 	int lenght;
 	int height;
-	int timer;
+	double timer;
 	int maxSizeY;
+	std::chrono::steady_clock clock;
+	std::chrono::time_point<std::chrono::steady_clock> last_time;
 	virtual void modifyBall(std::vector<Balle*> &ball, Plateforme _plat, bool reset = false);
 	virtual void modifyPlateform(Plateforme& platform, bool reset = false);
 	virtual void modifyControler(Controller& controller, bool reset = false);
+	bool isStackable;
 	
 	
 public:
@@ -38,6 +43,8 @@ public:
 	void setState(Status s) { state = s; };
 	Position getPos() { return pos; };
 	int getHeight() { return height; };
+	void resetTimer() { timer = 0; }
+	bool getStackable(){ return isStackable; }
 	
 
 	

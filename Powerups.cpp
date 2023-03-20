@@ -17,6 +17,7 @@ Powerups::Powerups(Position positionDestroyed,int _height , int _lenght  )
 	lenght = _lenght;
 	height = _height;
 	timer = 0;
+	isStackable = true;
 	
 }
 
@@ -35,7 +36,14 @@ void Powerups::update()
 		
 	}
 	if (state == Active)
-		timer += SLEEP;
+	{
+		auto current_time = clock.now();
+		auto elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(current_time - last_time);
+		last_time = clock.now();
+		timer += elapsed_time.count();
+	}
+
+
 }
 
 bool Powerups::checkCollisions(Plateforme _plateforme)
@@ -52,6 +60,7 @@ bool Powerups::checkCollisions(Plateforme _plateforme)
 			{
 
 				state = Active;
+				last_time = clock.now();
 				return true;
 
 			}

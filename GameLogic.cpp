@@ -47,7 +47,7 @@ void GameLogic:: update(Controller& c)
                 _powers[i]->resetPowerups(_balls, _platform, c);
             UI[_powers[i]->getPos().y][_powers[i]->getPos().x] = ' ';
             delete _powers[i];
-;             _powers.erase(_powers.begin() + i);
+;           _powers.erase(_powers.begin() + i);
             
         }
     }
@@ -84,8 +84,36 @@ void GameLogic::checkCollisions(Controller &control) {
             _powers[i]->setState(OutOfBounds); 
         
         if (_powers[i]->checkCollisions(_platform)) {
-            UI[_powers[i]->getPos().y][_powers[i]->getPos().x] = ' ';
-            _powers[i]->setPowerups(_balls, _platform, control);
+            bool typefound = false;
+            if (!_powers[i]->getStackable())
+            {
+               
+                for (int j = 0; j < _powers.size(); j++)
+                {
+                    if (typeid(_powers[i]) == typeid(_powers[j]) && j!=i)
+                    {
+                        _powers[j]->resetTimer();
+                        UI[_powers[i]->getPos().y][_powers[i]->getPos().x] = ' ';
+                        delete _powers[i];
+                        _powers.erase(_powers.begin() + i);
+                        typefound = true;
+
+                        break;
+                    }
+                        
+
+                }
+               
+                    
+            }
+            
+            if (!typefound)
+            {
+                _powers[i]->setPowerups(_balls, _platform, control);
+                UI[_powers[i]->getPos().y][_powers[i]->getPos().x] = ' ';
+            }
+                
+            
         }
     }
     for(int i=0; i< _balls.size();i++)
