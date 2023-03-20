@@ -65,8 +65,8 @@ void GameLoop:: update() {
 }
 
 void GameLoop:: loadFile(){
-    //int value= _menu.Get_Level();
-    int value = 3;
+    int value= _menu.Get_Level();
+    //int value = 3;
     std::stringstream str;
     std::string levelPath;
     str << "level/" << value << ".txt";
