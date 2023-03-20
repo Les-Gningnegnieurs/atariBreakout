@@ -191,5 +191,5 @@ void Brique::addPowerUp(std::vector<Powerups*>& p) {
     int y = rand() ;
     _etat = Destroyed;
     if (y % 100 <= 20)
-        p.push_back(new Addballs(_posBrique));
+        p.push_back(new Swapcontrol(_posBrique));
 }

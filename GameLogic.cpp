@@ -35,10 +35,43 @@ void GameLogic:: update(Controller& c)
     _platform.move(c.getJoystick().x);
     _platform.update(); //update la position
     _platform.draw(UI); //update le dessin dans le tableau
-
+    bool foundTimer = false;
+    int indexTimer = 0;
     for (int i = 0; i < _powers.size(); i++)
     {
+      
+        
         _powers[i]->update();
+        if (_powers[i]->getState() == Active && _powers[i]->getLedinfo().hasTimer && !foundTimer)
+        {
+            if (_powers[i]->getLedinfo().color == 'r')
+            {
+                c.setLED(0, 255, 0, 0);
+                c.setLED(1, 255, 0, 0);
+            }
+            else
+            {
+                c.setLED(0, 0, 255, 0);
+                c.setLED(1, 0, 255, 0);
+            }
+           
+            foundTimer = true;
+            indexTimer = i;
+        }
+        if (foundTimer)
+        {
+            int timer = _powers[i]->getTimer();
+            int nbLeds = (timer / 10000 )*10;
+            nbLeds = nbLeds % 10;
+            for (int i = 0; i < nbLeds; i++)
+            {
+                c.setBargraph(i, 1);
+            }
+        }
+        {
+            c.setBargraph(i, 1);
+        }
+        
         _powers[i]->draw(UI);
         if (_powers[i]->getState() == Done || _powers[i]->getState() == OutOfBounds)
         {

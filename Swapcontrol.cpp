@@ -3,6 +3,7 @@
 Swapcontrol::Swapcontrol(Position positionDestroyed, int height, int lenght) :Powerups(positionDestroyed, height, lenght)
 {
 	isStackable = false;
+	ledInfo.color = 'r';
 
 }
 

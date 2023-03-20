@@ -27,6 +27,7 @@ protected:
 	virtual void modifyPlateform(Plateforme& platform, bool reset = false);
 	virtual void modifyControler(Controller& controller, bool reset = false);
 	bool isStackable;
+	PowerupsLED ledInfo;
 	
 	
 public:
@@ -45,6 +46,8 @@ public:
 	int getHeight() { return height; };
 	void resetTimer() { timer = 0; }
 	bool getStackable(){ return isStackable; }
+	PowerupsLED getLedinfo() { return ledInfo;}
+	double getTimer() { return timer; }
 	
 
 	

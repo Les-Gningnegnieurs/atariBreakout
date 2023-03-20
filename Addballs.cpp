@@ -28,6 +28,7 @@ void Addballs::modifyBall(std::vector<Balle*> &ball, Plateforme _plat, bool rese
 
 Addballs::Addballs(Position positionDestroyed, int height, int lenght) :Powerups(positionDestroyed, height, lenght)
 {
+	ledInfo.hasTimer = false;
 
 }
 

@@ -18,6 +18,8 @@ Powerups::Powerups(Position positionDestroyed,int _height , int _lenght  )
 	height = _height;
 	timer = 0;
 	isStackable = true;
+	ledInfo.hasTimer = true;
+	ledInfo.color = 'g';
 	
 }
 
@@ -106,3 +108,4 @@ void Powerups::draw(char UI[RESMAX_Y][RESMAX_X])
 		UI[pos.y][pos.x] = 'P'; //update la nouvelle pos de la balle dans l'array 
 	}
 }
+

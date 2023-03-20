@@ -65,4 +65,10 @@ enum Status {
     OutOfBounds
 };
 
+struct PowerupsLED {
+    bool hasTimer;
+    char color;
+
+};
+
 #endif
