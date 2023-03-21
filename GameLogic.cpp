@@ -15,7 +15,7 @@ GameLogic:: GameLogic(LevelInfos i)
     Position posB;
     posB.x = i.pos_Ball_iniX;
     posB.y = i.pos_Ball_iniY;
-    _balls.push_back(new Balle(posB,i.ball_radius));
+    _balls.push_back(new Balle(posB,i.ball_radius, i.speed_B_x, i.speed_B_y));
     _level = Level(_info);
     for (int i = 0; i < maxSizeY; i++) {
         for (int j = 0; j < maxSizeX; j++) {
@@ -161,33 +161,36 @@ void GameLogic::checkCollisions(Controller &control) {
     for(int i=0; i< _balls.size();i++)
     {
         pos= _balls[i]->getPos();
-        if (pos.y >= maxSizeY) //check si mort
+        Velocity speed = _balls[i]->getSpeed();
+        int rayon = _balls[i]->getrayon();
+        _platform.checkCollision(_balls[i]);
+        if (pos.y + rayon > maxSizeY && speed.y > 0) //check si mort 
         {
             //_balls[i]->changeVelocity(0, 1); //faire bounce dans le bas
             delete _balls[i];
             _balls.erase(_balls.begin()+i);
         }
         else
-        {
-            _platform.checkCollision(_balls[i]);
-            
+        {      
             //Balle *b = _balls[i];
             _level.checkCollision(_balls[i], _score,_powers);
 
-            if (pos.y <= 0) //Hit  plafond
+            if (pos.y - rayon < 0 && speed.y < 0) //Hit  plafond
             {
                 _balls[i]->changeVelocity(0, 1);//inverser direction de la balle en Y
             }
 
             //check walls collision
-            if (pos.x <= 0 || pos.x + _balls[i]->getrayon() >= maxSizeX - 1)
+            if (pos.x - rayon < 0 && speed.x < 0)
+                _balls[i]->changeVelocity(1, 0); //inverse le vecteur X pour éloigner du mur
+            if(pos.x + rayon > maxSizeX - 1 && speed.x > 0)
                 _balls[i]->changeVelocity(1, 0); //inverse le vecteur X pour éloigner du mur
         }
     }
     if(_balls.empty())
     {
         _livesLeft--;
-        Sleep(200);
+        Sleep(350);
         Position posb; 
         posb.x = _info.pos_Ball_iniX;
         posb.y = _info.pos_Ball_iniY;

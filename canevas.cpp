@@ -23,6 +23,8 @@ std::istream& operator>>(std::istream& s, Canevas& can)
 	s >> can._info.pos_Ball_iniX;
 	s >> can._info.pos_Ball_iniY;
 	s >> can._info.ball_radius;
+	s >> can._info.speed_B_x;
+	s >> can._info.speed_B_y;
 	//on as set tt ce dont les constructeurs ont besoin et ensuite on px read le reste
 	can._game= GameLogic(can._info);
 	s >> can._game;

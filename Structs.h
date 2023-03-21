@@ -7,7 +7,7 @@
 
 #define RESMAX_X 80
 #define RESMAX_Y 25
-#define SLEEP 16
+#define SLEEP 100
 #define PTIMELIMIT 10000
 
 struct Position {
@@ -31,6 +31,8 @@ struct LevelInfos{
     int pos_Ball_iniX;
     int pos_Ball_iniY;
     float ball_radius;
+    int speed_B_x;
+    int speed_B_y;
 };
 
 

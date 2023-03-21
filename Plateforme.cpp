@@ -33,7 +33,7 @@ void Plateforme::update()
 
 void Plateforme::draw(char UI[RESMAX_Y][RESMAX_X])
 {
-    //clear la ligne de la plateforme (plus simple que clear tout le UI
+    //clear la ligne de la plateforme (plus simple que clear tout le UI 
     for (int i = 0; i < columns; i++)
     {
         UI[rows - 1][i] = ' ';
