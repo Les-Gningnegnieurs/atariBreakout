@@ -230,6 +230,7 @@ void Menu::Main_Menu(std::ostream& os)
 
 bool Menu::Choose_Level_Menu(std::ostream& os)
 {
+    
     system("CLS");
     os << std::endl << std::endl << std::endl;
     switch (index)
@@ -281,6 +282,8 @@ bool Menu::Choose_Level_Menu(std::ostream& os)
         case SAVE_LEVEL:
             level = index_x;
             SaveConfig();
+            os << "SAVED";
+            Sleep(300);
             break;
         case EXIT_LEVEL:
             return false;

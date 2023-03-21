@@ -11,8 +11,8 @@ GameLoop::GameLoop() {
     over = false;
 }
 
-void GameLoop:: Start(){
-    
+void GameLoop::Start() {
+
     while (!_menu.Is_over())
     {
         _menu.print(std::cout);
@@ -28,25 +28,25 @@ void GameLoop:: Start(){
 }
 
 
-void GameLoop:: Pause()
+void GameLoop::Pause()
 {
-    _gameState=Paused;
+    _gameState = Paused;
 }
 
 void GameLoop::Stop() {
-    _gameState=Stopped;
+    _gameState = Stopped;
 }
 
 void GameLoop::Restart()
 {
     delete _canevas;
-    _canevas= new Canevas;
+    _canevas = new Canevas;
     loadFile();
 
 }
 
-void GameLoop:: GameOver(){
-    if(_canevas->Is_GameOver())
+void GameLoop::GameOver() {
+    if (_canevas->Is_GameOver())
     {
         Stop();
         _canevas->erase();
@@ -56,48 +56,63 @@ void GameLoop:: GameOver(){
 
 
 }
-
-void GameLoop:: update() {
+#include <conio.h>
+void GameLoop::update() {
     if (_gameState == Starting)
         Start();
 
     _controller->receiveInputs();
-    
-    if (_gameState==Running) {
+
+    if (_gameState == Running) {
         _canevas->update(*_controller);
         if (_controller->getButton(2))
         {
-            bool start_end = false;
-            while (!start_end)
+            Sleep(150);
+
+
+            std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
+            std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
+            std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
+            std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
+            std::cout << std::endl << std::endl << "Paused\t" << "ESC : Resume\t" << "ENTER : QUIT";
+
+
+            _controller->receiveInputs();
+            while (!_controller->getButton(2) && !_controller->getButton(1))
             {
-                Sleep(100);
                 _controller->receiveInputs();
-                start_end = _controller->getButton(2);
+
             }
-            //Sleep(100);
-            //_canevas->update(*_controller);
-            //Menu _mmenu;
-            //draw();
-            //while (_menu.Resume_Menu(std::cout)) _canevas->update(*_controller);
+            if (_controller->getButton(1))
+            {
+                Stop();
+                _canevas->erase();
+                over = true;
+            }
+
+            Sleep(150);
+            system("CLS");
+
+
         }
     }
     GameOver();
     _controller->sendOutputs();
 }
 
-void GameLoop:: loadFile(){
-    int value= _menu.Get_Level();
+void GameLoop::loadFile() {
+    int value = _menu.Get_Level();
     std::stringstream str;
     std::string levelPath;
     str << "level/" << value << ".txt";
     levelPath = str.str();
     std::fstream myfile;
-    myfile.open(levelPath,std::ios::in);
-    myfile>>*_canevas;
+    myfile.open(levelPath, std::ios::in);
+    myfile >> *_canevas;
 }
 
 void GameLoop::draw()
 {
-   _canevas->draw(std::cout);
+    _canevas->draw(std::cout);
 }
 
