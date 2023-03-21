@@ -6,11 +6,15 @@
 using namespace std;
 
 int main(){
-    GameLoop game;
-    game.Start();
-    while(true){
-        game.update();
-        Sleep(SLEEP);
+
+    Intro(std::cout);
+    while (true)
+    {
+        GameLoop game;
+        while (!game.over) {
+            game.update();
+            Sleep(SLEEP);
+        }
     }
     return 0;
 }

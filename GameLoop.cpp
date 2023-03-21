@@ -6,11 +6,13 @@ GameLoop::GameLoop() {
     _canevas = new Canevas();
     _controller = new Keyboard();
     _menu.Set_Controller(_controller);
+    _gameState = Starting;
     loadFile();
+    over = false;
 }
 
 void GameLoop:: Start(){
-    _menu.Intro(std::cout);
+    
     while (!_menu.Is_over())
     {
         _menu.print(std::cout);
@@ -24,6 +26,8 @@ void GameLoop:: Start(){
     else
         Stop();
 }
+
+
 void GameLoop:: Pause()
 {
     _gameState=Paused;
@@ -46,7 +50,7 @@ void GameLoop:: GameOver(){
     {
         Stop();
         _canevas->erase();
-        //ouvrir le menu
+        over = true;
     }
     else draw();
 
@@ -54,9 +58,11 @@ void GameLoop:: GameOver(){
 }
 
 void GameLoop:: update() {
-    _controller->receiveInputs();
     if (_gameState == Starting)
         Start();
+
+    _controller->receiveInputs();
+    
     if (_gameState==Running) {
         _canevas->update(*_controller);
         if (_controller->getButton(2))
@@ -68,7 +74,11 @@ void GameLoop:: update() {
                 _controller->receiveInputs();
                 start_end = _controller->getButton(2);
             }
-            Sleep(100);
+            //Sleep(100);
+            //_canevas->update(*_controller);
+            //Menu _mmenu;
+            //draw();
+            //while (_menu.Resume_Menu(std::cout)) _canevas->update(*_controller);
         }
     }
     GameOver();
