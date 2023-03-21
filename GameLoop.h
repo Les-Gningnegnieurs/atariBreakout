@@ -20,9 +20,11 @@ private:
     Canevas *_canevas;
     Menu _menu;
     gameState _gameState;
+    
 public:
     Controller* _controller;
 
+    bool over;
     GameLoop();
     void Start();
     void Stop();
