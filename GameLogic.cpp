@@ -56,30 +56,24 @@ void GameLogic:: update(Controller& c)
             }
            
             foundTimer = true;
-            if (foundTimer)
+            
+            
+            int timer = _powers[i]->getTimer();
+            int nbLeds = ((timer * 10) / PTIMELIMIT);
+            nbLeds = nbLeds % 10;
+            for (int i = 0; i < nbLeds; i++)
             {
-                int timer = _powers[i]->getTimer();
-                int nbLeds = ((timer * 10) / PTIMELIMIT);
-                nbLeds = nbLeds % 10;
-                for (int i = 0; i < nbLeds; i++)
-                {
-                    c.setBargraph(i, 1);
-                }
-                for (int i = nbLeds; i < 10; i++)
-                {
-                    c.setBargraph(i, 0);
-                }
+                c.setBargraph(i, 1);
             }
+            for (int i = nbLeds; i < 10; i++)
+            {
+                c.setBargraph(i, 0);
+            }
+            
 
             
         }
 
-        if (!foundTimer)
-        {
-            c.setLED(0, 0, 0, 0);
-            c.setLED(1, 0, 0, 0);
-
-        }
         
         
         
@@ -106,8 +100,12 @@ void GameLogic:: update(Controller& c)
     //check les collisions une fois que les positions ont ete updatés
     checkCollisions(c);
     draw(std::cout);
-    //Update controller status (LED & bargrpah)
-    //TODO quand on vas avoir déterminé une utilité
+    if (!foundTimer)
+    {
+        c.setLED(0, 0, 0, 0);
+        c.setLED(1, 0, 0, 0);
+    }
+    
 }
 
 bool GameLogic::isGameOver()
