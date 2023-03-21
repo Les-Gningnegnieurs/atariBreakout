@@ -5,9 +5,9 @@
 #ifndef STRUCTS_H
 #define STRUCTS_H
 
-#define RESMAX_X 80
-#define RESMAX_Y 25
-#define SLEEP 16
+#define RESMAX_X 200 //80
+#define RESMAX_Y 50 //25
+#define SLEEP 50
 #define PTIMELIMIT 10000
 
 struct Position {
