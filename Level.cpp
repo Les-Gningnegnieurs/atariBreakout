@@ -24,27 +24,28 @@ void Level::draw(char UI[RESMAX_Y][RESMAX_X]) {
 }
 
 void Level::checkColl_DOWN_RIGHT(Balle* b, int& score, std::vector <Powerups*>& p){
-    /*
-        LE CODE EN COMMENTAIRE EST UNE IDÉE POUR OPTIMISER LES CHECKCOLLISIONS: ON CHECK JUSTE LES BRIQUES AUTOUR
-        DE LA BALLE AU LIEU DE CHECK L'ENSEMBLE DE L'ARRAY
-    int i_max = round(b->getPos().y / BrickHeigth) + 2;
-    int j_max = round(b->getPos().x / BrickLength) +2 ;
-    if (i_max > rows / BrickHeigth)
-        i_max = rows / BrickHeigth;
-    if (j_max > columns / BrickLength)
-        j_max = columns / BrickLength;
-    int i = i_max - 4;
-    if (i < 0)
-        i = 0;
-    for(i; i < i_max; i++)
-    {
-        int j = j_max - 4;
-        if (j < 0);
+    
+        //LE CODE EN COMMENTAIRE EST UNE IDÉE POUR OPTIMISER LES CHECKCOLLISIONS: ON CHECK JUSTE LES BRIQUES AUTOUR
+        //DE LA BALLE AU LIEU DE CHECK L'ENSEMBLE DE L'ARRAY
+  
+    //for (int i=0; i < rows/BrickHeigth; i++) //haut en bas
+    //{ 
+        //for (int j=0; j < columns/BrickLength; j++) //gauche a droite
+        int i_max = round(b->getPos().y / BrickHeigth) + 2;
+        int j_max = round(b->getPos().x / BrickLength) + 2;
+        if (i_max > rows / BrickHeigth)
+            i_max = rows / BrickHeigth;
+        if (j_max > columns / BrickLength)
+            j_max = columns / BrickLength;
+        int i = i_max - 4;
+        if (i < 0)
+            i = 0;
+        for (i; i < i_max; i++)
+        {
+            int j = j_max - 4;
+            if (j < 0);
             j = 0;
-        for(j;j<j_max;j++)*/
-    for (int i=0; i < rows/BrickHeigth; i++) //haut en bas
-    { 
-        for (int j=0; j < columns/BrickLength; j++) //gauche a droite
+            for (j; j < j_max; j++)
         {
             if (!_board[i][j]->est_Detruite())
             {

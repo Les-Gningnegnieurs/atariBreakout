@@ -194,8 +194,10 @@ void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
 }
 
 void Brique::addPowerUp(std::vector<Powerups*>& p) {
-    int y = rand() ;
+    std::uniform_real_distribution<double> distribution(0, 99);
+    std::default_random_engine generator(rd());
+    int y = distribution(generator);
     _etat = Destroyed;
-    if (y % 100 <= 20)
+    if (y  <= 20)
         p.push_back(new Swapcontrol(_posBrique));
 }
