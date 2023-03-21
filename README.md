@@ -11,6 +11,8 @@ La première rangée définie les paramèmtre dans l'ordre suivant:
 - Position initiale de la balle sur l'axe X
 - Position initiale de la balle sur l'axe Y
 - Rayon de la balle
+- speed de la balle en X
+- speed de la balle en Y
 
 Les lignes qui suivent représentent les briques contenues dans l'interface utilisateur (Tableau 2D de caractères).
 L'état de ces briques est donné par:
