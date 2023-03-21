@@ -54,39 +54,30 @@ void Plateforme::checkCollision(Balle *b)
     Position posBa = b->getPos();
     int rayon = b->getrayon();
     Velocity speed = b->getSpeed();
-    if (posBa.y == pos.y - rayon && speed.y > 0)
+    int middle_R = pos.x + (sizeX) / 2;
+    int middle_L = middle_R-1;
+    //if (posBa.y == pos.y - rayon && speed.y > 0)  //- facile de hit la plateforme
+    if (posBa.y >= pos.y - rayon && speed.y > 0) //+ facile de hit la plateforme(pogne le côté aussi)
     {
-        if (posBa.x >= pos.x && posBa.x < pos.x + (sizeX) / 2 - 1) //gauche
+        if (posBa.x >= pos.x - rayon  && posBa.x < middle_L) //gauche
         {
-            if (posBa.x == pos.x)    //coin gauche
+            if (posBa.x == pos.x-rayon && speed.x > 0)    //coin gauche
                 b->setVelocity(-1, -1);
-            else if (posBa.x >= pos.x + 1 && posBa.x < pos.x + (sizeX) / 2 - 1 && speed.x >= 0)  //renvoie du meme bord si allait vers la droite
-                b->setVelocity(-1, -1);
-            else
+            else if (posBa.x >= pos.x  && posBa.x < middle_L && speed.x >= 0)  //renvoie du meme bord si allait vers la droite (
+                b->setVelocity(-1, -1); //&& posBa.x < middle_L est une condition inutile
+            else if(posBa.x >= pos.x && posBa.x < middle_L && speed.x <= 0)
                 b->changeVelocity(0, 1);    //sinon change juste le y
         }
-        else if (posBa.x == pos.x + (sizeX) / 2 - 1 || posBa.x == pos.x + (sizeX) / 2)   //si dans un des milieux
+        else if (posBa.x == middle_L || posBa.x == middle_R)   //si dans un des milieux
             b->setVelocity(0, -1); //renvoyer straigth
-        else if(posBa.x > pos.x + (sizeX) / 2 && posBa.x <= pos.x + sizeX - 1) //droite
+        else if(posBa.x > middle_R && posBa.x <= pos.x + sizeX) //droite
         {
-            if (posBa.x == pos.x + sizeX - 1)   //coin droit
+            if (posBa.x == pos.x + sizeX && speed.x < 0)   //coin droit
                 b->setVelocity(1, -1);
-            else if (posBa.x > pos.x + (sizeX) / 2 &&posBa.x <= pos.x + sizeX - 1 - 1 && speed.x <= 0) //renvoie du meme bord si allait vers la gauche
+            else if (posBa.x > middle_R &&posBa.x <= pos.x + (sizeX-1) && speed.x <= 0) //renvoie du meme bord si allait vers la gauche
                 b->setVelocity(1, -1);
-            else
+            else if(posBa.x > middle_R && posBa.x <= pos.x + (sizeX - 1) && speed.x >= 0)
                 b->changeVelocity(0, 1);    //sinon change juste le y
-
-
-            //if (pos.x + sizeX / 2 >= b->getPos().x) //on est a gauche
-            //{
-            //    if (b->getSpeed().x >= 0) b->changeVelocity(1, 1);//il allait vers la droite
-            //    else b->changeVelocity(0, 1);
-            //}
-            //else //on est a droite
-            //{
-            //    if (b->getSpeed().x <= 0) b->changeVelocity(1, 1);//il allait vers la gauche
-            //    else b->changeVelocity(0, 1);
-            //}
         }
     }
 }
