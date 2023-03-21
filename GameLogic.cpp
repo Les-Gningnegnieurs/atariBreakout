@@ -36,7 +36,7 @@ void GameLogic:: update(Controller& c)
     _platform.update(); //update la position
     _platform.draw(UI); //update le dessin dans le tableau
     bool foundTimer = false;
-    int indexTimer = 0;
+   
     for (int i = 0; i < _powers.size(); i++)
     {
       
@@ -56,21 +56,32 @@ void GameLogic:: update(Controller& c)
             }
            
             foundTimer = true;
-            indexTimer = i;
-        }
-        if (foundTimer)
-        {
-            int timer = _powers[i]->getTimer();
-            int nbLeds = (timer / 10000 )*10;
-            nbLeds = nbLeds % 10;
-            for (int i = 0; i < nbLeds; i++)
+            if (foundTimer)
             {
-                c.setBargraph(i, 1);
+                int timer = _powers[i]->getTimer();
+                int nbLeds = ((timer * 10) / PTIMELIMIT);
+                nbLeds = nbLeds % 10;
+                for (int i = 0; i < nbLeds; i++)
+                {
+                    c.setBargraph(i, 1);
+                }
+                for (int i = nbLeds; i < 10; i++)
+                {
+                    c.setBargraph(i, 0);
+                }
             }
+
+            
         }
+
+        if (!foundTimer)
         {
-            c.setBargraph(i, 1);
+            c.setLED(0, 0, 0, 0);
+            c.setLED(1, 0, 0, 0);
+
         }
+        
+        
         
         _powers[i]->draw(UI);
         if (_powers[i]->getState() == Done || _powers[i]->getState() == OutOfBounds)
