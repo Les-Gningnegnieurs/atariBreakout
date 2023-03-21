@@ -12,6 +12,7 @@ int main(){
     {
         GameLoop game;
         while (!game.over) {
+
             game.update();
             Sleep(SLEEP);
         }

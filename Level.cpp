@@ -25,27 +25,27 @@ void Level::draw(char UI[RESMAX_Y][RESMAX_X]) {
 
 void Level::checkColl_DOWN_RIGHT(Balle* b, int& score, std::vector <Powerups*>& p){
     
-        //LE CODE EN COMMENTAIRE EST UNE IDÉE POUR OPTIMISER LES CHECKCOLLISIONS: ON CHECK JUSTE LES BRIQUES AUTOUR
-        //DE LA BALLE AU LIEU DE CHECK L'ENSEMBLE DE L'ARRAY
-  
-    //for (int i=0; i < rows/BrickHeigth; i++) //haut en bas
-    //{ 
-        //for (int j=0; j < columns/BrickLength; j++) //gauche a droite
-        int i_max = round(b->getPos().y / BrickHeigth) + 2;
-        int j_max = round(b->getPos().x / BrickLength) + 2;
-        if (i_max > rows / BrickHeigth)
-            i_max = rows / BrickHeigth;
-        if (j_max > columns / BrickLength)
-            j_max = columns / BrickLength;
-        int i = i_max - 4;
-        if (i < 0)
-            i = 0;
-        for (i; i < i_max; i++)
-        {
-            int j = j_max - 4;
-            if (j < 0);
+    //    LE CODE EN COMMENTAIRE EST UNE IDÉE POUR OPTIMISER LES CHECKCOLLISIONS: ON CHECK JUSTE LES BRIQUES AUTOUR
+    //  DE LA BALLE AU LIEU DE CHECK L'ENSEMBLE DE L'ARRAY
+    //for (int i = 0; i < rows / BrickHeigth; i++) //haut en bas
+    //{
+        //for (int j = 0; j < columns / BrickLength; j++) //gauche a droite
+    int i_max = round(b->getPos().y / BrickHeigth) + 2;
+    int j_max = round(b->getPos().x / BrickLength) + 2;
+    if (i_max > rows / BrickHeigth)
+        i_max = rows / BrickHeigth;
+    if (j_max > columns / BrickLength)
+        j_max = columns / BrickLength;
+    int i = i_max - 4;
+    if (i < 0)
+        i = 0;
+    for(i; i < i_max; i++)
+    {
+        int j = j_max - 4;
+        if (j < 0)
             j = 0;
-            for (j; j < j_max; j++)
+        for(j;j<j_max;j++)
+   
         {
             if (!_board[i][j]->est_Detruite())
             {
@@ -81,10 +81,26 @@ void Level::checkColl_DOWN_RIGHT(Balle* b, int& score, std::vector <Powerups*>& 
     }
 }
 void Level::checkColl_DOWN_LEFT(Balle* b, int& score, std::vector <Powerups*>& p){
-    for (int i = 0; i < rows / BrickHeigth; i++) //haut en bas
+    int i_max = round(b->getPos().y / BrickHeigth) + 2;
+    int j_max = round(b->getPos().x / BrickLength) -2;
+    if (i_max > rows / BrickHeigth)
+        i_max = rows / BrickHeigth;
+    if (j_max < 0)
+        j_max = 0;
+    int i = i_max - 4;
+    if (i < 0)
+        i = 0;
+    for (i; i < i_max; i++)
     {
-        for (int j = (columns / BrickLength) - 1; j >= 0; j--) //droite a gauche
+        int j = j_max + 4;
+        if (j > (columns / BrickLength)-1)
+        j = (columns / BrickLength) - 1;
+        for (j; j >= j_max; j--)
         {
+    //for (int i = 0; i < rows / BrickHeigth; i++) //haut en bas
+    //{
+        //for (int j = (columns / BrickLength) - 1; j >= 0; j--) //droite a gauche
+        //{
             if (!_board[i][j]->est_Detruite())
             {
                 Collision check = _board[i][j]->checkCollision(b);
@@ -117,10 +133,25 @@ void Level::checkColl_DOWN_LEFT(Balle* b, int& score, std::vector <Powerups*>& p
     }
 }
 void Level::checkColl_UP_RIGHT(Balle* b, int& score, std::vector <Powerups*>& p){
-    for (int i = (rows / BrickHeigth) - 1; i >= 0; i--) //bas vers le haut
+    int i_max = round(b->getPos().y / BrickHeigth) - 2;
+    int j_max = round(b->getPos().x / BrickLength) + 2;
+    if (i_max < 0)
+        i_max = 0;
+    if (j_max > columns / BrickLength)
+        j_max = columns / BrickLength;
+    int i = i_max + 4;
+    if (i >= (rows/BrickHeigth)-1)
+        i = (rows / BrickHeigth) - 1;
+    for (i; i >= i_max; i--)
     {
-        for (int j = 0; j < columns / BrickLength; j++) //gauche a droite
-        {
+        int j = j_max - 4;
+        if (j < 0)
+            j = 0;
+        for (j; j < j_max; j++)
+        { 
+    //for (int i = (rows / BrickHeigth) - 1; i >= 0; i--) //bas vers le haut
+    //{
+        //for (int j = 0; j < columns / BrickLength; j++) //gauche a droite
             if (!_board[i][j]->est_Detruite())
             {
                 Collision check = _board[i][j]->checkCollision(b);
@@ -153,10 +184,26 @@ void Level::checkColl_UP_RIGHT(Balle* b, int& score, std::vector <Powerups*>& p)
     }
 }
 void Level::checkColl_UP_LEFT(Balle* b, int& score, std::vector <Powerups*>& p){
-    for (int i = (rows / BrickHeigth) - 1; i >= 0; i--) //bas vers le haut
+    int i_max = round(b->getPos().y / BrickHeigth) - 2;
+    int j_max = round(b->getPos().x / BrickLength) - 2;
+    if (i_max < 0)
+        i_max = 0;
+    if (j_max < 0)
+        j_max = 0;
+    int i = i_max + 4;
+    if (i >= (rows / BrickHeigth) - 1)
+        i = (rows / BrickHeigth) - 1;
+    for(i; i>= i_max; i--)
     {
-        for (int j = (columns / BrickLength) - 1; j >= 0; j--) //droite vers la gauche
+        int j = j_max + 4;
+        if (j > (columns / BrickLength) - 1)
+            j = (columns / BrickLength) - 1;
+        for(j; j >= j_max; j--)
         {
+
+    //for (int i = (rows / BrickHeigth) - 1; i >= 0; i--) //bas vers le haut
+    //{
+        //for (int j = (columns / BrickLength) - 1; j >= 0; j--) //droite vers la gauche
             if (!_board[i][j]->est_Detruite())
             {
                 Collision check = _board[i][j]->checkCollision(b);
