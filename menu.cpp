@@ -70,7 +70,10 @@ void Menu::Update_config()
 
 bool Menu::LoadConfig()
 {
-   std::ifstream file(CONFIG_PATH);
+    std::cout << "LOADING";
+    Sleep(300);
+
+    std::ifstream file(CONFIG_PATH);
 
     if (!file.is_open())
     {
@@ -98,13 +101,16 @@ bool Menu::LoadConfig()
     file.close();
 
     return true;
-}		
+}
 
 
 bool Menu::SaveConfig()
 {
+    std::cout << "SAVING";
+    Sleep(300);
+
     Update_config();
-    
+
     std::ofstream file(CONFIG_PATH);
 
     if (!file.is_open())
@@ -119,14 +125,14 @@ bool Menu::SaveConfig()
     }
 
     file.close();
-    
+
     return true;
 }
 
 
 /* ---------------------- INTERFACE DU MENU ----------------------
  *
- * 
+ *
  */
 void Menu::print(std::ostream& os)
 {
@@ -167,7 +173,7 @@ void Menu::Main_Menu(std::ostream& os)
         os << "Settings\n";
         os << "\x1B[32mChange controller mode\033[0m\n";
         os << "Exit\n";
-    break;
+        break;
     case 5:
         os << "Play game\n";
         os << "Change Level\n";
@@ -230,7 +236,7 @@ void Menu::Main_Menu(std::ostream& os)
 
 bool Menu::Choose_Level_Menu(std::ostream& os)
 {
-    
+
     system("CLS");
     os << std::endl << std::endl << std::endl;
     switch (index)
@@ -282,8 +288,6 @@ bool Menu::Choose_Level_Menu(std::ostream& os)
         case SAVE_LEVEL:
             level = index_x;
             SaveConfig();
-            os << "SAVED";
-            Sleep(300);
             break;
         case EXIT_LEVEL:
             return false;
@@ -299,7 +303,7 @@ bool Menu::Choose_Controller_Menu(std::ostream& os)
 {
     system("CLS");
     os << std::endl << std::endl << std::endl;
-    std::string m = temp ? "< Controller" : "Keyboard >"; 
+    std::string m = temp ? "< Controller" : "Keyboard >";
 
     switch (index)
     {
@@ -462,7 +466,7 @@ bool Menu::Settings_Menu(std::ostream& os)
         }
         break;
     }
-    
+
     return true;
 }
 
@@ -513,7 +517,7 @@ bool Menu::Resume_Menu(std::ostream& os)
 Input Menu::Navigate()
 {
     while (1) // APPUYEZ SUR UNE TOUCHE VALIDE POUR SORTIR DE LA BOUCLE
-    { 
+    {
         _keyboard->receiveInputs();
         if (_keyboard->getJoystick().y == -1) return _UP;
         if (_keyboard->getJoystick().y == 1) return _DOWN;
