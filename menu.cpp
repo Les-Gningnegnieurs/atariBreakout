@@ -463,6 +463,49 @@ bool Menu::Settings_Menu(std::ostream& os)
     return true;
 }
 
+bool Menu::Resume_Menu(std::ostream& os)
+{
+    os << std::endl << std::endl << std::endl;
+    switch (index)
+    {
+    case 1:
+        os << "\x1B[32mResume\033[0m\n";
+        os << "Exit\n";
+        break;
+    case 2:
+        os << "Resume\n";
+        os << "\x1B[32mExit\033[0m\n";
+        break;
+    }
+
+
+    Input in = Navigate();
+    std::this_thread::sleep_for(std::chrono::milliseconds(150));
+
+    switch (in)
+    {
+    case _UP:
+        if (index > 1) index--;
+        break;
+    case _DOWN:
+        if (index < NBR_CHOICE_RESUME) index++;
+        break;
+    case _ESC:
+        break;
+    case _ENTER:
+        switch (index)
+        {
+        case RESUME_GAME:
+            return true;
+            break;
+        case EXIT_GAME:
+            return false;
+            break;
+        }
+        break;
+    }
+}
+
 
 Input Menu::Navigate()
 {
@@ -475,10 +518,11 @@ Input Menu::Navigate()
         if (_keyboard->getJoystick().x == 1) return _RIGHT;
         if (_keyboard->getButton(1) == 1) return _ENTER;
         if (_keyboard->getButton(2) == 1) return _ESC;
+        Sleep(SLEEP);
     }
 }
 
-void Menu::Intro(std::ostream& os)
+void Intro(std::ostream& os)
 {
     os << std::endl << std::endl << std::endl;
     os << "\x1B[32m                                     LL      EEEEEE  SSSSSS\033[0m\n";
@@ -502,7 +546,7 @@ void Menu::Intro(std::ostream& os)
 
 void Menu::Change_Controller() {
     if (Get_controllerMode()) {
-        std::string c = std::to_string(Get_comPort());
+        std::string c = "com" + std::to_string(Get_comPort());
         _keyboard = new PhysicalController(c);
     }
     else

@@ -46,6 +46,8 @@ bool PhysicalController::receiveInputs(){
     if(!RcvFromSerial(_arduino, raw_msg)){
         return false;
     }
+
+
         
     // Impression du message de l'Arduino si valide
     if(raw_msg.size()>0){
@@ -103,27 +105,19 @@ bool PhysicalController::RcvFromSerial(SerialPort *arduino, std::string &msg){
     int buffer_size;
 
     msg.clear(); // clear string
-    // Read serialport until '\n' character (Blocking)
-
-    // Version fonctionnel dans VScode, mais non fonctionnel avec Visual Studio
-/*  
-    while(msg.back()!='\n'){
-        if(msg.size()>MSG_MAX_SIZE){
-            return false;
-        }
-
-        buffer_size = arduino->readSerialPort(char_buffer, MSG_MAX_SIZE);
-        str_buffer.assign(char_buffer, buffer_size);
-        msg.append(str_buffer);
-    }
-*/
 
     // Version fonctionnelle dans VScode et Visual Studio
     buffer_size = arduino->readSerialPort(char_buffer, MSG_MAX_SIZE);
     str_buffer.assign(char_buffer, buffer_size);
     msg.append(str_buffer);
 
-    //msg.pop_back(); //remove '/n' from string
+    while (!json::accept(msg) && msg.size() > 0) { 
+        buffer_size = arduino->readSerialPort(char_buffer, MSG_MAX_SIZE);
+        str_buffer.assign(char_buffer, buffer_size);
+        msg.append(str_buffer);
+    }
+
+    msg = msg.substr(0, msg.find('\0'));
 
     return true;
 }

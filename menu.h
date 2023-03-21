@@ -28,6 +28,7 @@ Elles permet de :
 #define NBR_CHOICE_CONTROLLER 5
 #define NBR_COM 4
 #define NBR_LEVEL_MODES 4
+#define NBR_CHOICE_RESUME 2 
 
 #define PLAY_GAME 1
 #define CHOOSE_LEVEL 2
@@ -44,6 +45,8 @@ Elles permet de :
 #define SAVE_LEVEL 2
 #define EXIT_LEVEL 3
 
+#define RESUME_GAME 1
+#define EXIT_GAME 2
 
 
 enum Input { _UP, _DOWN, _LEFT, _RIGHT, _ESC, _ENTER };
@@ -86,12 +89,12 @@ public:
 	void Update_config();
 
 	void print(std::ostream & os);
-	void Intro(std::ostream& os);
 	Input Navigate();
 	void Main_Menu(std::ostream& os);
 	bool Settings_Menu(std::ostream& os);
 	bool Choose_Level_Menu(std::ostream& os);
 	bool Choose_Controller_Menu(std::ostream& os);
+	bool Resume_Menu(std::ostream& os);
 		
 
 	bool LoadConfig();
@@ -127,5 +130,6 @@ public:
 	bool Is_over() { return over; };
 };
 
+void Intro(std::ostream& os);
 
 #endif
