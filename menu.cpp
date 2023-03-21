@@ -475,6 +475,7 @@ Input Menu::Navigate()
         if (_keyboard->getJoystick().x == 1) return _RIGHT;
         if (_keyboard->getButton(1) == 1) return _ENTER;
         if (_keyboard->getButton(2) == 1) return _ESC;
+        Sleep(SLEEP);
     }
 }
 
@@ -502,7 +503,7 @@ void Menu::Intro(std::ostream& os)
 
 void Menu::Change_Controller() {
     if (Get_controllerMode()) {
-        std::string c = std::to_string(Get_comPort());
+        std::string c = "com" + std::to_string(Get_comPort());
         _keyboard = new PhysicalController(c);
     }
     else
