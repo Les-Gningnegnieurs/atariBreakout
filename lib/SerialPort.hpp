@@ -7,11 +7,13 @@
 
 #pragma once
 
+
 #define ARDUINO_WAIT_TIME 2000
 #define MAX_DATA_LENGTH 255
 
 #include <windows.h>
 #include <iostream>
+
 
 class SerialPort
 {
@@ -25,6 +27,7 @@ public:
     ~SerialPort();
 
     int readSerialPort(const char *buffer, unsigned int buf_size);
+    int readSerialPort1(const char *buffer, unsigned int buf_size);
     bool writeSerialPort(const char *buffer, unsigned int buf_size);
     bool isConnected();
     void closeSerial();

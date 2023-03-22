@@ -129,3 +129,39 @@ void SerialPort::closeSerial()
 {
     CloseHandle(this->handler);
 }
+
+int SerialPort::readSerialPort1(const char *buffer, unsigned int buf_size)
+{
+    DWORD bytesRead{};
+    unsigned int toRead = 0;
+    unsigned int totalRead = 0;
+    bool endOfMessage = false;
+    ClearCommError(this->handler, &this->errors, &this->status);
+    memset((void*) buffer, 0, buf_size);
+    while (!status.fEof)
+    {
+        if (this->status.cbInQue > 0)
+        {
+            if (this->status.cbInQue > buf_size - totalRead)
+            {
+                toRead = buf_size - totalRead;
+            }
+            else
+            {
+                toRead = this->status.cbInQue;
+            }
+        }
+        // memset((void*) buffer, 0, buf_size);
+        if (ReadFile(this->handler, (void*) (buffer), toRead, &bytesRead, NULL))
+        {
+            totalRead += bytesRead;
+            if (buffer[0] != '\0')
+            {
+                std::cout <<"-  buffer: " << buffer << '\n';
+            }
+            return totalRead;
+        }
+    }
+    // std::cout <<"-  buffer: " << buffer << '\n';
+    return 0;
+}
