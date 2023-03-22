@@ -210,9 +210,9 @@ void Menu::Main_Menu(std::ostream& os)
         break;
     }
 
-
+    //Sleep(100);
     Input in = Navigate();
-
+    //Sleep(100);
     switch (in)
     {
     case _UP:
@@ -240,9 +240,12 @@ void Menu::Main_Menu(std::ostream& os)
             index = 1;
             while (Settings_Menu(std::cout));
             index = 1;
+            is_load = false;
+            is_saved = false;
             break;
         case CHOOSE_CONTROLLER:
             index = 1;
+            is_saved = false;
             index_x = comPort;
             temp = false;
             while (Choose_Controller_Menu(std::cout));
@@ -275,7 +278,10 @@ bool Menu::Choose_Level_Menu(std::ostream& os)
     case 2:
         os << "Level\t";
         os << index_x << "\n";
-        os << "\x1B[32mSet Level\033[0m\n";
+        if (level != index_x)
+            os << "\x1B[32mSet Level\033[0m\n";
+        else
+            os << "\033[0;33mSet Level\033[0m\n";
         os << "Exit\n";
         break;
     case 3:
@@ -285,9 +291,9 @@ bool Menu::Choose_Level_Menu(std::ostream& os)
         os << "\x1B[32mExit\033[0m\n";
         break;
     }
-
+    //Sleep(100);
     Input in = Navigate();
-
+    //Sleep(100);
     switch (in)
     {
     case _UP:
@@ -343,7 +349,10 @@ bool Menu::Choose_Controller_Menu(std::ostream& os)
     case 2:
         os << "COM\t";
         os << index_x << "\n";
-        os << "\x1B[32mSet COM\033[0m\n";
+        if (is_saved)
+            os << "\033[0;33mSet COM\033[0m\n";
+        else
+            os << "\x1B[32mSet COM\033[0m\n";
         os << "INPUT :\t";
         os << m << "\n";
         os << "Set Input\n";
@@ -364,7 +373,10 @@ bool Menu::Choose_Controller_Menu(std::ostream& os)
         os << "Set COM\n";
         os << "INPUT :\t";
         os << m << "\n";
-        os << "\x1B[32mSet Input\033[0m\n";
+        if (is_saved)
+            os << "\033[0;33mSet Input\033[0m\n";
+        else
+            os << "\x1B[32mSet Input\033[0m\n";
         os << "Exit\n";
         break;
     case 5:
@@ -377,24 +389,28 @@ bool Menu::Choose_Controller_Menu(std::ostream& os)
         os << "\x1B[32mExit\033[0m\n";
         break;
     }
-
+    //Sleep(100);
     Input in = Navigate();
-
+    //Sleep(100);
     switch (in)
     {
     case _UP:
         if (index > 1) index--;
+        is_saved = false;
         break;
     case _DOWN:
         if (index < NBR_CHOICE_CONTROLLER) index++;
+        is_saved = false;
         break;
     case _LEFT:
         if (index == 1 && index_x > 0) index_x--;
         if (index == 3) temp = !temp;
+        is_saved = false;
         break;
     case _RIGHT:
         if (index == 1 && index_x < NBR_COM) index_x++;
         if (index == 3) temp = !temp;
+        is_saved = false;
         break;
     case _ESC:
         break;
@@ -403,10 +419,12 @@ bool Menu::Choose_Controller_Menu(std::ostream& os)
         {
         case 2:
             Set_comPort(index_x);
+            is_saved = true;
             break;
         case 4:
             Set_controllerMode(temp);
             Change_Controller();
+            is_saved = true;
             break;
         case 5:
             return false;
@@ -436,7 +454,10 @@ bool Menu::Settings_Menu(std::ostream& os)
         os << "Playing Mode\t";
         if (Is_modeJoystick()) os << "[JOYSTICK]\n";
         else os << "[ACCELEROMETER]\n";
-        os << "\x1B[32mLoad Configuration\033[0m\n";
+        if (is_load)
+            os << "\033[0;33mLoad Configuration\033[0m\n";
+        else
+            os << "\x1B[32mLoad Configuration\033[0m\n";
         os << "Save Configuration\n";
         os << "Exit\n";
         break;
@@ -445,7 +466,10 @@ bool Menu::Settings_Menu(std::ostream& os)
         if (Is_modeJoystick()) os << "[JOYSTICK]\n";
         else os << "[ACCELEROMETER]\n";
         os << "Load Configuration\n";
-        os << "\x1B[32mSave Configuration\033[0m\n";
+        if (is_saved)
+            os << "\033[0;33mSave Configuration\033[0m\n";
+        else
+            os << "\x1B[32mSave Configuration\033[0m\n";
         os << "Exit\n";
         break;
     case 4:
@@ -457,9 +481,9 @@ bool Menu::Settings_Menu(std::ostream& os)
         os << "\x1B[32mExit\033[0m\n";
         break;
     }
-
+    //Sleep(100);
     Input in = Navigate();
-
+    //Sleep(100);
     switch (in)
     {
     case _UP:
@@ -475,12 +499,18 @@ bool Menu::Settings_Menu(std::ostream& os)
         {
         case PLAYING_MODE:
             Change_mode();
+            is_load = false;
+            is_saved = false;
             break;
         case LOAD_CONFIGURATION:
             LoadConfig();
+            is_load = true;
+            is_saved = true;
             break;
         case SAVE_CONFIGURATION:
             SaveConfig();
+            is_load = true;
+            is_saved = true;
             break;
         case EXIT_SETTINGS:
             return false;

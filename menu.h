@@ -82,6 +82,8 @@ private:
 	const short NBR_OF_PARAMETERS = Count_Parameters();
 	const short NBR_OF_LEVELS = Count_Level();
 
+	bool is_saved;
+	bool is_load;
 public:
 	
 
