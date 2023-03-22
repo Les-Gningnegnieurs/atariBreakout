@@ -534,19 +534,28 @@ bool Menu::Resume_Menu(std::ostream& os)
     }
 }
 
-
 Input Menu::Navigate()
 {
     while (1) // APPUYEZ SUR UNE TOUCHE VALIDE POUR SORTIR DE LA BOUCLE
     {
-        _keyboard->receiveInputs();
-        if (_keyboard->getJoystick().y == -1) return _UP;
-        if (_keyboard->getJoystick().y == 1) return _DOWN;
-        if (_keyboard->getJoystick().x == -1) return _LEFT;
-        if (_keyboard->getJoystick().x == 1) return _RIGHT;
-        if (_keyboard->getButton(1) == 1) return _ENTER;
-        if (_keyboard->getButton(2) == 1) return _ESC;
-        Sleep(SLEEP);
+        bool pinHigh = false;
+        if (_keyboard->receiveInputs())
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(30));
+            if (_keyboard->receiveInputs()) //si 
+                pinHigh = true;
+            if (pinHigh) {
+ 
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                if (_keyboard->getJoystick().y == -1) return _UP;
+                if (_keyboard->getJoystick().y == 1) return _DOWN;
+                if (_keyboard->getJoystick().x == -1) return _LEFT;
+                if (_keyboard->getJoystick().x == 1) return _RIGHT;
+                if (_keyboard->getButton(1) == 1) return _ENTER;
+                if (_keyboard->getButton(2) == 1) return _ESC;
+            }
+        }
+        //std::this_thread::sleep_for(std::chrono::milliseconds(500));
     }
 }
 
