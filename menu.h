@@ -102,6 +102,7 @@ public:
 	bool Choose_Level_Menu(std::ostream& os);
 	bool Choose_Controller_Menu(std::ostream& os);
 	bool Resume_Menu(std::ostream& os);
+	void Reset();
 		
 
 	bool LoadConfig();

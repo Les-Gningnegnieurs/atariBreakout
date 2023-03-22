@@ -14,7 +14,8 @@ protected:
     Bargraph _bargraph;
     LedRGB _leds[2];
     OuputChanged _outputChanged;
-    bool _reversemode;
+    bool _reversemode = false;
+    Powermanette power;
 
 public:
     virtual bool receiveInputs() = 0;
@@ -28,9 +29,9 @@ public:
     bool getButton(int id);
     Accelerometre getAccelerometre();
     void setReverse(bool mode) { _reversemode = mode; }
-
     void TurnOffLed(int id);
     void TurnOnLed(int id);
     bool statusLed(int id);
+    void setPower(bool mode);
 };
 #endif 
