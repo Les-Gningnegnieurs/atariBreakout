@@ -28,7 +28,7 @@ Elles permet de :
 #define NBR_CHOICE_SETTINGS 4
 #define NBR_CHOICE_LEVEL 3
 #define NBR_CHOICE_CONTROLLER 5
-#define NBR_COM 4
+#define NBR_COM 5
 #define NBR_LEVEL_MODES 4
 #define NBR_CHOICE_RESUME 2 
 
