@@ -21,6 +21,13 @@ void GameLoop::Start() {
     _controller = _menu.Get_Controller();
     _controller->setPower(true);
 
+    for (int i = 0; i < 10; i++) {
+        if (i < 5)
+            _controller->setBargraph(i, 1);
+        else
+            _controller->setBargraph(i, 0);
+    }
+
     _canevas->erase();
     if (_menu.Is_playing())
         _gameState = Running;

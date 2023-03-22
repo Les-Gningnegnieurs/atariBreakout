@@ -25,10 +25,14 @@ public:
     ~Controller();
     Joystick getJoystick();
     void setBargraph(int id, bool val);
-    void setLED(int id, int R, int G, int B);
+    void setLED(int id, int status, int R, int G, int B);
     bool getButton(int id);
     Accelerometre getAccelerometre();
     void setReverse(bool mode) { _reversemode = mode; }
     void setPower(bool mode);
+
+    void TurnOffLed(int id);
+    void TurnOnLed(int id);
+    bool statusLed(int id);
 };
 #endif 
