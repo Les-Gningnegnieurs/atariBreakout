@@ -387,6 +387,7 @@ bool Menu::Choose_Controller_Menu(std::ostream& os)
         os << m << "\n";
         os << "Set Input\n";
         os << "\x1B["+_col_+"Exit\033[0m\n";
+        _col_ = "32m"; //changer la couleur avant de partir
         break;
     }
     //Sleep(100);
