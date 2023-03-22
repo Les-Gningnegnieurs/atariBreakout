@@ -105,7 +105,7 @@ void GameLogic:: update(Controller& c)
         c.setLED(0, 0, 0, 0);
         c.setLED(1, 0, 0, 0);
     }
-    
+   
 }
 
 bool GameLogic::isGameOver()

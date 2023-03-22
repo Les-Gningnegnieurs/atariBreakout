@@ -61,6 +61,11 @@ bool Keyboard::receiveInputs(){
         _buttons[2] = 0;
     }
 
+    if (_reversemode)
+    {
+        _joystick.x = -1 * _joystick.x;
+    }
+
     return true;
 };
 

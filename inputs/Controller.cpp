@@ -1,10 +1,7 @@
 #include "Controller.h"
 
 Joystick Controller::getJoystick(){
-    if (_reversemode)
-    {
-        _joystick.x = -1 * _joystick.x;
-    }
+
 
     return _joystick;
 }
@@ -14,6 +11,12 @@ void Controller::setBargraph(int id, bool val){
         _bargraph.status[id] = val;
         _outputChanged.bargraph = true;
     }
+}
+
+void Controller::setPower(bool mode){
+    power.power = mode;
+    _outputChanged.power = true;
+
 }
 
 void Controller::setLED(int id, int R, int G, int B){

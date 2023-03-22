@@ -155,10 +155,11 @@ int SerialPort::readSerialPort1(const char *buffer, unsigned int buf_size)
         if (ReadFile(this->handler, (void*) (buffer), toRead, &bytesRead, NULL))
         {
             totalRead += bytesRead;
-            if (buffer[0] != '\0')
+           if (buffer[0] != '\0')
             {
-                std::cout <<"-  buffer: " << buffer << '\n';
+                //std::cout <<"-  buffer: " << buffer << '\n';
             }
+            
             return totalRead;
         }
     }
