@@ -36,7 +36,9 @@ void GameLogic:: update(Controller& c)
     _platform.update(); //update la position
     _platform.draw(UI); //update le dessin dans le tableau
     bool foundTimer = false;
-   
+    
+    
+        
     for (int i = 0; i < _powers.size(); i++)
     {
       
@@ -44,20 +46,23 @@ void GameLogic:: update(Controller& c)
         _powers[i]->update();
         if (_powers[i]->getState() == Active && _powers[i]->getLedinfo().hasTimer && !foundTimer)
         {
-            if (_powers[i]->getLedinfo().color == 'r')
+            //caller la couleur juste une fois au début, pas à chaque Tick
+            //caller turnOn/turnOff pour faire flasher
+            /*if (_powers[i]->getLedinfo().color == 'r')
             {
-                c.setLED(0, 255, 0, 0);
-                c.setLED(1, 255, 0, 0);
+                c.setLED(0, 1, 255, 0, 0);
+                c.setLED(1, 1, 255, 0, 0);
             }
             else
             {
-                c.setLED(0, 0, 255, 0);
-                c.setLED(1, 0, 255, 0);
-            }
+                c.setLED(0, 1, 0, 255, 0);
+                c.setLED(1, 1, 0, 255, 0);
+            }*/
            
             foundTimer = true;
             
             
+            //Logique a revoir
             int timer = _powers[i]->getTimer();
             int nbLeds = ((timer * 10) / PTIMELIMIT);
             nbLeds = nbLeds % 10;
@@ -102,8 +107,11 @@ void GameLogic:: update(Controller& c)
     draw(std::cout);
     if (!foundTimer)
     {
-        c.setLED(0, 0, 0, 0);
-        c.setLED(1, 0, 0, 0);
+        if (c.statusLed(0))
+            c.TurnOffLed(0);
+
+        if (c.statusLed(1))
+            c.TurnOffLed(1);
     }
     
 }
