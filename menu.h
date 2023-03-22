@@ -83,6 +83,8 @@ private:
 	const short NBR_OF_LEVELS = Count_Level();
 	std::string _col_ = "32m";
 
+	bool is_saved;
+	bool is_load;
 public:
 	
 
