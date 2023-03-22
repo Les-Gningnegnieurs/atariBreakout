@@ -52,7 +52,7 @@ void GameLoop::GameOver() {
         _canevas->erase();
         over = true;
     }
-    else draw();
+
 
 
 }
