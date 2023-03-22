@@ -8,5 +8,6 @@ class Keyboard : public Controller{
 public:
     bool receiveInputs();
     bool sendOutputs();
+    bool ConnectionStatus() { return true; };
 };
 #endif

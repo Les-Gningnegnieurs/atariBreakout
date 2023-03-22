@@ -33,5 +33,6 @@ public:
     void TurnOnLed(int id);
     bool statusLed(int id);
     void setPower(bool mode);
+    virtual bool ConnectionStatus()=0;
 };
 #endif 

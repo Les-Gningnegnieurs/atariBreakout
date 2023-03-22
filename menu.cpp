@@ -328,12 +328,12 @@ bool Menu::Choose_Controller_Menu(std::ostream& os)
     system("CLS");
     os << std::endl << std::endl << std::endl;
     std::string m = temp ? "< Controller" : "Keyboard >";
-
+    //std::string _colv_ = "32m"; //vert
     switch (index)
     {
     case 1:
-        os << "\x1B[32mCOM :\033[0m\t";
-        os << "\x1B[32m" << index_x << "\033[0m\n";
+        os << "\x1B["+_col_+"COM : \033[0m\t";
+        os << "\x1B["+_col_ << index_x << "\033[0m\n";
         os << "Set COM\n";
         os << "INPUT :\t";
         os << m << "\n";
@@ -343,7 +343,7 @@ bool Menu::Choose_Controller_Menu(std::ostream& os)
     case 2:
         os << "COM\t";
         os << index_x << "\n";
-        os << "\x1B[32mSet COM\033[0m\n";
+        os << "\x1B["+_col_+"Set COM\033[0m\n";
         os << "INPUT :\t";
         os << m << "\n";
         os << "Set Input\n";
@@ -353,8 +353,8 @@ bool Menu::Choose_Controller_Menu(std::ostream& os)
         os << "COM\t";
         os << index_x << "\n";
         os << "Set COM\n";
-        os << "\x1B[32mINPUT :\033[0m\t";
-        os << "\x1B[32m" << m << "\033[0m\n";
+        os << "\x1B["+_col_+"INPUT :\033[0m\t";
+        os << "\x1B["+_col_ << m << "\033[0m\n";
         os << "Set Input\n";
         os << "Exit\n";
         break;
@@ -364,7 +364,7 @@ bool Menu::Choose_Controller_Menu(std::ostream& os)
         os << "Set COM\n";
         os << "INPUT :\t";
         os << m << "\n";
-        os << "\x1B[32mSet Input\033[0m\n";
+        os << "\x1B["+_col_+"Set Input\033[0m\n";
         os << "Exit\n";
         break;
     case 5:
@@ -374,7 +374,7 @@ bool Menu::Choose_Controller_Menu(std::ostream& os)
         os << "INPUT :\t";
         os << m << "\n";
         os << "Set Input\n";
-        os << "\x1B[32mExit\033[0m\n";
+        os << "\x1B["+_col_+"Exit\033[0m\n";
         break;
     }
 
@@ -542,7 +542,7 @@ Input Menu::Navigate()
         if (_keyboard->receiveInputs())
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(30));
-            if (_keyboard->receiveInputs()) //si 
+            if (_keyboard->receiveInputs()) //Debouncing batard: si on read le même input 2 x de suite en l'espace de 30 ms, on active. 
                 pinHigh = true;
             if (pinHigh) {
  
@@ -585,8 +585,18 @@ void Menu::Change_Controller() {
     if (Get_controllerMode()) {
         std::string c = "com" + std::to_string(Get_comPort());
         _keyboard = new PhysicalController(c);
+        if (!_keyboard->ConnectionStatus())
+        {
+            _col_ = "31m";
+            _keyboard = new Keyboard();
+            //rouge
+            //bool COM = false;
+            //std::string c = "Port COM Introuvable";
+            //Choose_Controller_Menu(std::cout);
+        }
     }
-    else
-        _keyboard = new Keyboard();
+    else {
+        _col_ = "32m"; //vert
+    }
 }
 

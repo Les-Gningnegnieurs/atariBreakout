@@ -81,6 +81,7 @@ private:
 	int comPort = 0;
 	const short NBR_OF_PARAMETERS = Count_Parameters();
 	const short NBR_OF_LEVELS = Count_Level();
+	std::string _col_ = "32m";
 
 public:
 	
