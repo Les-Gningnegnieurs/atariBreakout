@@ -15,8 +15,6 @@ Plateforme::Plateforme(LevelInfos I)
 
 void Plateforme::move(int joystickvalueX)
 {
-  
-
     speed.x = joystickvalueX*2;
 }
 

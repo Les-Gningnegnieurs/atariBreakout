@@ -12,7 +12,7 @@
 #include "Addballs.h"
 #include "Swapcontrol.h"
 
-
+#include <random>
 #include <iostream>
 
 
@@ -49,6 +49,8 @@ protected:
 	int _sizeX;
 	int _sizeY;
 	int _PV;
+	std::random_device rd;
+	
 	
 };
 

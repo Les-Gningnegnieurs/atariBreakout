@@ -106,27 +106,7 @@ Collision Brique::checkCollision(Balle* b) {
     }
     return NO;
     }
-    /*if (posBa.y + rayon >= _posBrique.y && posBa.y - rayon <= _posBrique.y)
-    {
-        if (_posBrique.x + _sizeX >= posBa.x - rayon && posBa.x + rayon >= _posBrique.x)
-        {
-            //checkbot
-            if (speed.y <= 0) {
-                if (speed.x >= 0 && posBa.y == _posBrique.y) return LT;//côté gauche 
-                    //c'est un calcul d'intervalles, pas un test d'égalité**
-                else if (speed.x <= 0 && posBa.y == _posBrique.y) return RT; //côté droit
-                else return DN; //sinon = hit du bottom
-
-            }
-            else if (speed.y >= 0) {//checktop
-                if (speed.x >= 0 && posBa.y == _posBrique.y) return LT;//côté gauche 
-                    //c'est un calcul d'intervalles, pas un test d'égalité**
-                else if (speed.x <= 0 && posBa.y == _posBrique.y)return RT; //côté droit
-                else return UP ; //sinon = hit du top
-            }
-        }
-    }
-    return NO;*/
+    return NO;
     
 }
 
@@ -194,8 +174,10 @@ void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
 }
 
 void Brique::addPowerUp(std::vector<Powerups*>& p) {
-    int y = rand() ;
+    std::uniform_real_distribution<double> distribution(0, 99);
+    std::default_random_engine generator(rd());
+    int y = distribution(generator);
     _etat = Destroyed;
-    if (y % 100 <= 20)
+    if (y  <= 20)
         p.push_back(new Swapcontrol(_posBrique));
 }
