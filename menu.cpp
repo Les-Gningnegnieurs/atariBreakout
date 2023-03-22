@@ -1,5 +1,5 @@
 #include "menu.h"
-
+////// LEVEL DOIT ETRE DONNÉE PAR COUNT LEVEL
 
 /* ------------------- PARAMÈTRE DE LA CONFIG -------------------
  *
@@ -11,7 +11,7 @@
  */
 Menu::Menu()
 {
-    parameters = new Config[NUMBER_OF_PARAMETERS];
+    parameters = new Config[NBR_OF_PARAMETERS+1];
 
     parameters[0].name = "SCREEN_WIDTH";
     parameters[1].name = "SCREEN_HEIGHT";
@@ -21,15 +21,15 @@ Menu::Menu()
 
     LoadConfig();
 
-    over = 0;
+    over = false;
     index = 1;
 }
 
 Menu::Menu(Controller* c)
 {
     _keyboard = c;
-    parameters = new Config[NUMBER_OF_PARAMETERS];
-
+    parameters = new Config[NBR_OF_PARAMETERS + 1];
+    
     parameters[0].name = "SCREEN_WIDTH";
     parameters[1].name = "SCREEN_HEIGHT";
     parameters[2].name = "MODE_ACCELEROMETER";
@@ -38,7 +38,7 @@ Menu::Menu(Controller* c)
 
     LoadConfig();
 
-    over = 0;
+    over = false;
     index = 1;
 }
 
@@ -84,16 +84,13 @@ bool Menu::LoadConfig()
     std::string parameter;
     short value;
 
+    int i = 0;
     while (!file.eof())
     {
         file >> parameter;
         file >> value;
-
-        for (int i = 0; i < NUMBER_OF_PARAMETERS; i++)
-        {
-            if (parameter == parameters[i].name)
-                parameters[i].value = value;
-        }
+        parameters[i].name = parameter;
+        parameters[i++].value = value;
     }
 
     Update_data();
@@ -119,14 +116,39 @@ bool Menu::SaveConfig()
         return false;
     }
 
-    for (int i = 0; i < NUMBER_OF_PARAMETERS; i++)
-    {
+    for (int i = 0; i < NBR_OF_PARAMETERS; i++)
         file << parameters[i].name << " " << parameters[i].value << std::endl;
-    }
-
+    
     file.close();
 
     return true;
+}
+
+
+int Menu::Count_Level()
+{
+    int count = 0;
+
+    for (const auto& entry : std::filesystem::directory_iterator(LEVEL_PATH)) {
+        if (entry.is_regular_file() && entry.path().extension() == ".txt") {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+int Menu::Count_Parameters()
+{
+    std::ifstream file(CONFIG_PATH);
+    int count = 0;
+    std::string line;
+
+    while (std::getline(file, line)) {
+        count++;
+    }
+
+    return count;
 }
 
 
@@ -228,6 +250,7 @@ void Menu::Main_Menu(std::ostream& os)
         case EXIT_MENU:
             over = true;
             play = false;
+            exit(EXIT_SUCCESS);
             break;
         }
         break;
@@ -276,7 +299,7 @@ bool Menu::Choose_Level_Menu(std::ostream& os)
         if (index == 1 && index_x > 1) index_x--;
         break;
     case _RIGHT:
-        if (index == 1 && index_x < NBR_LEVEL_MODES) index_x++;
+        if (index == 1 && index_x < NBR_OF_LEVELS) index_x++;
         break;
     case _ESC:
         break;

@@ -12,6 +12,8 @@ Elles permet de :
 #include "GameLoop.h"
 #include <conio.h>
 #include "Keyboard.h"
+#include <string>
+#include <filesystem>
 
 #include <chrono>
 #include <thread>
@@ -20,8 +22,8 @@ Elles permet de :
 #ifndef MENU_H
 #define MENU_H
 #define CONFIG_PATH "./config/game.config"		//Location du fichier config
+#define LEVEL_PATH "./level"
 
-#define NUMBER_OF_PARAMETERS 5
 #define NBR_CHOICE_MAIN 5
 #define NBR_CHOICE_SETTINGS 4
 #define NBR_CHOICE_LEVEL 3
@@ -77,6 +79,8 @@ private:
 	bool temp;
 	bool controllerMode = false;
 	int comPort = 0;
+	const short NBR_OF_PARAMETERS = Count_Parameters();
+	const short NBR_OF_LEVELS = Count_Level();
 
 public:
 	
@@ -85,8 +89,11 @@ public:
 	Menu(Controller* c);
 	~Menu() { delete[] parameters;};
 
+
 	void Update_data();
 	void Update_config();
+	int Count_Level();
+	int Count_Parameters();
 
 	void print(std::ostream & os);
 	Input Navigate();
