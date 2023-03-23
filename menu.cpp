@@ -70,9 +70,6 @@ void Menu::Update_config()
 
 bool Menu::LoadConfig()
 {
-    std::cout << "LOADING";
-    Sleep(300);
-
     std::ifstream file(CONFIG_PATH);
 
     if (!file.is_open())
@@ -106,9 +103,6 @@ void Menu::Reset() {
 
 bool Menu::SaveConfig()
 {
-    std::cout << "SAVING";
-    Sleep(300);
-
     Update_config();
 
     std::ofstream file(CONFIG_PATH);
