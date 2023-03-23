@@ -5,7 +5,7 @@ struct Joystick {
 };
 
 struct Bargraph{
-    bool status[10];
+    int status[10];
 };
 
 struct LedRGB{
