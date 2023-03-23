@@ -162,7 +162,6 @@ void Menu::print(std::ostream& os)
 
 void Menu::Main_Menu(std::ostream& os)
 {
-    _col_ = "32m";
     os << std::endl << std::endl << std::endl;
     switch (index)
     {
@@ -206,11 +205,10 @@ void Menu::Main_Menu(std::ostream& os)
     }
 
     //Sleep(100);
-    while (_keyboard->getJoystick().y != 0 || _keyboard->getJoystick().x != 0)
+    while (_keyboard->getJoystick().y != 0 || _keyboard->getJoystick().x != 0
+        || _keyboard->getButton(1) != 0 || _keyboard->getButton(2) != 0)
         _keyboard->receiveInputs();
-
     Input in = Navigate();
-    
     //Sleep(100);
     switch (in)
     {
@@ -291,11 +289,10 @@ bool Menu::Choose_Level_Menu(std::ostream& os)
         break;
     }
     //Sleep(100);
-    while (_keyboard->getJoystick().y != 0 || _keyboard->getJoystick().x != 0)
-    _keyboard->receiveInputs();
-
+    while (_keyboard->getJoystick().y != 0 || _keyboard->getJoystick().x != 0
+        || _keyboard->getButton(1) != 0 || _keyboard->getButton(2) != 0)
+        _keyboard->receiveInputs();
     Input in = Navigate();
-    
     //Sleep(100);
     switch (in)
     {
@@ -390,16 +387,14 @@ bool Menu::Choose_Controller_Menu(std::ostream& os)
         os << m << "\n";
         os << "Set Input\n";
         os << "\x1B["+_col_+"Exit\033[0m\n";
+        _col_ = "32m"; //changer la couleur avant de partir
         break;
     }
     //Sleep(100);
-
-    while (_keyboard->getJoystick().y != 0 || _keyboard->getJoystick().x != 0)
-    _keyboard->receiveInputs();
-    
+    while (_keyboard->getJoystick().y != 0 || _keyboard->getJoystick().x != 0
+        || _keyboard->getButton(1) != 0 || _keyboard->getButton(2) != 0)
+        _keyboard->receiveInputs();
     Input in = Navigate();
-
-    
     //Sleep(100);
     switch (in)
     {
@@ -491,12 +486,10 @@ bool Menu::Settings_Menu(std::ostream& os)
         break;
     }
     //Sleep(100);
-    
-    while (_keyboard->getJoystick().y != 0 || _keyboard->getJoystick().x != 0)
-    _keyboard->receiveInputs();
+    while (_keyboard->getJoystick().y != 0 || _keyboard->getJoystick().x != 0
+        || _keyboard->getButton(1) != 0 || _keyboard->getButton(2) != 0)
+        _keyboard->receiveInputs();
     Input in = Navigate();
-
-   
     //Sleep(100);
     switch (in)
     {
@@ -588,13 +581,7 @@ Input Menu::Navigate()
         if (_keyboard->getJoystick().y == 1) return _DOWN;
         if (_keyboard->getJoystick().x == -1) return _LEFT;
         if (_keyboard->getJoystick().x == 1) return _RIGHT;
-        if (_keyboard->getButton(1) == 1)
-        {
-            while (_keyboard->getButton(1) == 1) //tant que le input est pas redevenu 0
-                _keyboard->receiveInputs();
-
-            return _ENTER;
-        }
+        if (_keyboard->getButton(1) == 1) return _ENTER;
         if (_keyboard->getButton(2) == 1) return _ESC;
 
         //Sleep(SLEEP);
