@@ -113,7 +113,7 @@ void GameLogic:: update(Controller& c)
         if (c.statusLed(1))
             c.TurnOffLed(1);
     }
-   
+    
 }
 
 bool GameLogic::isGameOver()

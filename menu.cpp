@@ -100,9 +100,6 @@ bool Menu::LoadConfig()
     return true;
 }
 
-void Menu::Reset() {
-    over = false;
-}
 
 bool Menu::SaveConfig()
 {
@@ -513,6 +510,7 @@ bool Menu::Resume_Menu(std::ostream& os)
 
 
     Input in = Navigate();
+    std::this_thread::sleep_for(std::chrono::milliseconds(150));
 
     switch (in)
     {

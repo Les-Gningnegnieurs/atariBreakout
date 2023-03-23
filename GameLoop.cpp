@@ -19,7 +19,6 @@ void GameLoop::Start() {
     }
 
     _controller = _menu.Get_Controller();
-    _controller->setPower(true);
 
     for (int i = 0; i < 10; i++) {
         if (i < 5)
@@ -49,10 +48,7 @@ void GameLoop::Restart()
 {
     delete _canevas;
     _canevas = new Canevas;
-    _gameState = Starting;
     loadFile();
-    over = false;
-    _menu.Reset();
 
 }
 
@@ -108,7 +104,6 @@ void GameLoop::update() {
         }
     }
     GameOver();
- 
     _controller->sendOutputs();
 }
 

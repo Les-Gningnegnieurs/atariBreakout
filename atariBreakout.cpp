@@ -8,15 +8,14 @@ using namespace std;
 int main(){
 
     Intro(std::cout);
-    GameLoop game;
     while (true)
     {
+        GameLoop game;
         while (!game.over) {
 
             game.update();
             Sleep(SLEEP);
         }
-        game.Restart();
     }
     return 0;
 }

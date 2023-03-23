@@ -24,9 +24,4 @@ struct Accelerometre{
 struct OuputChanged{
     bool leds;
     bool bargraph;
-    bool power;
-};
-
-struct Powermanette {
-    bool power;
 };
