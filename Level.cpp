@@ -30,18 +30,18 @@ void Level::checkColl_DOWN_RIGHT(Balle* b, int& score, std::vector <Powerups*>& 
     //for (int i = 0; i < rows / BrickHeigth; i++) //haut en bas
     //{
         //for (int j = 0; j < columns / BrickLength; j++) //gauche a droite
-    int i_max = round(b->getPos().y / BrickHeigth) + 2;
-    int j_max = round(b->getPos().x / BrickLength) + 2;
+    int i_max = (b->getPos().y / BrickHeigth) + 2;
+    int j_max = (b->getPos().x / BrickLength) + 2;
     if (i_max > rows / BrickHeigth)
         i_max = rows / BrickHeigth;
     if (j_max > columns / BrickLength)
         j_max = columns / BrickLength;
-    int i = i_max - 4;
+    int i = i_max - 3;
     if (i < 0)
         i = 0;
     for(i; i < i_max; i++)
     {
-        int j = j_max - 4;
+        int j = j_max - 3;
         if (j < 0)
             j = 0;
         for(j;j<j_max;j++)
@@ -81,18 +81,18 @@ void Level::checkColl_DOWN_RIGHT(Balle* b, int& score, std::vector <Powerups*>& 
     }
 }
 void Level::checkColl_DOWN_LEFT(Balle* b, int& score, std::vector <Powerups*>& p){
-    int i_max = round(b->getPos().y / BrickHeigth) + 2;
-    int j_max = round(b->getPos().x / BrickLength) -2;
+    int i_max = (b->getPos().y / BrickHeigth) + 2;
+    int j_max = (b->getPos().x / BrickLength) - 1;
     if (i_max > rows / BrickHeigth)
         i_max = rows / BrickHeigth;
     if (j_max < 0)
         j_max = 0;
-    int i = i_max - 4;
+    int i = i_max - 3;
     if (i < 0)
         i = 0;
     for (i; i < i_max; i++)
     {
-        int j = j_max + 4;
+        int j = j_max + 2;
         if (j > (columns / BrickLength)-1)
         j = (columns / BrickLength) - 1;
         for (j; j >= j_max; j--)
@@ -133,18 +133,18 @@ void Level::checkColl_DOWN_LEFT(Balle* b, int& score, std::vector <Powerups*>& p
     }
 }
 void Level::checkColl_UP_RIGHT(Balle* b, int& score, std::vector <Powerups*>& p){
-    int i_max = round(b->getPos().y / BrickHeigth) - 2;
-    int j_max = round(b->getPos().x / BrickLength) + 2;
+    int i_max = (b->getPos().y / BrickHeigth) - 1;
+    int j_max = (b->getPos().x / BrickLength) + 2;
     if (i_max < 0)
         i_max = 0;
     if (j_max > columns / BrickLength)
         j_max = columns / BrickLength;
-    int i = i_max + 4;
+    int i = i_max + 2;
     if (i >= (rows/BrickHeigth)-1)
         i = (rows / BrickHeigth) - 1;
     for (i; i >= i_max; i--)
     {
-        int j = j_max - 4;
+        int j = j_max - 3;
         if (j < 0)
             j = 0;
         for (j; j < j_max; j++)
@@ -184,18 +184,18 @@ void Level::checkColl_UP_RIGHT(Balle* b, int& score, std::vector <Powerups*>& p)
     }
 }
 void Level::checkColl_UP_LEFT(Balle* b, int& score, std::vector <Powerups*>& p){
-    int i_max = round(b->getPos().y / BrickHeigth) - 2;
-    int j_max = round(b->getPos().x / BrickLength) - 2;
+    int i_max = (b->getPos().y / BrickHeigth) - 1;
+    int j_max = (b->getPos().x / BrickLength) - 1;
     if (i_max < 0)
         i_max = 0;
     if (j_max < 0)
         j_max = 0;
-    int i = i_max + 4;
+    int i = i_max + 2;
     if (i >= (rows / BrickHeigth) - 1)
         i = (rows / BrickHeigth) - 1;
     for(i; i>= i_max; i--)
     {
-        int j = j_max + 4;
+        int j = j_max + 2;
         if (j > (columns / BrickLength) - 1)
             j = (columns / BrickLength) - 1;
         for(j; j >= j_max; j--)
