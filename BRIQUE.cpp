@@ -178,6 +178,17 @@ void Brique::addPowerUp(std::vector<Powerups*>& p) {
     std::default_random_engine generator(rd());
     int y = distribution(generator);
     _etat = Destroyed;
-    if (y  <= 20)
-        p.push_back(new Swapcontrol(_posBrique));
+    if (y <= 20) {
+        int x = rand();
+        switch (x % 2){
+            case 0:
+                p.push_back(new Swapcontrol(_posBrique));
+            case 1:
+                p.push_back(new Addballs(_posBrique));
+            case 2:
+                p.push_back(new Extendplatform(_posBrique));
+
+        }
+        
+    }
 }

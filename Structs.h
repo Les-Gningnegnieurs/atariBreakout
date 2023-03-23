@@ -8,7 +8,7 @@
 #define RESMAX_X 200 //80
 #define RESMAX_Y 50 //25
 #define SLEEP 16
-#define PTIMELIMIT 30000
+#define PTIMELIMIT 15000
 
 struct Position {
     int x;
