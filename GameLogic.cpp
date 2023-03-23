@@ -142,15 +142,16 @@ void GameLogic::checkCollisions(Controller &control) {
                
                 for (int j = 0; j < _powers.size(); j++)
                 {
-                    if (typeid(_powers[i]) == typeid(_powers[j]) && j!=i)
+                    if (_powers[i]->getName() == _powers[j]->getName() && j!=i && _powers[j]->getState()==Active)
                     {
                         _powers[j]->resetTimer();
                         UI[_powers[i]->getPos().y][_powers[i]->getPos().x] = ' ';
                         delete _powers[i];
                         _powers.erase(_powers.begin() + i);
                         typefound = true;
-
                         break;
+
+                        
                     }
                         
 

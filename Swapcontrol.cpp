@@ -4,6 +4,7 @@ Swapcontrol::Swapcontrol(Position positionDestroyed, int height, int lenght) :Po
 {
 	isStackable = false;
 	ledInfo.color = 'r';
+	name = "Swapcontrol";
 
 }
 

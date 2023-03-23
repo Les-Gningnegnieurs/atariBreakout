@@ -28,6 +28,7 @@ protected:
 	virtual void modifyControler(Controller& controller, bool reset = false);
 	bool isStackable;
 	PowerupsLED ledInfo;
+	std::string name = "Powerups";
 	
 	
 public:
@@ -48,6 +49,7 @@ public:
 	bool getStackable(){ return isStackable; }
 	PowerupsLED getLedinfo() { return ledInfo;}
 	double getTimer() { return timer; }
+	std::string getName() { return name; }
 	
 
 	
