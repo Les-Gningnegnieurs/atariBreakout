@@ -21,6 +21,7 @@ void GameLoop::Start() {
     _controller = _menu.Get_Controller();
     _controller->setPower(true);
 
+
     _canevas->erase();
     if (_menu.Is_playing())
         _gameState = Running;
@@ -69,6 +70,7 @@ void GameLoop::update() {
 
     if (_gameState == Running) {
         _canevas->update(*_controller);
+
         if (_controller->getButton(2))
         {
             Sleep(150);
@@ -101,7 +103,19 @@ void GameLoop::update() {
         }
     }
     GameOver();
+
+    /*if (bg >= 10)
+        bg = 0;
+    else
+        bg++;
  
+    for (int i = 0; i < 10; i++) {
+        if (i < bg)
+            _controller->setBargraph(i, 1);
+        else
+            _controller->setBargraph(i, 0);
+    }
+    Sleep(1000);*/
     _controller->sendOutputs();
 }
 

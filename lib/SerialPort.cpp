@@ -93,6 +93,7 @@ int SerialPort::readSerialPort(const char *buffer, unsigned int buf_size)
 
     if (ReadFile(this->handler, (void*) buffer, toRead, &bytesRead, NULL))
     {
+
         return bytesRead;
     }
 
@@ -104,10 +105,15 @@ int SerialPort::readSerialPort(const char *buffer, unsigned int buf_size)
 bool SerialPort::writeSerialPort(const char *buffer, unsigned int buf_size)
 {
     DWORD bytesSend;
+    /*if (buffer[0] != '\0')
+    {
+        std::cout << "-  buffer: " << buffer << '\n';
+    }*/
 
     if (!WriteFile(this->handler, (void*) buffer, buf_size, &bytesSend, 0))
     {
         ClearCommError(this->handler, &this->errors, &this->status);
+        
         return false;
     }
     

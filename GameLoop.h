@@ -20,6 +20,7 @@ private:
     Canevas *_canevas;
     Menu _menu;
     gameState _gameState;
+    int bg = 0;
     
 public:
     Controller* _controller;
