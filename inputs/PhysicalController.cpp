@@ -64,7 +64,8 @@ bool PhysicalController::sendOutputs() {
     }
 
     if(j_msg_send==json::value_t::null){
-        return false;
+        j_msg_send["t"] = 0;
+        SendToSerial(_arduino, j_msg_send);
     }
     else
         return SendToSerial(_arduino, j_msg_send);
