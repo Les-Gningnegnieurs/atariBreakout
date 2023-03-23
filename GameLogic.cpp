@@ -78,6 +78,8 @@ void GameLogic:: update(Controller& c)
 
             
         }
+
+        
         
         
         _powers[i]->draw(UI);

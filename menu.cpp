@@ -212,6 +212,7 @@ void Menu::Main_Menu(std::ostream& os)
 
 
     Input in = Navigate();
+    std::this_thread::sleep_for(std::chrono::milliseconds(150));
 
     switch (in)
     {
@@ -287,6 +288,7 @@ bool Menu::Choose_Level_Menu(std::ostream& os)
     }
 
     Input in = Navigate();
+    std::this_thread::sleep_for(std::chrono::milliseconds(150));
 
     switch (in)
     {
@@ -379,6 +381,7 @@ bool Menu::Choose_Controller_Menu(std::ostream& os)
     }
 
     Input in = Navigate();
+    std::this_thread::sleep_for(std::chrono::milliseconds(150));
 
     switch (in)
     {
@@ -459,6 +462,7 @@ bool Menu::Settings_Menu(std::ostream& os)
     }
 
     Input in = Navigate();
+    std::this_thread::sleep_for(std::chrono::milliseconds(150));
 
     switch (in)
     {
