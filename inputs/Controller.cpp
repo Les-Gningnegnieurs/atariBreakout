@@ -8,8 +8,11 @@ Joystick Controller::getJoystick(){
 
 void Controller::setBargraph(int id, bool val){
     if(id >=0 && id < 10){
-        _bargraph.status[id] = val;
-        _outputChanged.bargraph = true;
+        if (_bargraph.status[id] != val)
+        {
+            _bargraph.status[id] = val;
+            _outputChanged.bargraph = true;
+        }
     }
 }
 
