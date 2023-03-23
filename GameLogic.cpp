@@ -120,7 +120,12 @@ void GameLogic:: update(Controller& c, bool accelmode)
 
 bool GameLogic::isGameOver()
 {
-    if (_livesLeft<0)  return true;
+    if (_livesLeft < 0)
+    {
+        std::cout << _score;
+        Sleep(500);
+        return true;
+    }
     else return false;
 }
 

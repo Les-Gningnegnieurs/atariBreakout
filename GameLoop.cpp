@@ -41,8 +41,7 @@ void GameLoop::Stop() {
 
 void GameLoop::Restart()
 {
-    delete _canevas;
-    _canevas = new Canevas;
+    _canevas->resetScore();
     _gameState = Starting;
     loadFile();
     over = false;
@@ -72,7 +71,7 @@ void GameLoop::update() {
         _canevas->update(*_controller, _menu.Is_modeAccelerometer());
         if (_controller->getButton(2))
         {
-            Sleep(150);
+            
 
 
             std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
@@ -81,11 +80,14 @@ void GameLoop::update() {
             std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
             std::cout << std::endl << std::endl << "Paused\t" << "ESC : Resume\t" << "ENTER : QUIT";
 
-
+            Sleep(200);
             _controller->receiveInputs();
+           
             while (!_controller->getButton(2) && !_controller->getButton(1))
             {
+                
                 _controller->receiveInputs();
+               
 
             }
             if (_controller->getButton(1))

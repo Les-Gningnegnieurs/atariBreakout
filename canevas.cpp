@@ -52,3 +52,4 @@ bool Canevas::Is_GameOver()
 {
 	return _game.isGameOver();
 }
+

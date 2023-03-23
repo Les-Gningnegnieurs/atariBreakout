@@ -40,6 +40,7 @@ public:
     bool isGameOver();
     int getScoreInfo();
     Plateforme& getPlaform();
+    void resetScore() { _score = 0; }
 
     friend std::istream& operator>>(std::istream& s, GameLogic &gl);
 };

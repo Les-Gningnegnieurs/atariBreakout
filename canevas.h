@@ -19,6 +19,7 @@ public:
 	void draw(std::ostream &s);
 	void update (Controller& c, bool modeaccel);
 	bool Is_GameOver();
+	void resetScore() { _game.resetScore(); }
 	
 	
 
