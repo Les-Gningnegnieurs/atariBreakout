@@ -17,7 +17,7 @@ public:
 	friend std::istream& operator>>(std::istream& s, Canevas& can);
 	void erase();
 	void draw(std::ostream &s);
-	void update (Controller& c);
+	void update (Controller& c, bool modeaccel);
 	bool Is_GameOver();
 	
 	

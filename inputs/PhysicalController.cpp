@@ -127,7 +127,9 @@ bool PhysicalController::receiveInputs(){
     //{"a" : [x,y,z]} 
     if(j_msg_rcv["a"] != json::value_t::null){
         //update accelerometer values
-        _accelerometre.x = j_msg_rcv["a"][0];
+        _accelerometre.x = j_msg_rcv["a"][0] != 0 ? j_msg_rcv["a"][0] > 0 ? 1 : -1 : 0;
+        if (_reversemode)
+            _accelerometre.x *= -1;
         _accelerometre.y = j_msg_rcv["a"][1];
         _accelerometre.z = j_msg_rcv["a"][2];
     }

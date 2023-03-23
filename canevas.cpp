@@ -43,9 +43,9 @@ void Canevas::draw(std::ostream&s)
 	_game.draw(s);
 }
 
-void Canevas::update (Controller& c)
+void Canevas::update (Controller& c,bool modeaccel)
 {
-	_game.update(c);
+	_game.update(c,modeaccel);
 }
 
 bool Canevas::Is_GameOver()

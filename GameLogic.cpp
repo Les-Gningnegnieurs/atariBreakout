@@ -28,11 +28,14 @@ GameLogic::~GameLogic(){
     _balls.clear();
 }
 
-void GameLogic:: update(Controller& c)
+void GameLogic:: update(Controller& c, bool accelmode)
 {
     _level.draw(UI);
     //move plateform
-    _platform.move(c.getJoystick().x);
+    if (accelmode)
+        _platform.move(c.getAccelerometre().x);
+    else
+        _platform.move(c.getJoystick().x);
     _platform.update(); //update la position
     _platform.draw(UI); //update le dessin dans le tableau
     bool foundTimer = false;
@@ -66,14 +69,15 @@ void GameLogic:: update(Controller& c)
             int timer = _powers[i]->getTimer();
             int nbLeds = ((timer * 10) / PTIMELIMIT);
             nbLeds = nbLeds % 10;
-            for (int i = 0; i < nbLeds; i++)
+            for (int i = 0; i < 10; i++)
             {
-                c.setBargraph(i, 1);
+                if (nbLeds > i)
+                    c.setBargraph(i, 1);
+                else
+                    c.setBargraph(i, 0);
+                    
             }
-            for (int i = nbLeds; i < 10; i++)
-            {
-                c.setBargraph(i, 0);
-            }
+            
             
 
             
