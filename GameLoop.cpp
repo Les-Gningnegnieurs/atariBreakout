@@ -66,9 +66,9 @@ void GameLoop::update() {
         Start();
 
     _controller->receiveInputs();
-
+    
     if (_gameState == Running) {
-        _canevas->update(*_controller);
+        _canevas->update(*_controller, _menu.Is_modeAccelerometer());
         if (_controller->getButton(2))
         {
             Sleep(150);

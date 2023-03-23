@@ -28,11 +28,14 @@ GameLogic::~GameLogic(){
     _balls.clear();
 }
 
-void GameLogic:: update(Controller& c)
+void GameLogic:: update(Controller& c, bool accelmode)
 {
     _level.draw(UI);
     //move plateform
-    _platform.move(c.getJoystick().x);
+    if (accelmode)
+        _platform.move(c.getAccelerometre().x);
+    else
+        _platform.move(c.getJoystick().x);
     _platform.update(); //update la position
     _platform.draw(UI); //update le dessin dans le tableau
     bool foundTimer = false;

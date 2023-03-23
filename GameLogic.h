@@ -35,7 +35,7 @@ public:
     GameLogic();
     GameLogic(LevelInfos _info);
     ~GameLogic();
-    void update(Controller& c);
+    void update(Controller& c,bool accelmode);
     void draw(std::ostream &s);
     bool isGameOver();
     int getScoreInfo();
