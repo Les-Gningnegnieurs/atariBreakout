@@ -5,18 +5,18 @@
 
 using namespace std;
 
-int main(){
-
-    Intro(std::cout);
-    GameLoop game;
-    while (true)
-    {
-        while (!game.over) {
-
-            game.update();
-            Sleep(SLEEP);
-        }
-        game.Restart();
-    }
-    return 0;
-}
+//int main(){
+//
+//    Intro(std::cout);
+//    GameLoop game;
+//    while (true)
+//    {
+//        while (!game.over) {
+//
+//            game.update();
+//            Sleep(SLEEP);
+//        }
+//        game.Restart();
+//    }
+//    return 0;
+//}
