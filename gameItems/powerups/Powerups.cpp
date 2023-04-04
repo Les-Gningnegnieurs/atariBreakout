@@ -20,6 +20,8 @@ Powerups::Powerups(Position positionDestroyed,int _height , int _lenght  )
 	isStackable = true;
 	ledInfo.hasTimer = true;
 	ledInfo.color = 'g';
+	oldpos.x = pos.x;
+	oldpos.y = pos.y;
 	
 }
 

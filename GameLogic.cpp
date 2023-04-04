@@ -30,14 +30,12 @@ GameLogic::~GameLogic(){
 
 void GameLogic:: update(Controller& c, bool accelmode)
 {
-    _level.draw(UI);
     //move plateform
     if (accelmode)
         _platform.move(c.getAccelerometre().x);
     else
         _platform.move(c.getJoystick().x);
     _platform.update(); //update la position
-    _platform.draw(UI); //update le dessin dans le tableau
     bool foundTimer = false;
     
     
@@ -84,7 +82,6 @@ void GameLogic:: update(Controller& c, bool accelmode)
         }
         
         
-        _powers[i]->draw(UI);
         if (_powers[i]->getState() == Done || _powers[i]->getState() == OutOfBounds)
         {
             if (_powers[i]->getState() == Done)
@@ -101,7 +98,6 @@ void GameLogic:: update(Controller& c, bool accelmode)
     for(int i=0; i< _balls.size();i++)
     {
         _balls[i]->update();
-        _balls[i]->draw(UI);
     }
 
     //check les collisions une fois que les positions ont ete updatés
@@ -221,6 +217,19 @@ int GameLogic::getScoreInfo() {
 }
 
 void GameLogic::draw(std::ostream& s) {
+    _level.draw(UI);
+    _platform.draw(UI); //update le dessin dans le tableau
+
+    for (int i = 0; i < _balls.size(); i++)
+    {
+        _balls[i]->draw(UI);
+    }
+
+    for (int i = 0; i < _powers.size(); i++)
+    {
+        _powers[i]->draw(UI);
+    }
+
     DWORD dw;
     COORD here;
     HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
