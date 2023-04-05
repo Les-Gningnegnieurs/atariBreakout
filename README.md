@@ -1,5 +1,7 @@
 Format du fichier .txt
 La première rangée définie les paramèmtre des Briques dans l'ordre suivant:
+- Resolution window X
+- Resolution window Y
 - Nombre de rangées
 - Nombre de colonnes
 - Largeur des briques
