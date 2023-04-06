@@ -67,3 +67,46 @@
 // m.show();
 // return app.exec();
 //}
+
+#include <QApplication>
+#include <QGraphicsScene>
+#include <QGraphicsRectItem>
+#include <QGraphicsView>
+#include "Level.h"
+#include "Brique.h"
+#include "Structs.h"
+#include <fstream>
+#include "GameLoop.h"
+#include "Myrect.h"
+#include "Plateforme.h"
+#include "Controller.h"
+#include <QTimer>
+#include <QObject>
+
+int main(int argc, char** argv)
+{
+	QApplication a(argc, argv);
+
+	//std::string input_data = "1 1 1 1 1 1 1 1";
+
+	// create a Level object and a std::istringstream object from the input data
+	
+	//std::istringstream input_stream(input_data);
+
+	// use the overloaded operator to read the input data into the Level object
+
+
+	//Level _level(_info);
+	//std::string s = "1 1 1 1 1 1 1 1";
+	//input_stream >> _level;
+
+	//QGraphicsView* view = new QGraphicsView(_level.getScene());
+
+
+	//view->show();
+	//view->setFixedSize(800, 600);
+	
+	GameLoop game;
+	
+	return a.exec();
+}

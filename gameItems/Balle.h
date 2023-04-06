@@ -9,6 +9,10 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <QGraphicsEllipseItem>
+#include <QBrush>
+#include <QColor>
+#include <QGraphicsScene>
 
 class Balle{
 private:
@@ -17,19 +21,22 @@ private:
     Velocity speed;
     int oldPosX;
     int oldPosY;
+    QGraphicsEllipseItem* circle;
+    QGraphicsScene* _scene;
 public:
-    Balle(Position posB, int radius, int speedX = -1,int speedY=-1);
+    Balle(QGraphicsScene* scene, Position posB, int radius, int speedX =-1, int speedY=-1);
+    Balle(LevelInfos I, QGraphicsScene* scene);
     void setVelocity(int x, int y);
     int getrayon() { return rayon; }
     void update();
     int getoldPosX() { return oldPosX;  };
     int getoldPosY() { return oldPosY;  };
-    void draw(char UI[RESMAX_Y][RESMAX_X]);
+    void draw();
     bool checkCollision(Position posHit);
     Velocity getSpeed(){return speed;}
     Position getPos() {return pos;}
     void changeVelocity(bool x = 0, bool y = 0);
-
+    QGraphicsEllipseItem* getBall() { return circle; }
 };
 
 #endif

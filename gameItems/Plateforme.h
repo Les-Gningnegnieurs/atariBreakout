@@ -5,6 +5,11 @@
 #include "Balle.h"
 #include <iostream>
 #include <sstream>
+//#include <QGraphicsRectItem>
+#include "Myrect.h"
+#include <QColor>
+#include <QBrush>
+#include <QGraphicsScene>
 
 class Plateforme {
 private:
@@ -14,18 +19,25 @@ private:
     int columns;
     int sizeX;
     int sizeY;
+    QGraphicsRectItem* rect;
+    QGraphicsScene* _scene;
+    int Window_X;
+    int Window_Y;
 public:
     Plateforme();
-    Plateforme(LevelInfos I);
+    Plateforme(LevelInfos I, QGraphicsScene* scene);
     void checkCollision(Balle *b);
     void update();
     void move(int joystickvalueX);
-    void draw(char UI[RESMAX_Y][RESMAX_X]);
+    void draw();
     Velocity getSpeed(){return speed;}
     Position getPos(){return pos;}
     int getLenght() { return sizeX; }
     int getHeight() { return sizeY; }
     void setLenght(int l) { sizeX = l; }
+    QGraphicsRectItem* getplat() { return rect; }
+    void update2();
+    void move2();
 
 };
 

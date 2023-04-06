@@ -14,7 +14,7 @@ void Extendplatform::modifyPlateform(Plateforme& platform, bool reset)
 	}
 }
 
-Extendplatform::Extendplatform(Position positionDestroyed,  int height , int lenght ) :Powerups( positionDestroyed,    height ,  lenght )
+Extendplatform::Extendplatform(Position positionDestroyed,  int height , int lenght ) :Powerups(_scene, positionDestroyed,    height ,  lenght )
 {
 	name = "Extendplatform";
 

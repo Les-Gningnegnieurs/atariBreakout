@@ -61,6 +61,9 @@ void GameLoop::GameOver() {
 
 }
 #include <conio.h>
+void GameLoop::update2() {
+    _canevas->update(*_controller, _menu.Is_modeAccelerometer());
+}
 void GameLoop::update() {
     if (_gameState == Starting)
         Start();
@@ -121,7 +124,8 @@ void GameLoop::update() {
 }
 
 void GameLoop::loadFile() {
-    int value = _menu.Get_Level();
+    //int value = _menu.Get_Level();
+    int value = 1;
     std::stringstream str;
     std::string levelPath;
     str << "level/" << value << ".txt";
@@ -133,6 +137,6 @@ void GameLoop::loadFile() {
 
 void GameLoop::draw()
 {
-    _canevas->draw(std::cout);
+    _canevas->draw();
 }
 

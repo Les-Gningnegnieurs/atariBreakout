@@ -9,7 +9,7 @@ Powerups::~Powerups()
 {
 
 }
-Powerups::Powerups(Position positionDestroyed,int _height , int _lenght  )
+Powerups::Powerups(QGraphicsScene* scene, Position positionDestroyed,int _height , int _lenght) : _scene(scene)
 {
 
 	pos = positionDestroyed;
@@ -75,7 +75,7 @@ bool Powerups::checkCollisions(Plateforme _plateforme)
 }
 
 
-void Powerups::modifyBall(std::vector<Balle*> & ball, Plateforme _plat,bool reset )
+void Powerups::modifyBall(std::vector<Balle*> & ball, Plateforme _plat,bool reset)
 {
 
 }
@@ -102,12 +102,11 @@ void Powerups::resetPowerups(std::vector<Balle*> &ball, Plateforme& platform, Co
 	modifyControler(controller,true);
 
 }
-void Powerups::draw(char UI[RESMAX_Y][RESMAX_X])
+void Powerups::draw()
 {
 	if (state == Falling)
 	{
-		UI[oldpos.y][oldpos.x] = ' '; //espace a l'ancienne pos de la balle
-		UI[pos.y][pos.x] = 'P'; //update la nouvelle pos de la balle dans l'array 
+		//a faire
 	}
 }
 

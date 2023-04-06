@@ -1,33 +1,38 @@
 #include "GameLogic.h"
 
-GameLogic::GameLogic()
+GameLogic::GameLogic(QGraphicsScene* scene) : _scene(scene)
 {
+    
 }
 
-GameLogic:: GameLogic(LevelInfos i)
+GameLogic:: GameLogic(LevelInfos i, QGraphicsScene* scene) : _scene(scene)
 {
     _info = i;
     maxSizeX = _info.columns;
     maxSizeY = _info.rows;
     _livesLeft=3;
-     _platform=Plateforme(_info);
+     _platform=Plateforme(_info, _scene);
     _score=0;
     Position posB;
     posB.x = i.pos_Ball_iniX;
     posB.y = i.pos_Ball_iniY;
-    _balls.push_back(new Balle(posB,i.ball_radius, i.speed_B_x, i.speed_B_y));
-    _level = Level(_info);
-    for (int i = 0; i < maxSizeY; i++) {
-        for (int j = 0; j < maxSizeX; j++) {
-            UI[i][j] = ' ';
-        }
-    }
+    _balls.push_back(new Balle(_info, _scene));
+    _level = new Level(_info, _scene);
 }
 
 GameLogic::~GameLogic(){
     _balls.clear();
+    delete _level;
 }
+void GameLogic::update2() {
+    _platform.update(); //update la position
+      //update Game / do logic
+    for (int i = 0; i < _balls.size(); i++)
+    {
+        _balls[i]->update();
+    }
 
+}
 void GameLogic:: update(Controller& c, bool accelmode)
 {
     //move plateform
@@ -87,7 +92,7 @@ void GameLogic:: update(Controller& c, bool accelmode)
             if (_powers[i]->getState() == Done)
             
                 _powers[i]->resetPowerups(_balls, _platform, c);
-            UI[_powers[i]->getPos().y][_powers[i]->getPos().x] = ' ';
+            //UI[_powers[i]->getPos().y][_powers[i]->getPos().x] = ' ';
             delete _powers[i];
 ;           _powers.erase(_powers.begin() + i);
             
@@ -102,7 +107,7 @@ void GameLogic:: update(Controller& c, bool accelmode)
 
     //check les collisions une fois que les positions ont ete updatés
     checkCollisions(c);
-    draw(std::cout);
+    draw();
     if (!foundTimer)
     {
         if (c.statusLed(0))
@@ -146,7 +151,7 @@ void GameLogic::checkCollisions(Controller &control) {
                     if (_powers[i]->getName() == _powers[j]->getName() && j!=i && _powers[j]->getState()==Active)
                     {
                         _powers[j]->resetTimer();
-                        UI[_powers[i]->getPos().y][_powers[i]->getPos().x] = ' ';
+                        //UI[_powers[i]->getPos().y][_powers[i]->getPos().x] = ' ';
                         delete _powers[i];
                         _powers.erase(_powers.begin() + i);
                         typefound = true;
@@ -164,7 +169,7 @@ void GameLogic::checkCollisions(Controller &control) {
             if (!typefound)
             {
                 _powers[i]->setPowerups(_balls, _platform, control);
-                UI[_powers[i]->getPos().y][_powers[i]->getPos().x] = ' ';
+                //UI[_powers[i]->getPos().y][_powers[i]->getPos().x] = ' ';
             }
                 
             
@@ -185,7 +190,7 @@ void GameLogic::checkCollisions(Controller &control) {
         else
         {      
             //Balle *b = _balls[i];
-            _level.checkCollision(_balls[i], _score,_powers);
+            _level->checkCollision(_balls[i], _score,_powers);
 
             if (pos.y - rayon < 0 && speed.y < 0) //Hit  plafond
             {
@@ -206,7 +211,7 @@ void GameLogic::checkCollisions(Controller &control) {
         Position posb; 
         posb.x = _info.pos_Ball_iniX;
         posb.y = _info.pos_Ball_iniY;
-        Balle* p1 = new Balle(posb,_info.ball_radius);
+        Balle* p1 = new Balle(_scene, posb,_info.ball_radius);
         _balls.push_back(p1);
     }
 
@@ -216,49 +221,26 @@ int GameLogic::getScoreInfo() {
     return _score;
 }
 
-void GameLogic::draw(std::ostream& s) {
-    _level.draw(UI);
-    _platform.draw(UI); //update le dessin dans le tableau
+void GameLogic::draw() {
+    _platform.draw(); //update le dessin dans le tableau
+    
 
     for (int i = 0; i < _balls.size(); i++)
     {
-        _balls[i]->draw(UI);
+        _balls[i]->draw();
     }
 
     for (int i = 0; i < _powers.size(); i++)
     {
-        _powers[i]->draw(UI);
+        _powers[i]->draw();
     }
 
-    DWORD dw;
-    COORD here;
-    HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-
-    //draw bricks
-    for (int i = 0; i < maxSizeY; i++) {
-        for (int j = 0; j < maxSizeX; j++) {
-            here.Y = i;
-            here.X = j;
-
-            TCHAR strFromConsole[1];
-            ReadConsoleOutputCharacter(hStdOut, strFromConsole, 1, here, &dw);
-            char c = strFromConsole[0];
-            if (c != UI[i][j])
-            {
-                char text[1];
-                text[0] = UI[i][j];
-                wchar_t wtext[1];
-                mbstowcs(wtext, text, 2);
-                LPWSTR ptr = wtext;
-                WriteConsoleOutputCharacter(hStdOut, ptr, 1, here, &dw);
-            }
-        }
-    }
+    _level->draw();
 }
 
 std::istream& operator>>(std::istream& s, GameLogic &gl){
     
-    s >> gl._level;
+    s >> *gl._level;
     return s;
  }
 

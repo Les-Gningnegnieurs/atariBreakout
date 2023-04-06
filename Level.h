@@ -13,6 +13,7 @@
 #include "Balle.h"
 #include <vector>
 #include "Powerups.h"
+#include <QGraphicsScene>
 
 
 class Level{
@@ -23,12 +24,13 @@ class Level{
         int BrickHeigth;
         int BrickLength;
         Brique *_board[RESMAX_Y][RESMAX_X];
+        QGraphicsScene* _scene;
     public:
-        Level(LevelInfos I);
+        Level(LevelInfos I, QGraphicsScene* scene);
         Level();
         ~Level();
 
-        void draw(char UI[RESMAX_Y][RESMAX_X]);
+        void draw();
 
         void setRows(int rows);
 

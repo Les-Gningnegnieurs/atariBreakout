@@ -35,6 +35,7 @@ public:
     void Restart();
     void draw();
     void loadFile();
+    void update2();
 
 
 };

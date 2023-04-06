@@ -11,6 +11,9 @@
 #include "Extendplatform.h"
 #include "Addballs.h"
 #include "Swapcontrol.h"
+#include <QGraphicsRectItem>
+#include <QColor>
+#include <QBrush>
 
 #include <random>
 #include <iostream>
@@ -18,6 +21,7 @@
 
 class Brique
 {
+
 public:
 	//on entre simplement les coordonnées. la hauteur et la largeur sont déja définies
 	Brique(int x = 0, int y = 0, int l = 6, int h = 2, state s = Alive);
@@ -28,6 +32,8 @@ public:
 
 	
 	Collision checkCollision(Balle*b);
+
+	QGraphicsRectItem* getRect();
 
 	//virtual void update(float timeElapsed);
 
@@ -40,7 +46,8 @@ public:
 	void setstate(state s);
 	int GetHauteur() { return _sizeY; }
 
-	void draw(char UI[RESMAX_Y][RESMAX_X]);
+	//void draw(char UI[RESMAX_Y][RESMAX_X]);
+	void draw();
 	virtual void afficher(std::ostream& s) = 0;
 	virtual void addPowerUp(std::vector<Powerups*>& p);
 protected:
@@ -50,6 +57,7 @@ protected:
 	int _sizeY;
 	int _PV;
 	std::random_device rd;
+	QGraphicsRectItem* rect;
 	
 	
 };

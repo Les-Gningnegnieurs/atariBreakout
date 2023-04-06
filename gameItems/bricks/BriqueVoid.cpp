@@ -1,6 +1,7 @@
 #include "BriqueVoid.h"
 
 BriqueVoid::BriqueVoid(int x, int y, int l, int h) {
+    //rect = new QGraphicsRectItem();
     _posBrique.x = x;
     _posBrique.y = y;
     _sizeX = l;
@@ -9,7 +10,7 @@ BriqueVoid::BriqueVoid(int x, int y, int l, int h) {
     _etat = Destroyed;
 }
 BriqueVoid::~BriqueVoid() {
-
+    //delete rect;
 }
 
 

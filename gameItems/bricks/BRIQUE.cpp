@@ -1,21 +1,27 @@
 #include "Brique.h"
 Brique:: Brique(int x, int y, int l, int h, state s){
+    rect = new QGraphicsRectItem();
     _posBrique.x = x;
     _posBrique.y = y;
     _sizeX = l;
     _sizeY = h;
     _PV = 0;
     _etat = s;
+    rect->setRect(x, y, l, h); //Length and heigth dépe
 
     //length et height peut-etre a definir
 }
 Brique::~Brique() {
-
+    delete rect;
 }
+
 bool Brique::est_Detruite() {
     if (_etat == Destroyed)
         return true;
     return false;
+}
+QGraphicsRectItem* Brique::getRect() {
+    return rect;
 }
 state Brique::getstate() {
     return _etat;
@@ -61,9 +67,9 @@ Collision Brique::checkCollision(Balle* b) {
         //if (posBa.x + speed.x == _posBrique.x
             //&& posBa.y + speed.y == _posBrique.y)
         if ((posBa.x == _posBrique.x - rayon && posBa.y == _posBrique.y - rayon && speed.x > 0 && speed.y > 0) || //coin superieur gauche
-           (posBa.x == _posBrique.x - rayon && posBa.y == _posBrique.y + rayon && speed.x > 0 && speed.y < 0) || //coin inferieur gauche
-           (posBa.x == _posBrique.x + rayon && posBa.y == _posBrique.y - rayon && speed.x < 0 && speed.y > 0) ||//coin superieur droit
-           (posBa.x == _posBrique.x + rayon && posBa.y == _posBrique.y + rayon) && speed.x < 0 && speed.y < 0) //coin inferieur droit (il faut que la balle aille en diagonal gauche)
+            (posBa.x == _posBrique.x - rayon && posBa.y == _posBrique.y + rayon && speed.x > 0 && speed.y < 0) || //coin inferieur gauche
+            (posBa.x == _posBrique.x + rayon && posBa.y == _posBrique.y - rayon && speed.x < 0 && speed.y > 0) ||//coin superieur droit
+            (posBa.x == _posBrique.x + rayon && posBa.y == _posBrique.y + rayon) && speed.x < 0 && speed.y < 0) //coin inferieur droit (il faut que la balle aille en diagonal gauche)
 
         {
             return CN;
@@ -72,46 +78,46 @@ Collision Brique::checkCollision(Balle* b) {
     }
     else {
         //collision down
-    if (posBa.y == _posBrique.y + (_sizeY-1)+ rayon && speed.y < 0)  
-    {
-        if (posBa.x >= _posBrique.x && posBa.x <=_posBrique.x+_sizeX-1 )
-            return DN;
-    }
-    //collision top
-    if (posBa.y == _posBrique.y - rayon && speed.y > 0) 
-    {
-        if (posBa.x >= _posBrique.x && posBa.x <= _posBrique.x + _sizeX-1)
-            return UP;
-    }
-    //collision left
-    if (posBa.x == _posBrique.x - rayon && speed.x > 0)
-    {
-        if (posBa.y <= _posBrique.y + (_sizeY-1) && posBa.y >= _posBrique.y)
-            return LT;
-    }
-    //collision right
-    if (posBa.x == _posBrique.x + (_sizeX-1) +rayon && speed.x < 0)
-    {
-        if (posBa.y <= _posBrique.y + (_sizeY - 1) && posBa.y >= _posBrique.y)
-            return RT;
-    }
-    //collision coin
-    if ((posBa.x == _posBrique.x-rayon && posBa.y == _posBrique.y-rayon && speed.x > 0 && speed.y > 0 )|| //coin superieur gauche
-        (posBa.x == _posBrique.x-rayon && posBa.y == _posBrique.y+(_sizeY-1)+rayon && speed.x > 0 && speed.y < 0)|| //coin inferieur gauche
-        (posBa.x == _posBrique.x+(_sizeX-1)+rayon && posBa.y == _posBrique.y-rayon && speed.x < 0 && speed.y > 0)||//coin superieur droit
-        (posBa.x == _posBrique.x+(_sizeX-1)+rayon && posBa.y == _posBrique.y+(_sizeY-1)+rayon) && speed.x < 0 && speed.y < 0) //coin inferieur droit (il faut que la balle aille en diagonal gauche)
+        if (posBa.y == _posBrique.y + (_sizeY - 1) + rayon && speed.y < 0)
+        {
+            if (posBa.x >= _posBrique.x && posBa.x <= _posBrique.x + _sizeX - 1)
+                return DN;
+        }
+        //collision top
+        if (posBa.y == _posBrique.y - rayon && speed.y > 0)
+        {
+            if (posBa.x >= _posBrique.x && posBa.x <= _posBrique.x + _sizeX - 1)
+                return UP;
+        }
+        //collision left
+        if (posBa.x == _posBrique.x - rayon && speed.x > 0)
+        {
+            if (posBa.y <= _posBrique.y + (_sizeY - 1) && posBa.y >= _posBrique.y)
+                return LT;
+        }
+        //collision right
+        if (posBa.x == _posBrique.x + (_sizeX - 1) + rayon && speed.x < 0)
+        {
+            if (posBa.y <= _posBrique.y + (_sizeY - 1) && posBa.y >= _posBrique.y)
+                return RT;
+        }
+        //collision coin
+        if ((posBa.x == _posBrique.x - rayon && posBa.y == _posBrique.y - rayon && speed.x > 0 && speed.y > 0) || //coin superieur gauche
+            (posBa.x == _posBrique.x - rayon && posBa.y == _posBrique.y + (_sizeY - 1) + rayon && speed.x > 0 && speed.y < 0) || //coin inferieur gauche
+            (posBa.x == _posBrique.x + (_sizeX - 1) + rayon && posBa.y == _posBrique.y - rayon && speed.x < 0 && speed.y > 0) ||//coin superieur droit
+            (posBa.x == _posBrique.x + (_sizeX - 1) + rayon && posBa.y == _posBrique.y + (_sizeY - 1) + rayon) && speed.x < 0 && speed.y < 0) //coin inferieur droit (il faut que la balle aille en diagonal gauche)
 
-    {
-        return CN;
+        {
+            return CN;
+        }
+        return NO;
     }
     return NO;
-    }
-    return NO;
-    
+
 }
 
 
-bool Brique::increase_Damage(std::vector<Powerups*>& p,int &score) {
+bool Brique::increase_Damage(std::vector<Powerups*>& p, int& score) {
     if (_etat != Indestructible && _etat != Destroyed)
     {
         _PV--;
@@ -126,7 +132,11 @@ bool Brique::increase_Damage(std::vector<Powerups*>& p,int &score) {
     }
     return false;
 }
-
+void Brique::draw(){
+    if(!est_Detruite())
+        rect->setPos(_posBrique.x, _posBrique.y);
+}
+/*
 void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
     if (est_Detruite()) {
         if (_sizeX == 1 && _sizeY == 1)
@@ -172,7 +182,7 @@ void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
         }
     }
 }
-
+*/
 void Brique::addPowerUp(std::vector<Powerups*>& p) {
     std::uniform_real_distribution<double> distribution(0, 99);
     std::default_random_engine generator(rd());

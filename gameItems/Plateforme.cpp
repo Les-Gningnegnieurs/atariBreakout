@@ -1,18 +1,30 @@
 #include "Plateforme.h"
 Plateforme::Plateforme() {
 }
-Plateforme::Plateforme(LevelInfos I)
+Plateforme::Plateforme(LevelInfos I, QGraphicsScene* scene) : _scene(scene)
 {
+    Window_X = I._windowResolutionX;
+    Window_Y = I._windowResolutionY;
     sizeX = I.Plat_length;
     sizeY = I.Plat_heigth;
     rows = I.rows;
     columns = I.columns;
     speed.x = 0;
     speed.y = 0;
-    pos.x = I.pos_Plat_iniX;
-    pos.y = I.pos_Plat_iniY;  
-}
+    pos.x = I.pos_Plat_iniX * I.Brick_length;
+    pos.y = I.pos_Plat_iniY * I.Brick_heigth;  
+    //pos.x = I.pos_Plat_iniX;  //si on marche en pixels
+    //pos.y = I.pos_Plat_iniY;  //pixels
+    rect = new QGraphicsRectItem();
+    rect->setBrush(Qt::gray);
+    rect->setRect(pos.x, pos.y, sizeX, sizeY);
+    _scene->addItem(rect);
 
+}
+void Plateforme::update2(){
+}
+void Plateforme::move2() {
+}
 void Plateforme::move(int joystickvalueX)
 {
     speed.x = joystickvalueX*2;
@@ -22,24 +34,15 @@ void Plateforme::update()
 {
     pos.x += speed.x;
     
-    if (pos.x >= columns - 1 - sizeX)
-        pos.x = columns - sizeX - 1;
+    if (pos.x >= Window_X - sizeX)
+        pos.x = Window_X - sizeX;
     else if (pos.x <= 0)
         pos.x = 0;
-
 }
 
-void Plateforme::draw(char UI[RESMAX_Y][RESMAX_X])
+void Plateforme::draw()
 {
-    //clear la ligne de la plateforme (plus simple que clear tout le UI 
-    for (int i = 0; i < columns; i++)
-    {
-        UI[rows - 1][i] = ' ';
-    }
-    for (int i = pos.x; i < pos.x + sizeX; i++)
-    {
-        UI[rows - 1][i] = '#';
-    }
+    rect->setPos(pos.x, pos.y);
 }
 
 

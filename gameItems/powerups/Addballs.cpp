@@ -16,9 +16,9 @@ void Addballs::modifyBall(std::vector<Balle*> &ball, Plateforme _plat, bool rese
 			
 				
 				
-				ball.push_back(new Balle(posP, rayon,-1,-1));
-				ball.push_back(new Balle(posP, rayon, 1, -1));
-				ball.push_back(new Balle(posP, rayon, 0, -1));
+				ball.push_back(new Balle(_scene, posP, rayon,-1,-1));
+				ball.push_back(new Balle(_scene,posP, rayon, 1, -1 ));
+				ball.push_back(new Balle(_scene, posP, rayon, 0, -1));
 
 		
 		}
@@ -26,7 +26,7 @@ void Addballs::modifyBall(std::vector<Balle*> &ball, Plateforme _plat, bool rese
 }
 
 
-Addballs::Addballs(Position positionDestroyed, int height, int lenght) :Powerups(positionDestroyed, height, lenght)
+Addballs::Addballs(Position positionDestroyed, int height, int lenght) :Powerups(_scene, positionDestroyed, height, lenght)
 {
 	ledInfo.hasTimer = false;
 	name = "Addballs";

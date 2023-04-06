@@ -7,6 +7,7 @@
 #include "Controller.h"
 #include <chrono>
 #include <vector>
+#include <QGraphicsScene>
 
 class GameLogic;
 
@@ -29,18 +30,19 @@ protected:
 	bool isStackable;
 	PowerupsLED ledInfo;
 	std::string name = "Powerups";
+	QGraphicsScene* _scene;
 	
 	
 public:
 	Powerups();
-	Powerups(Position positionDestroyed,  int height =1 ,int lenght = 1);
+	Powerups(QGraphicsScene* scene, Position positionDestroyed,  int height =1 ,int lenght = 1);
 	~Powerups();
 	bool checkCollisions(Plateforme _plateforme);
 	void update();
 	void setPowerups(std::vector<Balle*> &ball, Plateforme& platform, Controller& controller);
 	void resetPowerups(std::vector<Balle*> & ball, Plateforme& platform, Controller& controller);
 	void setFalling() { state = Falling; }
-	virtual void draw(char UI[RESMAX_Y][RESMAX_X]);
+	virtual void draw();
 	Status getState() { return state; };
 	void setState(Status s) { state = s; };
 	Position getPos() { return pos; };

@@ -1,5 +1,5 @@
 #include "Level.h"
-Level::Level(LevelInfos I){
+Level::Level(LevelInfos I, QGraphicsScene* scene): _scene(scene){
     rows = I.rows;
     columns = I.columns;
     BrickHeigth = I.Brick_heigth;
@@ -11,16 +11,14 @@ Level :: ~Level(){
 
 }
 
-void Level::draw(char UI[RESMAX_Y][RESMAX_X]) {
+void Level::draw() {
 
-    for (int i = 0; i < rows/BrickHeigth; i++) {
-        for (int j = 0; j < columns/BrickLength; j++) {
-            _board[i][j]->draw(UI);
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
+             _board[i][j]->draw();
         }
 
     }
-
-
 }
 
 void Level::checkColl_DOWN_RIGHT(Balle* b, int& score, std::vector <Powerups*>& p){
@@ -293,28 +291,38 @@ int Level :: getLength(){
 std::istream& operator >> (std::istream& s, Level& I){
     //on est rendu aux infos sur le level
     int x=0;
-    //while(!s.eof()){
-        for(int i=0; i< I.getRows()/I.getHeigth(); i++)
+        //for(int i=0; i< I.getRows()/I.getHeigth(); i++)
+        for (int i = 0; i < I.getRows() ; i++)
         {
-            for(int j=0; j<I.getColumns()/I.getLength(); j++)
+            //for(int j=0; j<I.getColumns()/I.getLength(); j++)
+            for(int j=0; j<I.getColumns(); j++)
             {
                 s >> x;
                 if(x == 1){
                     //pourrait faire dequoi avec le 128 pour ajuster l'écran
                     //si == 0 : pas de brique a cette position
                     I._board[i][j] = new Briquetest(j*I.getLength(), i*I.getHeigth(), I.getLength(), I.getHeigth()); 
+                    I._scene->addItem(I._board[i][j]->getRect());
                 }
-                else if (x == 0) 
+                else if (x == 0) {
                     I._board[i][j] = new BriqueVoid(j * I.getLength(), i * I.getHeigth(), I.getLength(), I.getHeigth());
+                    //I._scene->addItem(I._board[i][j]->getRect());
+                }
                 
-                else if (x == 2)
+                else if (x == 2) {
                     I._board[i][j] = new BriqueB(j * I.getLength(), i * I.getHeigth(), I.getLength(), I.getHeigth());
+                    I._scene->addItem(I._board[i][j]->getRect());
+                }
                 
-                else if(x == 3)
+                else if (x == 3) {
                     I._board[i][j] = new BriqueC(j * I.getLength(), i * I.getHeigth(), I.getLength(), I.getHeigth());
+                    I._scene->addItem(I._board[i][j]->getRect());
+                }
 
-                else if (x == 8) 
+                else if (x == 8) {
                     I._board[i][j] = new BriqueT(j * I.getLength(), i * I.getHeigth(), I.getLength(), I.getHeigth());
+                    I._scene->addItem(I._board[i][j]->getRect());
+                }
                 
             }
         }

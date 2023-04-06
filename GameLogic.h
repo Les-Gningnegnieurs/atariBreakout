@@ -14,29 +14,31 @@
 #include <iostream>
 #include "Powerups.h"
 #include <Windows.h>
+#include <QGraphicsScene>
 
 class GameLogic {
 private:
     std::vector<Balle*> _balls;
     std::vector<Powerups*> _powers;
-    Level _level;
+    Level *_level;
     LevelInfos _info;
     Plateforme _platform;
-    char UI[RESMAX_Y][RESMAX_X];
     int _score;
     int _livesLeft;
     int maxSizeX;
     int maxSizeY;
+    QGraphicsScene* _scene;
     
  
 
     void checkCollisions(Controller& control);
 public:
-    GameLogic();
-    GameLogic(LevelInfos _info);
+    GameLogic(QGraphicsScene* scene);
+    GameLogic(LevelInfos _info, QGraphicsScene* scene);
     ~GameLogic();
     void update(Controller& c,bool accelmode);
-    void draw(std::ostream &s);
+    void update2();
+    void draw();
     bool isGameOver();
     int getScoreInfo();
     Plateforme& getPlaform();

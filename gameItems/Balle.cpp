@@ -1,6 +1,18 @@
 #include "Balle.h"
-Balle::Balle(Position posB, int radius, int speedX , int speedY)
+Balle::Balle(LevelInfos I, QGraphicsScene* scene) :_scene(scene)
 {
+    pos.x = I.pos_Ball_iniX;
+    pos.y = I.pos_Ball_iniY;
+    oldPosX = pos.x;
+    oldPosY = pos.y;
+    speed.y = I.speed_B_y;
+    speed.x = I.speed_B_x;
+    rayon = I.ball_radius;
+    circle = new QGraphicsEllipseItem(pos.x*I.Brick_length, pos.y*I.Brick_heigth,rayon*2,rayon*2);
+    circle->setBrush(Qt::magenta);
+    _scene->addItem(circle);
+}
+Balle::Balle(QGraphicsScene* scene, Position posB, int radius, int speedX, int speedY) :_scene(scene) {
     pos.x = posB.x;
     pos.y = posB.y;
     oldPosX = pos.x;
@@ -8,6 +20,9 @@ Balle::Balle(Position posB, int radius, int speedX , int speedY)
     speed.y = speedY;
     speed.x = speedX;
     rayon = radius;
+    circle = new QGraphicsEllipseItem(pos.x, pos.y, rayon * 2, rayon * 2);
+    circle->setBrush(Qt::magenta);
+    _scene->addItem(circle);
 }
 void Balle::update()
 {
@@ -20,12 +35,12 @@ void Balle::update()
 
     pos.x += speedX;
     pos.y += speedY;
+   
 }
 
-void Balle:: draw(char UI[RESMAX_Y][RESMAX_X])
+void Balle:: draw()
 {
-    UI[getoldPosY()][getoldPosX()] = ' '; //espace a l'ancienne pos de la balle
-    UI[getPos().y][getPos().x] = 'O'; //update la nouvelle pos de la balle dans l'array 
+    circle->setPos(pos.x, pos.y);
 }
 
 

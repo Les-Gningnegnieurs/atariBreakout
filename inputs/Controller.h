@@ -1,8 +1,10 @@
 #ifndef CONTROLLER_H__
 #define CONTROLLER_H__
 
+
 #include "../components/components.h"
 #include <iostream>
+#include <QKeyEvent>
 
 
 

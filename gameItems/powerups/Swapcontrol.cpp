@@ -1,6 +1,6 @@
 #include "Swapcontrol.h"
 
-Swapcontrol::Swapcontrol(Position positionDestroyed, int height, int lenght) :Powerups(positionDestroyed, height, lenght)
+Swapcontrol::Swapcontrol(Position positionDestroyed, int height, int lenght) :Powerups(_scene,positionDestroyed, height, lenght)
 {
 	isStackable = false;
 	ledInfo.color = 'r';

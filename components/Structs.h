@@ -20,6 +20,8 @@ struct Velocity {
 };
 
 struct LevelInfos{
+    int _windowResolutionX;
+    int _windowResolutionY;
     int rows;
     int columns;
     int Brick_length; //in pixels
