@@ -1,21 +1,20 @@
 #include "BriqueA.h"
 
 BriqueA::BriqueA(int x, int y, int l, int h) {
-    rect = new QGraphicsRectItem();
-    rect->setBrush(Qt::blue);
+    setBrush(Qt::blue);
     _posBrique.x = x;
     _posBrique.y = y;
     _sizeX = l;
     _sizeY = h;
     _PV = 1;
     _etat = Alive;
-    rect->setRect(x, y, l, h);
+    setRect(x, y, l, h);
 
     //length et height peut-etre a definir
 }
 
 BriqueA::~BriqueA() {
-    delete rect;
+    //delete rect;
 }
 
 

@@ -1,18 +1,15 @@
 #include "Brique.h"
 Brique:: Brique(int x, int y, int l, int h, state s){
-    rect = new QGraphicsRectItem();
     _posBrique.x = x;
     _posBrique.y = y;
     _sizeX = l;
     _sizeY = h;
     _PV = 0;
     _etat = s;
-    rect->setRect(x, y, l, h); //Length and heigth dépe
-
+    setRect(x, y, l, h);
     //length et height peut-etre a definir
 }
 Brique::~Brique() {
-    delete rect;
 }
 
 bool Brique::est_Detruite() {
@@ -20,9 +17,7 @@ bool Brique::est_Detruite() {
         return true;
     return false;
 }
-QGraphicsRectItem* Brique::getRect() {
-    return rect;
-}
+
 state Brique::getstate() {
     return _etat;
 }
@@ -117,14 +112,13 @@ Collision Brique::checkCollision(Balle* b) {
 }
 
 
-bool Brique::increase_Damage(std::vector<Powerups*>& p, int& score) {
+bool Brique::increase_Damage(std::vector<Powerups*>& p) {
     if (_etat != Indestructible && _etat != Destroyed)
     {
         _PV--;
         if (_PV <= 0)
         {
             addPowerUp(p);
-            score++;
         }
         else
             _etat = Hurt;
@@ -134,7 +128,7 @@ bool Brique::increase_Damage(std::vector<Powerups*>& p, int& score) {
 }
 void Brique::draw(){
     if(!est_Detruite())
-        rect->setPos(_posBrique.x, _posBrique.y);
+        setPos(_posBrique.x, _posBrique.y);
 }
 /*
 void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {

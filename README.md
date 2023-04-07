@@ -8,13 +8,13 @@ La deuxième rangée définie les paramèmtre des Briques dans l'ordre suivant:
 - Largeur des briques en px
 - Hauteur des briques en px
 La troisième rangée définie les paramèmtre de la plateforme dans l'ordre suivant:
-- Position initiale de la plateforme sur l'axe X (en terme de colonnes de briques)
-- Position initiale de la plateforme sur l'axe Y (en termes de rangées de briques)
+- Position initiale de la plateforme sur l'axe X (en px)
+- Position initiale de la plateforme sur l'axe Y (en px)
 - Largeur de la plateforme (en px)
 - Hauteur de la plateforme  (en px)
 La quatrième rangée définie les paramèmtre de la balle dans l'ordre suivant:
-- Position initiale de la balle sur l'axe X (en terme de colonnes de briques)
-- Position initiale de la balle sur l'axe Y (en terme de rangées de briques)
+- Position initiale de la balle sur l'axe X (en px)
+- Position initiale de la balle sur l'axe Y (en px)
 - Rayon de la balle (en px)
 - speed de la balle en X    (en px/tick)
 - speed de la balle en Y    (en px/tick)

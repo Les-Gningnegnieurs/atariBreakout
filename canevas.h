@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QWidget>
 #define RESOLUTION_X 80
 #define RESOLUTION_Y 25
 
 
-class Canevas
+class Canevas: public QGraphicsView
 {
 private:
 	GameLogic* _game;
@@ -14,7 +15,6 @@ private:
 	int _windowResolutionY = RESOLUTION_Y;
 	LevelInfos _info;
 	QGraphicsScene* _scene;
-	QGraphicsView* _view;
 public:
 	Canevas();
 	~Canevas();
@@ -22,6 +22,7 @@ public:
 	void erase();
 	void draw();
 	void update (Controller& c, bool modeaccel);
+	void update2();
 	bool Is_GameOver();
 	void resetScore() { _game->resetScore(); }
 	

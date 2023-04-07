@@ -12,12 +12,28 @@ GameLogic:: GameLogic(LevelInfos i, QGraphicsScene* scene) : _scene(scene)
     maxSizeY = _info.rows;
     _livesLeft=3;
      _platform=Plateforme(_info, _scene);
-    _score=0;
     Position posB;
     posB.x = i.pos_Ball_iniX;
     posB.y = i.pos_Ball_iniY;
+    QGraphicsRectItem* rect_Left = new QGraphicsRectItem(0,0,50,i._windowResolutionY-200);
+    rect_Left->setBrush(Qt::lightGray);
+    QGraphicsRectItem* rect_Top = new QGraphicsRectItem(0, 0, i._windowResolutionX, 50);
+    rect_Top->setBrush(Qt::lightGray);
+    QGraphicsRectItem* rect_Right = new QGraphicsRectItem(i._windowResolutionX-50, 0, 50, i._windowResolutionY-200);
+    rect_Right->setBrush(Qt::lightGray);
+    _scene->addItem(rect_Left);
+    _scene->addItem(rect_Top);
+    _scene->addItem(rect_Right);
+
     _balls.push_back(new Balle(_info, _scene));
-    _level = new Level(_info, _scene);
+    _vies = new Health();
+    _vies->setPos(10, i._windowResolutionY - 70);
+    scene->addItem(_vies);
+    _score = new Score();
+    _score->setPos(10, i._windowResolutionY - 100);
+    scene->addItem(_score);
+    _level = new Level(_info, _score, _scene);
+
 }
 
 GameLogic::~GameLogic(){
@@ -25,13 +41,9 @@ GameLogic::~GameLogic(){
     delete _level;
 }
 void GameLogic::update2() {
-    _platform.update(); //update la position
-      //update Game / do logic
-    for (int i = 0; i < _balls.size(); i++)
-    {
-        _balls[i]->update();
-    }
-
+    _platform.getplat()->setFlag(QGraphicsItem::ItemIsFocusable);
+    _platform.getplat()->setFocus();
+    //_scene->setFocusItem(_platform.getplat());
 }
 void GameLogic:: update(Controller& c, bool accelmode)
 {
@@ -123,7 +135,7 @@ bool GameLogic::isGameOver()
 {
     if (_livesLeft < 0)
     {
-        std::cout << _score;
+        std::cout << _score->getScore();
         Sleep(500);
         return true;
     }
@@ -190,7 +202,7 @@ void GameLogic::checkCollisions(Controller &control) {
         else
         {      
             //Balle *b = _balls[i];
-            _level->checkCollision(_balls[i], _score,_powers);
+            _level->checkCollision(_balls[i],_powers);
 
             if (pos.y - rayon < 0 && speed.y < 0) //Hit  plafond
             {
@@ -218,7 +230,7 @@ void GameLogic::checkCollisions(Controller &control) {
 }
 
 int GameLogic::getScoreInfo() {
-    return _score;
+    return _score->getScore();
 }
 
 void GameLogic::draw() {

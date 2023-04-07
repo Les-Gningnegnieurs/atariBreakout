@@ -62,7 +62,7 @@ void GameLoop::GameOver() {
 }
 #include <conio.h>
 void GameLoop::update2() {
-    _canevas->update(*_controller, _menu.Is_modeAccelerometer());
+    _canevas->update2();
 }
 void GameLoop::update() {
     if (_gameState == Starting)

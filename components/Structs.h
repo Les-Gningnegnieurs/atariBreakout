@@ -9,6 +9,7 @@
 #define RESMAX_Y 50 //25
 #define SLEEP 16
 #define PTIMELIMIT 15000
+#define CONTOUR 50
 
 struct Position {
     int x;

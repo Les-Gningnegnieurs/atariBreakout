@@ -15,6 +15,8 @@
 #include "Powerups.h"
 #include <Windows.h>
 #include <QGraphicsScene>
+#include <QGraphicsTextItem>
+#include <QGraphicsRectItem>
 
 class GameLogic {
 private:
@@ -23,12 +25,13 @@ private:
     Level *_level;
     LevelInfos _info;
     Plateforme _platform;
-    int _score;
     int _livesLeft;
     int maxSizeX;
     int maxSizeY;
     QGraphicsScene* _scene;
-    
+    Health* _vies;
+    Score* _score;
+    QGraphicsRectItem* _rect;
  
 
     void checkCollisions(Controller& control);
@@ -42,7 +45,7 @@ public:
     bool isGameOver();
     int getScoreInfo();
     Plateforme& getPlaform();
-    void resetScore() { _score = 0; }
+    void resetScore() { _score->resetScore(); } //a voir
 
     friend std::istream& operator>>(std::istream& s, GameLogic &gl);
 };

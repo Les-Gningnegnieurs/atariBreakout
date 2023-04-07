@@ -19,21 +19,20 @@
 #include <iostream>
 
 
-class Brique
+class Brique: public QGraphicsRectItem
 {
-
 public:
 	//on entre simplement les coordonnées. la hauteur et la largeur sont déja définies
 	Brique(int x = 0, int y = 0, int l = 6, int h = 2, state s = Alive);
 
-	bool increase_Damage(std::vector<Powerups*>& p,int &score);
+	bool increase_Damage(std::vector<Powerups*>& p);
 
 	virtual ~Brique();
 
 	
 	Collision checkCollision(Balle*b);
 
-	QGraphicsRectItem* getRect();
+	//QGraphicsRectItem* getRect();
 
 	//virtual void update(float timeElapsed);
 
@@ -57,8 +56,7 @@ protected:
 	int _sizeY;
 	int _PV;
 	std::random_device rd;
-	QGraphicsRectItem* rect;
-	
+	//QGraphicsRectItem* rect;
 	
 };
 

@@ -11,14 +11,16 @@ Plateforme::Plateforme(LevelInfos I, QGraphicsScene* scene) : _scene(scene)
     columns = I.columns;
     speed.x = 0;
     speed.y = 0;
-    pos.x = I.pos_Plat_iniX * I.Brick_length;
-    pos.y = I.pos_Plat_iniY * I.Brick_heigth;  
+    pos.x = I.pos_Plat_iniX;
+    pos.y = I.pos_Plat_iniY;
     //pos.x = I.pos_Plat_iniX;  //si on marche en pixels
     //pos.y = I.pos_Plat_iniY;  //pixels
-    rect = new QGraphicsRectItem();
+    rect = new MyRect();
     rect->setBrush(Qt::gray);
     rect->setRect(pos.x, pos.y, sizeX, sizeY);
     _scene->addItem(rect);
+    rect->setFlag(QGraphicsItem::ItemIsFocusable);
+    rect->setFocus();
 
 }
 void Plateforme::update2(){

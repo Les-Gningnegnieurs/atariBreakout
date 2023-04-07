@@ -107,6 +107,7 @@ int main(int argc, char** argv)
 	//view->setFixedSize(800, 600);
 	
 	GameLoop game;
+	game.update2();
 	
 	return a.exec();
 }
