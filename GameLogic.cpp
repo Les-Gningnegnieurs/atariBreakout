@@ -60,13 +60,9 @@ void GameLogic:: update(Controller& c, bool accelmode)
         _platform.move(c.getJoystick().x);
     _platform.update(); //update la position
     bool foundTimer = false;
-    
-    
         
     for (int i = 0; i < _powers.size(); i++)
     {
-      
-        
         _powers[i]->update();
         if (_powers[i]->getState() == Active && _powers[i]->getLedinfo().hasTimer && !foundTimer)
         {
@@ -225,7 +221,6 @@ void GameLogic::checkCollisions(Controller &control) {
     if(_balls.empty())
     {
         _livesLeft--;
-        Sleep(350);
         Position posb; 
         posb.x = _info.pos_Ball_iniX;
         posb.y = _info.pos_Ball_iniY;

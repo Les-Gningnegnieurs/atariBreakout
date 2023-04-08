@@ -2,21 +2,30 @@
 
 #include "GameLoop.h"
 
-GameLoop::GameLoop() {
+GameLoop::GameLoop(QObject* parent) : QObject(parent) {   
     _canevas = new Canevas();
     _controller = new Keyboard();
     _menu.Set_Controller(_controller);
     _gameState = Starting;
     loadFile();
     over = false;
+    thread = new QThread(this);
+    timer = new QTimer();
+    timer->setInterval(100);
+    QObject::connect(timer, &QTimer::timeout, this, &GameLoop::MainGameLoop);
+    QObject::connect(thread, &QThread::started, timer, static_cast<void (QTimer::*)(void)>(&QTimer::start));
+    timer->moveToThread(thread);
+
+    //temporaire
+    _menu.Set_playing(1);
 }
 
 void GameLoop::Start() {
 
-    while (!_menu.Is_over())
+    /*while (!_menu.Is_over())
     {
         _menu.print(std::cout);
-    }
+    }*/
 
     _controller = _menu.Get_Controller();
     _controller->setPower(true);
@@ -27,6 +36,8 @@ void GameLoop::Start() {
         _gameState = Running;
     else
         Stop();
+
+    startGameLoop();
 }
 
 
@@ -41,6 +52,7 @@ void GameLoop::Stop() {
 
 void GameLoop::Restart()
 {
+    stopGameLoop();
     _canevas->resetScore();
     _gameState = Starting;
     loadFile();
@@ -56,14 +68,13 @@ void GameLoop::GameOver() {
         _canevas->erase();
         over = true;
     }
-
-
-
 }
+
 #include <conio.h>
 void GameLoop::update2() {
     _canevas->update2();
 }
+
 void GameLoop::update() {
     if (_gameState == Starting)
         Start();
@@ -77,13 +88,13 @@ void GameLoop::update() {
             
 
 
+           /* std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
             std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
             std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
             std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
-            std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
-            std::cout << std::endl << std::endl << "Paused\t" << "ESC : Resume\t" << "ENTER : QUIT";
+            std::cout << std::endl << std::endl << "Paused\t" << "ESC : Resume\t" << "ENTER : QUIT";*/
 
-            Sleep(200);
+            //Sleep(200);
             _controller->receiveInputs();
            
             while (!_controller->getButton(2) && !_controller->getButton(1))
@@ -100,26 +111,14 @@ void GameLoop::update() {
                 over = true;
             }
 
-            Sleep(150);
-            system("CLS");
+            //Sleep(150);
+            //system("CLS");
 
 
         }
     }
     GameOver();
 
-    /*if (bg >= 10)
-        bg = 0;
-    else
-        bg++;
- 
-    for (int i = 0; i < 10; i++) {
-        if (i < bg)
-            _controller->setBargraph(i, 1);
-        else
-            _controller->setBargraph(i, 0);
-    }
-    Sleep(1000);*/
     _controller->sendOutputs();
 }
 
@@ -140,3 +139,21 @@ void GameLoop::draw()
     _canevas->draw();
 }
 
+void GameLoop::startGameLoop() {
+    thread->start();
+}
+
+void GameLoop::stopGameLoop() {
+    thread->exit();
+    timer->stop();
+}
+
+
+void GameLoop::MainGameLoop() {
+    if (!over) {
+        update();
+    }
+    else {
+        Restart();
+    }
+}

@@ -2,21 +2,21 @@
 #include "GameLoop.h"
 #include <fstream>
 #include <iostream>
+#include <QApplication>
+#include <QThread>
+#include <QTimer>
 
 using namespace std;
+int main(int argc, char** argv){
 
-//int main(){
-//
-//    //Intro(std::cout);
-//    GameLoop* game = new GameLoop();
-//    while (true)
-//    {
-//        while (!game->over) {
-//
-//            game->update();
-//            Sleep(SLEEP);
-//        }
-//        game->Restart();
-//    }
-//    return 0;
-//}
+    QApplication a(argc, argv);
+
+
+    //Intro(std::cout);
+    GameLoop* game = new GameLoop();
+
+    game->Start();
+    game->update2(); //renomer la méthode pour Focus()
+    
+    return a.exec();
+}
