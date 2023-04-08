@@ -26,6 +26,7 @@ private:
     Level *_level;
     LevelInfos _info;
     Plateforme _platform;
+    MyRect* _plat;
     int _livesLeft;
     int maxSizeX;
     int maxSizeY;

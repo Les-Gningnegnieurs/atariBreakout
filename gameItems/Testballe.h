@@ -10,7 +10,7 @@ class testBalle : public QObject, public QGraphicsEllipseItem {
 	Q_OBJECT
 public:
 	testBalle(LevelInfos I);
-	void checkCollisions();
+	bool checkCollisions();
 public slots:
 	void move();
 private:

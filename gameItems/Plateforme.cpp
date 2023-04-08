@@ -15,7 +15,7 @@ Plateforme::Plateforme(LevelInfos I, QGraphicsScene* scene) : _scene(scene)
     pos.y = I.pos_Plat_iniY;
     //pos.x = I.pos_Plat_iniX;  //si on marche en pixels
     //pos.y = I.pos_Plat_iniY;  //pixels
-    rect = new MyRect();
+    rect = new MyRect(I);
     rect->setBrush(Qt::gray);
     rect->setRect(pos.x, pos.y, sizeX, sizeY);
     _scene->addItem(rect);

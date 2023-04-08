@@ -1,6 +1,7 @@
 #include "Briquetest.h"
 
 Briquetest::Briquetest(int x, int y, int l, int h, state s) {
+    setRect(0, 0, l, h);
     setBrush(Qt::yellow);
     _posBrique.x = x;
     _posBrique.y = y;
@@ -8,7 +9,6 @@ Briquetest::Briquetest(int x, int y, int l, int h, state s) {
     _sizeY = h;
     _PV = 1;
     _etat = s;
-    setRect(x, y, l, h);
     //length et height peut-etre a definir
 }
 

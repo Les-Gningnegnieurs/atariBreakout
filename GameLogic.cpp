@@ -11,7 +11,10 @@ GameLogic:: GameLogic(LevelInfos i, QGraphicsScene* scene) : _scene(scene)
     maxSizeX = _info.columns;
     maxSizeY = _info.rows;
     _livesLeft=3;
-     _platform=Plateforme(_info, _scene);
+    // _platform=Plateforme(_info, _scene);
+    _plat = new  MyRect(i);
+    _plat->setPos(i.pos_Plat_iniX, i.pos_Plat_iniY);
+    _scene->addItem(_plat);
     Position posB;
     posB.x = i.pos_Ball_iniX;
     posB.y = i.pos_Ball_iniY;
@@ -44,8 +47,8 @@ GameLogic::~GameLogic(){
     delete _level;
 }
 void GameLogic::update2() {
-    _platform.getplat()->setFlag(QGraphicsItem::ItemIsFocusable);
-    _platform.getplat()->setFocus();
+    _plat->setFlag(QGraphicsItem::ItemIsFocusable);
+    _plat->setFocus();
     //_scene->setFocusItem(_platform.getplat());
 }
 void GameLogic:: update(Controller& c, bool accelmode)

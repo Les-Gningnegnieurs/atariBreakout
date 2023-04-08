@@ -1,6 +1,7 @@
 #include "BriqueB.h"
 
 BriqueB::BriqueB(int x, int y, int l, int h) {
+    setRect(0,0,l,h);
     setBrush(Qt::cyan);
     _posBrique.x = x;
     _posBrique.y = y;
@@ -8,7 +9,6 @@ BriqueB::BriqueB(int x, int y, int l, int h) {
     _sizeY = h;
     _PV = 2;
     _etat = Alive;
-    setRect(x, y, l, h);
 
     //length et height peut-etre a definir
 }

@@ -320,6 +320,7 @@ std::istream& operator >> (std::istream& s, Level& I){
                     //pourrait faire dequoi avec le 128 pour ajuster l'écran
                     //si == 0 : pas de brique a cette position
                     I._board[i][j] = new Briquetest(j*I.getLength()+CONTOUR, i*I.getHeigth()+CONTOUR, I.getLength(), I.getHeigth()); 
+                    I._board[i][j]->setPos(j * I.BrickLength + CONTOUR,  i * I.BrickHeigth + CONTOUR);
                     I._scene->addItem(I._board[i][j]);
                 }
                 else if (x == 0) {
@@ -329,16 +330,19 @@ std::istream& operator >> (std::istream& s, Level& I){
                 
                 else if (x == 2) {
                     I._board[i][j] = new BriqueB(j * I.getLength() + CONTOUR, i * I.getHeigth() + CONTOUR, I.getLength(), I.getHeigth());
+                    I._board[i][j]->setPos(j * I.BrickLength + CONTOUR, i * I.BrickHeigth + CONTOUR);
                     I._scene->addItem(I._board[i][j]);
                 }
                 
                 else if (x == 3) {
                     I._board[i][j] = new BriqueC(j * I.getLength() + CONTOUR, i * I.getHeigth() + CONTOUR, I.getLength(), I.getHeigth());
+                    I._board[i][j]->setPos(j * I.BrickLength + CONTOUR, i * I.BrickHeigth + CONTOUR);
                     I._scene->addItem(I._board[i][j]);
                 }
 
                 else if (x == 8) {
                     I._board[i][j] = new BriqueT(j * I.getLength() + CONTOUR, i * I.getHeigth() + CONTOUR, I.getLength(), I.getHeigth());
+                    I._board[i][j]->setPos(j * I.BrickLength + CONTOUR, i * I.BrickHeigth + CONTOUR);
                     I._scene->addItem(I._board[i][j]);
                 }
                 

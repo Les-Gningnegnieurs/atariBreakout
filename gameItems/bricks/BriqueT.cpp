@@ -1,5 +1,6 @@
 #include "BriqueT.h"
 BriqueT::BriqueT(int x, int y, int l, int h) {
+    setRect(0, 0, l, h);
     setBrush(Qt::darkGray);
     _posBrique.x = x;
     _posBrique.y = y;
@@ -7,7 +8,6 @@ BriqueT::BriqueT(int x, int y, int l, int h) {
     _sizeY = h;
     _PV = 1;
     _etat = Indestructible;
-    setRect(x, y, l, h);
 
     //length et height peut-etre a definir
 }
