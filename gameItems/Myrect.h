@@ -1,15 +1,16 @@
 #ifndef MYRECT_H
 #define MYRECT_H
-
 #include <QGraphicsRectItem>
 #include <QKeyEvent>
 #include <QGraphicsTextItem>
+
 #include <QDebug>
 #include <QFont>
 #include <QColor>
 class MyRect : public QGraphicsRectItem {
 public:
 	void keyPressEvent(QKeyEvent* event);
+
 };
 
 class Score : public QGraphicsTextItem {
@@ -30,4 +31,5 @@ public:
 private:
 	int vies;
 };
+
 #endif MYRECT_H

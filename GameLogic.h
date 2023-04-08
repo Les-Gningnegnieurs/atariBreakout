@@ -5,6 +5,7 @@
 #define GAMELOGIC_H
 
 #include "Balle.h"
+#include "Testballe.h"
 #include "Level.h"
 #include "BRIQUE.H"
 #include "Plateforme.h"

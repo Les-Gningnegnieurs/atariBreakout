@@ -8,9 +8,9 @@ Balle::Balle(LevelInfos I, QGraphicsScene* scene) :_scene(scene)
     speed.y = I.speed_B_y;
     speed.x = I.speed_B_x;
     rayon = I.ball_radius;
-    circle = new QGraphicsEllipseItem(pos.x, pos.y,rayon*2,rayon*2);
+    circle = new QGraphicsEllipseItem(pos.x, pos.y, rayon * 2, rayon * 2);
     circle->setBrush(Qt::magenta);
-    _scene->addItem(circle);
+    scene->addItem(circle);
 }
 Balle::Balle(QGraphicsScene* scene, Position posB, int radius, int speedX, int speedY) :_scene(scene) {
     pos.x = posB.x;

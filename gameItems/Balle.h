@@ -14,7 +14,7 @@
 #include <QColor>
 #include <QGraphicsScene>
 
-class Balle{
+class Balle:public QGraphicsEllipseItem{
 private:
     Position pos;
     int rayon;
