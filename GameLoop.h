@@ -15,12 +15,14 @@
 #include <QObject>
 #include "inputs/Keyboard.h"
 #include "inputs/PhysicalController.h"
+#include "mainWindow.h"
 
 using  namespace std::chrono;
 
 
 class GameLoop : public QObject {
 private:
+    MainWindow* _window;
     Canevas *_canevas;
     Menu _menu;
     gameState _gameState;

@@ -14,6 +14,7 @@ Elles permet de :
 #include "Keyboard.h"
 #include <string>
 #include <filesystem>
+#include <QGraphicsScene>
 
 #include <chrono>
 #include <thread>
@@ -64,6 +65,7 @@ class Menu
 private:
 	Config* parameters;
 	Controller* _keyboard;
+	QGraphicsScene* _scene;
 
 	// Devra contenir les différents paramètres
 	bool modeAccelerometer;
@@ -130,6 +132,7 @@ public:
 	short Get_choice() { return choice; };
 	bool Get_controllerMode() { return controllerMode; };
 	int Get_comPort() { return comPort; };
+	QGraphicsScene* getScene() { return _scene; }
 	Controller* Get_Controller() { return _keyboard; }
 
 	void Change_mode() { if (modeJoystick) Set_modeAccelerometer(); else Set_modeJoystick(); };

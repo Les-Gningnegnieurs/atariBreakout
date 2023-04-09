@@ -4,6 +4,7 @@
 
 GameLoop::GameLoop(QObject* parent) : QObject(parent) {   
     _canevas = new Canevas();
+    _window = new MainWindow(_canevas->getScene(), _menu.getScene());
     _controller = new Keyboard();
     _menu.Set_Controller(_controller);
     _gameState = Starting;
@@ -18,6 +19,7 @@ GameLoop::GameLoop(QObject* parent) : QObject(parent) {
 
     //temporaire
     _menu.Set_playing(1);
+    //_window->showMenu();
 }
 
 void GameLoop::Start() {
