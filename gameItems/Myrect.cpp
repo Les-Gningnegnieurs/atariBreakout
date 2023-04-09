@@ -50,6 +50,9 @@ Health::Health(QGraphicsItem* parent) : QGraphicsTextItem(parent) {
 	setPlainText(QString("Health: ") + QString::number(vies));
 	setDefaultTextColor(Qt::red);
 	setFont(QFont("Helvetica", 14));
+
+	//voici comment render une image provenant du fichier ressource
+	QImage* im = new QImage(":/game/ui/heart");
 }
 void Health::decrease() {
 	vies--;

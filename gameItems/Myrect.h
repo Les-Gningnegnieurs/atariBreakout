@@ -9,6 +9,7 @@
 #include <QFont>
 #include <QColor>
 #include <QBrush>
+#include <QImage>
 class MyRect : public QGraphicsRectItem {
 public:
 	MyRect(LevelInfos I);

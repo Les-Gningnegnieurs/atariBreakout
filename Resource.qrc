@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/game/ui">
+        <file alias="heart">ressources/heart.png</file>
+    </qresource>
+</RCC>
