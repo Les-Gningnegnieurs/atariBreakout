@@ -1,6 +1,6 @@
 #include "application.h"
 
-
+/*
 void Window::set_as_sure()
 {
 	resize(400, 300);
@@ -20,7 +20,7 @@ void Window::set_as_paused() //NON TERMINÉ
 	yes->move(this->width() / 2 - yes->width(), imageY);
 
 	QPushButton* cancel = add_button("image/unselected/quit.png");
-	cancel->move(this->width() / 2, imageY);*/
+	cancel->move(this->width() / 2, imageY);
 }
 
 // Permet d'ajouter un bouton image à l'endroit désiré
@@ -154,6 +154,7 @@ void Menu_UI::set_as_settings()
 
 QPushButton* Menu_UI::add_exit(QWidget* widget)
 {
+
 	QPushButton* button = new QPushButton(widget);
 	QPixmap pixmap("image/unselected/exit.png");
 	QIcon icon(pixmap); // Création d'une icône à partir de la première image
@@ -170,7 +171,6 @@ QPushButton* Menu_UI::add_exit(QWidget* widget)
 
 	return button;
 }
-
 QLabel* Menu_UI::import_image(QString path, QWidget* widget)
 {
 	QLabel* imageLabel = new QLabel(widget);
@@ -198,57 +198,6 @@ QPushButton* Menu_UI::add_center_button(QString path, QWidget* widget)
 
 	return button;
 }
-/*
-Main_UI::Main_UI(QApplication* a)
-{
-	app = a;
-	imageY = 100;
-	import_image_up("image/title/logo.png");
-	import_image_up("image/title/team.png");
-	imageY += 50;
-	_center[0] = add_center_button("image/unselected/play_game.png");
-	_center[1] = add_center_button("image/unselected/select_level.png");
-	_center[2] = add_center_button("image/unselected/settings.png");
-	QObject::connect(_exit, &QPushButton::clicked, this, &Main_UI::exit_clicked);
-	QObject::connect(_center[0], &QPushButton::clicked, this, &Main_UI::settings_clicked);
-	QObject::connect(_center[1], &QPushButton::clicked, this, &Main_UI::level_clicked);
-	QObject::connect(_center[2], &QPushButton::clicked, this, &Main_UI::settings_clicked);
-}
-
-Settings_UI::Settings_UI()
-{
-	imageY = 50;
-	import_image_up("image/title/settings_menu.png");
-	QPushButton* _playing_mode = add_button("image/unselected/playing_mode.png");
-	_playing_mode->move(this->width() / 2 - _playing_mode->width(), imageY);
-	imageY += _playing_mode->height();
-
-	QPushButton* _COM = add_button("image/unselected/COM.png");
-	_COM->move(this->width() / 2 - _COM->width(), imageY);
-	imageY += _COM->height();
-
-	QPushButton* _input = add_button("image/unselected/input.png");
-	_input->move(this->width() / 2 - _input->width(), imageY);
-	imageY += _input->height();
-
-	QPushButton* _apply = add_center_button("image/unselected/apply.png");
-
-	QPushButton* _load = add_button("image/unselected/load.png");
-	_load->move(this->width() / 2 - _load->width() - 50, imageY);
-
-	QPushButton* _save = add_button("image/unselected/save.png");
-	_save->move(this->width() / 2 + 50, imageY);
-
-	connect(_exit, &QPushButton::clicked, this, &Window::close);
-}
-
-Level_UI::Level_UI()
-{
-	imageY = 50;
-	import_image_up("image/title/select_level_menu.png");
-
-	connect(_exit, &QPushButton::clicked, this, &Window::close);
-}
 */
 /*
 int main(int argc, char* argv[]) {
@@ -267,7 +216,7 @@ int main(int argc, char* argv[]) {
 #include <QPushButton>
 #include <QLabel>
 
-int main(int argc, char* argv[])
+/*int main(int argc, char* argv[])
 {
 	QApplication app(argc, argv);
 	//button2->setGeometry(200, 20, 100, 30); // Définir la position et la taille du bouton 2
@@ -281,3 +230,4 @@ int main(int argc, char* argv[])
 
 	return app.exec();
 }
+*/

@@ -13,6 +13,7 @@
 #include <QSpacerItem>
 #include <QIcon>
 #include <QtWidgets>
+#include <QGraphicsScene>
 
 #include <QObject>
 
@@ -23,26 +24,22 @@
 #define EXIT_WIDTH 50
 #define EXIT_HEIGHT 50
 #define MARGIN 50
-
-class Window : public QMainWindow
+/*
+class Window : public QGraphicsScene
 {
 protected:
 	Menu* _menu;
 	int imageY = 0; // Position verticale de la prochaine image à ajouter
 	QApplication* app;
 public:
-	Window(QWidget* parent = nullptr) : QMainWindow(parent)
+	Window(QWidget* parent = nullptr) : QGraphicsScene(parent)
 	{
-		setStyleSheet("background-color: black;");
-		setWindowTitle("Atari Breakout - P3");
-		setWindowIcon(QIcon("image/icon.png"));
+		setBackgroundBrush(Qt::black);
 	}
-	Window(QApplication* a, QWidget* parent = nullptr) : QMainWindow(parent)
+	Window(QApplication* a, QWidget* parent = nullptr) : QGraphicsScene(parent)
 	{
 		app = a;
-		setStyleSheet("background-color: black;");
-		setWindowTitle("Atari Breakout - P3");
-		setWindowIcon(QIcon("image/icon.png"));
+		setBackgroundBrush(Qt::black);
 	}
 
 	QLabel* import_image_up(QString path, QWidget* widget);
@@ -88,8 +85,7 @@ public:
 public slots:
 	void exit_clicked()
 	{
-		Window* win = new Window(app);
-		win->set_as_sure();
+		QMainWindow* win = new QMainWindow();
 		win->show();
 	}
 	void level_clicked()
@@ -107,4 +103,5 @@ public slots:
 
 };
 
+*/
 #endif
