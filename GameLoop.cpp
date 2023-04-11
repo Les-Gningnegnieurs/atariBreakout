@@ -2,83 +2,160 @@
 
 #include "GameLoop.h"
 
-GameLoop::GameLoop() {
+GameLoop::GameLoop(QObject* parent) : QObject(parent) {   
     _canevas = new Canevas();
-    _keyboard = new Keyboard();
+    _window = new MainWindow(_canevas->getScene(), _menu.getScene());
+    _controller = new Keyboard();
+    _menu.Set_Controller(_controller);
+    _gameState = Starting;
     loadFile();
+    over = false;
+    thread = new QThread(this);
+    timer = new QTimer();
+    timer->setInterval(100);
+    QObject::connect(timer, &QTimer::timeout, this, &GameLoop::MainGameLoop);
+    QObject::connect(thread, &QThread::started, timer, static_cast<void (QTimer::*)(void)>(&QTimer::start));
+    timer->moveToThread(thread);
+
+    //temporaire
+    _menu.Set_playing(1);
+    //_window->showMenu();
 }
-void GameLoop:: Start(){
-    _gameState=Running;
-    elapsed = 0;
+
+void GameLoop::Start() {
+
+    /*while (!_menu.Is_over())
+    {
+        _menu.print(std::cout);
+    }*/
+
+    _controller = _menu.Get_Controller();
+    _controller->setPower(true);
+
+
+    _canevas->erase();
+    if (_menu.Is_playing())
+        _gameState = Running;
+    else
+        Stop();
+
+    startGameLoop();
 }
-void GameLoop:: Pause()
+
+
+void GameLoop::Pause()
 {
-    _gameState=Paused;
+    _gameState = Paused;
 }
-void GameLoop::GetTimeElapsed()
-{
-     auto tick = clock.now();
-     auto int_ms = duration_cast<std::chrono::milliseconds>(tick - lastTickTime);
-     lastTickTime = tick;
-     elapsed = int_ms.count();
-}
+
 void GameLoop::Stop() {
-    _gameState=Stopped;
+    _gameState = Stopped;
 }
 
 void GameLoop::Restart()
 {
-    delete _canevas;
-    _canevas= new Canevas;
+    stopGameLoop();
+    _canevas->resetScore();
+    _gameState = Starting;
     loadFile();
+    over = false;
+    _menu.Reset();
 
 }
 
-void GameLoop:: GameOver(){
-    if(_canevas->Is_GameOver())
+void GameLoop::GameOver() {
+    if (_canevas->Is_GameOver())
     {
         Stop();
         _canevas->erase();
-        //ouvrir le menu
+        over = true;
     }
-    else draw();
-
-
 }
 
-void GameLoop:: update() {
-    _keyboard->receiveInputs();
-    GetTimeElapsed();
+#include <conio.h>
+void GameLoop::update2() {
+    _canevas->update2();
+}
+
+void GameLoop::update() {
     if (_gameState == Starting)
         Start();
-    if (_gameState==Running) {
-        _canevas->update(elapsed, *_keyboard);
+
+    _controller->receiveInputs();
+    
+    if (_gameState == Running) {
+        _canevas->update(*_controller, _menu.Is_modeAccelerometer());
+        if (_controller->getButton(2))
+        {
+            
+
+
+           /* std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
+            std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
+            std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
+            std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
+            std::cout << std::endl << std::endl << "Paused\t" << "ESC : Resume\t" << "ENTER : QUIT";*/
+
+            //Sleep(200);
+            _controller->receiveInputs();
+           
+            while (!_controller->getButton(2) && !_controller->getButton(1))
+            {
+                
+                _controller->receiveInputs();
+               
+
+            }
+            if (_controller->getButton(1))
+            {
+                Stop();
+                _canevas->erase();
+                over = true;
+            }
+
+            //Sleep(150);
+            //system("CLS");
+
+
+        }
     }
     GameOver();
-    _keyboard->sendOutputs();
 
+    _controller->sendOutputs();
 }
 
-void GameLoop:: loadFile(){
-    //int value= _menu.Get_Level();
+void GameLoop::loadFile() {
+    //int value = _menu.Get_Level();
     int value = 1;
     std::stringstream str;
     std::string levelPath;
     str << "level/" << value << ".txt";
     levelPath = str.str();
     std::fstream myfile;
-    myfile.open(levelPath,std::ios::in);
-    myfile>>*_canevas;
+    myfile.open(levelPath, std::ios::in);
+    myfile >> *_canevas;
 }
 
 void GameLoop::draw()
 {
-    if (drawElapsed >= 60.0) {
-        drawElapsed = 0;
-        std::stringstream s;
-        _canevas->draw(s);
-        std::cout << s.str();
-   }
-    else
-        drawElapsed += elapsed;
+    _canevas->draw();
+}
+
+void GameLoop::startGameLoop() {
+    thread->start();
+}
+
+void GameLoop::stopGameLoop() {
+    thread->exit();
+    timer->stop();
+}
+
+
+void GameLoop::MainGameLoop() {
+    if (!over) {
+        update();
+    }
+    else {
+        Restart();
+    }
 }

@@ -5,22 +5,36 @@
 #include "Structs.h"
 #include "Briquetest.h"
 #include "BriqueVoid.h"
+#include "BriqueA.h"
+#include "BriqueB.h"
+#include "BriqueT.h"
+#include "BriqueC.h"
 #include <iostream>
 #include "Balle.h"
-#define MAX_ROWS 10
-#define MAX_COLUMNS 10
+#include <vector>
+#include "Powerups.h"
+#include <QGraphicsScene>
+#include "Myrect.h"
+
+
 
 class Level{
     private: 
-        LevelInfos _info;
-        Brique *_board[MAX_ROWS][MAX_COLUMNS];
+        //LevelInfos _info;
+        int rows;
+        int columns;
+        int BrickHeigth;
+        int BrickLength;
+        Brique *_board[RESMAX_Y][RESMAX_X];
+        QGraphicsScene* _scene;
+        Score* _score;
+
     public:
+        Level(LevelInfos I, Score* score, QGraphicsScene* scene);
         Level();
         ~Level();
 
-        void draw(std::ostream &s);
-
-        void update(float timeElapsed);
+        void draw();
 
         void setRows(int rows);
 
@@ -32,13 +46,15 @@ class Level{
 
         int getHeigth();
 
-        void setHeigth(int y);
-
         int getLength();
+        int I(int i_start, int i_end, int i);
+        int J(int j_start, int j_end, int j);
 
-        void setLength(int x);
-
-        void checkCollision(Balle *b, int& score);
+        void checkColl_DOWN_RIGHT(Balle* b, std::vector <Powerups*>& p);
+        void checkColl_DOWN_LEFT(Balle* b, std::vector <Powerups*>& p);
+        void checkColl_UP_RIGHT(Balle* b, std::vector <Powerups*>& p);
+        void checkColl_UP_LEFT(Balle* b, std::vector <Powerups*>& p);
+        void checkCollision(Balle *b, std::vector <Powerups*> &p);
 
         Brique* getBrique(int row_idx, int column_idx); //utile pour set le level au debut
 
@@ -46,7 +62,6 @@ class Level{
 
 
         void afficher(std::ostream& s);
-        void levelDrawline(std::ostream &s,int ligne );
 
 
         friend std::istream& operator >>(std::istream& s, Level& I);

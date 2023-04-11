@@ -9,35 +9,46 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <QApplication>
+#include <QThread>
+#include <QTimer>
+#include <QObject>
 #include "inputs/Keyboard.h"
+#include "inputs/PhysicalController.h"
+#include "mainWindow.h"
 
 using  namespace std::chrono;
 
 
-class GameLoop {
+class GameLoop : public QObject {
 private:
-    high_resolution_clock clock;
+    MainWindow* _window;
     Canevas *_canevas;
     Menu _menu;
-    steady_clock::time_point lastTickTime;
     gameState _gameState;
-    float elapsed;
-    long long drawElapsed;
-public:
-    Controller* _keyboard;
+    QThread* thread;
+    QTimer* timer;
+    int bg = 0;
 
-    GameLoop();
+private slots:
+    void MainGameLoop();
+    
+public:
+    Controller* _controller;
+
+    bool over;
+    GameLoop(QObject* parent = 0);
     void Start();
     void Stop();
     void Pause();
-    void openMenu();
     void update();
     void GameOver();
     void Restart();
     void draw();
-    void Exit();
     void loadFile();
-    void GetTimeElapsed();
+    void update2();
+    void startGameLoop();
+    void stopGameLoop();
 
 
 };
