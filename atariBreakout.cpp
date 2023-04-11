@@ -20,7 +20,7 @@ int main(int argc, char** argv){
 
      //game->Start();
      //game->update2(); //renomer la méthode pour Focus()
-    window->resize(800, 600);
+    window->resize(1000,800 );
     window->show();
     return a.exec();
 }

@@ -10,13 +10,18 @@ void SelectLevel :: initUI()
 
     QGridLayout* gridLayout = new QGridLayout();
     gridLayout->setSpacing(100);
+   
 
     
 
     // Add level images to the grid
-    QPixmap level1(":\ressources\Level.png");
-    QPushButton* level1Button = new QPushButton(level1,"level1");
-    //level1Label->setCursor(Qt::PointingHandCursor);
+    QPixmap level1("../ressources/Level.png");
+    QPushButton* level1Button = new QPushButton("level1");
+    QIcon icon(level1);
+    level1Button->setIcon(icon);
+    level1Button->setIconSize(level1.rect().size()); 
+    level1Button->setFixedSize(level1.rect().size()); 
+    level1Button->setFlat(true);
     gridLayout->addWidget(level1Button, 0, 0);
 
     // Add level images to the grid
@@ -32,12 +37,21 @@ void SelectLevel :: initUI()
     gridLayout->addWidget(level3Button, 1, 0);
 
     // Set the layout for the widget
+
+
     QVBoxLayout* layout = new QVBoxLayout();
-    gridLayout->setAlignment(Qt::AlignCenter);
     layout->setAlignment(Qt::AlignCenter);
+
+    QLabel* text = new QLabel();
+    QPixmap pix =  QPixmap("../ressources/Select_Level.png");
+    text->setPixmap(pix);
+    text->move(400, 100);
+    layout->addWidget(text);
+   
   
     layout->addLayout(gridLayout);
     
-
-    this->setLayout(gridLayout);
+    this->setStyleSheet("background-color: gray;");
+  
+    this->setLayout(layout);
 }
