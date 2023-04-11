@@ -2,8 +2,9 @@
 #define MAINMENU_H
 #include <QGraphicsScene>
 #include "application.h"
-class MainMenu:public QGraphicsScene
+class MainMenu:public QObject,public QGraphicsScene
 {
+	Q_OBJECT
 public:
 	MainMenu(QApplication* app,QWidget*parent=nullptr): QGraphicsScene(parent){
 		setBackgroundBrush(Qt::black);

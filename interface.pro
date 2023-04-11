@@ -5,3 +5,4 @@ HEADERS += application.h menu.h MainMenu.h   ../Appli/components/Structs.h ../Ap
 SOURCES += application.cpp MainMenu.cpp menu.cpp ../Appli/inputs/Controller.cpp ../Appli/inputs/Keyboard.cpp ../Appli/inputs/PhysicalController.cpp ../Appli/lib/SerialPort.cpp
 INCLUDEPATH += ../Appli
 QT += widgets
+QT += core

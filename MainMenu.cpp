@@ -91,22 +91,26 @@ QPushButton* MainMenu::add_center_button(QString path)
 void MainMenu::set_as_sure()
 {
 	QMainWindow* win = new QMainWindow();
+	win->setStyleSheet("background-color: black;");
+	QWidget* centralWidget = new QWidget(win);
+	win->setCentralWidget(centralWidget);
 	win->resize(400, 300);
 	QLabel* imageLabel = import_image_up("image/title/sure.png");
-	win->setCentralWidget(imageLabel);
+	QVBoxLayout* layout = new QVBoxLayout(centralWidget);
+	centralWidget->setLayout(layout);
+	layout->addWidget(imageLabel);
 
 	QPushButton* yes = add_button("image/unselected/yes.png",win);
-	win->setCentralWidget(yes);
-
+	layout->addWidget(yes);
 
 	yes->move(this->width() / 2 - yes->width(), imageY);
-	connect(yes, &QPushButton::clicked, _app, &QApplication::quit);
+	QObject::connect(yes, &QPushButton::clicked, _app, &QApplication::quit);
 
 	QPushButton* cancel = add_button("image/unselected/cancel.png",win);
-	win->setCentralWidget(cancel);
+	layout->addWidget(cancel);
 
 	cancel->move(this->width() / 2, imageY);
-	connect(cancel, &QPushButton::clicked, win, &QMainWindow::close);
+	QObject::connect(cancel, &QPushButton::clicked, win, &QMainWindow::close);
 	win->show();
 }
 
