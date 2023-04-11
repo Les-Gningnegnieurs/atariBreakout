@@ -14,7 +14,7 @@ void SelectLevel :: initUI()
     
 
     // Add level images to the grid
-    QPixmap level1(":\level\level1.jpg");
+    QPixmap level1(":\ressources\Level.png");
     QPushButton* level1Button = new QPushButton(level1,"level1");
     //level1Label->setCursor(Qt::PointingHandCursor);
     gridLayout->addWidget(level1Button, 0, 0);
@@ -34,9 +34,10 @@ void SelectLevel :: initUI()
     // Set the layout for the widget
     QVBoxLayout* layout = new QVBoxLayout();
     gridLayout->setAlignment(Qt::AlignCenter);
+    layout->setAlignment(Qt::AlignCenter);
   
     layout->addLayout(gridLayout);
     
 
-    this->setLayout(layout);
+    this->setLayout(gridLayout);
 }
