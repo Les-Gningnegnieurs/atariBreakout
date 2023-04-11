@@ -14,6 +14,7 @@ Elles permet de :
 #include <string>
 #include <filesystem>
 #include "application.h"
+#include <QGraphicsScene>
 
 #include <chrono>
 #include <thread>

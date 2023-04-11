@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "menu.h"
 #include <QApplication>
 #include <QMainWindow>
 #include <QWidget>
@@ -26,6 +27,7 @@
 class Window : public QMainWindow
 {
 protected:
+	Menu* _menu;
 	int imageY = 0; // Position verticale de la prochaine image à ajouter
 	QApplication* app;
 public:
@@ -74,7 +76,7 @@ protected:
 	QPushButton* _exits;
 	QPushButton* _buttons[6];
 public:
-	Menu_UI(QApplication* a);
+	Menu_UI(QApplication* a, Menu* m);
 	QPushButton* add_exit(QWidget* widget);
 	QLabel* import_image(QString path, QWidget* widget);
 	QPushButton* add_center_button(QString path, QWidget* widget);

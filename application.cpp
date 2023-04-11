@@ -57,12 +57,12 @@ QLabel* Window::import_image_up(QString path, QWidget* widget)
 
 
 
-Menu_UI::Menu_UI(QApplication* a)
+Menu_UI::Menu_UI(QApplication* a, Menu* m)
 {
 	app = a;
 	resize(1200, 800);
 	
-	
+	_menu = m;
 	
 	_main->resize(RESOLUTION_X, RESOLUTION_Y);
 	_level->resize(RESOLUTION_X, RESOLUTION_Y);
@@ -271,8 +271,8 @@ int main(int argc, char* argv[])
 {
 	QApplication app(argc, argv);
 	//button2->setGeometry(200, 20, 100, 30); // Définir la position et la taille du bouton 2
-
-	Menu_UI* menu = new Menu_UI(&app);
+	Menu m;
+	Menu_UI* menu = new Menu_UI(&app, &m);
 
 	menu->set_as_main();
 
