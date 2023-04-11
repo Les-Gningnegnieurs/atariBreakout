@@ -12,9 +12,9 @@ testBalle::testBalle(LevelInfos I) {
     speed.x = I.speed_B_x;
     rayon = I.ball_radius;
     setBrush(Qt::magenta);
-	QTimer* timer = new QTimer();
+	/*QTimer* timer = new QTimer();
 	connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-	timer->start(50);
+	timer->start(50);*/
 }
 bool testBalle::checkCollisions() {
     QList<QGraphicsItem*> colliding_items = collidingItems();

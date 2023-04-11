@@ -11,10 +11,10 @@ GameLogic:: GameLogic(LevelInfos i, QGraphicsScene* scene) : _scene(scene)
     maxSizeX = _info.columns;
     maxSizeY = _info.rows;
     _livesLeft=3;
-    // _platform=Plateforme(_info, _scene);
-    _plat = new  MyRect(i);
+    _platform=Plateforme(_info, _scene);
+   /* _plat = new  MyRect(i);
     _plat->setPos(i.pos_Plat_iniX, i.pos_Plat_iniY);
-    _scene->addItem(_plat);
+    _scene->addItem(_plat);*/
     Position posB;
     posB.x = i.pos_Ball_iniX;
     posB.y = i.pos_Ball_iniY;
@@ -28,10 +28,10 @@ GameLogic:: GameLogic(LevelInfos i, QGraphicsScene* scene) : _scene(scene)
     _scene->addItem(rect_Top);
     _scene->addItem(rect_Right);
 
-    //_balls.push_back(new Balle(_info, _scene));
-    testBalle* _balle = new testBalle(_info);
+    _balls.push_back(new Balle(_info, _scene));
+    /*testBalle* _balle = new testBalle(_info);
     _balle->setPos(_info.pos_Ball_iniX, _info.pos_Ball_iniY);
-    _scene->addItem(_balle);
+    _scene->addItem(_balle);*/
     _vies = new Health();
     _vies->setPos(10, i._windowResolutionY - 70);
     scene->addItem(_vies);
@@ -47,9 +47,9 @@ GameLogic::~GameLogic(){
     delete _level;
 }
 void GameLogic::update2() {
-    _plat->setFlag(QGraphicsItem::ItemIsFocusable);
-    _plat->setFocus();
-    //_scene->setFocusItem(_platform.getplat());
+    /*_plat->setFlag(QGraphicsItem::ItemIsFocusable);
+    _plat->setFocus();*/
+    _scene->setFocusItem(_platform.getplat());
 }
 void GameLogic:: update(Controller& c, bool accelmode)
 {
@@ -112,16 +112,18 @@ void GameLogic:: update(Controller& c, bool accelmode)
             
         }
     }
-
     //update Game / do logic
-    for(int i=0; i< _balls.size();i++)
+    //check les collisions une fois que les positions ont ete updatés
+    for (int i = 0; i < _balls.size(); i++)
     {
         _balls[i]->update();
     }
-
-    //check les collisions une fois que les positions ont ete updatés
     checkCollisions(c);
-    draw();
+    //draw();
+    for (int i = 0; i < _balls.size(); i++)
+    {
+        _balls[i]->draw();
+    }
     if (!foundTimer)
     {
         if (c.statusLed(0))
@@ -195,7 +197,7 @@ void GameLogic::checkCollisions(Controller &control) {
         Velocity speed = _balls[i]->getSpeed();
         int rayon = _balls[i]->getrayon();
         _platform.checkCollision(_balls[i]);
-        if (pos.y + rayon > maxSizeY && speed.y > 0) //check si mort 
+        if (pos.y + rayon*2 > 650 && speed.y > 0) //check si mort 
         {
             //_balls[i]->changeVelocity(0, 1); //faire bounce dans le bas
             delete _balls[i];
@@ -206,15 +208,15 @@ void GameLogic::checkCollisions(Controller &control) {
             //Balle *b = _balls[i];
             _level->checkCollision(_balls[i],_powers);
 
-            if (pos.y - rayon < 0 && speed.y < 0) //Hit  plafond
+            if (pos.y < 50 && speed.y < 0) //Hit  plafond
             {
                 _balls[i]->changeVelocity(0, 1);//inverser direction de la balle en Y
             }
 
             //check walls collision
-            if (pos.x - rayon < 0 && speed.x < 0)
+            if (pos.x < 49 && speed.x < 0)
                 _balls[i]->changeVelocity(1, 0); //inverse le vecteur X pour éloigner du mur
-            if(pos.x + rayon > maxSizeX - 1 && speed.x > 0)
+            if(pos.x + rayon*2 > _info._windowResolutionX - 49 && speed.x > 0)
                 _balls[i]->changeVelocity(1, 0); //inverse le vecteur X pour éloigner du mur
         }
     }

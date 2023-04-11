@@ -1,4 +1,5 @@
 #include "Keyboard.h"
+#include <QDebug>
 
 bool Keyboard::receiveInputs(){
     //Controles de base 
@@ -13,6 +14,8 @@ bool Keyboard::receiveInputs(){
     {
         //left arrow or A key held down 
         _joystick.x = 1;
+        qDebug() << "Left key pressed";
+
     }
     else{
         _joystick.x = 0;

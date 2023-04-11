@@ -10,13 +10,10 @@ GameLoop::GameLoop(QObject* parent) : QObject(parent) {
     _gameState = Starting;
     loadFile();
     over = false;
-    thread = new QThread(this);
     timer = new QTimer();
-    timer->setInterval(100);
+    timer->setInterval(50);
     QObject::connect(timer, &QTimer::timeout, this, &GameLoop::MainGameLoop);
-    QObject::connect(thread, &QThread::started, timer, static_cast<void (QTimer::*)(void)>(&QTimer::start));
-    timer->moveToThread(thread);
-
+    timer->start();
     //temporaire
     _menu.Set_playing(1);
     //_window->showMenu();
@@ -39,7 +36,7 @@ void GameLoop::Start() {
     else
         Stop();
 
-    startGameLoop();
+    MainGameLoop();
 }
 
 
@@ -142,7 +139,7 @@ void GameLoop::draw()
 }
 
 void GameLoop::startGameLoop() {
-    thread->start();
+    Start();
 }
 
 void GameLoop::stopGameLoop() {

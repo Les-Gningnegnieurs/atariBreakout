@@ -17,7 +17,7 @@ Canevas::~Canevas() {
 	delete _scene;
 }
 void Canevas::update2() {
-	_game->update2();
+	//_game->update2();
 }
 
 

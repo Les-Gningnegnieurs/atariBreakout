@@ -15,12 +15,12 @@ Plateforme::Plateforme(LevelInfos I, QGraphicsScene* scene) : _scene(scene)
     pos.y = I.pos_Plat_iniY;
     //pos.x = I.pos_Plat_iniX;  //si on marche en pixels
     //pos.y = I.pos_Plat_iniY;  //pixels
-    rect = new MyRect(I);
+    rect = new QGraphicsRectItem(0,0, sizeX, sizeY);
     rect->setBrush(Qt::gray);
-    rect->setRect(pos.x, pos.y, sizeX, sizeY);
+    rect->setPos(pos.x, pos.y);
     _scene->addItem(rect);
-    rect->setFlag(QGraphicsItem::ItemIsFocusable);
-    rect->setFocus();
+    /*rect->setFlag(QGraphicsItem::ItemIsFocusable);
+    rect->setFocus();*/
 
 }
 void Plateforme::update2(){
@@ -40,10 +40,12 @@ void Plateforme::update()
         pos.x = Window_X - sizeX;
     else if (pos.x <= 0)
         pos.x = 0;
+    draw();
 }
 
 void Plateforme::draw()
 {
+
     rect->setPos(pos.x, pos.y);
 }
 

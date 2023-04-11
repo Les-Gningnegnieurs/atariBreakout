@@ -15,8 +15,8 @@ int main(int argc, char** argv){
     //Intro(std::cout);
     GameLoop* game = new GameLoop();
 
-    game->Start();
-    game->update2(); //renomer la méthode pour Focus()
+   /* game->Start();
+    game->update2();*/ //renomer la méthode pour Focus()
     
     return a.exec();
 }

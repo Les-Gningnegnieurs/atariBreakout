@@ -4,11 +4,11 @@ MainWindow::MainWindow(QGraphicsScene* scene, QGraphicsScene* menu) {
 	_scene = scene;
 	_menu = menu;
 
-	this->setFixedSize(1000, 800);
+	this->setFixedSize(1200, 750);
 	this->show();
 
 	//focus sur menu en premier
-	_menu->setFocus();
+	_scene->setFocus();
 }
 
 void MainWindow::showMenu() {

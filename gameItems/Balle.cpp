@@ -8,7 +8,8 @@ Balle::Balle(LevelInfos I, QGraphicsScene* scene) :_scene(scene)
     speed.y = I.speed_B_y;
     speed.x = I.speed_B_x;
     rayon = I.ball_radius;
-    circle = new QGraphicsEllipseItem(pos.x, pos.y, rayon * 2, rayon * 2);
+    circle = new QGraphicsEllipseItem(0,0, rayon * 2, rayon * 2);
+    circle->setPos(pos.x, pos.y);
     circle->setBrush(Qt::magenta);
     scene->addItem(circle);
 }
@@ -20,7 +21,8 @@ Balle::Balle(QGraphicsScene* scene, Position posB, int radius, int speedX, int s
     speed.y = speedY;
     speed.x = speedX;
     rayon = radius;
-    circle = new QGraphicsEllipseItem(pos.x, pos.y, rayon * 2, rayon * 2);
+    circle = new QGraphicsEllipseItem(0, 0, rayon * 2, rayon * 2);
+    circle->setPos(pos.x, pos.y);
     circle->setBrush(Qt::magenta);
     _scene->addItem(circle);
 }
@@ -35,7 +37,6 @@ void Balle::update()
 
     pos.x += speedX;
     pos.y += speedY;
-   
 }
 
 void Balle:: draw()
@@ -46,11 +47,9 @@ void Balle:: draw()
 
 bool Balle::checkCollision(Position posHit)
 {
-    double distance = sqrt(pow( posHit.x- pos.x, 2) + pow(posHit.y - pos.y, 2));
-    if(distance<=rayon) return true;
+    double distance = sqrt(pow(posHit.x - pos.x, 2) + pow(posHit.y - pos.y, 2));
+    if (distance <= rayon) return true;
     return false;
-
-
 }
 
 void Balle::changeVelocity(bool x, bool y){

@@ -5,7 +5,7 @@
 #include "Balle.h"
 #include <iostream>
 #include <sstream>
-#include "Myrect.h"
+#include <QGraphicsRectItem>
 #include <QColor>
 #include <QBrush>
 #include <QGraphicsScene>
@@ -18,7 +18,7 @@ private:
     int columns;
     int sizeX;
     int sizeY;
-    MyRect* rect;
+    QGraphicsRectItem* rect;
     QGraphicsScene* _scene;
     int Window_X;
     int Window_Y;
