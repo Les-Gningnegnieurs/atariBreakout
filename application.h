@@ -28,7 +28,6 @@ class Window : public QMainWindow
 protected:
 	int imageY = 0; // Position verticale de la prochaine image à ajouter
 	QApplication* app;
-	QWidget* centralWidget = new QWidget();
 public:
 	Window(QWidget* parent = nullptr) : QMainWindow(parent)
 	{
@@ -44,8 +43,8 @@ public:
 		setWindowIcon(QIcon("image/icon.png"));
 	}
 
-	QLabel* import_image_up(QString path);
-	QPushButton* add_button(QString path);
+	QLabel* import_image_up(QString path, QWidget* widget);
+	QPushButton* add_button(QString path, QWidget* widget);
 
 	void set_as_sure();
 	void set_as_paused();
@@ -56,14 +55,29 @@ public:
 class Menu_UI : public Window
 {
 protected:
-	QPushButton* _exit;
+	QStackedWidget* stackedWidget = new QStackedWidget(this);
+
+	// for main
+	QWidget* _main = new QWidget();
+	QLabel* _controllerm; 
+	QPushButton* _exitm;
 	QPushButton* _center[3];
-	QLabel* controller;
+	
+	//for level
+	QWidget* _level = new QWidget();
+	QLabel* _controllerl;
+	QPushButton* _exitl;
+
+	//for settings
+	QWidget* _settings = new QWidget();
+	QLabel* _controllers;
+	QPushButton* _exits;
+	QPushButton* _buttons[6];
 public:
 	Menu_UI(QApplication* a);
-	QPushButton* add_exit();
-	QLabel* import_image(QString path);
-	QPushButton* add_center_button(QString path);
+	QPushButton* add_exit(QWidget* widget);
+	QLabel* import_image(QString path, QWidget* widget);
+	QPushButton* add_center_button(QString path, QWidget* widget);
 
 	void set_as_main();
 	void set_as_settings();
@@ -76,47 +90,19 @@ public slots:
 		win->set_as_sure();
 		win->show();
 	}
-
-
-};
-/*
-class Settings_UI : public Menu_UI
-{
-public:
-	Settings_UI();
-};
-
-class Level_UI : public Menu_UI
-{
-public:
-	Level_UI();
-};
-
-class Main_UI : public Menu_UI
-{
-	
-public:
-	Main_UI(QApplication* a);
-public slots:
-	void exit_clicked()
-	{
-		Window* win = new Window(app);
-		win->set_as_sure();
-		win->show();
-	}
 	void level_clicked()
 	{
-		Level_UI* win = new Level_UI;
-		win->show();
+		set_as_level();
 	}
 	void settings_clicked()
 	{
-		Settings_UI * win = new Settings_UI;
-		win->show();
+		set_as_settings();
 	}
+	void exits()
+	{
+		set_as_main();
+	}
+
 };
-*/
-
-
 
 #endif
