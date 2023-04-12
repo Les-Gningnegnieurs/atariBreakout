@@ -2,7 +2,6 @@
 
 #ifndef GAMELOOP_H
 #define GAMELOOP_H
-#include <chrono>
 #include "menu.h"
 #include "Canevas.h"
 #include "Structs.h"
@@ -10,23 +9,21 @@
 #include <iostream>
 #include <sstream>
 #include <QApplication>
-#include <QThread>
 #include <QTimer>
 #include <QObject>
 #include "inputs/Keyboard.h"
 #include "inputs/PhysicalController.h"
 #include "mainWindow.h"
 
-using  namespace std::chrono;
 
 
 class GameLoop : public QObject {
+    Q_OBJECT;
 private:
     MainWindow* _window;
     Canevas *_canevas;
     Menu _menu;
     gameState _gameState;
-    QThread* thread;
     QTimer* timer;
     int bg = 0;
 
@@ -37,7 +34,7 @@ public:
     Controller* _controller;
 
     bool over;
-    GameLoop(QObject* parent = 0);
+    GameLoop(QApplication* app, QObject* parent = 0);
     void Start();
     void Stop();
     void Pause();
@@ -46,7 +43,6 @@ public:
     void Restart();
     void draw();
     void loadFile();
-    void update2();
     void startGameLoop();
     void stopGameLoop();
 

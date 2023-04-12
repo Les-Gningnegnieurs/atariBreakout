@@ -1,29 +1,34 @@
 #include "mainWindow.h"
 
-MainWindow::MainWindow(QWidget* parent, QGraphicsView* view, QGraphicsScene* scene) : QMainWindow(parent) {
-	_view = view;
-	_scene = scene;
+MainWindow::MainWindow(QApplication *app, QWidget* parent, QGraphicsScene* game) : QMainWindow(parent) {
+	_view = new QGraphicsView();
+	_game = game;
 
 	_view->setParent(this);
-	_scene->setParent(this);
+	_game->setParent(this);
 
+	_settings = new Settings(app, this);
+	//_menu = new MainMenu(app, this);
 
-	//menu
-	QGraphicsScene* testScene = new QGraphicsScene(this);
-	_menu = new QGraphicsView(testScene, this);
-
-	this->setFixedSize(1200, 800);
+	_view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	this->setFixedSize(W_RESOLUTION_X, W_RESOLUTION_Y);
 	setCentralWidget(_view);
-	this->show();
+	showMenu();
+	//this->show();
 
 	////focus sur menu en premier
 	//_scene->setFocus();
 }
 
 void MainWindow::showMenu() {
-	setCentralWidget(_menu);
+	/*setFixedSize(RESOLUTION_X, RESOLUTION_Y);
+	_view->setFixedSize(RESOLUTION_X, RESOLUTION_Y);
+	_view->setScene(_menu);*/
 }
 
 void MainWindow::showGame() {
-	setCentralWidget(_view);
+	/*setFixedSize(1200, 800);
+	_view->setFixedSize(1200, 800);
+	_view->setScene(_game);*/
 }

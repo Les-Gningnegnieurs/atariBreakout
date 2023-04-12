@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H_
-#define MAINWINDOW_H_
+#ifndef CMAINWINDOW_H_
+#define CMAINWINDOW_H_
 #include <QApplication>
 #include <QMainWindow>
 #include <QPushButton>
@@ -8,20 +8,23 @@
 #include <QString>
 #include <QRect>
 #include <QStyle>
+#include "Settings.h"
+//#include "MainMenu.h"
+
+#define W_RESOLUTION_X 1200
+#define W_RESOLUTION_Y 800
 
 class MainWindow : public QMainWindow {
+Q_OBJECT;
 public:
-	MainWindow(QWidget* parent, QGraphicsView* view, QGraphicsScene* scene);
+	MainWindow(QApplication* app, QWidget* parent, QGraphicsScene* game);
 
 	void showMenu();
 	void showGame();
-public slots:
-
 private:
-	int activeScene = 0; //menu : 0 | game : 1 ...
-
 	QGraphicsView* _view;
-	QGraphicsView* _menu;
-	QGraphicsScene* _scene;
+	/*MainMenu* _menu;*/
+	Settings* _settings;
+	QGraphicsScene* _game;
 };
 #endif

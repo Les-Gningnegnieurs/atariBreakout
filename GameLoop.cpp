@@ -2,20 +2,19 @@
 
 #include "GameLoop.h"
 
-GameLoop::GameLoop(QObject* parent) : QObject(parent) {   
+GameLoop::GameLoop(QApplication* app, QObject* parent) : QObject(parent) {   
     _canevas = new Canevas();
-    _window = new MainWindow(nullptr, _canevas, _canevas->getScene());
+    _window = new MainWindow(app, nullptr, _canevas->getScene());
     _controller = new Keyboard();
     _menu.Set_Controller(_controller);
 
-    _gameState = Starting;
+    _gameState = gameState(0);
     loadFile();
     over = false;
 
     timer = new QTimer();
     timer->setInterval(SLEEP);
     QObject::connect(timer, &QTimer::timeout, this, &GameLoop::MainGameLoop);
-    timer->start();
     //temporaire
     _menu.Set_playing(1);
     //_window->showMenu();
@@ -38,7 +37,8 @@ void GameLoop::Start() {
     else
         Stop();
 
-    MainGameLoop();
+    //_window->showGame();
+    timer->start();
 }
 
 
@@ -49,6 +49,8 @@ void GameLoop::Pause()
 
 void GameLoop::Stop() {
     _gameState = Stopped;
+    timer->stop();
+    //_window->showMenu();
 }
 
 void GameLoop::Restart()
@@ -71,11 +73,6 @@ void GameLoop::GameOver() {
     }
 }
 
-#include <conio.h>
-void GameLoop::update2() {
-    _canevas->update2();
-}
-
 void GameLoop::update() {
     if (_gameState == Starting)
         Start();
@@ -86,16 +83,6 @@ void GameLoop::update() {
         _canevas->update(*_controller, _menu.Is_modeAccelerometer());
         if (_controller->getButton(2))
         {
-            
-
-
-           /* std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
-            std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
-            std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
-            std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
-            std::cout << std::endl << std::endl << "Paused\t" << "ESC : Resume\t" << "ENTER : QUIT";*/
-
-            //Sleep(200);
             _controller->receiveInputs();
            
             while (!_controller->getButton(2) && !_controller->getButton(1))
@@ -111,11 +98,6 @@ void GameLoop::update() {
                 _canevas->erase();
                 over = true;
             }
-
-            //Sleep(150);
-            //system("CLS");
-
-
         }
     }
     GameOver();
@@ -147,7 +129,6 @@ void GameLoop::startGameLoop() {
 void GameLoop::stopGameLoop() {
     //À vérifier
     timer->stop();
-    //thread->exit();
 }
 
 

@@ -5,10 +5,7 @@ Canevas::Canevas()
 {
 	_scene = new QGraphicsScene();
 	_scene->setSceneRect(0, 0, 1200, 800);
-	setScene(_scene);
-	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	setFixedSize(1200, 800);
+	
 	//setBackgroundBrush(QBrush(Qt::red));
 
 }
@@ -41,11 +38,9 @@ std::istream& operator>>(std::istream& s, Canevas& can)
 	s >> can._info.speed_B_y;
 	//on as set tt ce dont les constructeurs ont besoin et ensuite on px read le reste
 	can._scene->setSceneRect(0, 0, can._info._windowResolutionX, can._info._windowResolutionY);
-	can.setFixedSize(can._info._windowResolutionX, can._info._windowResolutionY);
-
 	can._game = new GameLogic(can._info, can._scene);
 	s >> *can._game;
-	can.show();
+	//can.show();
 	return s;
 }
 

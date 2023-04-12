@@ -1,33 +1,44 @@
-#ifndef SETTINGS_H 
-#define SETTINGS_H 
+#ifndef CSETTINGS_H 
+#define CSETTINGS_H 
+#include <iostream>
+#include <string>
+#include "menu.h"
+#include <QApplication>
+#include <QMainWindow>
+#include <QWidget>
+#include <QLabel>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QSpacerItem>
+#include <QIcon>
+#include <QtWidgets>
 #include <QGraphicsScene>
-#include "application.h"
-#include "MenuUtils.h"
+#include <QObject>
+//#include "MenuUtils.h"
+
+#define RESOLUTION_X 1200
+#define RESOLUTION_Y 800
+
+#define EXIT_WIDTH 50
+#define EXIT_HEIGHT 50
+#define MARGIN 50
 class Settings : public QGraphicsScene
 {
-	Q_OBJECT
+	Q_OBJECT;
 public:
-	Settings(QApplication* app, QWidget* parent = nullptr) : QGraphicsScene(parent) {
-		setBackgroundBrush(Qt::black);
-		utils = new MenuUtils(this,app);
-		initUI();
-		_app = app;
-
-	}
+	Settings();
+	Settings(QApplication* app, QWidget* parent = nullptr);
 
 private:
 	void initUI();
 	QApplication* _app;
 	QPushButton* _center[3];
-	MenuUtils* utils;
+	//MenuUtils* utils;
 	int imageY = 0;
 	QPushButton* _buttons[6];
 
 public slots:
-	void exit_clicked()
-	{
-		utils->set_as_sure();
-	}
+	void exit_clicked();
 };
 
 #endif

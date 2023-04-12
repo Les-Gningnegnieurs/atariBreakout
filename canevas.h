@@ -7,7 +7,7 @@
 #define RESOLUTION_Y 25
 
 
-class Canevas: public QGraphicsView
+class Canevas
 {
 private:
 	GameLogic* _game;
