@@ -118,11 +118,7 @@ void GameLogic:: update(Controller& c, bool accelmode)
         _balls[i]->update();
     }
     checkCollisions(c);
-    //draw();
-    for (int i = 0; i < _balls.size(); i++)
-    {
-        _balls[i]->draw();
-    }
+    draw();
     if (!foundTimer)
     {
         if (c.statusLed(0))
@@ -222,8 +218,8 @@ void GameLogic::checkCollisions(Controller &control) {
     {
         _livesLeft--;
         Position posb; 
-        posb.x = _info.pos_Ball_iniX;
-        posb.y = _info.pos_Ball_iniY;
+        posb.x = _info.pos_Ball_iniX+4; 
+        posb.y = _info.pos_Ball_iniY ;
         Balle* p1 = new Balle(_scene, posb,_info.ball_radius);
         _balls.push_back(p1);
     }
@@ -243,12 +239,11 @@ void GameLogic::draw() {
         _balls[i]->draw();
     }
 
-    for (int i = 0; i < _powers.size(); i++)
+  /*  for (int i = 0; i < _powers.size(); i++)
     {
         _powers[i]->draw();
-    }
+    }*/
 
-    _level->draw();
 }
 
 std::istream& operator>>(std::istream& s, GameLogic &gl){

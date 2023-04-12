@@ -612,7 +612,7 @@ void Intro(std::ostream& os)
 }
 
 void Menu::Change_Controller() {
-    if (Get_controllerMode()) {
+    /*if (Get_controllerMode()) {
         std::string c = "com" + std::to_string(Get_comPort());
         _keyboard = new PhysicalController(c);
         if (!_keyboard->ConnectionStatus())
@@ -627,6 +627,6 @@ void Menu::Change_Controller() {
     }
     else {
         _col_ = "32m"; //vert
-    }
+    }*/
 }
 

@@ -25,7 +25,7 @@ private:
     QGraphicsEllipseItem* circle;
     QGraphicsScene* _scene;
 public:
-    Balle(QGraphicsScene* scene, Position posB, int radius, int speedX =-1, int speedY=-1);
+    Balle(QGraphicsScene* scene, Position posB, int radius, int speedX =-2, int speedY=-2);
     Balle(LevelInfos I, QGraphicsScene* scene);
     void setVelocity(int x, int y);
     int getrayon() { return rayon; }
