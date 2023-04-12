@@ -7,7 +7,7 @@ void Settings::initUI()
 
 	QPushButton*_exits = utils->add_exit();
 	QWidget* temp;
-	QLabel* lab = utils->import_image_up("image/title/settings_menu.png");
+	QLabel* lab = utils->import_image_up("image/title/settings_menu.png",1);
 	imageY += lab->height();
 	_buttons[0] = utils->add_button("image/unselected/playing_mode.png",temp);
 	_buttons[0]->move(this->width() / 2 - _buttons[0]->width(), imageY);
