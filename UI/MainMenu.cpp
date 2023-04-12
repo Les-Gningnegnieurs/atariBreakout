@@ -8,8 +8,8 @@ void MainMenu:: initUI()
 
 	QPushButton*_exitm = utils->add_exit();
 	 imageY = 100;
-	QLabel* im1 = utils->import_image_up("image/title/logo.png");
-	QLabel* im2 = utils->import_image_up("image/title/team.png");
+	QLabel* im1 = utils->import_image_up("image/title/logo.png",1);
+	QLabel* im2 = utils->import_image_up("image/title/team.png",1);
 	_center[0] = utils->add_center_button("image/unselected/play_game.png");
 	_center[1] = utils->add_center_button("image/unselected/select_level.png");
 	_center[2] = utils->add_center_button("image/unselected/settings.png");
@@ -29,8 +29,6 @@ int main(int argc,char *argv[])
 	MainMenu* menu = new MainMenu(&app);
 	Settings* settings = new Settings(&app);
 	mainwindow->setScene(menu);
-	Sleep(10000);
-	mainwindow->setScene(settings);
 
 	mainwindow->resize(RESOLUTION_X, RESOLUTION_Y);
 	mainwindow->show();

@@ -14,6 +14,7 @@ QLabel* MenuUtils::import_image(QString path)
 QPushButton* MenuUtils::add_exit()
 {
 	QPushButton* button = new QPushButton();
+
 	QPixmap pixmap("image/unselected/exit.png");
 	QIcon icon(pixmap); // Création d'une icône à partir de la première image
 	button->setIcon(icon); // Définition de l'icône pour le bouton
@@ -31,7 +32,7 @@ QPushButton* MenuUtils::add_exit()
 	return button;
 
 }
-QLabel* MenuUtils::import_image_up(QString path)
+QLabel* MenuUtils::import_image_up(QString path,bool add)
 {
 	QLabel* imageLabel = new QLabel();
 	QPixmap image(path);
@@ -40,7 +41,8 @@ QLabel* MenuUtils::import_image_up(QString path)
 	int imageX = (RESOLUTION_X - image.width()) / 2; // Position horizontale de l'image
 	imageLabel->setGeometry(imageX, imageY, image.width(), image.height());
 	imageY += image.height();
-	_scene->addWidget(imageLabel);
+	if(add)
+		_scene->addWidget(imageLabel);
 
 	return imageLabel;
 }
@@ -83,7 +85,7 @@ void MenuUtils::set_as_sure()
 	QWidget* centralWidget = new QWidget(win);
 	win->setCentralWidget(centralWidget);
 	win->resize(400, 300);
-	QLabel* imageLabel = import_image_up("image/title/sure.png");
+	QLabel* imageLabel = import_image_up("image/title/sure.png",0);
 	QVBoxLayout* layout = new QVBoxLayout(centralWidget);
 	centralWidget->setLayout(layout);
 	layout->addWidget(imageLabel);

@@ -14,7 +14,7 @@ public:
 	}
 	QLabel* import_image(QString path);
 	QPushButton* add_exit();
-	QLabel* import_image_up(QString path);
+	QLabel* import_image_up(QString path, bool add);
 	QPushButton* add_center_button(QString path);
 	QPushButton* add_button(QString path, QWidget* widget);
 	void set_as_sure();
