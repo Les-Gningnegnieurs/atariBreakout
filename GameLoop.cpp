@@ -4,14 +4,16 @@
 
 GameLoop::GameLoop(QObject* parent) : QObject(parent) {   
     _canevas = new Canevas();
-    _window = new MainWindow(_canevas->getScene(), _menu.getScene());
+    _window = new MainWindow(nullptr, _canevas, _canevas->getScene());
     _controller = new Keyboard();
     _menu.Set_Controller(_controller);
+
     _gameState = Starting;
     loadFile();
     over = false;
+
     timer = new QTimer();
-    timer->setInterval(20);
+    timer->setInterval(SLEEP);
     QObject::connect(timer, &QTimer::timeout, this, &GameLoop::MainGameLoop);
     timer->start();
     //temporaire
@@ -143,8 +145,9 @@ void GameLoop::startGameLoop() {
 }
 
 void GameLoop::stopGameLoop() {
-    thread->exit();
+    //À vérifier
     timer->stop();
+    //thread->exit();
 }
 
 
