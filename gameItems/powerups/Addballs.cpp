@@ -16,9 +16,9 @@ void Addballs::modifyBall(std::vector<Balle*> &ball, Plateforme _plat, bool rese
 			
 				
 				
-				ball.push_back(new Balle(_scene, posP, rayon,-1,-1));
-				ball.push_back(new Balle(_scene,posP, rayon, 1, -1 ));
-				ball.push_back(new Balle(_scene, posP, rayon, 0, -1));
+				ball.push_back(new Balle(_scene, posP, rayon,-3,-3));
+				ball.push_back(new Balle(_scene,posP, rayon, 3, -3 ));
+				ball.push_back(new Balle(_scene, posP, rayon, 0, -3));
 
 		
 		}

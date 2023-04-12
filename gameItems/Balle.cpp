@@ -38,7 +38,6 @@ void Balle::update()
 
     pos.x += speedX;
     pos.y += speedY;
-    draw();
 }
 
 void Balle:: draw()

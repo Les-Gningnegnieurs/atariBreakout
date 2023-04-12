@@ -1,4 +1,6 @@
 #include "Brique.h"
+#define CORNER_FACTOR 8
+#define SIDE_FACTOR 15
 Brique:: Brique(int x, int y, int l, int h, state s){
     setRect(0, 0, 10, 10);
     _posBrique.x = x;
@@ -72,38 +74,38 @@ Collision Brique::checkCollision(Balle* b) {
         return NO;
     }
     else {
+        int X_next = posBa.x + speed.x;
+        int Y_next = posBa.y + speed.y;
+
+        if ((posBa.x + rayon * 2 >= _posBrique.x && posBa.x < _posBrique.x + CORNER_FACTOR && posBa.y + rayon * 2 >= _posBrique.y && posBa.y + rayon * 2 < _posBrique.y + CORNER_FACTOR && speed.x > 0 && speed.y > 0) || //coin supérieur gauche
+            (posBa.x + rayon * 2 >= _posBrique.x && posBa.x < _posBrique.x + CORNER_FACTOR && posBa.y <= _posBrique.y + _sizeX -1 && posBa.y > _posBrique.y + CORNER_FACTOR && speed.x > 0 && speed.y < 0)||    //coin inférieur gauche
+            (posBa.x <= _posBrique.x + _sizeX -1 && posBa.x > _posBrique.x + _sizeX -1 - CORNER_FACTOR && posBa.y + rayon*2 >= _posBrique.y && posBa.y + rayon*2 < _posBrique.y + CORNER_FACTOR && speed.x < 0 && speed.y > 0)||    //coin supérieur droit
+            (posBa.x <= _posBrique.x + _sizeX - 1 && posBa.x > _posBrique.x + _sizeX - 1 - CORNER_FACTOR && posBa.y <= _posBrique.y + _sizeY-1 && posBa.y > _posBrique.y + _sizeY-1 - CORNER_FACTOR && speed.x<0 && speed.y < 0 ))  //coin inférieur droit
+            return CN;
         //collision down
-        if (posBa.y <= _posBrique.y + (_sizeY - 1) && posBa.y > _posBrique.y && speed.y < 0)
+        if (Y_next <= _posBrique.y + (_sizeY - 1) && Y_next > _posBrique.y && speed.y < 0)
         {
-            if (posBa.x >= _posBrique.x && posBa.x + rayon*2 <= _posBrique.x + _sizeX - 1)
+            if (posBa.x + rayon*2 > _posBrique.x && posBa.x < _posBrique.x + _sizeX - 1)
                 return DN;
         }
         //collision top
-        if (posBa.y + rayon*2 >= _posBrique.y && posBa.y + rayon*2 < _posBrique.y +_sizeY-1 && speed.y > 0)
+        if (Y_next + rayon*2 >= _posBrique.y && Y_next + rayon*2 < _posBrique.y +_sizeY-1 && speed.y > 0)
         {
-            if (posBa.x >= _posBrique.x && posBa.x <= _posBrique.x + _sizeX - 1)
+            if (posBa.x + rayon*2 > _posBrique.x && posBa.x < _posBrique.x + _sizeX - 1)
                 return UP;
         }
         //collision left
-        if (posBa.x + rayon*2 >= _posBrique.x && posBa.x + rayon*2 <_posBrique.x +_sizeX-1 && speed.x > 0)
+        if (X_next + rayon*2 > _posBrique.x && X_next + rayon*2 <_posBrique.x + SIDE_FACTOR && speed.x > 0)
         {
-            if (posBa.y <= _posBrique.y + (_sizeY - 1) && posBa.y >= _posBrique.y)
+            //if (posBa.y <= _posBrique.y + (_sizeY - 1) && posBa.y + rayon * 2 >= _posBrique.y)
+            if (posBa.y < _posBrique.y + (_sizeY - 1) && posBa.y + rayon * 2 > _posBrique.y)
                 return LT;
         }
         //collision right
-        if (posBa.x <= _posBrique.x + (_sizeX - 1) && posBa.x >= _posBrique.x && speed.x < 0)
+        if (X_next < _posBrique.x + (_sizeX - 1) && X_next > _posBrique.x + _sizeX-1 - SIDE_FACTOR && speed.x < 0)
         {
-            if (posBa.y <= _posBrique.y + (_sizeY - 1) && posBa.y >= _posBrique.y)
+            if (posBa.y < _posBrique.y + (_sizeY - 1) && posBa.y + rayon * 2 > _posBrique.y)
                 return RT;
-        }
-        //collision coin
-        if ((posBa.x == _posBrique.x - rayon && posBa.y == _posBrique.y - rayon && speed.x > 0 && speed.y > 0) || //coin superieur gauche
-            (posBa.x == _posBrique.x - rayon && posBa.y == _posBrique.y + (_sizeY - 1) + rayon && speed.x > 0 && speed.y < 0) || //coin inferieur gauche
-            (posBa.x == _posBrique.x + (_sizeX - 1) + rayon && posBa.y == _posBrique.y - rayon && speed.x < 0 && speed.y > 0) ||//coin superieur droit
-            (posBa.x == _posBrique.x + (_sizeX - 1) + rayon && posBa.y == _posBrique.y + (_sizeY - 1) + rayon) && speed.x < 0 && speed.y < 0) //coin inferieur droit (il faut que la balle aille en diagonal gauche)
-
-        {
-            return CN;
         }
         return NO;
     }

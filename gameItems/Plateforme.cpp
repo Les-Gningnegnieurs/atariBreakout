@@ -29,7 +29,7 @@ void Plateforme::move2() {
 }
 void Plateforme::move(int joystickvalueX)
 {
-    speed.x = joystickvalueX*3;
+    speed.x = joystickvalueX*4;
 }
 
 void Plateforme::update()
@@ -40,7 +40,6 @@ void Plateforme::update()
         pos.x = Window_X - sizeX;
     else if (pos.x <= 0)
         pos.x = 0;
-    draw();
 }
 
 void Plateforme::draw()
