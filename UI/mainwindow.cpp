@@ -1,24 +1,29 @@
 #include "mainWindow.h"
 
-MainWindow::MainWindow(QGraphicsScene* scene, QGraphicsScene* menu) {
+MainWindow::MainWindow(QWidget* parent, QGraphicsView* view, QGraphicsScene* scene) : QMainWindow(parent) {
+	_view = view;
 	_scene = scene;
-	_menu = menu;
 
-	this->setFixedSize(1200, 750);
+	_view->setParent(this);
+	_scene->setParent(this);
+
+
+	//menu
+	QGraphicsScene* testScene = new QGraphicsScene(this);
+	_menu = new QGraphicsView(testScene, this);
+
+	this->setFixedSize(1200, 800);
+	setCentralWidget(_view);
 	this->show();
 
-	//focus sur menu en premier
-	_scene->setFocus();
+	////focus sur menu en premier
+	//_scene->setFocus();
 }
 
 void MainWindow::showMenu() {
-	//show menu
-
-	//hide game
+	setCentralWidget(_menu);
 }
 
 void MainWindow::showGame() {
-	//show game
-
-	//hide menu
+	setCentralWidget(_view);
 }

@@ -26,7 +26,5 @@ public:
 	bool Is_GameOver();
 	void resetScore() { _game->resetScore(); }
 	QGraphicsScene* getScene() { return _scene; }
-	
-	
 
 };
