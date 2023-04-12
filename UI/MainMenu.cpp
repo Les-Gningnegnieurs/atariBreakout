@@ -7,6 +7,8 @@ void MainMenu:: initUI()
 	_controllerm->move(RESOLUTION_X - _controllerm->width() - MARGIN, RESOLUTION_Y - _controllerm->height() - MARGIN);
 
 	QPushButton*_exitm = utils->add_exit();
+	_exitm->move(MARGIN, RESOLUTION_Y - _exitm->height() - MARGIN);
+
 	 imageY = 100;
 	QLabel* im1 = utils->import_image_up("image/title/logo.png",1);
 	QLabel* im2 = utils->import_image_up("image/title/team.png",1);
