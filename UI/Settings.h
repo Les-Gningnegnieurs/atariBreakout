@@ -26,7 +26,7 @@ private:
 public slots:
 	void exit_clicked()
 	{
-		utils->set_as_sure();
+		
 	}
 };
 

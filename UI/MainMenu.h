@@ -4,6 +4,7 @@
 #include "application.h"
 #include "MenuUtils.h"
 #include "Settings.h"
+#include "SelectLevel.h"
 class MainMenu:public QGraphicsScene
 {
 	Q_OBJECT

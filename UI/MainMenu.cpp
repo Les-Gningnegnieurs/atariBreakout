@@ -28,7 +28,8 @@ int main(int argc,char *argv[])
 	QGraphicsView* mainwindow = new QGraphicsView;
 	MainMenu* menu = new MainMenu(&app);
 	Settings* settings = new Settings(&app);
-	mainwindow->setScene(menu);
+	SelectLevel* level = new SelectLevel(&app);
+	mainwindow->setScene(level);
 
 	mainwindow->resize(RESOLUTION_X, RESOLUTION_Y);
 	mainwindow->show();
