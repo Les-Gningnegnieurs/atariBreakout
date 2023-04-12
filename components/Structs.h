@@ -36,6 +36,7 @@ struct LevelInfos{
     float ball_radius;
     int speed_B_x;
     int speed_B_y;
+    float maxspeed_B;
 };
 
 

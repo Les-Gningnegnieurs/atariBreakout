@@ -37,7 +37,8 @@ Score::Score(QGraphicsItem* parent) : QGraphicsTextItem(parent) {
 	setFont(QFont("Helvetica", 14));
 }
 void Score::increase() {
-	score++;
+	score+=100;
+	setPlainText(QString("Score: ") + QString::number(score));
 }
 void Score::resetScore() {
 	score = 0;
@@ -45,14 +46,15 @@ void Score::resetScore() {
 int Score::getScore() {
 	return score;
 }
-Health::Health(QGraphicsItem* parent) : QGraphicsTextItem(parent) {
+Health::Health(QGraphicsPixmapItem* parent) : QGraphicsPixmapItem(parent) {
 	vies = 3;
-	setPlainText(QString("Health: ") + QString::number(vies));
-	setDefaultTextColor(Qt::red);
-	setFont(QFont("Helvetica", 14));
+	setPixmap(QPixmap("ressources/heart.png"));
+	//setPlainText(QString("Health: ") + QString::number(vies));
+	//setDefaultTextColor(Qt::red);
+	//setFont(QFont("Helvetica", 14));
 
 	//voici comment render une image provenant du fichier ressource
-	QImage* im = new QImage(":/game/ui/heart");
+	//QImage* im = new QImage(":/game/ui/heart");
 }
 void Health::decrease() {
 	vies--;

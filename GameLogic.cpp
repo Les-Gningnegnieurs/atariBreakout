@@ -32,7 +32,8 @@ GameLogic:: GameLogic(LevelInfos i, QGraphicsScene* scene) : _scene(scene)
     _balle->setPos(_info.pos_Ball_iniX, _info.pos_Ball_iniY);
     _scene->addItem(_balle);*/
     _vies = new Health();
-    _vies->setPos(10, i._windowResolutionY - 70);
+    //_vies->setPos(10, i._windowResolutionY - 70);
+    _vies->setPos(500, 500);
     scene->addItem(_vies);
     _score = new Score();
     _score->setPos(10, i._windowResolutionY - 100);

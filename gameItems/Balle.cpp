@@ -5,9 +5,10 @@ Balle::Balle(LevelInfos I, QGraphicsScene* scene) :_scene(scene)
     pos.y = I.pos_Ball_iniY;
     oldPosX = pos.x;
     oldPosY = pos.y;
-    speed.y = I.speed_B_y;
-    speed.x = I.speed_B_x;
+    speed.y = I.speed_B_x;
+    speed.x = I.speed_B_y;
     rayon = I.ball_radius;
+    MaxSpeed = I.maxspeed_B;
     circle = new QGraphicsEllipseItem(0,0,rayon*2,rayon*2);
     circle->setPos(pos.x, pos.y);
     circle->setBrush(Qt::magenta);
@@ -21,6 +22,7 @@ Balle::Balle(QGraphicsScene* scene, Position posB, int radius, int speedX, int s
     speed.y = speedY;
     speed.x = speedX;
     rayon = radius;
+    MaxSpeed = sqrt(pow(speed.x, 2) + pow(speed.y, 2));
     circle = new QGraphicsEllipseItem(0,0,rayon*2, rayon*2);
     circle->setPos(pos.x, pos.y);
     circle->setBrush(Qt::magenta);
@@ -31,8 +33,10 @@ void Balle::update()
     checkCollision(pos);
     int speedX;
     int speedY;
-    speedX = 1 * speed.x;
-    speedY = 1 * speed.y;
+    float current_speed = sqrt(pow(speed.x,2) + pow(speed.y,2));
+    float speed_ratio = current_speed / MaxSpeed;
+    speedX = round(speed_ratio * speed.x);
+    speedY = round(speed_ratio * speed.y);
     oldPosX = pos.x;
     oldPosY = pos.y;
 
@@ -66,4 +70,8 @@ void Balle::changeVelocity(bool x, bool y){
 void Balle::setVelocity(int x, int y) {
     speed.x = x;
     speed.y = y;
+}
+void Balle::platVelocity(float angle) {
+    speed.x = round(MaxSpeed * cos(angle));
+    speed.y = round(MaxSpeed * sin(angle));
 }
