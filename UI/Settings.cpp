@@ -7,8 +7,8 @@ void Settings::initUI()
 
 	QPushButton*_exits = utils->add_exit();
 	QWidget* temp;
-	imageY = 50;
-	utils->import_image_up("image/title/settings_menu.png",1);
+	QLabel* lab = utils->import_image_up("image/title/settings_menu.png");
+	imageY += lab->height();
 	_buttons[0] = utils->add_button("image/unselected/playing_mode.png",temp);
 	_buttons[0]->move(this->width() / 2 - _buttons[0]->width(), imageY);
 	imageY += _buttons[0]->height();
@@ -24,6 +24,8 @@ void Settings::initUI()
 	addWidget(_buttons[2]);
 
 	_buttons[3] = utils->add_center_button("image/unselected/apply.png");
+	_buttons[3]->move(_buttons[3]->pos().x(), imageY);
+	imageY += _buttons[3]->height();
 
 	_buttons[4] = utils->add_button("image/unselected/load.png", temp);
 	_buttons[4]->move(this->width() / 2 - _buttons[4]->width() - 50, imageY);
