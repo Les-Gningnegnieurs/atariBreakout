@@ -29,7 +29,7 @@ void Plateforme::move2() {
 }
 void Plateforme::move(int joystickvalueX)
 {
-    speed.x = joystickvalueX*2;
+    speed.x = joystickvalueX*3;
 }
 
 void Plateforme::update()
@@ -59,30 +59,30 @@ void Plateforme::checkCollision(Balle *b)
     Position posBa = b->getPos();
     int rayon = b->getrayon();
     Velocity speed = b->getSpeed();
-    int middle_R = pos.x + (sizeX) / 2;
-    int middle_L = middle_R-1;
+    int middle_R = (pos.x + (sizeX) / 2)+ 3;
+    int middle_L = middle_R-8;
     //if (posBa.y == pos.y - rayon && speed.y > 0)  //- facile de hit la plateforme
-    if (posBa.y >= pos.y - rayon && speed.y > 0) //+ facile de hit la plateforme(pogne le côté aussi)
+    if (posBa.y + rayon*2 >= pos.y && posBa.y + rayon*2 < pos.y + sizeY &&speed.y > 0) //+ facile de hit la plateforme(pogne le côté aussi)
     {
         if (posBa.x >= pos.x - rayon  && posBa.x < middle_L) //gauche
         {
             if (posBa.x == pos.x-rayon && speed.x > 0)    //coin gauche
-                b->setVelocity(-1, -1);
+                b->setVelocity(-2, -2);
             else if (posBa.x >= pos.x  && posBa.x < middle_L && speed.x >= 0)  //renvoie du meme bord si allait vers la droite (
-                b->setVelocity(-1, -1); //&& posBa.x < middle_L est une condition inutile
+                b->setVelocity(-2, -2); //&& posBa.x < middle_L est une condition inutile
             else if(posBa.x >= pos.x && posBa.x < middle_L && speed.x <= 0)
-                b->changeVelocity(0, 1);    //sinon change juste le y
+                b->changeVelocity(0, 2);    //sinon change juste le y
         }
-        else if (posBa.x == middle_L || posBa.x == middle_R)   //si dans un des milieux
-            b->setVelocity(0, -1); //renvoyer straigth
+        else if (posBa.x >= middle_L && posBa.x <= middle_R)   //si dans un des milieux
+            b->setVelocity(0, -2); //renvoyer straigth
         else if(posBa.x > middle_R && posBa.x <= pos.x + sizeX) //droite
         {
             if (posBa.x == pos.x + sizeX && speed.x < 0)   //coin droit
-                b->setVelocity(1, -1);
+                b->setVelocity(2, -2);
             else if (posBa.x > middle_R &&posBa.x <= pos.x + (sizeX-1) && speed.x <= 0) //renvoie du meme bord si allait vers la gauche
-                b->setVelocity(1, -1);
+                b->setVelocity(2, -2);
             else if(posBa.x > middle_R && posBa.x <= pos.x + (sizeX - 1) && speed.x >= 0)
-                b->changeVelocity(0, 1);    //sinon change juste le y
+                b->changeVelocity(0, 2);    //sinon change juste le y
         }
     }
 }

@@ -2,7 +2,6 @@
 
 GameLogic::GameLogic(QGraphicsScene* scene) : _scene(scene)
 {
-    
 }
 
 GameLogic:: GameLogic(LevelInfos i, QGraphicsScene* scene) : _scene(scene)
@@ -145,7 +144,6 @@ bool GameLogic::isGameOver()
     }
     else return false;
 }
-
 //Retirer les valeurs de limite hardcodé et enovyer balle en reference 
 //dans les check collision pour utiliser leur vélocité pour savoir d'ou elles arrivent pour le check colision
 //et determiner l'angle de renvoi

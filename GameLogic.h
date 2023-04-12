@@ -18,6 +18,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
 #include <QGraphicsRectItem>
+#include <QGraphicsItem>
 
 class GameLogic {
 private:

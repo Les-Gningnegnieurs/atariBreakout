@@ -30,10 +30,10 @@ void Level::checkColl_DOWN_RIGHT(Balle* b, std::vector <Powerups*>& p){
         //for (int j = 0; j < columns / BrickLength; j++) //gauche a droite
     int i_max = (b->getPos().y / BrickHeigth) + 2;
     int j_max = (b->getPos().x / BrickLength) + 2;
-    if (i_max > rows / BrickHeigth)
-        i_max = rows / BrickHeigth;
-    if (j_max > columns / BrickLength)
-        j_max = columns / BrickLength;
+    if (i_max > rows-1 )
+        i_max = rows-1;
+    if (j_max > columns-1 )
+        j_max = columns-1;
     int i = i_max - 3;
     if (i < 0)
         i = 0;
@@ -84,8 +84,8 @@ void Level::checkColl_DOWN_RIGHT(Balle* b, std::vector <Powerups*>& p){
 void Level::checkColl_DOWN_LEFT(Balle* b,std::vector <Powerups*>& p){
     int i_max = (b->getPos().y / BrickHeigth) + 2;
     int j_max = (b->getPos().x / BrickLength) - 1;
-    if (i_max > rows / BrickHeigth)
-        i_max = rows / BrickHeigth;
+    if (i_max > rows-1 )
+        i_max = rows-1;
     if (j_max < 0)
         j_max = 0;
     int i = i_max - 3;
@@ -94,8 +94,8 @@ void Level::checkColl_DOWN_LEFT(Balle* b,std::vector <Powerups*>& p){
     for (i; i < i_max; i++)
     {
         int j = j_max + 2;
-        if (j > (columns / BrickLength)-1)
-        j = (columns / BrickLength) - 1;
+        if (j > columns-1)
+            j = columns-1;
         for (j; j >= j_max; j--)
         {
     //for (int i = 0; i < rows / BrickHeigth; i++) //haut en bas
@@ -143,11 +143,11 @@ void Level::checkColl_UP_RIGHT(Balle* b, std::vector <Powerups*>& p){
     int j_max = (b->getPos().x / BrickLength) + 2;
     if (i_max < 0)
         i_max = 0;
-    if (j_max > columns)
-        j_max = columns;
+    if (j_max > columns-1)
+        j_max = columns-1;
     int i = i_max + 2;
-    if (i >= (rows)-1)
-        i = rows - 1;
+    if (i >= rows-1)
+        i = rows-1;
     for (i; i >= i_max; i--)
     {
         int j = j_max - 3;
@@ -202,13 +202,13 @@ void Level::checkColl_UP_LEFT(Balle* b, std::vector <Powerups*>& p){
     if (j_max < 0)
         j_max = 0;
     int i = i_max + 2;
-    if (i >= (rows / BrickHeigth) - 1)
-        i = (rows / BrickHeigth) - 1;
+    if (i >= rows-1)
+        i = rows -1;
     for(i; i>= i_max; i--)
     {
         int j = j_max + 2;
-        if (j > (columns / BrickLength) - 1)
-            j = (columns / BrickLength) - 1;
+        if (j > columns-1)
+            j = columns-1;
         for(j; j >= j_max; j--)
         {
 

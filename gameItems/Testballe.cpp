@@ -2,16 +2,16 @@
 #include <QTimer>
 #include <QDebug>
 // Q_OBJECT
-testBalle::testBalle(LevelInfos I) {
+testBalle::testBalle(Position posB, int radius, int speedX, int speedY) {
 	setRect(0, 0, 10, 10);
-    _Position.x = I.pos_Ball_iniX;
-    _Position.y = I.pos_Ball_iniY;
+    _Position.x = posB.x;
+    _Position.y = posB.y;
     oldPosX = _Position.x;
     oldPosY = _Position.y;
-    speed.y = I.speed_B_y;
-    speed.x = I.speed_B_x;
-    rayon = I.ball_radius;
-    setBrush(Qt::magenta);
+    speed.y = speedY;
+    speed.x = speedX;
+    rayon = radius;
+    //setBrush(Qt::magenta);
 	/*QTimer* timer = new QTimer();
 	connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 	timer->start(50);*/

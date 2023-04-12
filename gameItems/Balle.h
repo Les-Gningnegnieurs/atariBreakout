@@ -13,6 +13,7 @@
 #include <QBrush>
 #include <QColor>
 #include <QGraphicsScene>
+#include <QDebug>
 
 class Balle:public QGraphicsEllipseItem{
 private:
@@ -37,6 +38,7 @@ public:
     Position getPos() {return pos;}
     void changeVelocity(bool x = 0, bool y = 0);
     QGraphicsEllipseItem* getBall() { return circle; }
+
 };
 
 #endif

@@ -11,7 +11,7 @@ GameLoop::GameLoop(QObject* parent) : QObject(parent) {
     loadFile();
     over = false;
     timer = new QTimer();
-    timer->setInterval(50);
+    timer->setInterval(20);
     QObject::connect(timer, &QTimer::timeout, this, &GameLoop::MainGameLoop);
     timer->start();
     //temporaire

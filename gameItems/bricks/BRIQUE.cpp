@@ -73,25 +73,25 @@ Collision Brique::checkCollision(Balle* b) {
     }
     else {
         //collision down
-        if (posBa.y == _posBrique.y + (_sizeY - 1) + rayon && speed.y < 0)
+        if (posBa.y <= _posBrique.y + (_sizeY - 1) && posBa.y > _posBrique.y && speed.y < 0)
         {
-            if (posBa.x >= _posBrique.x && posBa.x <= _posBrique.x + _sizeX - 1)
+            if (posBa.x >= _posBrique.x && posBa.x + rayon*2 <= _posBrique.x + _sizeX - 1)
                 return DN;
         }
         //collision top
-        if (posBa.y == _posBrique.y - rayon && speed.y > 0)
+        if (posBa.y + rayon*2 >= _posBrique.y && posBa.y + rayon*2 < _posBrique.y +_sizeY-1 && speed.y > 0)
         {
             if (posBa.x >= _posBrique.x && posBa.x <= _posBrique.x + _sizeX - 1)
                 return UP;
         }
         //collision left
-        if (posBa.x == _posBrique.x - rayon && speed.x > 0)
+        if (posBa.x + rayon*2 >= _posBrique.x && posBa.x + rayon*2 <_posBrique.x +_sizeX-1 && speed.x > 0)
         {
             if (posBa.y <= _posBrique.y + (_sizeY - 1) && posBa.y >= _posBrique.y)
                 return LT;
         }
         //collision right
-        if (posBa.x == _posBrique.x + (_sizeX - 1) + rayon && speed.x < 0)
+        if (posBa.x <= _posBrique.x + (_sizeX - 1) && posBa.x >= _posBrique.x && speed.x < 0)
         {
             if (posBa.y <= _posBrique.y + (_sizeY - 1) && posBa.y >= _posBrique.y)
                 return RT;
@@ -119,6 +119,7 @@ bool Brique::increase_Damage(std::vector<Powerups*>& p) {
         if (_PV <= 0)
         {
             addPowerUp(p);
+            this->hide();
         }
         else
             _etat = Hurt;
