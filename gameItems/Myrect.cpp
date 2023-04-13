@@ -31,7 +31,7 @@ void MyRect::keyPressEvent(QKeyEvent *event) {
 }
 Plati::Plati(LevelInfos I) {
 	setPos(0, 0);
-	QPixmap pixmap("ressources/bar1.png");
+	QPixmap pixmap("ressources/bar4.png");
 	QPixmap scaledPixmap = pixmap.scaled(I.Plat_length, I.Plat_heigth, Qt::KeepAspectRatioByExpanding);
 	setPixmap(scaledPixmap);  
 }
