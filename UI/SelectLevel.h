@@ -31,12 +31,6 @@ signals:
 	void exit_click();
 public slots:
 	void exit_clicked();
-	
-
-
-
-
-
 };
 
 #endif
