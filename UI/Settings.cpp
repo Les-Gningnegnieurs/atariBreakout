@@ -37,16 +37,16 @@ void Settings::initUI()
 	_buttons[1] = utils->add_button("COM.png", temp);
 	_buttons[1]->move(this->width() / 2 - _buttons[1]->width(), imageY2);
 	addWidget(_buttons[1]);
-	_buttons[7] = utils->add_button("joystick.png", temp);
-	_buttons[7]->move(this->width() / 2, imageY1);
+	_buttons[7] = utils->add_button("1.png", temp);
+	_buttons[7]->move(this->width() / 2, imageY2);
 	addWidget(_buttons[7]);
 	imageY3 = imageY2 + _buttons[1]->height();
 	
 	_buttons[2] = utils->add_button("input.png", temp);
 	_buttons[2]->move(this->width() / 2 - _buttons[2]->width(), imageY3);
 	addWidget(_buttons[2]);
-	_buttons[8] = utils->add_button("joystick.png", temp);
-	_buttons[8]->move(this->width() / 2, imageY1);
+	_buttons[8] = utils->add_button("keyboard_mode.png", temp);
+	_buttons[8]->move(this->width() / 2, imageY3);
 	addWidget(_buttons[8]);
 	imageY4 = imageY3 + _buttons[2]->height();
 	
