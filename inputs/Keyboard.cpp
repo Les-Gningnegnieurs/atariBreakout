@@ -69,6 +69,8 @@ bool Keyboard::receiveInputs(){
         _joystick.x = -1 * _joystick.x;
     }
 
+    _rand = rand() % 10;
+
     return true;
 };
 

@@ -18,6 +18,7 @@ protected:
     OuputChanged _outputChanged;
     bool _reversemode = false;
     Powermanette power;
+    int _rand = 1;
 
 public:
     virtual bool receiveInputs() = 0;
@@ -35,6 +36,7 @@ public:
     void TurnOnLed(int id);
     bool statusLed(int id);
     void setPower(bool mode);
+    int getRand() { return _rand; }
     virtual bool ConnectionStatus()=0;
 };
 #endif 
