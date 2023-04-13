@@ -16,7 +16,6 @@ public:
 		utils = new MenuUtils(this, app);
 		initUI();
 		_app = app;
-
 	}
 
 private:
