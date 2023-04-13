@@ -1,7 +1,10 @@
 #ifndef MAINMENU_H 
 #define MAINMENU_H
 #include <QGraphicsScene>
-#include "application.h"
+
+#include <QPointer>
+#include <QObject>
+
 #include "MenuUtils.h"
 #include "Settings.h"
 #include "SelectLevel.h"

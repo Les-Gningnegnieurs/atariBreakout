@@ -27,11 +27,12 @@ private:
 
 
 	int imageY = 0;
-public slots:
-	void exit_clicked()
-	{
 
-	}
+signals:
+	void exit_click();
+public slots:
+	void exit_clicked();
+	
 
 
 
