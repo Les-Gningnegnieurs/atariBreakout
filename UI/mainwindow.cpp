@@ -13,9 +13,6 @@ MainWindow::MainWindow(QApplication *app, QWidget* parent, QGraphicsScene* game)
 	QPointer<Settings> _settingsTemp = new Settings(app, this);
 
 
-	_settings = new Settings(app, this);
-	_menu = new MainMenu(app, this);
-	_selectLevel = new SelectLevel(app, this);
 
 	_view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
