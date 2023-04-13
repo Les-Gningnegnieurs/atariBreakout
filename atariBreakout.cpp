@@ -3,8 +3,6 @@
 #include <fstream>
 #include <iostream>
 #include <QApplication>
-#include <QThread>
-#include <QTimer>
 #include "SelectLevel.h"
 
 using namespace std;

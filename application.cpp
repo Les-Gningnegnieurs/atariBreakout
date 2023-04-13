@@ -1,4 +1,4 @@
-//#include "application.h"
+#include "application.h"
 //
 ///*
 //void Window::set_as_sure()
@@ -211,10 +211,10 @@
 //	return app.exec();
 //}*/
 //
-//#include <QApplication>
-//#include <QWidget>
-//#include <QPushButton>
-//#include <QLabel>
+#include <QApplication>
+#include <QWidget>
+#include <QPushButton>
+#include <QLabel>
 //
 ///*int main(int argc, char* argv[])
 //{

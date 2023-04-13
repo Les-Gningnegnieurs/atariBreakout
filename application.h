@@ -1,25 +1,25 @@
-//#ifndef UI_MENU_CLASS
-//#define UI_MENU_CLASS
-//
-//#include <iostream>
-//#include <string>
-//#include "menu.h"
-//#include <QApplication>
-//#include <QMainWindow>
-//#include <QWidget>
-//#include <QLabel>
-//#include <QPushButton>
-//#include <QHBoxLayout>
-//#include <QSpacerItem>
-//#include <QIcon>
-//#include <QtWidgets>
-//#include <QGraphicsScene>
-//
-//#include <QObject>
-//
-//
-//#define RESOLUTION_X 1200
-//#define RESOLUTION_Y 800
+#ifndef UI_MENU_CLASS
+#define UI_MENU_CLASS
+
+#include <iostream>
+#include <string>
+#include "menu.h"
+#include <QApplication>
+#include <QMainWindow>
+#include <QWidget>
+#include <QLabel>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QSpacerItem>
+#include <QIcon>
+#include <QtWidgets>
+#include <QGraphicsScene>
+
+#include <QObject>
+
+
+#define RESOLUTION_X 1200
+#define RESOLUTION_Y 800
 //
 ///*
 //class Window : public QGraphicsScene
@@ -101,4 +101,4 @@
 //};
 //
 //*/
-//#endif
+#endif
