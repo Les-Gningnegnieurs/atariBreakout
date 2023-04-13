@@ -5,11 +5,15 @@
 #include <QString>
 #include <QGraphicsScene>
 #include <QObject>
-#include "application.h" 
+#include <QMainWindow>
+#include <QVBoxLayout>
+#include <QApplication>
 
 #define EXIT_WIDTH 50
 #define EXIT_HEIGHT 50
 #define MARGIN 50
+#define RESOLUTION_X 1200
+#define RESOLUTION_Y 800
 
 class MenuUtils : public QObject {
 	Q_OBJECT;

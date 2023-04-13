@@ -1,0 +1,28 @@
+clang version 12.0.0
+Target: i686-pc-windows-msvc
+Thread model: posix
+InstalledDir: 
+clang version 12.0.0
+Target: i686-pc-windows-msvc
+Thread model: posix
+InstalledDir: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\Llvm\bin
+clang Invocation:
+ "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\Llvm\\bin\\clang-tool" "-cc1" "-triple" "i686-pc-windows-msvc19.29.30148" "-fsyntax-only" "-disable-free" "-disable-llvm-verifier" "-discard-value-names" "-main-file-name" "GameLoop.cpp" "-mrelocation-model" "static" "-mframe-pointer=all" "-fmath-errno" "-fno-rounding-math" "-mconstructor-aliases" "-target-cpu" "pentium4" "-tune-cpu" "generic" "-v" "-resource-dir" "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\Llvm\\lib\\clang\\12.0.0" "-internal-isystem" "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\Llvm\\lib\\clang\\12.0.0\\include" "-internal-isystem" "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\include" "-internal-isystem" "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\atlmfc\\include" "-internal-isystem" "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt" "-internal-isystem" "C:\\Program Files (x86)\\Windows Kits\\10\\include\\10.0.19041.0\\shared" "-internal-isystem" "C:\\Program Files (x86)\\Windows Kits\\10\\include\\10.0.19041.0\\um" "-internal-isystem" "C:\\Program Files (x86)\\Windows Kits\\10\\include\\10.0.19041.0\\winrt" "-fdeprecated-macro" "-fdebug-compilation-dir" "C:\\Users\\stao0901\\Documents\\GitHub\\atariBreakout" "-ferror-limit" "19" "-fno-use-cxa-atexit" "-fms-extensions" "-fms-compatibility" "-fms-compatibility-version=19.29.30148" "-std=c++14" "-fdelayed-template-parsing" "-fcxx-exceptions" "-fexceptions" "-faddrsig" "-x" "c++" "C:\\Users\\stao0901\\Documents\\GitHub\\atariBreakout\\GameLoop.cpp"
+
+clang -cc1 version 12.0.0 based upon LLVM 12.0.0 default target i686-pc-windows-msvc
+ignoring nonexistent directory "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\Llvm\lib\clang\12.0.0\include"
+#include "..." search starts here:
+#include <...> search starts here:
+ C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include
+ C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\atlmfc\include
+ C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt
+ C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared
+ C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um
+ C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt
+End of search list.
+1 error generated.
+Error while processing C:\Users\stao0901\Documents\GitHub\atariBreakout\GameLoop.cpp.
+C:\Users\stao0901\Documents\GitHub\atariBreakout/GameLoop.h:5:10: error: 'menu.h' file not found [clang-diagnostic-error]
+#include "menu.h"
+         ^
+Found compiler error(s).

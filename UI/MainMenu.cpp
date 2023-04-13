@@ -29,15 +29,3 @@ void MainMenu:: initUI()
 
 }
 
-//int main(int argc,char *argv[])
-//{
-//	qapplication app(argc, argv);
-//	qgraphicsview* mainwindow = new qgraphicsview;
-//	mainmenu* menu = new mainmenu(&app);
-//	settings* settings = new settings(&app);
-//	mainwindow->setscene(menu);
-//
-//	mainwindow->resize(resolution_x, resolution_y);
-//	mainwindow->show();
-//	return app.exec();
-//}
