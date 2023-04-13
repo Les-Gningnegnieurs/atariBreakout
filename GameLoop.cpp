@@ -36,7 +36,7 @@ void GameLoop::Start() {
     if (_menu.Is_playing())
     {
         _gameState = Running;
-        timer->start();
+        //timer->start();
     }
     else
         Stop();
