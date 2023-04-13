@@ -4,6 +4,7 @@
 #include <iostream>
 #include <QApplication>
 #include "SelectLevel.h"
+#include <QDebug>
 
 using namespace std;
 int main(int argc, char** argv) {

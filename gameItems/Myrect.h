@@ -24,6 +24,10 @@ private:
 	int Window_X;
 	int Window_Y;
 };
+class Plati : public QGraphicsPixmapItem {
+public:
+	Plati(LevelInfos I);
+};
 
 class Score : public QGraphicsTextItem {
 public:

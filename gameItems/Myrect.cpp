@@ -29,17 +29,25 @@ void MyRect::keyPressEvent(QKeyEvent *event) {
 	}
 
 }
+Plati::Plati(LevelInfos I) {
+	setPos(0, 0);
+	QPixmap pixmap("ressources/bar1.png");
+	QPixmap scaledPixmap = pixmap.scaled(I.Plat_length, I.Plat_heigth, Qt::KeepAspectRatioByExpanding);
+	setPixmap(scaledPixmap);  
+}
 
 Score::Score(QGraphicsItem* parent) : QGraphicsTextItem(parent) {
 	score = 0;
 	setPlainText(QString("Score: ") + QString::number(score));
-	setDefaultTextColor(Qt::blue);
-	setFont(QFont("Helvetica", 14));
+	setDefaultTextColor(Qt::black);
+	QFont font("Ad Lib BT", 14);
+	font.setBold(true);
+	setFont(font);
 }
 void Score::increase() {
 	score+=100;
 	setPlainText(QString("Score: ") + QString::number(score));
-}
+}	
 void Score::resetScore() {
 	score = 0;
 }
@@ -48,11 +56,9 @@ int Score::getScore() {
 }
 Health::Health(QGraphicsPixmapItem* parent) : QGraphicsPixmapItem(parent) {
 	vies = 3;
-	setPixmap(QPixmap("ressources/heart.png"));
-	//setPlainText(QString("Health: ") + QString::number(vies));
-	//setDefaultTextColor(Qt::red);
-	//setFont(QFont("Helvetica", 14));
-
+	QPixmap pixmap("ressources/heart2.png");
+	QPixmap scaledPixmap = pixmap.scaled(26, 26, Qt::KeepAspectRatioByExpanding);
+	setPixmap(scaledPixmap);
 	//voici comment render une image provenant du fichier ressource
 	//QImage* im = new QImage(":/game/ui/heart");
 }

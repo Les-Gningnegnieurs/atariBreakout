@@ -16,6 +16,7 @@
 #define W_RESOLUTION_X 1200
 #define W_RESOLUTION_Y 800
 
+
 class MainWindow : public QMainWindow {
 	Q_OBJECT;
 public:

@@ -17,6 +17,7 @@
 #include <Windows.h>
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
+#include <QGraphicsLineItem>
 #include <QGraphicsRectItem>
 #include <QGraphicsItem>
 
@@ -32,7 +33,9 @@ private:
     int maxSizeX;
     int maxSizeY;
     QGraphicsScene* _scene;
-    Health* _vies;
+    Health* _vies1;
+    Health* _vies2;
+    Health* _vies3;
     Score* _score;
     QGraphicsRectItem* _rect;
  

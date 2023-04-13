@@ -26,8 +26,9 @@ private:
     QGraphicsScene* _scene;
     float MaxSpeed;
 public:
-    Balle(QGraphicsScene* scene, Position posB, int radius, int speedX =-9, int speedY=-1);
+    Balle(QGraphicsScene* scene, Position posB, int radius, int speedX =-1, int speedY=-7);
     Balle(LevelInfos I, QGraphicsScene* scene);
+    ~Balle();
     void setVelocity(int x, int y);
     int getrayon() { return rayon; }
     void update();

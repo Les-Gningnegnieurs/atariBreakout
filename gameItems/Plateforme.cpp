@@ -13,10 +13,11 @@ Plateforme::Plateforme(LevelInfos I, QGraphicsScene* scene) : _scene(scene)
     speed.y = 0;
     pos.x = I.pos_Plat_iniX;
     pos.y = I.pos_Plat_iniY;
-    //pos.x = I.pos_Plat_iniX;  //si on marche en pixels
-    //pos.y = I.pos_Plat_iniY;  //pixels
-    rect = new QGraphicsRectItem(0,0, sizeX, sizeY);
-    rect->setBrush(Qt::gray);
+    /*QPixmap pixmap("ressources/bar1.png");
+    QPixmap scaledPixmap = pixmap.scaled(sizeX,sizeY,Qt::KeepAspectRatioByExpanding);
+    rect = new QGraphicsPixmapItem(scaledPixmap);
+    rect->setPos(0, 0);*/
+    rect = new Plati(I);
     rect->setPos(pos.x, pos.y);
     _scene->addItem(rect);
     /*rect->setFlag(QGraphicsItem::ItemIsFocusable);
@@ -60,31 +61,6 @@ void Plateforme::checkCollision(Balle *b)
     Velocity speed = b->getSpeed();
     int middleX = (pos.x + (sizeX-1) / 2);
     int middleY = (pos.y + (sizeY - 1) / 2);
-    //int middle_L = middle_R-8;
-    ////if (posBa.y == pos.y - rayon && speed.y > 0)  //- facile de hit la plateforme
-    //if (posBa.y + rayon*2 >= pos.y && posBa.y + rayon*2 < pos.y + sizeY &&speed.y > 0) //+ facile de hit la plateforme(pogne le côté aussi)
-    //{
-    //    if (posBa.x >= pos.x - rayon  && posBa.x < middle_L) //gauche
-    //    {
-    //        if (posBa.x == pos.x-rayon && speed.x > 0)    //coin gauche
-    //            b->setVelocity(-4, -2);
-    //        else if (posBa.x >= pos.x  && posBa.x < middle_L && speed.x >= 0)  //renvoie du meme bord si allait vers la droite (
-    //            b->setVelocity(-3, -3); //&& posBa.x < middle_L est une condition inutile
-    //        else if(posBa.x >= pos.x && posBa.x < middle_L && speed.x <= 0)
-    //            b->changeVelocity(0, 1);    //sinon change juste le y
-    //    }
-    //    else if (posBa.x >= middle_L && posBa.x <= middle_R)   //si dans un des milieux
-    //        b->setVelocity(-1, -4); //renvoyer straigth
-    //    else if(posBa.x > middle_R && posBa.x <= pos.x + sizeX) //droite
-    //    {
-    //        if (posBa.x == pos.x + sizeX && speed.x < 0)   //coin droit
-    //            b->setVelocity(4, -2);
-    //        else if (posBa.x > middle_R &&posBa.x <= pos.x + (sizeX-1) && speed.x <= 0) //renvoie du meme bord si allait vers la gauche
-    //            b->setVelocity(3, -3);
-    //        else if(posBa.x > middle_R && posBa.x <= pos.x + (sizeX - 1) && speed.x >= 0)
-    //            b->changeVelocity(0, 1);    //sinon change juste le y
-    //    }
-    //}
     if (posBa.y + rayon * 2 >= pos.y && posBa.y + rayon * 2 < pos.y + sizeY && speed.y > 0) //+ facile de hit la plateforme(pogne le côté aussi)
     {
         if (posBa.x + 2 * rayon >= pos.x && posBa.x <= pos.x + sizeX - 1)

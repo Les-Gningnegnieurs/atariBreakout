@@ -14,10 +14,57 @@ GameLogic:: GameLogic(LevelInfos i, QGraphicsScene* scene) : _scene(scene)
    /* _plat = new  MyRect(i);
     _plat->setPos(i.pos_Plat_iniX, i.pos_Plat_iniY);
     _scene->addItem(_plat);*/
+    QPen pen(Qt::black);  // Create a black pen
+    pen.setWidth(50);      // Set the width of the pen to 2
+    pen.setStyle(Qt::SolidLine);  // Set the pen style to solid
+    //QGraphicsLineItem* left_contour = new QGraphicsLineItem(0, 0, 0, i._windowResolutionY - 200);
+    //QGraphicsLineItem* top_contour = new QGraphicsLineItem(0, 0, i._windowResolutionX, 0);
+    //QGraphicsLineItem* right_contour = new QGraphicsLineItem(i._windowResolutionX - 50, 0, i._windowResolutionX - 50, i._windowResolutionY - 200);
+    //left_contour->setPen(pen);
+    //top_contour->setPen(pen);
+    //right_contour->setPen(pen);
+    //_scene->addItem(left_contour);
+    //_scene->addItem(top_contour);
+    //_scene->addItem(right_contour);
+    QPixmap side("ressources/sides.png");
+    QPixmap top("ressources/sidetop.png");
+    QPixmap bot("ressources/sideBot.png");
+
+    QGraphicsPixmapItem* side_left = new QGraphicsPixmapItem();
+    side_left->setPixmap(side);
+    side_left->setPos(0, 0);
+
+    QGraphicsPixmapItem* side_right = new QGraphicsPixmapItem();
+    side_right->setPixmap(side);
+    side_right->setPos(1150, 0);
+
+    QGraphicsPixmapItem* side_top = new QGraphicsPixmapItem();
+    side_top->setPixmap(top);
+    side_top->setPos(50, 0);
+
+    QGraphicsPixmapItem* side_bot = new QGraphicsPixmapItem();
+    side_bot->setPixmap(bot);
+    side_bot->setPos(0, 600);
+
+    _scene->addItem(side_left);
+    _scene->addItem(side_right);
+    _scene->addItem(side_top);
+    _scene->addItem(side_bot);
+
+
+
+
+
+    /*QGraphicsPixmapItem(QPixmap("ressources/sides.png")
+    _scene->addItem(QGraphicsPixmapItem(QPixmap("ressources/sides.png")))
+    _scene->addLine(25, 0, 25, i._windowResolutionY - 200, pen);
+    _scene->addLine(0, 25, i._windowResolutionX, 25, pen);
+    _scene->addLine(i._windowResolutionX - 25, 0, i._windowResolutionX - 25, i._windowResolutionY - 200,pen);*/
+
     Position posB;
     posB.x = i.pos_Ball_iniX;
     posB.y = i.pos_Ball_iniY;
-    QGraphicsRectItem* rect_Left = new QGraphicsRectItem(0,0,50,i._windowResolutionY-200);
+    /*QGraphicsRectItem* rect_Left = new QGraphicsRectItem(0,0,50,i._windowResolutionY-200);
     rect_Left->setBrush(Qt::lightGray);
     QGraphicsRectItem* rect_Top = new QGraphicsRectItem(0, 0, i._windowResolutionX, 50);
     rect_Top->setBrush(Qt::lightGray);
@@ -25,18 +72,32 @@ GameLogic:: GameLogic(LevelInfos i, QGraphicsScene* scene) : _scene(scene)
     rect_Right->setBrush(Qt::lightGray);
     _scene->addItem(rect_Left);
     _scene->addItem(rect_Top);
-    _scene->addItem(rect_Right);
+    _scene->addItem(rect_Right);*/
 
     _balls.push_back(new Balle(_info, _scene));
-    /*testBalle* _balle = new testBalle(_info);
-    _balle->setPos(_info.pos_Ball_iniX, _info.pos_Ball_iniY);
-    _scene->addItem(_balle);*/
-    _vies = new Health();
-    //_vies->setPos(10, i._windowResolutionY - 70);
-    _vies->setPos(500, 500);
-    scene->addItem(_vies);
+    QGraphicsTextItem* VIES = new QGraphicsTextItem();
+    VIES->setPlainText(QString("Health: "));
+    VIES->setDefaultTextColor(Qt::red);
+    VIES->setFont(QFont("Helvetica", 14));
+    VIES->setPos(10, i._windowResolutionY - 70);
+    scene->addItem(VIES);
+    _vies1 = new Health();
+    _vies2 = new Health();
+    _vies3 = new Health();
+    _vies1->setPos(80, i._windowResolutionY - 70);
+    _vies2->setPos(120, i._windowResolutionY - 70);
+    _vies3->setPos(160, i._windowResolutionY - 70);
+    scene->addItem(_vies1);
+    scene->addItem(_vies2);
+    scene->addItem(_vies3);
+
+    QPixmap pixmap("ressources/scoreboard.png");
+    QGraphicsPixmapItem* _scoreboard = new QGraphicsPixmapItem();
+    _scoreboard->setPixmap(pixmap);
+    _scoreboard->setPos(10, i._windowResolutionY - 140);
+    scene->addItem(_scoreboard);
     _score = new Score();
-    _score->setPos(10, i._windowResolutionY - 100);
+    _score->setPos(30, i._windowResolutionY - 127);
     scene->addItem(_score);
     _level = new Level(_info, _score, _scene);
 
@@ -218,6 +279,12 @@ void GameLogic::checkCollisions(Controller &control) {
     if(_balls.empty())
     {
         _livesLeft--;
+        if (_livesLeft == 2)
+            delete _vies3;
+        else if (_livesLeft == 1)
+            delete _vies2;
+        else if (_livesLeft == 0)
+            delete _vies3;
         Position posb; 
         posb.x = _info.pos_Ball_iniX+4; 
         posb.y = _info.pos_Ball_iniY ;
