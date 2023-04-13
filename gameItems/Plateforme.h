@@ -9,6 +9,10 @@
 #include <QColor>
 #include <QBrush>
 #include <QGraphicsScene>
+#include <QPixmap>
+#include <QGraphicsPixmapItem>
+#include <QPainter>
+#include "Myrect.h"
 
 class Plateforme {
 private:
@@ -18,7 +22,7 @@ private:
     int columns;
     int sizeX;
     int sizeY;
-    QGraphicsRectItem* rect;
+    Plati* rect;
     QGraphicsScene* _scene;
     int Window_X;
     int Window_Y;
@@ -34,7 +38,7 @@ public:
     int getLenght() { return sizeX; }
     int getHeight() { return sizeY; }
     void setLenght(int l) { sizeX = l; }
-    QGraphicsRectItem* getplat() { return rect; }
+    Plati* getplat() { return rect; }
     void update2();
     void move2();
 

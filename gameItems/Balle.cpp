@@ -28,6 +28,10 @@ Balle::Balle(QGraphicsScene* scene, Position posB, int radius, int speedX, int s
     circle->setBrush(Qt::magenta);
     _scene->addItem(circle);
 }
+Balle::~Balle() {
+    delete circle;
+}
+
 void Balle::update()
 {
     checkCollision(pos);
@@ -74,4 +78,6 @@ void Balle::setVelocity(int x, int y) {
 void Balle::platVelocity(float angle) {
     speed.x = round(MaxSpeed * cos(angle));
     speed.y = round(MaxSpeed * sin(angle));
+    if (speed.y == 0)
+        speed.y = -1;
 }
