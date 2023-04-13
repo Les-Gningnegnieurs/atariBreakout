@@ -1,50 +1,44 @@
 #ifndef MAINMENU_H 
 #define MAINMENU_H
 #include <QGraphicsScene>
-
 #include <QPointer>
 #include <QObject>
-
+#include "application.h"
 #include "MenuUtils.h"
 #include "Settings.h"
-#include "SelectLevel.h"
+
+
 class MainMenu:public QGraphicsScene
 {
-	Q_OBJECT
+	Q_OBJECT;
 public:
-	MainMenu(QApplication* app,QWidget*parent=nullptr): QGraphicsScene(parent){
-		setBackgroundBrush(Qt::black);
-		utils = new MenuUtils(this,app);
-		initUI();
-		_app = app;
-		
-	}
+	MainMenu(QApplication* app, QWidget* parent = nullptr);
 
 private:
 	void initUI();
 	QApplication* _app;
 	QPushButton* _center[3];
-	MenuUtils* utils;
+	QPointer<MenuUtils> _utils;
 
 
 	int imageY = 0;
 public slots:
 	void exit_clicked()
 	{
-		utils->set_as_sure();
-	}
-	void showSettingsUI() 
+		_utils->set_as_sure();
+	};
+	void showSettingsUI()
 	{
 		emit showSettingsRequested();
-	}
+	};
 	void showGameUI()
 	{
 		emit showGameRequested();
-	}
+	};
 	void showSelectLevelUI()
 	{
 		emit showSelectLevelRequested();
-	}
+	};
 
 signals:
 	void showSettingsRequested();

@@ -2,16 +2,16 @@
 #define SELECTLEVEL_H
 
 #include <QGraphicsScene>
-#include "application.h"
 #include "MenuUtils.h"
 #include <QObject>
+#include <QPointer>
 
 
-class SelectLevel:public QGraphicsScene
+class SelectLevel :public QGraphicsScene
 {
 	Q_OBJECT
 public:
-		SelectLevel(QApplication* app, QWidget* parent = nullptr) : QGraphicsScene(parent) {
+	SelectLevel(QApplication* app, QWidget* parent = nullptr) : QGraphicsScene(parent) {
 		setBackgroundBrush(Qt::black);
 		utils = new MenuUtils(this, app);
 		initUI();
@@ -23,7 +23,7 @@ private:
 	void initUI();
 	QApplication* _app;
 	QPushButton* _images[6];
-	MenuUtils* utils;
+	QPointer<MenuUtils> utils;
 
 
 	int imageY = 0;

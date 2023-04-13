@@ -1,5 +1,14 @@
 #include "MenuUtils.h"
 
+MenuUtils::MenuUtils(QWidget* parent) : QObject(parent) {
+
+}
+
+MenuUtils::MenuUtils(QGraphicsScene* scene, QApplication* app, QWidget* parent) : QObject(parent) {
+	_scene = scene;
+	_app = app;
+}
+
 QLabel* MenuUtils::import_image(QString path)
 {
 	QLabel* imageLabel = new QLabel();
@@ -8,7 +17,7 @@ QLabel* MenuUtils::import_image(QString path)
 
 	imageLabel->setFixedSize(image.width(), image.height());
 	_scene->addWidget(imageLabel);
-
+	
 	return imageLabel;
 }
 QPushButton* MenuUtils::add_exit()

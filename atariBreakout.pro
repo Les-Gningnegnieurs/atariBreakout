@@ -6,4 +6,5 @@ HEADERS     += UI/MenuUtils.h UI/Settings.h UI/MainMenu.h application.h UI/mainW
 SOURCES     += UI/MenuUtils.cpp UI/Settings.cpp UI/MainMenu.cpp application.cpp UI/mainWindow.cpp UI/SelectLevel.cpp atariBreakout.cpp inputs/PhysicalController.cpp inputs/Controller.cpp inputs/Keyboard.cpp gameItems/Balle.cpp gameItems/bricks/Brique.cpp gameItems/bricks/Briquetest.cpp gameItems/bricks/BriqueA.cpp gameItems/bricks/BriqueB.cpp gameItems/bricks/BriqueC.cpp gameItems/bricks/BriqueT.cpp gameItems/bricks/BriqueVoid.cpp Level.cpp UI/menu.cpp gameItems/Plateforme.cpp gameItems/Myrect.cpp gameItems/Testballe.cpp GameLogic.cpp Canevas.cpp GameLoop.cpp gameItems/powerups/Powerups.cpp gameItems/powerups/Extendplatform.cpp gameItems/powerups/Addballs.cpp gameItems/powerups/Swapcontrol.cpp lib/SerialPort.cpp
 INCLUDEPATH += ../atariBreakout ../atariBreakout/inputs ../atariBreakout/lib ../atariBreakout/lib ../atariBreakout/components ../atariBreakout/UI ../atariBreakout/gameItems ../atariBreakout/gameItems/bricks ../atariBreakout/gameItems/powerups
 QT          += widgets
+QT          += core
 		

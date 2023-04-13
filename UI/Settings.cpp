@@ -1,5 +1,19 @@
 #include "Settings.h"
 
+
+Settings::Settings() {
+
+}
+
+Settings::Settings(QApplication* app, QWidget* parent) : QGraphicsScene(parent) {
+	setBackgroundBrush(Qt::black);
+	utils = new MenuUtils(this,app);
+	initUI();
+	
+	_app = app;
+
+}
+
 void Settings::initUI()
 {
 	QLabel* _controllers = utils->import_image("image/unselected/keyboard.png"); // A REVOIR POUR LA MANETTE_exits = add_exit(_settings);
@@ -40,4 +54,8 @@ void Settings::initUI()
 
 	 QObject::connect(_exits, &QPushButton::clicked, this, &Settings::exit_clicked);
 	
+}
+
+void Settings::exit_clicked() {
+	emit exit_click();
 }

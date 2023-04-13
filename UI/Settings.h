@@ -1,33 +1,42 @@
-#ifndef SETTINGS_H 
-#define SETTINGS_H 
+#ifndef CSETTINGS_H 
+#define CSETTINGS_H 
+#include <iostream>
+#include <string>
+#include "menu.h"
+#include <QApplication>
+#include <QMainWindow>
+#include <QWidget>
+#include <QLabel>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QSpacerItem>
+#include <QIcon>
+#include <QtWidgets>
 #include <QGraphicsScene>
-#include "application.h"
+#include <QObject>
+#include <QPointer>
 #include "MenuUtils.h"
+
+
+
 class Settings : public QGraphicsScene
 {
-	Q_OBJECT
+	Q_OBJECT;
 public:
-	Settings(QApplication* app, QWidget* parent = nullptr) : QGraphicsScene(parent) {
-		setBackgroundBrush(Qt::black);
-		utils = new MenuUtils(this,app);
-		initUI();
-		_app = app;
-
-	}
+	Settings();
+	Settings(QApplication* app, QWidget* parent = nullptr);
 
 private:
 	void initUI();
 	QApplication* _app;
 	QPushButton* _center[3];
-	MenuUtils* utils;
+	QPointer<MenuUtils> utils;
 	int imageY = 0;
 	QPushButton* _buttons[6];
-
+signals:
+	void exit_click();
 public slots:
-	void exit_clicked()
-	{
-		
-	}
+	void exit_clicked();
 };
 
 #endif
