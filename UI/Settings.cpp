@@ -7,8 +7,9 @@ Settings::Settings() {
 
 Settings::Settings(QApplication* app, QWidget* parent) : QGraphicsScene(parent) {
 	setBackgroundBrush(Qt::black);
-	utils = new MenuUtils(this, app);
+	utils = new MenuUtils(this,app);
 	initUI();
+	
 	_app = app;
 
 }

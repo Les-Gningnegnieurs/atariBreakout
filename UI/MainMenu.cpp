@@ -2,6 +2,7 @@
 
 MainMenu::MainMenu(QApplication* app, QWidget* parent) : QGraphicsScene(parent) {
 	setBackgroundBrush(Qt::black);
+	_utils = new MenuUtils(this, app);
 	initUI();
 	_app = app;
 
@@ -10,8 +11,8 @@ MainMenu::MainMenu(QApplication* app, QWidget* parent) : QGraphicsScene(parent) 
 void MainMenu:: initUI()
 {
 	//// CREATING MAIN
-	//QLabel*_controllerm = _utils->import_image("image/unselected/keyboard.png"); // A REVOIR POUR LA MANETTE
-	//_controllerm->move(RESOLUTION_X - _controllerm->width() - MARGIN, RESOLUTION_Y - _controllerm->height() - MARGIN);
+	QLabel*_controllerm = _utils->import_image("image/unselected/keyboard.png"); // A REVOIR POUR LA MANETTE
+	_controllerm->move(RESOLUTION_X - _controllerm->width() - MARGIN, RESOLUTION_Y - _controllerm->height() - MARGIN);
 
 	QPushButton*_exitm = _utils->add_exit();
 	 imageY = 100;

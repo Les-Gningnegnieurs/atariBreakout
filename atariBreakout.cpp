@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
 
    // SelectLevel* level = new SelectLevel;
     //Intro(std::cout);
-    GameLoop* game = new GameLoop(&a);
+     GameLoop* game = new GameLoop(&a);
 
    /* game->Start();
     game->update2();*/ //renomer la m�thode pour Focus()

@@ -18,7 +18,7 @@ private:
 	void initUI();
 	QApplication* _app;
 	QPushButton* _center[3];
-	QPointer<MenuUtils> _utils = new MenuUtils();
+	QPointer<MenuUtils> _utils;
 
 
 	int imageY = 0;

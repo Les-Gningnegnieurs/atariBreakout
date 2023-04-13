@@ -30,7 +30,7 @@ private:
 	void initUI();
 	QApplication* _app;
 	QPushButton* _center[3];
-	QPointer<MenuUtils> utils = new MenuUtils();
+	QPointer<MenuUtils> utils;
 	int imageY = 0;
 	QPushButton* _buttons[6];
 signals:
