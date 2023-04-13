@@ -2,7 +2,6 @@
 #define CSETTINGS_H 
 #include <iostream>
 #include <string>
-#include "menu.h"
 #include <QApplication>
 #include <QMainWindow>
 #include <QWidget>
