@@ -17,7 +17,7 @@ void MyRect::keyPressEvent(QKeyEvent *event) {
 	if (event->key() == Qt::Key_Left)
 	{
 		//qDebug() << pos().x();
-		if (!(pos().x() - 50 > 0));
+		if (!(pos().x() - 50 > 0))
 		{
 			setPos(x() - 10, y());
 		}
