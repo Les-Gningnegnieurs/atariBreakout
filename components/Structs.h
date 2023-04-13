@@ -4,7 +4,8 @@
 
 #ifndef STRUCTS_H
 #define STRUCTS_H
-
+#define RESOLUTION_X 1200
+#define RESOLUTION_Y 800
 #define RESMAX_X 200 //80
 #define RESMAX_Y 50 //25
 #define SLEEP 20

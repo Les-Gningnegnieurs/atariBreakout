@@ -3,8 +3,8 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QWidget>
-#define RESOLUTION_X 80
-#define RESOLUTION_Y 25
+#include <Structs.h>
+
 
 
 class Canevas
