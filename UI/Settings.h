@@ -43,6 +43,9 @@ private:
 
 signals:
 	void exit_click();
+	void load_click();
+	void save_click();
+	void apply_click();
 public slots:
 	void click()
 	{
@@ -67,6 +70,9 @@ public slots:
 		}
 	}
 	void exit_clicked();
+	void load_clicked();
+	void save_clicked();
+	void apply_clicked();
 };
 
 #endif

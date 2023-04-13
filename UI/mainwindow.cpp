@@ -29,6 +29,9 @@ MainWindow::MainWindow(QApplication *app, QWidget* parent, QGraphicsScene* game)
 	QObject::connect(_selectLevelTemp, &SelectLevel::level4Selected, this, &MainWindow::level4Selected);
 	QObject::connect(_selectLevelTemp, &SelectLevel::level5Selected, this, &MainWindow::level5Selected);
 	QObject::connect(_selectLevelTemp, &SelectLevel::level6Selected, this, &MainWindow::level6Selected);
+	QObject::connect(_settingsTemp, &Settings::load_click, this, &MainWindow::loadConfig);
+	QObject::connect(_settingsTemp, &Settings::apply_click, this, &MainWindow::applyConfig);
+	QObject::connect(_settingsTemp, &Settings::save_click, this, &MainWindow::saveConfig);
 
 	_settings = _settingsTemp;
 	_menu = _menuTemp;
@@ -111,5 +114,21 @@ void MainWindow::level5Selected() {
 void MainWindow::level6Selected() {
 	QMessageBox _text;
 	_text.setText("Level 6 Selectionee");
+	_text.exec();
+}
+void MainWindow::applyConfig()
+{
+	QMessageBox _text;
+	_text.setText("Configuration Appliquer");
+	_text.exec();
+}
+void MainWindow::loadConfig() {
+	QMessageBox _text;
+	_text.setText("Configuration Charger");
+	_text.exec();
+}
+void MainWindow::saveConfig() {
+	QMessageBox _text;
+	_text.setText("Configuration Sauvegarder");
 	_text.exec();
 }

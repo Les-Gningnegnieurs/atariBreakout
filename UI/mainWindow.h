@@ -37,6 +37,9 @@ public slots:
 	void level4Selected();
 	void level5Selected();
 	void level6Selected();
+	void applyConfig();
+	void saveConfig();
+	void loadConfig();
 
 
 
