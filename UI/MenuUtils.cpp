@@ -20,18 +20,10 @@ QLabel* MenuUtils::import_image(QString path)
 	
 	return imageLabel;
 }
-QPushButton* MenuUtils::add_exit()
+CustomButton* MenuUtils::add_exit()
 {
-	QPushButton* button = new QPushButton();
-
-	QPixmap pixmap("image/unselected/exit.png");
-	QIcon icon(pixmap); // Création d'une icône à partir de la première image
-	button->setIcon(icon); // Définition de l'icône pour le bouton
-	button->setIconSize(pixmap.rect().size()); // Définition de la taille de l'icône pour le bouton
-	button->setFixedSize(pixmap.rect().size()); // Définition de la taille fixe du bouton pour correspondre à la taille de l'icône
-	button->setFlat(true);
-
-
+	CustomButton* button = new CustomButton("exit.png");
+	
 	int buttonX = MARGIN;
 	int buttonY = _scene->height() - (EXIT_HEIGHT + MARGIN);
 
@@ -55,33 +47,20 @@ QLabel* MenuUtils::import_image_up(QString path,bool add)
 
 	return imageLabel;
 }
-QPushButton* MenuUtils::add_center_button(QString path)
+CustomButton* MenuUtils::add_center_button(QString path)
 {
-	QPushButton* button = new QPushButton();
+	CustomButton* button = new CustomButton(path);
+	int offset = 50;
 
-	QPixmap pixmap(path);
-	QIcon icon(pixmap); // Création d'une icône à partir de la première image
-	button->setIcon(icon); // Définition de l'icône pour le bouton
-	button->setIconSize(pixmap.rect().size()); // Définition de la taille de l'icône pour le bouton
-	button->setFixedSize(pixmap.rect().size()); // Définition de la taille fixe du bouton pour correspondre à la taille de l'icône
-	button->setFlat(true);
-
-	button->move((_scene->width() - pixmap.width()) / 2, imageY);
-	imageY += pixmap.height();
+	button->move((_scene->width() - button->width() + offset) / 2, imageY);
+	imageY += button->height();
 	_scene->addWidget(button);
 
 	return button;
 }
-QPushButton* MenuUtils::add_button(QString path, QWidget* widget)
+CustomButton* MenuUtils::add_button(QString path, QWidget* widget)
 {
-	QPushButton* button = new QPushButton();
-
-	QPixmap pixmap(path);
-	QIcon icon(pixmap); // Création d'une icône à partir de la première image
-	button->setIcon(icon); // Définition de l'icône pour le bouton
-	button->setIconSize(pixmap.rect().size()); // Définition de la taille de l'icône pour le bouton
-	button->setFixedSize(pixmap.rect().size()); // Définition de la taille fixe du bouton pour correspondre à la taille de l'icône
-	button->setFlat(true);
+	CustomButton* button = new CustomButton(path);
 
 	return button;
 }
@@ -93,22 +72,32 @@ void MenuUtils::set_as_sure()
 	win->setStyleSheet("background-color: black;");
 	QWidget* centralWidget = new QWidget(win);
 	win->setCentralWidget(centralWidget);
-	win->resize(400, 300);
+	win->resize(600, 400);
 	QLabel* imageLabel = import_image_up("image/title/sure.png",0);
-	QVBoxLayout* layout = new QVBoxLayout(centralWidget);
-	centralWidget->setLayout(layout);
-	layout->addWidget(imageLabel);
+	QHBoxLayout* layout = new QHBoxLayout();
+	QHBoxLayout* layout1 = new QHBoxLayout();
 
-	QPushButton* yes = add_button("image/unselected/yes.png", win);
+	layout1->addStretch(1);
+	layout1->addWidget(imageLabel);
+	layout1->addStretch(1);
+
+	QPushButton* yes = add_button("yes.png", win);
 	layout->addWidget(yes);
 
 	yes->move(_scene->width() / 2 - yes->width(), imageY);
 	QObject::connect(yes, &QPushButton::clicked, _app, &QApplication::quit);
 
-	QPushButton* cancel = add_button("image/unselected/cancel.png", win);
+	QPushButton* cancel = add_button("cancel.png", win);
 	layout->addWidget(cancel);
 
 	cancel->move(_scene->width() / 2, imageY);
+	
+	QVBoxLayout* vlayout = new QVBoxLayout(centralWidget);
+	vlayout->addLayout(layout1);
+	vlayout->addLayout(layout);
+	
+	
+	centralWidget->setLayout(vlayout);
 	QObject::connect(cancel, &QPushButton::clicked, win, &QMainWindow::close);
 	win->show();
 }

@@ -8,7 +8,7 @@
 #define RESOLUTION_Y 800
 #define RESMAX_X 200 //80
 #define RESMAX_Y 50 //25
-#define SLEEP 20
+#define SLEEP 10
 #define PTIMELIMIT 15000
 #define CONTOUR 50
 

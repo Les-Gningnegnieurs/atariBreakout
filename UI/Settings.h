@@ -32,7 +32,7 @@ private:
 	QPushButton* _center[3];
 	QPointer<MenuUtils> utils;
 	int imageY = 0;
-	QPushButton* _buttons[6];
+	QPushButton* _buttons[9];
 signals:
 	void exit_click();
 public slots:

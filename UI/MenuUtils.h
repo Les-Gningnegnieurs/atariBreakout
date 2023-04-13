@@ -7,6 +7,7 @@
 #include <QMainWindow>
 #include <QVBoxLayout>
 #include <QApplication>
+#include "CustomButton.h"
 
 
 #define EXIT_WIDTH 50
@@ -22,10 +23,10 @@ public:
 	MenuUtils(QWidget* parent = nullptr);
 	MenuUtils(QGraphicsScene* scene, QApplication* app, QWidget* parent = nullptr);
 	QLabel* import_image(QString path);
-	QPushButton* add_exit();
+	CustomButton* add_exit();
 	QLabel* import_image_up(QString path, bool add);
-	QPushButton* add_center_button(QString path);
-	QPushButton* add_button(QString path, QWidget* widget);
+	CustomButton* add_center_button(QString path);
+	CustomButton* add_button(QString path, QWidget* widget);
 	void set_as_sure();
 private:
 	QGraphicsScene* _scene;
