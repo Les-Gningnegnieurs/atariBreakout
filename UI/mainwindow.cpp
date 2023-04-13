@@ -11,12 +11,16 @@ MainWindow::MainWindow(QApplication *app, QWidget* parent, QGraphicsScene* game)
 
 	_settings = new Settings(app, this);
 	_menu = new MainMenu(app, this);
+	_selectLevel = new SelectLevel(app, this);
 
 	_view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	this->setFixedSize(W_RESOLUTION_X, W_RESOLUTION_Y);
 	setCentralWidget(_view);
-	showMenu();
+	//showMenu();
+	showGame();
+	//showSettings();
+	//showSelectLevel();
 	this->show();
 
 	////focus sur menu en premier
@@ -39,4 +43,10 @@ void MainWindow::showSettings() {
 	setFixedSize(1200, 800);
 	_view->setFixedSize(1200, 800);
 	_view->setScene(_settings);
+}
+
+void MainWindow::showSelectLevel() {
+	setFixedSize(1200, 800);
+	_view->setFixedSize(1200, 800);
+	_view->setScene(_selectLevel);
 }

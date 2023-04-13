@@ -11,6 +11,7 @@
 #include "Settings.h"
 #include "MainMenu.h"
 #include "MenuUtils.h"
+#include "SelectLevel.h"
 
 #define W_RESOLUTION_X 1200
 #define W_RESOLUTION_Y 800
@@ -25,11 +26,13 @@ public slots:
 	void showMenu();
 	void showGame();
 	void showSettings();
+	void showSelectLevel();
 
 private:
 	QGraphicsView* _view;
 	QGraphicsScene* _menu;
 	QGraphicsScene* _settings;
 	QGraphicsScene* _game;
+	QGraphicsScene* _selectLevel;
 };
 #endif
