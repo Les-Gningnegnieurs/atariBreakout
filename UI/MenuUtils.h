@@ -4,12 +4,9 @@
 #include <QPushButton>
 #include <QString>
 #include <QGraphicsScene>
-
 #include <QMainWindow>
 #include <QVBoxLayout>
 #include <QApplication>
-
-#include "application.h" 
 
 
 #define EXIT_WIDTH 50

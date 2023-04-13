@@ -14,6 +14,7 @@
 #include <QtWidgets>
 #include <QGraphicsScene>
 #include <QObject>
+#include <QPointer>
 #include "MenuUtils.h"
 
 
