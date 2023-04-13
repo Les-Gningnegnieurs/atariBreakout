@@ -50,8 +50,8 @@ void MainWindow::showMenu() {
 }
 
 void MainWindow::showGame() {
-	setFixedSize(1200, 800);
-	_view->setFixedSize(1200, 800);
+	//setFixedSize(1200, 800);
+	//_view->setFixedSize(1200, 800);
 	_view->setScene(_game);
 }
 
