@@ -50,8 +50,9 @@ QLabel* MenuUtils::import_image_up(QString path,bool add)
 CustomButton* MenuUtils::add_center_button(QString path)
 {
 	CustomButton* button = new CustomButton(path);
-	
-	button->move((_scene->width() - button->width()) / 2, imageY);
+	int offset = 50;
+
+	button->move((_scene->width() - button->width() + offset) / 2, imageY);
 	imageY += button->height();
 	_scene->addWidget(button);
 
@@ -71,11 +72,14 @@ void MenuUtils::set_as_sure()
 	win->setStyleSheet("background-color: black;");
 	QWidget* centralWidget = new QWidget(win);
 	win->setCentralWidget(centralWidget);
-	win->resize(400, 300);
+	win->resize(600, 400);
 	QLabel* imageLabel = import_image_up("image/title/sure.png",0);
-	QVBoxLayout* layout = new QVBoxLayout(centralWidget);
-	centralWidget->setLayout(layout);
-	layout->addWidget(imageLabel);
+	QHBoxLayout* layout = new QHBoxLayout();
+	QHBoxLayout* layout1 = new QHBoxLayout();
+
+	layout1->addStretch(1);
+	layout1->addWidget(imageLabel);
+	layout1->addStretch(1);
 
 	QPushButton* yes = add_button("yes.png", win);
 	layout->addWidget(yes);
@@ -87,6 +91,13 @@ void MenuUtils::set_as_sure()
 	layout->addWidget(cancel);
 
 	cancel->move(_scene->width() / 2, imageY);
+	
+	QVBoxLayout* vlayout = new QVBoxLayout(centralWidget);
+	vlayout->addLayout(layout1);
+	vlayout->addLayout(layout);
+	
+	
+	centralWidget->setLayout(vlayout);
 	QObject::connect(cancel, &QPushButton::clicked, win, &QMainWindow::close);
 	win->show();
 }
