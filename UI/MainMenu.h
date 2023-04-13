@@ -3,7 +3,6 @@
 #include <QGraphicsScene>
 #include <QPointer>
 #include <QObject>
-#include "application.h"
 #include "MenuUtils.h"
 #include "Settings.h"
 

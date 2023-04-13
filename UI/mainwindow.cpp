@@ -8,6 +8,10 @@ MainWindow::MainWindow(QApplication *app, QWidget* parent, QGraphicsScene* game)
 
 	_view->setParent(this);
 	_game->setParent(this);
+	QPointer<MainMenu> _menuTemp = new MainMenu(app, this);
+	QPointer<SelectLevel> _selectLevelTemp = new SelectLevel(app, this);
+	QPointer<Settings> _settingsTemp = new Settings(app, this);
+
 
 	_settings = new Settings(app, this);
 	_menu = new MainMenu(app, this);
@@ -17,8 +21,17 @@ MainWindow::MainWindow(QApplication *app, QWidget* parent, QGraphicsScene* game)
 	_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	this->setFixedSize(W_RESOLUTION_X, W_RESOLUTION_Y);
 	setCentralWidget(_view);
-	//showMenu();
-	showGame();
+	QObject::connect(_menuTemp, &MainMenu::showGameRequested, this, &MainWindow::showGame);
+	QObject::connect(_menuTemp, &MainMenu::showSelectLevelRequested, this, &MainWindow::showSelectLevel);
+	QObject::connect(_menuTemp, &MainMenu::showSettingsRequested, this, &MainWindow::showSettings);
+	QObject::connect(_settingsTemp, &Settings::exit_click, this, &MainWindow::showMenu);
+	QObject::connect(_selectLevelTemp, &SelectLevel::exit_click, this, &MainWindow::showMenu);
+
+	_settings = _settingsTemp;
+	_menu = _menuTemp;
+	_selectLevel = _selectLevelTemp;
+	showMenu();
+	//showGame();
 	//showSettings();
 	//showSelectLevel();
 	this->show();

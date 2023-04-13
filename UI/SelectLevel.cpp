@@ -40,8 +40,13 @@ void SelectLevel::initUI()
 	_images[5] = utils->add_button("ressources/steve.png", temp);
 	_images[5]->move(3 * this->width() / 4 - _images[5]->width() / 2, imageY);
 	addWidget(_images[5]);
+	QObject::connect(_exits, &QPushButton::clicked, this, &SelectLevel::exit_clicked);
 
 
 
+}
 
+void SelectLevel::exit_clicked()
+{
+	emit exit_click();
 }

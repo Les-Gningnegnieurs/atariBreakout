@@ -17,6 +17,7 @@ GameLoop::GameLoop(QApplication* app, QObject* parent) : QObject(parent) {
     QObject::connect(timer, &QTimer::timeout, this, &GameLoop::MainGameLoop);
     //temporaire
     _menu.Set_playing(1);
+    Start();
     //_window->showMenu();
 }
 
