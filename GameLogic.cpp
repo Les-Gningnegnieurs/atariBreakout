@@ -194,7 +194,7 @@ void GameLogic:: update(Controller& c, bool accelmode)
 
 bool GameLogic::isGameOver()
 {
-    if (_livesLeft < 0)
+    if (_livesLeft <= 0)
     {
         std::cout << _score->getScore();
         Sleep(500);
@@ -284,7 +284,7 @@ void GameLogic::checkCollisions(Controller &control) {
         else if (_livesLeft == 1)
             delete _vies2;
         else if (_livesLeft == 0)
-            delete _vies3;
+            delete _vies1;
         Position posb; 
         posb.x = _info.pos_Ball_iniX+4; 
         posb.y = _info.pos_Ball_iniY ;
