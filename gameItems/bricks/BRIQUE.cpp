@@ -84,15 +84,15 @@ Collision Brique::checkCollision(Balle* b) {
         //collision down
         if (Y_next <= _posBrique.y + (_sizeY - 1) && Y_next > _posBrique.y && speed.y < 0)
         {
-            //if (posBa.x + rayon*2 > _posBrique.x && posBa.x < _posBrique.x + _sizeX - 1)
-            if (posBa.x + rayon * 2 > _posBrique.x && posBa.x < _posBrique.x + _sizeX - 1)
+            if (posBa.x + rayon*2 > _posBrique.x && posBa.x < _posBrique.x + _sizeX - 1)
+            //if (posBa.x + rayon * 2 > _posBrique.x && posBa.x < _posBrique.x + _sizeX - 1)
                 return DN;
         }
         //collision top
         if (Y_next + rayon*2 >= _posBrique.y && Y_next + rayon*2 < _posBrique.y +_sizeY-1 && speed.y > 0)
         {
             //if (posBa.x + rayon*2 > _posBrique.x && posBa.x < _posBrique.x + _sizeX - 1)
-            if (posBa.x + rayon * 2 > _posBrique.x && posBa.x < _posBrique.x + _sizeX - 1)
+            if (posBa.x + rayon*2  > _posBrique.x && posBa.x < _posBrique.x + _sizeX - 1)
                 return UP;
         }
         //collision left

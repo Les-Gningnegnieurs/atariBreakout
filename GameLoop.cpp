@@ -34,12 +34,14 @@ void GameLoop::Start() {
 
     _canevas->erase();
     if (_menu.Is_playing())
+    {
         _gameState = Running;
+        timer->start();
+    }
     else
         Stop();
 
     //_window->showGame();
-    timer->start();
 }
 
 

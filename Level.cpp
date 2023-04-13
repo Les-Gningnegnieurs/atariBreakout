@@ -143,8 +143,8 @@ void Level::checkColl_UP_RIGHT(Balle* b, std::vector <Powerups*>& p){
     int j_max = (b->getPos().x / BrickLength) + 2;
     if (i_max < 0)
         i_max = 0;
-    if (j_max > columns-1)
-        j_max = columns-1;
+    if (j_max > columns)
+        j_max = columns;
     int i = i_max + 2;
     if (i >= rows-1)
         i = rows-1;

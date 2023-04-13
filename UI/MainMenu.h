@@ -12,12 +12,13 @@ class MainMenu:public QGraphicsScene
 	Q_OBJECT;
 public:
 	MainMenu(QApplication* app, QWidget* parent = nullptr);
-
+	bool on_menu() { return menu_on; }
 private:
 	void initUI();
 	QApplication* _app;
 	QPushButton* _center[3];
 	QPointer<MenuUtils> _utils;
+	bool menu_on = true;
 
 
 	int imageY = 0;
@@ -33,6 +34,7 @@ public slots:
 	void showGameUI()
 	{
 		emit showGameRequested();
+		menu_on = false;
 	};
 	void showSelectLevelUI()
 	{
