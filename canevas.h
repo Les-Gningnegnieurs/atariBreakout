@@ -3,6 +3,8 @@
 #include <QGraphicsScene>
 #include <QWidget>
 #include <Structs.h>
+#include <QLabel>
+#include <QGraphicsPixmapItem>
 
 
 
