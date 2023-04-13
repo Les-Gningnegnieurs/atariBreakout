@@ -5,6 +5,7 @@
 #include <QObject>
 #include "application.h"
 #include "MenuUtils.h"
+#include "testMenu.h"
 #include "Settings.h"
 
 
@@ -18,14 +19,15 @@ private:
 	void initUI();
 	QApplication* _app;
 	QPushButton* _center[3];
-	QPointer<MenuUtils> _utils = new MenuUtils();
+	testMenu* _test;
+	//QPointer<MenuUtils> _utils = new MenuUtils();
 
 
 	int imageY = 0;
 public slots:
 	void exit_clicked()
 	{
-		_utils->set_as_sure();
+		//_utils->set_as_sure();
 	};
 	void showSettingsUI()
 	{
