@@ -116,6 +116,12 @@ bool PhysicalController::receiveInputs(){
         }
     }
 
+    //Reset les bouttons
+    _buttons[0] = 0;
+    _buttons[1] = 0;
+    _buttons[2] = 0;
+    _buttons[3] = 0;
+
     //{"b": [b1,b2,b3,b4]} (0/1)
     if(j_msg_rcv["b"] != json::value_t::null){
         _buttons[0] = j_msg_rcv["b"][0] == 1;
