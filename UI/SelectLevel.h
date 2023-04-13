@@ -29,8 +29,22 @@ private:
 
 signals:
 	void exit_click();
+	void level1Selected();
+	void level2Selected();
+	void level3Selected();
+	void level4Selected();
+	void level5Selected();
+	void level6Selected();
 public slots:
 	void exit_clicked();
+	void level1Requested();
+	void level2Requested();
+	void level3Requested();
+	void level4Requested();
+	void level5Requested();
+	void level6Requested();
+
+	
 	
 
 
