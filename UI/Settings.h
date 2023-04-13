@@ -32,10 +32,10 @@ public:
 private:
 	void initUI();
 	QApplication* _app;
-	QPushButton* _center[3];
+	QGraphicsProxyWidget* proxy[15];
 	QPointer<MenuUtils> utils;
 	int imageY1, imageY2, imageY3, imageY4, imageY5 = 0;
-	QPushButton* _buttons[9];
+	QPushButton* _buttons[15];
 	bool _playingMode = 0;
 	short _COM = 0;
 	bool _input = 0;
