@@ -140,6 +140,11 @@ bool PhysicalController::receiveInputs(){
         _accelerometre.z = j_msg_rcv["a"][2];
     }
 
+    if (j_msg_rcv["r"] != json::value_t::null) {
+        _rand = j_msg_rcv["r"];
+    }
+
+
     return true;
     
 }
