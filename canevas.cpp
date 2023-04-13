@@ -36,6 +36,7 @@ std::istream& operator>>(std::istream& s, Canevas& can)
 	s >> can._info.ball_radius;
 	s >> can._info.speed_B_x;
 	s >> can._info.speed_B_y;
+	s >> can._info.maxspeed_B;
 	//on as set tt ce dont les constructeurs ont besoin et ensuite on px read le reste
 	can._scene->setSceneRect(0, 0, can._info._windowResolutionX, can._info._windowResolutionY);
 	can._game = new GameLogic(can._info, can._scene);

@@ -4,6 +4,7 @@
 #include <QKeyEvent>
 #include <QGraphicsTextItem>
 #include "Structs.h"
+#include <QGraphicsPixmapItem>
 
 #include <QDebug>
 #include <QFont>
@@ -34,9 +35,9 @@ public:
 private:
 	int score;
 };
-class Health : public QGraphicsTextItem {
+class Health : public QGraphicsPixmapItem {
 public:
-	Health(QGraphicsItem* parent = 0);
+	Health(QGraphicsPixmapItem* parent = 0);
 	void decrease();
 	int GetHealth();
 private:

@@ -24,8 +24,9 @@ private:
     int oldPosY;
     QGraphicsEllipseItem* circle;
     QGraphicsScene* _scene;
+    float MaxSpeed;
 public:
-    Balle(QGraphicsScene* scene, Position posB, int radius, int speedX =-2, int speedY=-2);
+    Balle(QGraphicsScene* scene, Position posB, int radius, int speedX =-9, int speedY=-1);
     Balle(LevelInfos I, QGraphicsScene* scene);
     void setVelocity(int x, int y);
     int getrayon() { return rayon; }
@@ -37,6 +38,7 @@ public:
     Velocity getSpeed(){return speed;}
     Position getPos() {return pos;}
     void changeVelocity(bool x = 0, bool y = 0);
+    void platVelocity(float angle);
     QGraphicsEllipseItem* getBall() { return circle; }
 
 };
