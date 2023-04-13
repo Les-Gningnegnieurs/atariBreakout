@@ -24,72 +24,51 @@ void Settings::initUI()
 
 	QWidget* temp;
 	QLabel* lab = utils->import_image_up("image/title/settings_menu.png",1);
-	imageY += lab->height();
+	imageY1 = lab->height();
 
 	_buttons[0] = utils->add_button("playing_mode.png",temp);
-	_buttons[0]->move(this->width() / 2 - _buttons[0]->width(), imageY);
+	_buttons[0]->move(this->width() / 2 - _buttons[0]->width(), imageY1);
 	addWidget(_buttons[0]);
-	int x = 0;
-	_buttons[6] = utils->add_button("left.png", temp);
-	_buttons[6]->move(this->width() / 2, imageY);
-	addWidget(_buttons[6]); x += _buttons[6]->width();
-	_buttons[7] = utils->add_button("joystick.png", temp);
-	_buttons[7]->move(this->width() / 2 + x, imageY);
-	addWidget(_buttons[7]); x += _buttons[7]->width();
-	_buttons[8] = utils->add_button("right.png", temp);
-	_buttons[8]->move(this->width() / 2 + x, imageY);
-	addWidget(_buttons[8]);
-	imageY += _buttons[0]->height();
+	_buttons[6] = utils->add_button("joystick.png", temp);
+	_buttons[6]->move(this->width() / 2, imageY1);
+	addWidget(_buttons[6]);
+	imageY2 = imageY1 + _buttons[0]->height();
 	
-	int space = 105;
 	_buttons[1] = utils->add_button("COM.png", temp);
-	_buttons[1]->move(this->width() / 2 - _buttons[1]->width(), imageY);
+	_buttons[1]->move(this->width() / 2 - _buttons[1]->width(), imageY2);
 	addWidget(_buttons[1]);
-	x = 0;
-	_buttons[9] = utils->add_button("left.png", temp);
-	_buttons[9]->move(this->width() / 2, imageY);
-	addWidget(_buttons[9]); x += _buttons[9]->width() + space;
-	_buttons[10] = utils->add_button("1.png", temp);
-	_buttons[10]->move(this->width() / 2 + x, imageY);
-	addWidget(_buttons[10]); x += _buttons[10]->width() + space;
-	_buttons[11] = utils->add_button("right.png", temp);
-	_buttons[11]->move(this->width() / 2 + x, imageY);
-	addWidget(_buttons[11]);
-	imageY += _buttons[1]->height();
+	_buttons[7] = utils->add_button("joystick.png", temp);
+	_buttons[7]->move(this->width() / 2, imageY1);
+	addWidget(_buttons[7]);
+	imageY3 = imageY2 + _buttons[1]->height();
 	
 	_buttons[2] = utils->add_button("input.png", temp);
-	_buttons[2]->move(this->width() / 2 - _buttons[2]->width(), imageY);
+	_buttons[2]->move(this->width() / 2 - _buttons[2]->width(), imageY3);
 	addWidget(_buttons[2]);
-	x = 0;
-	_buttons[12] = utils->add_button("left.png", temp);
-	_buttons[12]->move(this->width() / 2, imageY);
-	addWidget(_buttons[12]); x += _buttons[12]->width();
-	_buttons[13] = utils->add_button("keyboard_mode.png", temp);
-	_buttons[13]->move(this->width() / 2 + x, imageY);
-	addWidget(_buttons[13]); x += _buttons[13]->width();
-	_buttons[14] = utils->add_button("right.png", temp);
-	_buttons[14]->move(this->width() / 2 + x, imageY);
-	addWidget(_buttons[14]);
-	imageY += _buttons[2]->height();
+	_buttons[8] = utils->add_button("joystick.png", temp);
+	_buttons[8]->move(this->width() / 2, imageY1);
+	addWidget(_buttons[8]);
+	imageY4 = imageY3 + _buttons[2]->height();
 	
-
 	_buttons[3] = utils->add_center_button("apply.png");
-	_buttons[3]->move(_buttons[3]->pos().x(), imageY);
-	QObject::connect(_buttons[3], &QPushButton::clicked, this, &Settings::apply_clicked);
-	imageY += _buttons[3]->height();
+	_buttons[3]->move(_buttons[3]->pos().x(), imageY4);
+	imageY5 = imageY4 + _buttons[3]->height();
 
 	_buttons[4] = utils->add_button("load.png", temp);
-	_buttons[4]->move(this->width() / 2 - _buttons[4]->width() - 50, imageY);
+	_buttons[4]->move(this->width() / 2 - _buttons[4]->width() - 50, imageY5);
 	addWidget(_buttons[4]);
 	QObject::connect(_buttons[4], &QPushButton::clicked, this, &Settings::load_clicked);
 
 	_buttons[5] = utils->add_button("save.png", temp);
-	_buttons[5]->move(this->width() / 2 + 50, imageY);
+	_buttons[5]->move(this->width() / 2 + 50, imageY5);
 	addWidget(_buttons[5]);
 	QObject::connect(_buttons[5], &QPushButton::clicked, this, &Settings::save_clicked);
 
+	QObject::connect(_buttons[6], &QPushButton::clicked, this, &Settings::click_playingMode);
+	QObject::connect(_buttons[7], &QPushButton::clicked, this, &Settings::click_COM);
+	QObject::connect(_buttons[8], &QPushButton::clicked, this, &Settings::click_input);
+
 	QObject::connect(_exits, &QPushButton::clicked, this, &Settings::exit_clicked);
-	
 }
 
 void Settings::exit_clicked() {
@@ -104,3 +83,45 @@ void Settings::save_clicked() {
 void Settings::apply_clicked() {
 	emit apply_click();
 }
+
+void Settings::click_playingMode() {
+	if (_playingMode)
+	{
+		_playingMode = 0;
+		delete _buttons[6];
+		_buttons[6] = utils->add_button("accelerometer.png", nullptr);
+		_buttons[6]->move(this->width() / 2, imageY1);
+		addWidget(_buttons[6]);
+		QObject::connect(_buttons[6], &QPushButton::clicked, this, &Settings::click_playingMode);
+		
+	}
+	else
+	{
+		_playingMode = 1;
+		delete _buttons[6];
+		_buttons[6] = utils->add_button("accelerometer.png", nullptr);
+		_buttons[6]->move(this->width() / 2, imageY1);
+		addWidget(_buttons[6]);
+		QObject::connect(_buttons[6], &QPushButton::clicked, this, &Settings::click_playingMode);
+		
+	}
+}
+void Settings::click_COM() {}
+void Settings::click_input() {}
+//if (_playingMode)
+//{
+//	_playingMode = 0;
+//	delete _buttons[7];
+//	_buttons[7] = utils->add_button("joystick.png", nullptr);
+//	int x = 50;
+//	_buttons[7]->move(this->width() / 2 + x, imageY1);
+//	addWidget(_buttons[7]); x += _buttons[7]->width();
+//}
+//else
+//{
+//	delete _buttons[7];
+//	_buttons[7] = utils->add_button("joystick.png", nullptr);
+//	int x = 50;
+//	_buttons[7]->move(this->width() / 2 + x, imageY1);
+//	addWidget(_buttons[7]); x += _buttons[7]->width();
+//}

@@ -34,11 +34,11 @@ private:
 	QApplication* _app;
 	QPushButton* _center[3];
 	QPointer<MenuUtils> utils;
-	int imageY = 0;
-	QPushButton* _buttons[15];
-	bool _playingMode;
-	short _COM;
-	bool _input;
+	int imageY1, imageY2, imageY3, imageY4, imageY5 = 0;
+	QPushButton* _buttons[9];
+	bool _playingMode = 0;
+	short _COM = 0;
+	bool _input = 0;
 
 
 signals:
@@ -47,28 +47,10 @@ signals:
 	void save_click();
 	void apply_click();
 public slots:
-	void click()
-	{
-		if (_playingMode == 0)
-		{
-			_playingMode = 1;
-
-			QPixmap pixmap("joystick.png"); // Charger l'image à partir du chemin d'image
-			QIcon icon(pixmap); // Créer une icône à partir de la pixmap
-			_buttons[0]->setIcon(icon); // Définir l'icône comme source d'image pour le bouton
-
-		}
-			
-
-		else
-		{
-			_playingMode = 0;
-
-			QPixmap pixmap("yes.png"); // Charger l'image à partir du chemin d'image
-			QIcon icon(pixmap); // Créer une icône à partir de la pixmap
-			_buttons[0]->setIcon(icon); // Définir l'icône comme source d'image pour le bouton
-		}
-	}
+	void click_playingMode();
+	void click_COM();
+	void click_input();
+	
 	void exit_clicked();
 	void load_clicked();
 	void save_clicked();
