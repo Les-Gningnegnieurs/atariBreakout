@@ -45,9 +45,6 @@ signals:
 	void showSettingsRequested();
 	void showGameRequested();
 	void showSelectLevelRequested();
-
-
-	
 };
 
 #endif
