@@ -15,6 +15,7 @@ Elles permet de :
 #include <filesystem>
 #include <QGraphicsScene>
 #include <QObject>
+#include "PhysicalController.h"
 
 #include <chrono>
 #include <thread>
@@ -147,7 +148,7 @@ public slots:
 	void controllerModeRequested() { Set_controllerMode(1); }
 	void joystickModeRequested() { Set_modeJoystick(); }
 	void accelModeRequested() { Set_modeAccelerometer(); }
-	void updateSettingsRequested() { Update_config(); }
+	void updateSettingsRequested() { Update_config(); Change_Controller(); }
 	void loadSettingsRequested() { LoadConfig(); }
 	void saveSettingsRequested() { SaveConfig(); }
 	void levelRequested(int _level) { Set_Level(_level); }
