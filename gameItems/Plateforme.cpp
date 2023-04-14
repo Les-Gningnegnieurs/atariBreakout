@@ -17,7 +17,7 @@ Plateforme::Plateforme(LevelInfos I, QGraphicsScene* scene) : _scene(scene)
     QPixmap scaledPixmap = pixmap.scaled(sizeX,sizeY,Qt::KeepAspectRatioByExpanding);
     rect = new QGraphicsPixmapItem(scaledPixmap);
     rect->setPos(0, 0);*/
-    rect = new Plati(I);
+    rect = new Plati(sizeX, sizeY);
     rect->setPos(pos.x, pos.y);
     _scene->addItem(rect);
     /*rect->setFlag(QGraphicsItem::ItemIsFocusable);
@@ -48,8 +48,15 @@ void Plateforme::draw()
 
     rect->setPos(pos.x, pos.y);
 }
+void Plateforme::setLenght(int l)
+{ 
+    sizeX = l; 
+    delete rect;
+    rect = new Plati(sizeX, sizeY, "ressources/bar2.png");
+    rect->setPos(pos.x, pos.y);
+    _scene->addItem(rect);
 
-
+}
 
 
 void Plateforme::checkCollision(Balle *b)

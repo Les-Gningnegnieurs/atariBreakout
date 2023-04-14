@@ -8,7 +8,7 @@
 #include <chrono>
 #include <vector>
 #include <QGraphicsScene>
-
+#include "Myrect.h"
 class GameLogic;
 
 
@@ -31,18 +31,19 @@ protected:
 	PowerupsLED ledInfo;
 	std::string name = "Powerups";
 	QGraphicsScene* _scene;
+	PowerX3* graphic_powerup;
 	
 	
 public:
 	Powerups();
-	Powerups(QGraphicsScene* scene, Position positionDestroyed,  int height =1 ,int lenght = 1);
+	Powerups(QGraphicsScene* scene, Position positionDestroyed,  int height = 40 ,int lenght = 40);
 	~Powerups();
 	bool checkCollisions(Plateforme _plateforme);
 	void update();
 	void setPowerups(std::vector<Balle*> &ball, Plateforme& platform, Controller& controller);
 	void resetPowerups(std::vector<Balle*> & ball, Plateforme& platform, Controller& controller);
 	void setFalling() { state = Falling; }
-	virtual void draw();
+	virtual void draw()=0;
 	Status getState() { return state; };
 	void setState(Status s) { state = s; };
 	Position getPos() { return pos; };
@@ -52,6 +53,7 @@ public:
 	PowerupsLED getLedinfo() { return ledInfo;}
 	double getTimer() { return timer; }
 	std::string getName() { return name; }
+	virtual void hide_powerup() = 0;
 	
 
 	
