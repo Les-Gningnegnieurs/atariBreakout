@@ -193,8 +193,8 @@ void Brique::addPowerUp(std::vector<Powerups*>& p, QGraphicsScene* _scene) {
     int y = distribution(generator);
     _etat = Destroyed;
     if (y <= 100) { //y<=20
-        //int x = rand();
-        int x = 2;
+        int x = rand();
+        //int x = 0;
         switch (x%3){ //x%3
             case 0:
                 p.push_back(new Swapcontrol(_scene,_posBrique));

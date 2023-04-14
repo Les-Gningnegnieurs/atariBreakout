@@ -13,12 +13,18 @@ Swapcontrol::Swapcontrol(QGraphicsScene* _scene, Position positionDestroyed, int
 }
 
 
-void Swapcontrol::modifyControler(Controller& controller, bool reset )
+void Swapcontrol::modifyControler(Controller& controller, Plateforme& platform, bool reset )
 {
 	if (reset)
+	{
 		controller.setReverse(0);
+		platform.setLenght(0,0);
+	}
 	else
+	{
 		controller.setReverse(1);
+		platform.setLenght(2,0);
+	}
 
 }
 void Swapcontrol::draw(){

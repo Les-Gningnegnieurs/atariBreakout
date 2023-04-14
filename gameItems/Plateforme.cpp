@@ -1,4 +1,5 @@
 #include "Plateforme.h"
+#define SIZEINI_X 140
 Plateforme::Plateforme() {
 }
 Plateforme::Plateforme(LevelInfos I, QGraphicsScene* scene) : _scene(scene)
@@ -48,11 +49,33 @@ void Plateforme::draw()
 
     rect->setPos(pos.x, pos.y);
 }
-void Plateforme::setLenght(int l)
-{ 
-    sizeX = l; 
+void Plateforme::setLenght(int powerup, int l)
+{
+    if(!l==0)
+        sizeX = l; 
     delete rect;
-    rect = new Plati(sizeX, sizeY, "ressources/bar2.png");
+    /* Ameliorer la logique: La plateforme devient grosse et jaune lorsque*/
+    if (powerup == 0)
+    {
+        reverseactive = false;
+        rect = new Plati(sizeX, sizeY);
+    }
+    else if (powerup == 1)
+    {
+        if (sizeX == 140 && reverseactive == true)
+            rect = new Plati(sizeX, sizeY, "ressources/bar4.png");
+        else if (sizeX == 140)
+            rect = new Plati(sizeX, sizeY);
+        else if(reverseactive == true)
+            rect = new Plati(sizeX, sizeY, "ressources/bar4.png");
+        else
+            rect = new Plati(sizeX, sizeY, "ressources/bar2.png");
+    }
+    else if (powerup == 2)
+    {
+        rect = new Plati(sizeX, sizeY, "ressources/bar4.png");
+        reverseactive = true;
+    }
     rect->setPos(pos.x, pos.y);
     _scene->addItem(rect);
 
