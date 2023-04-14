@@ -20,7 +20,7 @@
 class GameLoop : public QObject {
     Q_OBJECT;
 private:
-    QMainWindow* _window;
+    MainWindow* _window;
     Canevas *_canevas;
     Menu _menu;
     gameState _gameState;
@@ -29,13 +29,14 @@ private:
 
 private slots:
     void MainGameLoop();
+    void Start();
     
 public:
     Controller* _controller;
 
     bool over;
     GameLoop(QApplication* app, QObject* parent = nullptr);
-    void Start();
+
     void Stop();
     void Pause();
     void update();

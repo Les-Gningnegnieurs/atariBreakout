@@ -51,11 +51,9 @@ signals:
 	void joystickSelected();
 	void controllerSelected();
 	void keyboardSelected();
-	void com1Selected();
-	void com2Selected();
-	void com3Selected();
-	void com4Selected();
-	void com5Selected();
+	void comSelected(int _com);
+	
+
 public slots:
 	void click_playingMode();
 	void click_COM();

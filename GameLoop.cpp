@@ -15,31 +15,26 @@ GameLoop::GameLoop(QApplication* app, QObject* parent) : QObject(parent) {
     timer = new QTimer();
     timer->setInterval(SLEEP);
     QObject::connect(timer, &QTimer::timeout, this, &GameLoop::MainGameLoop);
-    //temporaire
-    _menu.Set_playing(1);
-    Start();
-    //_window->showMenu();
+    QObject::connect(_window, &MainWindow::startGame, this,&GameLoop::Start);
+    
 }
 
 void GameLoop::Start() {
 
-    /*while (!_menu.Is_over())
-    {
-        _menu.print(std::cout);
-    }*/
+ 
 
     _controller = _menu.Get_Controller();
     _controller->setPower(true);
-
-
+ 
+    //loadFile();
     _canevas->erase();
-    if (_menu.Is_playing())
-    {
-        _gameState = Running;
-        timer->start();
-    }
-    else
-        Stop();
+    
+
+    
+     _gameState = Running;
+     timer->start();
+    
+   
 
     //_window->showGame();
 }
@@ -109,8 +104,8 @@ void GameLoop::update() {
 }
 
 void GameLoop::loadFile() {
-    //int value = _menu.Get_Level();
-    int value = 1;
+    int value = _menu.Get_Level();
+  
     std::stringstream str;
     std::string levelPath;
     str << "level/" << value << ".txt";

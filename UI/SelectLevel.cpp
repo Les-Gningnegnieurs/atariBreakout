@@ -65,31 +65,31 @@ void SelectLevel::exit_clicked()
 
 void SelectLevel::level1Requested()
 {
-	emit level1Selected();
+	emit levelSelected(1);
 }
 
 void SelectLevel::level2Requested()
 {
-	emit level2Selected();
+	emit levelSelected(2);
 
 }
 void SelectLevel::level3Requested()
 {
-	emit level3Selected();
+	emit levelSelected(3);
 
 }
 void SelectLevel::level4Requested()
 {
-	emit level4Selected();
+	emit levelSelected(4);
 
 }
 void SelectLevel::level5Requested()
 {
-	emit level5Selected();
+	emit levelSelected(5);
 
 }
 void SelectLevel::level6Requested()
 {
-	emit level6Selected();
+	emit levelSelected(6);
 
 }

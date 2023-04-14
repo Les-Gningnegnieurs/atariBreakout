@@ -142,11 +142,7 @@ public:
 
 public slots:
 
-	void com1Requested() { Set_comPort(1); }
-	void com2Requested() { Set_comPort(2); }
-	void com3Requested() { Set_comPort(3); }
-	void com4Requested() { Set_comPort(4); }
-	void com5Requested() { Set_comPort(5); }
+	void comRequested(int _com) { Set_comPort(_com); }
 	void keyboardModeRequested() { Set_controllerMode(0); }
 	void controllerModeRequested() { Set_controllerMode(1); }
 	void joystickModeRequested() { Set_modeJoystick(); }
@@ -154,6 +150,7 @@ public slots:
 	void updateSettingsRequested() { Update_config(); }
 	void loadSettingsRequested() { LoadConfig(); }
 	void saveSettingsRequested() { SaveConfig(); }
+	void levelRequested(int _level) { Set_Level(_level); }
 };
 
 

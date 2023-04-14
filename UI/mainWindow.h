@@ -31,12 +31,9 @@ public slots:
 	void showGame();
 	void showSettings();
 	void showSelectLevel();
-	void level1Selected();
-	void level2Selected();
-	void level3Selected();
-	void level4Selected();
-	void level5Selected();
-	void level6Selected();
+
+signals:
+	void startGame();
 
 
 
