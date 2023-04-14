@@ -25,6 +25,7 @@ class MainWindow : public QMainWindow {
 public:
 	MainWindow();
 	MainWindow(QApplication* app, QWidget* parent, QGraphicsScene* game, Menu * menu);
+	void updateScene(QGraphicsScene* game) { _game = game; }
 
 public slots:
 	void showMenu();
