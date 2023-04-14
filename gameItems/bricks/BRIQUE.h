@@ -14,7 +14,7 @@
 #include <QGraphicsRectItem>
 #include <QColor>
 #include <QBrush>
-
+#include <QGraphicsScene>
 #include <random>
 #include <iostream>
 
@@ -25,7 +25,7 @@ public:
 	//on entre simplement les coordonnées. la hauteur et la largeur sont déja définies
 	Brique(int x = 0, int y = 0, int l = 6, int h = 2, state s = Alive);
 
-	bool increase_Damage(std::vector<Powerups*>& p);
+	bool increase_Damage(std::vector<Powerups*>& p, QGraphicsScene* _scene);
 
 	virtual ~Brique();
 
@@ -48,7 +48,7 @@ public:
 	//void draw(char UI[RESMAX_Y][RESMAX_X]);
 	void draw();
 	virtual void afficher(std::ostream& s) = 0;
-	virtual void addPowerUp(std::vector<Powerups*>& p);
+	virtual void addPowerUp(std::vector<Powerups*>& p, QGraphicsScene* _scene);
 protected:
 	Position _posBrique;
 	state _etat;
@@ -56,7 +56,7 @@ protected:
 	int _sizeY;
 	int _PV;
 	std::random_device rd;
-	//QGraphicsRectItem* rect;
+	QGraphicsScene* _scene;
 	
 };
 

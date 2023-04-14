@@ -37,7 +37,7 @@ public:
     Position getPos(){return pos;}
     int getLenght() { return sizeX; }
     int getHeight() { return sizeY; }
-    void setLenght(int l) { sizeX = l; }
+    void setLenght(int l);
     Plati* getplat() { return rect; }
     void update2();
     void move2();

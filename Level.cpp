@@ -51,27 +51,27 @@ void Level::checkColl_DOWN_RIGHT(Balle* b, std::vector <Powerups*>& p){
                 switch (check) {
                 case LT:
                     b->changeVelocity(1, 0);
-                    if (_board[i][j]->increase_Damage(p))   //si la brique est peté
+                    if (_board[i][j]->increase_Damage(p, _scene))   //si la brique est peté
                         _score->increase();
                     break;
                 case RT:
                     b->changeVelocity(1, 0);
-                    if (_board[i][j]->increase_Damage(p))   //si la brique est peté
+                    if (_board[i][j]->increase_Damage(p, _scene))   //si la brique est peté
                         _score->increase();
                     break;
                 case DN:
                     b->changeVelocity(0, 1);
-                    if (_board[i][j]->increase_Damage(p))   //si la brique est peté
+                    if (_board[i][j]->increase_Damage(p, _scene))   //si la brique est peté
                         _score->increase();
                     break;
                 case UP:
                     b->changeVelocity(0, 1);
-                    if (_board[i][j]->increase_Damage(p))   //si la brique est peté
+                    if (_board[i][j]->increase_Damage(p, _scene))   //si la brique est peté
                         _score->increase();
                     break;
                 case CN:
                     b->changeVelocity(1, 1);
-                    if (_board[i][j]->increase_Damage(p))   //si la brique est peté
+                    if (_board[i][j]->increase_Damage(p, _scene))   //si la brique est peté
                         _score->increase();
                     break;
                 case NO:
@@ -108,27 +108,27 @@ void Level::checkColl_DOWN_LEFT(Balle* b,std::vector <Powerups*>& p){
                 switch (check) {
                 case LT:
                     b->changeVelocity(1, 0);
-                    if (_board[i][j]->increase_Damage(p))   //si la brique est peté
+                    if (_board[i][j]->increase_Damage(p, _scene))   //si la brique est peté
                         _score->increase();
                     break;
                 case RT:
                     b->changeVelocity(1, 0);
-                    if (_board[i][j]->increase_Damage(p))   //si la brique est peté
+                    if (_board[i][j]->increase_Damage(p, _scene))   //si la brique est peté
                         _score->increase();
                     break;
                 case DN:
                     b->changeVelocity(0, 1);
-                    if (_board[i][j]->increase_Damage(p))   //si la brique est peté
+                    if (_board[i][j]->increase_Damage(p, _scene))   //si la brique est peté
                         _score->increase();
                     break;
                 case UP:
                     b->changeVelocity(0, 1);
-                    if (_board[i][j]->increase_Damage(p))   //si la brique est peté
+                    if (_board[i][j]->increase_Damage(p, _scene))   //si la brique est peté
                         _score->increase();
                     break;
                 case CN:
                     b->changeVelocity(1, 1);
-                    if (_board[i][j]->increase_Damage(p))   //si la brique est peté
+                    if (_board[i][j]->increase_Damage(p, _scene))   //si la brique est peté
                         _score->increase();
                     break;
                 case NO:
@@ -164,27 +164,27 @@ void Level::checkColl_UP_RIGHT(Balle* b, std::vector <Powerups*>& p){
                 switch (check) {
                 case LT:
                     b->changeVelocity(1, 0);
-                    if (_board[i][j]->increase_Damage(p))   //si la brique est peté
+                    if (_board[i][j]->increase_Damage(p, _scene))   //si la brique est peté
                         _score->increase();
                     break;
                 case RT:
                     b->changeVelocity(1, 0);
-                    if (_board[i][j]->increase_Damage(p))   //si la brique est peté
+                    if (_board[i][j]->increase_Damage(p, _scene))   //si la brique est peté
                         _score->increase();
                     break;
                 case DN:
                     b->changeVelocity(0, 1);
-                    if (_board[i][j]->increase_Damage(p))   //si la brique est peté
+                    if (_board[i][j]->increase_Damage(p, _scene))   //si la brique est peté
                         _score->increase();
                     break;
                 case UP:
                     b->changeVelocity(0, 1);
-                    if (_board[i][j]->increase_Damage(p))   //si la brique est peté
+                    if (_board[i][j]->increase_Damage(p, _scene))   //si la brique est peté
                         _score->increase();
                     break;
                 case CN:
                     b->changeVelocity(1, 1);
-                    if (_board[i][j]->increase_Damage(p))   //si la brique est peté
+                    if (_board[i][j]->increase_Damage(p, _scene))   //si la brique est peté
                         _score->increase();
                     break;
                 case NO:
@@ -221,27 +221,27 @@ void Level::checkColl_UP_LEFT(Balle* b, std::vector <Powerups*>& p){
                 switch (check) {
                 case LT:
                     b->changeVelocity(1, 0);
-                    if(_board[i][j]->increase_Damage(p))   //si la brique est peté
+                    if(_board[i][j]->increase_Damage(p, _scene))   //si la brique est peté
                         _score->increase();
                     break;
                 case RT:
                     b->changeVelocity(1, 0);
-                    if(_board[i][j]->increase_Damage(p))
+                    if(_board[i][j]->increase_Damage(p, _scene))
                         _score->increase();
                     break;
                 case DN:
                     b->changeVelocity(0, 1);
-                    if(_board[i][j]->increase_Damage(p))
+                    if(_board[i][j]->increase_Damage(p, _scene))
                         _score->increase();
                     break;
                 case UP:
                     b->changeVelocity(0, 1);
-                    if(_board[i][j]->increase_Damage(p))
+                    if(_board[i][j]->increase_Damage(p, _scene))
                         _score->increase();
                     break;
                 case CN:
                     b->changeVelocity(1, 1);
-                    if(_board[i][j]->increase_Damage(p))
+                    if(_board[i][j]->increase_Damage(p, _scene))
                         _score->increase();
                     break;
                 case NO:
