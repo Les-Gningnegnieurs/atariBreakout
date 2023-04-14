@@ -151,18 +151,20 @@ int Menu::Count_Parameters()
 
 
 void Menu::Change_Controller() {
-    if (_keyboard != nullptr)
-        delete _keyboard;
+
     if (Get_controllerMode()) {
+        if (_keyboard != nullptr)
+            delete _keyboard;
         std::string c = "com" + std::to_string(Get_comPort());
         _keyboard = new PhysicalController(c);
-        if (!_keyboard->ConnectionStatus())
+    }
+    if (!_keyboard->ConnectionStatus())
         {
           
             _keyboard = new Keyboard();
             
         }
-    }
+    
    
     
 }
