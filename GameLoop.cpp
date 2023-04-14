@@ -26,10 +26,12 @@ void GameLoop::Start() {
     _controller = _menu.Get_Controller();
     _controller->setPower(true);
  
-    //loadFile();
-    _canevas->erase();
     
-
+    _canevas->erase();
+   
+    
+    loadFile();
+    _window->updateScene(_canevas->getScene());
     
      _gameState = Running;
      timer->start();

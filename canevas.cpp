@@ -5,6 +5,7 @@ Canevas::Canevas()
 {
 	_scene = new QGraphicsScene();
 	_scene->setSceneRect(0, 0, 1200, 800);
+	_game = nullptr;
 	
 	
 	
@@ -37,8 +38,13 @@ std::istream& operator>>(std::istream& s, Canevas& can)
 	s >> can._info.speed_B_x;
 	s >> can._info.speed_B_y;
 	s >> can._info.maxspeed_B;
+	
 	//on as set tt ce dont les constructeurs ont besoin et ensuite on px read le reste
 	can._scene->setSceneRect(0, 0, can._info._windowResolutionX, can._info._windowResolutionY);
+	if (can._game != nullptr)
+		delete can._game;
+	
+
 	can._game = new GameLogic(can._info, can._scene);
 	s >> *can._game;
 	//can.show();
@@ -47,7 +53,9 @@ std::istream& operator>>(std::istream& s, Canevas& can)
 
 void Canevas::erase()
 {
-	system("CLS");
+	delete _scene;
+	_scene = new QGraphicsScene;
+	_scene->setSceneRect(0, 0, 1200, 800);
 }
 
 

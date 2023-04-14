@@ -17,7 +17,7 @@ void MyRect::keyPressEvent(QKeyEvent *event) {
 	if (event->key() == Qt::Key_Left)
 	{
 		//qDebug() << pos().x();
-		if (!(pos().x() - 50 > 0))
+		if (!(pos().x() - 50 > 0));
 		{
 			setPos(x() - 10, y());
 		}
@@ -29,10 +29,10 @@ void MyRect::keyPressEvent(QKeyEvent *event) {
 	}
 
 }
-Plati::Plati(LevelInfos I) {
+Plati::Plati(int plat_length, int plat_heigth, QString filepath) {
 	setPos(0, 0);
-	QPixmap pixmap("ressources/bar4.png");
-	QPixmap scaledPixmap = pixmap.scaled(I.Plat_length, I.Plat_heigth, Qt::KeepAspectRatioByExpanding);
+	QPixmap pixmap(filepath);
+	QPixmap scaledPixmap = pixmap.scaled(plat_length, plat_heigth, Qt::KeepAspectRatioByExpanding);
 	setPixmap(scaledPixmap);  
 }
 
@@ -68,3 +68,11 @@ void Health::decrease() {
 int Health::GetHealth() {
 	return vies;
 }
+
+PowerX3::PowerX3(QString filepath) {
+	setPos(0, 0);
+	QPixmap pixmap(filepath);
+	QPixmap scaledPixmap = pixmap.scaled(40, 40, Qt::KeepAspectRatioByExpanding);
+	setPixmap(scaledPixmap);
+}
+
