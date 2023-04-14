@@ -137,7 +137,7 @@ void GameLogic::checkCollisions(Controller &control) {
 
     for (int i = 0; i < _powers.size(); i++)
     {
-        if (_powers[i]->getPos().y + _powers[i]->getHeight() >= maxSizeY)
+        if (_powers[i]->getPos().y + _powers[i]->getHeight() >= _info._windowResolutionY-150)
             _powers[i]->setState(OutOfBounds); 
         
         if (_powers[i]->checkCollisions(_platform)) {

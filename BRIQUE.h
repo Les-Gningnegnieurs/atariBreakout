@@ -11,7 +11,6 @@
 #include "Extendplatform.h"
 #include "Addballs.h"
 #include "Swapcontrol.h"
-
 #include <random>
 #include <iostream>
 
@@ -42,7 +41,7 @@ public:
 
 	void draw(char UI[RESMAX_Y][RESMAX_X]);
 	virtual void afficher(std::ostream& s) = 0;
-	virtual void addPowerUp(std::vector<Powerups*>& p);
+	virtual void addPowerUp(std::vector<Powerups*>& p, QGraphicsScene* _scene);
 protected:
 	Position _posBrique;
 	state _etat;

@@ -2,9 +2,13 @@
 
 Swapcontrol::Swapcontrol(Position positionDestroyed, int height, int lenght) :Powerups(positionDestroyed, height, lenght)
 {
+	graphic_powerup = new PowerX3("ressources/powerup_x3.png");
 	isStackable = false;
 	ledInfo.color = 'r';
 	name = "Swapcontrol";
+	graphic_powerup->setPos(positionDestroyed.x, positionDestroyed.y);
+	_scene->addItem(graphic_powerup);
+	state = Falling;
 
 }
 
@@ -17,13 +21,12 @@ void Swapcontrol::modifyControler(Controller& controller, bool reset )
 		controller.setReverse(1);
 
 }
-
-void Swapcontrol:: draw(char UI[RESMAX_Y][RESMAX_X])
-{
+void Swapcontrol::draw(){
 	if (state == Falling)
 	{
-		UI[oldpos.y][oldpos.x] = ' '; //espace a l'ancienne pos de la balle
-		UI[pos.y][pos.x] = 'D'; //update la nouvelle pos de la balle dans l'array 
+		graphic_powerup->setPos(pos.x, pos.y);
 	}
-
+}
+void Swapcontrol::hide_powerup() {
+	delete graphic_powerup;
 }
