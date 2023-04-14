@@ -9,12 +9,12 @@ Elles permet de :
 ///		Libraries
 #include <iostream>
 #include <fstream>
-#include "GameLoop.h"
 #include <conio.h>
 #include "Keyboard.h"
 #include <string>
 #include <filesystem>
 #include <QGraphicsScene>
+#include <QObject>
 
 #include <chrono>
 #include <thread>
@@ -60,8 +60,11 @@ struct Config
 	short value;
 };
 
-class Menu
+class Menu:public QObject
 {
+	Q_OBJECT
+
+
 private:
 	Config* parameters;
 	Controller* _keyboard;
@@ -100,13 +103,6 @@ public:
 	int Count_Level();
 	int Count_Parameters();
 
-	void print(std::ostream & os);
-	Input Navigate();
-	void Main_Menu(std::ostream& os);
-	bool Settings_Menu(std::ostream& os);
-	bool Choose_Level_Menu(std::ostream& os);
-	bool Choose_Controller_Menu(std::ostream& os);
-	bool Resume_Menu(std::ostream& os);
 	void Reset();
 		
 
@@ -142,8 +138,23 @@ public:
 	bool Is_modeJoystick() { return modeJoystick; };
 	bool Is_playing() { return play; };
 	bool Is_over() { return over; };
+
+
+public slots:
+
+	void com1Requested() { Set_comPort(1); }
+	void com2Requested() { Set_comPort(2); }
+	void com3Requested() { Set_comPort(3); }
+	void com4Requested() { Set_comPort(4); }
+	void com5Requested() { Set_comPort(5); }
+	void keyboardModeRequested() { Set_controllerMode(0); }
+	void controllerModeRequested() { Set_controllerMode(1); }
+	void joystickModeRequested() { Set_modeJoystick(); }
+	void accelModeRequested() { Set_modeAccelerometer(); }
+	void updateSettingsRequested() { Update_config(); }
+	void loadSettingsRequested() { LoadConfig(); }
+	void saveSettingsRequested() { SaveConfig(); }
 };
 
-void Intro(std::ostream& os);
 
 #endif

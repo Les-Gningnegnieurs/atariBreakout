@@ -24,7 +24,7 @@ class MainWindow : public QMainWindow {
 	Q_OBJECT;
 public:
 	MainWindow();
-	MainWindow(QApplication* app, QWidget* parent, QGraphicsScene* game);
+	MainWindow(QApplication* app, QWidget* parent, QGraphicsScene* game, Menu * menu);
 
 public slots:
 	void showMenu();
@@ -37,9 +37,7 @@ public slots:
 	void level4Selected();
 	void level5Selected();
 	void level6Selected();
-	void applyConfig();
-	void saveConfig();
-	void loadConfig();
+
 
 
 
@@ -49,5 +47,6 @@ private:
 	QGraphicsScene* _settings;
 	QGraphicsScene* _game;
 	QGraphicsScene* _selectLevel;
+	Menu *_menuGame;
 };
 #endif

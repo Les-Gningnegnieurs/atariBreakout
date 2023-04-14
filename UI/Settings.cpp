@@ -125,6 +125,36 @@ void Settings::save_clicked() {
 	emit save_click();
 }
 void Settings::apply_clicked() {
+	switch (_COM) {
+	case 0:
+		emit com1Selected();
+		break;
+	case 1:
+		emit com2Selected();
+		break;
+	case 2:
+		com3Selected();
+		break;
+	case 3:
+		com4Selected();
+		break;
+	case 4:
+		com5Selected();
+		break;
+
+
+	}
+
+	if (!_playingMode)
+		emit joystickSelected();
+	else
+		emit accelSelected();
+
+	if (!_input)
+		emit keyboardSelected();
+	else
+		emit controllerSelected();
+
 	emit apply_click();
 }
 

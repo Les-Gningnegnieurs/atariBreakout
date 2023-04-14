@@ -2,9 +2,10 @@
 
 MainWindow::MainWindow(){}
 
-MainWindow::MainWindow(QApplication *app, QWidget* parent, QGraphicsScene* game) : QMainWindow(parent) {
+MainWindow::MainWindow(QApplication *app, QWidget* parent, QGraphicsScene* game,Menu*menu) : QMainWindow(parent) {
 	_view = new QGraphicsView();
 	_game = game;
+	_menuGame = menu;
 
 	_view->setParent(this);
 	_game->setParent(this);
@@ -29,9 +30,19 @@ MainWindow::MainWindow(QApplication *app, QWidget* parent, QGraphicsScene* game)
 	QObject::connect(_selectLevelTemp, &SelectLevel::level4Selected, this, &MainWindow::level4Selected);
 	QObject::connect(_selectLevelTemp, &SelectLevel::level5Selected, this, &MainWindow::level5Selected);
 	QObject::connect(_selectLevelTemp, &SelectLevel::level6Selected, this, &MainWindow::level6Selected);
-	QObject::connect(_settingsTemp, &Settings::load_click, this, &MainWindow::loadConfig);
-	QObject::connect(_settingsTemp, &Settings::apply_click, this, &MainWindow::applyConfig);
-	QObject::connect(_settingsTemp, &Settings::save_click, this, &MainWindow::saveConfig);
+	QObject::connect(_settingsTemp, &Settings::apply_click, _menuGame, &Menu::updateSettingsRequested);
+	QObject::connect(_settingsTemp, &Settings::com1Selected, _menuGame, &Menu::com1Requested);
+	QObject::connect(_settingsTemp, &Settings::com2Selected, _menuGame, &Menu::com2Requested);
+	QObject::connect(_settingsTemp, &Settings::com3Selected, _menuGame, &Menu::com3Requested);
+	QObject::connect(_settingsTemp, &Settings::com4Selected, _menuGame, &Menu::com4Requested);
+	QObject::connect(_settingsTemp, &Settings::com5Selected, _menuGame, &Menu::com5Requested);
+	QObject::connect(_settingsTemp, &Settings::keyboardSelected, _menuGame, &Menu::keyboardModeRequested);
+	QObject::connect(_settingsTemp, &Settings::controllerSelected, _menuGame, &Menu::controllerModeRequested);
+	QObject::connect(_settingsTemp, &Settings::joystickSelected, _menuGame, &Menu::joystickModeRequested);
+	QObject::connect(_settingsTemp, &Settings::accelSelected, _menuGame, &Menu::accelModeRequested);
+	QObject::connect(_settingsTemp, &Settings::apply_click, _menuGame, &Menu::updateSettingsRequested);
+	QObject::connect(_settingsTemp, &Settings::save_click, _menuGame, &Menu::saveSettingsRequested);
+	QObject::connect(_settingsTemp, &Settings::load_click, _menuGame, &Menu::loadSettingsRequested);
 
 	_settings = _settingsTemp;
 	_menu = _menuTemp;
@@ -116,19 +127,4 @@ void MainWindow::level6Selected() {
 	_text.setText("Level 6 Selectionee");
 	_text.exec();
 }
-void MainWindow::applyConfig()
-{
-	QMessageBox _text;
-	_text.setText("Configuration Appliquer");
-	_text.exec();
-}
-void MainWindow::loadConfig() {
-	QMessageBox _text;
-	_text.setText("Configuration Charger");
-	_text.exec();
-}
-void MainWindow::saveConfig() {
-	QMessageBox _text;
-	_text.setText("Configuration Sauvegarder");
-	_text.exec();
-}
+
