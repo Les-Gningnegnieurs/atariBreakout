@@ -11,18 +11,16 @@ Powerups::~Powerups()
 }
 Powerups::Powerups(QGraphicsScene* scene, Position positionDestroyed,int _height , int _lenght) : _scene(scene)
 {
-
 	pos = positionDestroyed;
 	state = Falling;
 	lenght = _lenght;
 	height = _height;
 	timer = 0;
 	isStackable = true;
-	ledInfo.hasTimer = true;
+	ledInfo.hasTimer = true; 
 	ledInfo.color = 'g';
 	oldpos.x = pos.x;
 	oldpos.y = pos.y;
-	
 }
 
 
@@ -31,13 +29,12 @@ void Powerups::update()
 	if (state == Falling)
 	{
 		oldpos = pos;
-		pos.y += 1;
+		pos.y += 2;
 		
 	}
 	if (timer >= PTIMELIMIT)
 	{
-		state = Done;
-		
+		state = Done;		
 	}
 	if (state == Active)
 	{
@@ -65,6 +62,7 @@ bool Powerups::checkCollisions(Plateforme _plateforme)
 
 				state = Active;
 				last_time = clock.now();
+				hide_powerup();
 				return true;
 
 			}
@@ -101,12 +99,5 @@ void Powerups::resetPowerups(std::vector<Balle*> &ball, Plateforme& platform, Co
 	modifyPlateform(platform,true);
 	modifyControler(controller,true);
 
-}
-void Powerups::draw()
-{
-	if (state == Falling)
-	{
-		//a faire
-	}
 }
 

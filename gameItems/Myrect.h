@@ -11,6 +11,7 @@
 #include <QColor>
 #include <QBrush>
 #include <QImage>
+#include <QString>
 class MyRect : public QGraphicsRectItem {
 public:
 	MyRect(LevelInfos I);
@@ -26,7 +27,7 @@ private:
 };
 class Plati : public QGraphicsPixmapItem {
 public:
-	Plati(LevelInfos I);
+	Plati(int plat_length, int plat_heigth, QString filepath = "ressources/bar1.png");
 };
 
 class Score : public QGraphicsTextItem {
@@ -46,6 +47,11 @@ public:
 	int GetHealth();
 private:
 	int vies;
+};
+
+class PowerX3 : public QGraphicsPixmapItem {
+public:
+	PowerX3(QString filepath = "ressources/powerup_x3.png");
 };
 
 #endif MYRECT_H
