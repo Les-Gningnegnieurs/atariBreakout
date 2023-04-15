@@ -34,7 +34,7 @@ bool PhysicalController::sendOutputs() {
     json j_msg_send;
     if (_outputChanged.power)
     {
-        j_msg_send["s"] = power.power;
+        j_msg_send["s"] = power.power ? 1 : 0;
         _outputChanged.power = false;
     }
 
@@ -68,8 +68,10 @@ bool PhysicalController::sendOutputs() {
         j_msg_send["t"] = 0;
         SendToSerial(_arduino, j_msg_send);
     }
-    else
+    else {
+        qDebug() << j_msg_send.dump().c_str() << "\n";
         return SendToSerial(_arduino, j_msg_send);
+    }
 }
 
 bool PhysicalController::receiveInputs(){

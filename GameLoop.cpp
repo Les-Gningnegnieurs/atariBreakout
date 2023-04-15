@@ -129,7 +129,7 @@ void GameLoop::startGameLoop() {
 }
 
 void GameLoop::stopGameLoop() {
-    //À vérifier
+    //ï¿½ vï¿½rifier
     timer->stop();
 }
 

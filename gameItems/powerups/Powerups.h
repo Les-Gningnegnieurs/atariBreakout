@@ -26,7 +26,7 @@ protected:
 	std::chrono::time_point<std::chrono::steady_clock> last_time;
 	virtual void modifyBall(std::vector<Balle*> &ball, Plateforme _plat, bool reset = false);
 	virtual void modifyPlateform(Plateforme& platform, bool reset = false);
-	virtual void modifyControler(Controller& controller, bool reset = false);
+	virtual void modifyControler(Controller& controller, Plateforme& platform, bool reset = false);
 	bool isStackable;
 	PowerupsLED ledInfo;
 	std::string name = "Powerups";
