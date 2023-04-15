@@ -160,7 +160,7 @@ void Menu::Change_Controller() {
     }
     if (!_keyboard->ConnectionStatus())
         {
-          
+            delete _keyboard;
             _keyboard = new Keyboard();
             
         }
