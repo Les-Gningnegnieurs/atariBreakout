@@ -16,21 +16,6 @@ void Extendplatform::modifyPlateform(Plateforme& platform, bool reset)
 
 Extendplatform::Extendplatform(Position positionDestroyed,  int height , int lenght ) :Powerups( positionDestroyed,    height ,  lenght )
 {
-	graphic_powerup = new PowerX3("ressources/heart2.png");
 	name = "Extendplatform";
-	graphic_powerup->setPos(positionDestroyed.x, positionDestroyed.y);
-	_scene->addItem(graphic_powerup);
-	state = Falling;
 
 }
-void Extendplatform::draw() {
-	if (state == Falling)
-	{
-		graphic_powerup->setPos(pos.x, pos.y);
-	}
-}
-
-void Extendplatform::hide_powerup() {
-	delete graphic_powerup;
-}
-

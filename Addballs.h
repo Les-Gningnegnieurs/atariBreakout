@@ -7,12 +7,9 @@
 class Addballs:public Powerups
 {
 public:
-	Addballs(QGraphicsScene* _scene, Position positionDestroyed, int height = 40, int lenght = 40);
+	Addballs(Position positionDestroyed, int height = 1, int lenght = 1);
 	void modifyBall(std::vector<Balle*> & ball, Plateforme _plat, bool reset = false);
-	void draw();
-	void hide_powerup();
-private:
-	//PowerX3* graphic_powerup;
+
 
 };
 

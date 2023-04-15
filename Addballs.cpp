@@ -28,20 +28,8 @@ void Addballs::modifyBall(std::vector<Balle*> &ball, Plateforme _plat, bool rese
 
 Addballs::Addballs(Position positionDestroyed, int height, int lenght) :Powerups(positionDestroyed, height, lenght)
 {
-	graphic_powerup = new PowerX3("ressources/powerup_x3.png");
 	ledInfo.hasTimer = false;
 	name = "Addballs";
-	graphic_powerup->setPos(positionDestroyed.x, positionDestroyed.y);
-	_scene->addItem(graphic_powerup);
-	state = Falling;
+
 }
 
-void Addballs::draw() {
-	if (state == Falling)
-	{
-		graphic_powerup->setPos(pos.x, pos.y);
-	}
-}
-void Addballs::hide_powerup() {
-	delete graphic_powerup;
-}

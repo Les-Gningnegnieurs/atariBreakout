@@ -11,13 +11,14 @@ Powerups::~Powerups()
 }
 Powerups::Powerups(Position positionDestroyed,int _height , int _lenght  )
 {
+
 	pos = positionDestroyed;
 	state = Falling;
 	lenght = _lenght;
 	height = _height;
 	timer = 0;
 	isStackable = true;
-	ledInfo.hasTimer = true; 
+	ledInfo.hasTimer = true;
 	ledInfo.color = 'g';
 	
 }
@@ -28,12 +29,13 @@ void Powerups::update()
 	if (state == Falling)
 	{
 		oldpos = pos;
-		pos.y += 2;
+		pos.y += 1;
 		
 	}
 	if (timer >= PTIMELIMIT)
 	{
-		state = Done;		
+		state = Done;
+		
 	}
 	if (state == Active)
 	{
@@ -61,7 +63,6 @@ bool Powerups::checkCollisions(Plateforme _plateforme)
 
 				state = Active;
 				last_time = clock.now();
-				hide_powerup();
 				return true;
 
 			}

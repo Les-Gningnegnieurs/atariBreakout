@@ -7,6 +7,7 @@
 #include "Controller.h"
 #include <chrono>
 #include <vector>
+
 class GameLogic;
 
 
@@ -49,7 +50,6 @@ public:
 	PowerupsLED getLedinfo() { return ledInfo;}
 	double getTimer() { return timer; }
 	std::string getName() { return name; }
-	virtual void hide_powerup() = 0;
 	
 
 	
