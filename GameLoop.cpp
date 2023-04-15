@@ -18,6 +18,7 @@ GameLoop::GameLoop(QApplication* app, QObject* parent) : QObject(parent) {
     QObject::connect(_window, &MainWindow::startGame, this,&GameLoop::Start);
     QObject::connect(this, &GameLoop::gameOver, _window, &MainWindow::showGameOver);
     QObject::connect(_window, &MainWindow::restartGame, this, &GameLoop::Restart);
+    QObject::connect(this, &GameLoop::pauseRequested, _window, &MainWindow::showMenu);
     
 }
 
@@ -46,11 +47,9 @@ void GameLoop::Start() {
 
 void GameLoop::Pause()
 {
-    _gameState = Paused;
 }
 
 void GameLoop::Stop() {
-    _gameState = Stopped;
     timer->stop();
     //_window->showMenu();
 }
@@ -82,25 +81,25 @@ void GameLoop::update() {
     _controller->receiveInputs();
     
      
-        _canevas->update(*_controller, _menu.Is_modeAccelerometer());
-        if (_controller->getButton(2))
-        {
-            _controller->receiveInputs();
+    _canevas->update(*_controller, _menu.Is_modeAccelerometer());
+        
+        
            
-            while (!_controller->getButton(2) && !_controller->getButton(1))
-            {
+           
                 
-                _controller->receiveInputs();
+               
                
 
-            }
-            if (_controller->getButton(1))
-            {
-                Stop();
-                _canevas->erase();
-                over = true;
-            }
-        }
+            
+     if (_controller->getButton(2))
+     {
+          Stop();
+          emit pauseRequested();
+          
+
+          over = true;
+     }
+        
     
     GameOver();
 

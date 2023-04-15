@@ -32,6 +32,7 @@ private slots:
     void Start();
 signals:
     void gameOver();
+    void pauseRequested();
     
 public:
     Controller* _controller;

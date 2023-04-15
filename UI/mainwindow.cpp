@@ -38,6 +38,7 @@ MainWindow::MainWindow(QApplication *app, QWidget* parent, QGraphicsScene* game,
 	QObject::connect(_gameOverTemp, &GameOver::replayClick, this, &MainWindow::restartGameRequested);
 	QObject::connect(_gameOverTemp, &GameOver::menuClick, this, &MainWindow::showMenu);
 	
+	
 	_gameOver = _gameOverTemp;
 	_settings = _settingsTemp;
 	_menu = _menuTemp;
