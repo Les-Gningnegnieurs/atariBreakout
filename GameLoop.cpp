@@ -24,7 +24,7 @@ GameLoop::GameLoop(QApplication* app, QObject* parent) : QObject(parent) {
 
 void GameLoop::Start() {
 
- 
+    
     over = false;
     _controller = _menu.Get_Controller();
     _controller->setPower(true);
@@ -70,6 +70,7 @@ void GameLoop::Restart()
 void GameLoop::GameOver() {
     if (_canevas->Is_GameOver())
     {
+        _controller->setReverse(false);
         Stop();
         over = true;
         emit gameOver();

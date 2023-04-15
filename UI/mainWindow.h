@@ -35,6 +35,7 @@ public slots:
 	void showSelectLevel();
 	void showGameOver();
 	void restartGameRequested();
+	void connectionFailed();
 signals:
 	void startGame();
 	void restartGame();

@@ -104,6 +104,10 @@ GameLogic:: GameLogic(LevelInfos i, QGraphicsScene* scene) : _scene(scene)
 }
 
 GameLogic::~GameLogic(){
+    for (int i = 0; i < _powers.size(); i++)
+    {
+        delete _powers[i];
+    }
     _balls.clear();
     delete _level;
 }

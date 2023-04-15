@@ -139,7 +139,8 @@ public:
 	bool Is_modeJoystick() { return modeJoystick; };
 	bool Is_playing() { return play; };
 	bool Is_over() { return over; };
-
+signals: 
+	void connectionFailed();
 
 public slots:
 

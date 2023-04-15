@@ -37,6 +37,7 @@ MainWindow::MainWindow(QApplication *app, QWidget* parent, QGraphicsScene* game,
 	QObject::connect(_settingsTemp, &Settings::load_click, _menuGame, &Menu::loadSettingsRequested);
 	QObject::connect(_gameOverTemp, &GameOver::replayClick, this, &MainWindow::restartGameRequested);
 	QObject::connect(_gameOverTemp, &GameOver::menuClick, this, &MainWindow::showMenu);
+	QObject::connect(_menuGame, &Menu::connectionFailed, this, &MainWindow::connectionFailed);
 	
 	
 	_gameOver = _gameOverTemp;
@@ -89,4 +90,11 @@ void MainWindow::restartGameRequested()
 {
 	emit restartGame();
 	_view->setScene(_game);
+}
+
+void MainWindow::connectionFailed()
+{
+	QMessageBox _text;
+	_text.setText("Connection Echouer");
+	_text.exec();
 }

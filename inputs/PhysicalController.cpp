@@ -10,6 +10,8 @@ PhysicalController::PhysicalController(std::string com){
     {
         _bargraph.status[i] = 0;
     }
+
+
     sendOutputs();
 }
 
