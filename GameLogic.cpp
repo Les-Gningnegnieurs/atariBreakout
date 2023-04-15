@@ -330,3 +330,8 @@ std::istream& operator>>(std::istream& s, GameLogic &gl){
 
 
 Plateforme& GameLogic::getPlaform() { return _platform; }
+
+bool GameLogic::isCompleted() {
+    if (_score->getScore() >= _level->getmaxScore())
+        return true;
+}

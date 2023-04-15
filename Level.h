@@ -28,6 +28,7 @@ class Level{
         Brique *_board[RESMAX_Y][RESMAX_X];
         QGraphicsScene* _scene;
         Score* _score;
+        int maxScore;
 
     public:
         Level(LevelInfos I, Score* score, QGraphicsScene* scene);
@@ -45,6 +46,8 @@ class Level{
         int getColumns();
 
         int getHeigth();
+
+        int getmaxScore() { return maxScore; }
 
         int getLength();
         int I(int i_start, int i_end, int i);

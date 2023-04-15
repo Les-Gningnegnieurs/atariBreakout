@@ -49,7 +49,7 @@ public:
     void loadFile();
     void startGameLoop();
     void stopGameLoop();
-
+    void gameCompleted();
 
 };
 

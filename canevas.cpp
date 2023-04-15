@@ -77,3 +77,7 @@ bool Canevas::Is_GameOver()
 	return _game->isGameOver();
 }
 
+bool Canevas::isCompleted()
+{
+	return _game->isCompleted();
+}
