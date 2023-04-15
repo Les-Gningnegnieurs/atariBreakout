@@ -30,6 +30,8 @@ private:
 private slots:
     void MainGameLoop();
     void Start();
+signals:
+    void gameOver();
     
 public:
     Controller* _controller;

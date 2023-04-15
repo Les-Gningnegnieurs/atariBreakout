@@ -15,5 +15,13 @@ public:
 private:
 	QPointer<MenuUtils> _utils;
 	QApplication* _app;
+
+signals:
+	void replayClick();
+	void menuClick();
+
+public slots:
+	void replayRequested();
+	void menuRequested();
 };
 

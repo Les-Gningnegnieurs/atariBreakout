@@ -55,12 +55,18 @@ CustomButton* MenuUtils::add_center_button(QString path)
 	button->move((_scene->width() - button->width() + offset) / 2, imageY);
 	imageY += button->height();
 	_scene->addWidget(button);
+	button->setBackgroundRole(QPalette::Button);
+	button->setAutoFillBackground(true);
+	button->setStyleSheet("background-color: transparent;");
 
 	return button;
 }
 CustomButton* MenuUtils::add_button(QString path, QWidget* widget)
 {
 	CustomButton* button = new CustomButton(path);
+	button->setBackgroundRole(QPalette::Button);
+	button->setAutoFillBackground(true);
+	button->setStyleSheet("background-color: transparent;");
 
 	return button;
 }

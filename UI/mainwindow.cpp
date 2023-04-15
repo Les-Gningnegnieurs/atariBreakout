@@ -12,6 +12,7 @@ MainWindow::MainWindow(QApplication *app, QWidget* parent, QGraphicsScene* game,
 	QPointer<MainMenu> _menuTemp = new MainMenu(app, this);
 	QPointer<SelectLevel> _selectLevelTemp = new SelectLevel(app, this);
 	QPointer<Settings> _settingsTemp = new Settings(app, this);
+	QPointer<GameOver> _gameOverTemp = new GameOver(app, this);
 
 
 
@@ -34,18 +35,18 @@ MainWindow::MainWindow(QApplication *app, QWidget* parent, QGraphicsScene* game,
 	QObject::connect(_settingsTemp, &Settings::apply_click, _menuGame, &Menu::updateSettingsRequested);
 	QObject::connect(_settingsTemp, &Settings::save_click, _menuGame, &Menu::saveSettingsRequested);
 	QObject::connect(_settingsTemp, &Settings::load_click, _menuGame, &Menu::loadSettingsRequested);
-
+	QObject::connect(_gameOverTemp, &GameOver::replayClick, this, &MainWindow::restartGameRequested);
+	QObject::connect(_gameOverTemp, &GameOver::menuClick, this, &MainWindow::showMenu);
+	
+	_gameOver = _gameOverTemp;
 	_settings = _settingsTemp;
 	_menu = _menuTemp;
 	_selectLevel = _selectLevelTemp;
 	showMenu();
-	//showGame();
-	//showSettings();
-	//showSelectLevel();
+	
 	this->show();
 
-	////focus sur menu en premier
-	//_scene->setFocus();
+	
 }
 
 void MainWindow::showMenu() {
@@ -75,4 +76,16 @@ void MainWindow::showSelectLevel() {
 	
 }
 
+void MainWindow::showGameOver()
+{
+	setFixedSize(1200, 800);
+	_view->setFixedSize(1200, 800);
+	_view->setScene(_gameOver);
 
+}
+
+void MainWindow::restartGameRequested()
+{
+	emit restartGame();
+	_view->setScene(_game);
+}

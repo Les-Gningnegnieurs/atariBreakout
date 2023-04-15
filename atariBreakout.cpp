@@ -1,3 +1,4 @@
+
 #include "Level.h"
 #include "GameLoop.h"
 #include <fstream>
@@ -7,6 +8,8 @@
 #include <QDebug>
 #include "GameOver.h"
 #include <QGraphicsView>
+
+
 
 using namespace std;
 int main(int argc, char** argv) {
@@ -24,6 +27,6 @@ int main(int argc, char** argv) {
 
    /* game->Start();
     game->update2();*/ //renomer la m�thode pour Focus()
-    
+ 
     return a.exec();
 }

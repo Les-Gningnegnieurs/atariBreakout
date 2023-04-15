@@ -15,6 +15,7 @@
 #include "MenuUtils.h"
 #include "SelectLevel.h"
 #include <QMessageBox>
+#include "GameOver.h"
 
 #define W_RESOLUTION_X 1200
 #define W_RESOLUTION_Y 800
@@ -32,10 +33,11 @@ public slots:
 	void showGame();
 	void showSettings();
 	void showSelectLevel();
-
+	void showGameOver();
+	void restartGameRequested();
 signals:
 	void startGame();
-
+	void restartGame();
 
 
 
@@ -45,6 +47,7 @@ private:
 	QGraphicsScene* _settings;
 	QGraphicsScene* _game;
 	QGraphicsScene* _selectLevel;
+	QGraphicsScene* _gameOver;
 	Menu *_menuGame;
 };
 #endif
