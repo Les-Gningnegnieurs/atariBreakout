@@ -1,7 +1,7 @@
 #include "Addballs.h"
 
 
-void Addballs::modifyBall(std::vector<Balle*> &ball, Plateforme _plat, bool reset)
+void Addballs::modifyBall(std::vector<Balle*> &ball, Plateforme _plat, bool reset, int rand)
 {
 	if (!reset) {
 		if(!ball.empty())
@@ -16,9 +16,9 @@ void Addballs::modifyBall(std::vector<Balle*> &ball, Plateforme _plat, bool rese
 			
 				
 				
-				ball.push_back(new Balle(_scene, posP, rayon,-3,-3));
-				ball.push_back(new Balle(_scene,posP, rayon, 3, -3 ));
-				ball.push_back(new Balle(_scene, posP, rayon, 0, -3));
+				ball.push_back(new Balle(_scene, posP, rayon,-3,-3, rand));
+				ball.push_back(new Balle(_scene,posP, rayon, 3, -3, rand));
+				ball.push_back(new Balle(_scene, posP, rayon, 0, -3, rand));
 
 		
 		}

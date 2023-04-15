@@ -8,7 +8,7 @@ class Addballs:public Powerups
 {
 public:
 	Addballs(QGraphicsScene* _scene, Position positionDestroyed, int height = 40, int lenght = 40);
-	void modifyBall(std::vector<Balle*> & ball, Plateforme _plat, bool reset = false);
+	void modifyBall(std::vector<Balle*> & ball, Plateforme _plat, bool reset = false, int rand = 1);
 	void draw();
 	void hide_powerup();
 private:

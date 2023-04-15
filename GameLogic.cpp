@@ -270,7 +270,7 @@ void GameLogic::checkCollisions(Controller &control) {
         else
         {      
             //Balle *b = _balls[i];
-            _level->checkCollision(_balls[i],_powers);
+            _level->checkCollision(_balls[i],_powers, control);
 
             if (pos.y < 50 && speed.y < 0) //Hit  plafond
             {
@@ -296,7 +296,7 @@ void GameLogic::checkCollisions(Controller &control) {
         Position posb; 
         posb.x = _info.pos_Ball_iniX+4; 
         posb.y = _info.pos_Ball_iniY ;
-        Balle* p1 = new Balle(_scene, posb,_info.ball_radius);
+        Balle* p1 = new Balle(_scene, posb,_info.ball_radius, control.getRand());
         _balls.push_back(p1);
     }
 
