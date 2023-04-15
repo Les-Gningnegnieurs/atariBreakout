@@ -143,3 +143,8 @@ void GameLoop::MainGameLoop() {
         Restart();
     }
 }
+
+void GameLoop::gameCompleted()
+{
+
+}

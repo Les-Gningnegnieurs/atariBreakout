@@ -47,6 +47,8 @@ class Level{
 
         int getHeigth();
 
+        int getmaxScore() { return maxScore; }
+
         int getLength();
         int I(int i_start, int i_end, int i);
         int J(int j_start, int j_end, int j);
