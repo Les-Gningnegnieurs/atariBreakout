@@ -50,11 +50,11 @@ class Level{
         int I(int i_start, int i_end, int i);
         int J(int j_start, int j_end, int j);
 
-        void checkColl_DOWN_RIGHT(Balle* b, std::vector <Powerups*>& p);
-        void checkColl_DOWN_LEFT(Balle* b, std::vector <Powerups*>& p);
-        void checkColl_UP_RIGHT(Balle* b, std::vector <Powerups*>& p);
-        void checkColl_UP_LEFT(Balle* b, std::vector <Powerups*>& p);
-        void checkCollision(Balle *b, std::vector <Powerups*> &p);
+        void checkColl_DOWN_RIGHT(Balle* b, std::vector <Powerups*>& p, Controller& c);
+        void checkColl_DOWN_LEFT(Balle* b, std::vector <Powerups*>& p, Controller& c);
+        void checkColl_UP_RIGHT(Balle* b, std::vector <Powerups*>& p, Controller& c);
+        void checkColl_UP_LEFT(Balle* b, std::vector <Powerups*>& p, Controller& c);
+        void checkCollision(Balle *b, std::vector <Powerups*> &p, Controller& c);
 
         Brique* getBrique(int row_idx, int column_idx); //utile pour set le level au debut
 

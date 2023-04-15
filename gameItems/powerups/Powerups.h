@@ -24,7 +24,7 @@ protected:
 	int maxSizeY;
 	std::chrono::steady_clock clock;
 	std::chrono::time_point<std::chrono::steady_clock> last_time;
-	virtual void modifyBall(std::vector<Balle*> &ball, Plateforme _plat, bool reset = false);
+	virtual void modifyBall(std::vector<Balle*>& ball, Plateforme _plat, bool reset = false, int rand = 1);
 	virtual void modifyPlateform(Plateforme& platform, bool reset = false);
 	virtual void modifyControler(Controller& controller, Plateforme& platform, bool reset = false);
 	bool isStackable;

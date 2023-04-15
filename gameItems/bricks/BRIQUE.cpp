@@ -121,13 +121,13 @@ Collision Brique::checkCollision(Balle* b) {
 }
 
 
-bool Brique::increase_Damage(std::vector<Powerups*>& p, QGraphicsScene* _scene) {
+bool Brique::increase_Damage(std::vector<Powerups*>& p, QGraphicsScene* _scene, Controller& c) {
     if (_etat != Indestructible && _etat != Destroyed)
     {
         _PV--;
         if (_PV <= 0)
         {
-            addPowerUp(p, _scene);
+            addPowerUp(p, _scene, c);
             this->hide();
         }
         else
@@ -187,14 +187,14 @@ void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
     }
 }
 */
-void Brique::addPowerUp(std::vector<Powerups*>& p, QGraphicsScene* _scene) {
+void Brique::addPowerUp(std::vector<Powerups*>& p, QGraphicsScene* _scene, Controller& c) {
     std::uniform_real_distribution<double> distribution(0, 99);
     std::default_random_engine generator(rd());
     int y = distribution(generator);
     _etat = Destroyed;
-    if (y <= 100) { //y<=20
+    if (y <= c.getRand() * 10) { //y<=20
         //int x = rand();
-        int x = 2;
+        int x = c.getRand();
         switch (x%3){ //x%3
             case 0:
                 p.push_back(new Swapcontrol(_scene,_posBrique));
