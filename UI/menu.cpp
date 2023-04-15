@@ -151,21 +151,21 @@ int Menu::Count_Parameters()
 
 
 void Menu::Change_Controller() {
-    /*if (Get_controllerMode()) {
+
+    if (Get_controllerMode()) {
+        if (_keyboard != nullptr)
+            delete _keyboard;
         std::string c = "com" + std::to_string(Get_comPort());
         _keyboard = new PhysicalController(c);
-        if (!_keyboard->ConnectionStatus())
-        {
-            _col_ = "31m";
-            _keyboard = new Keyboard();
-            //rouge
-            //bool COM = false;
-            //std::string c = "Port COM Introuvable";
-            //Choose_Controller_Menu(std::cout);
-        }
     }
-    else {
-        _col_ = "32m"; //vert
-    }*/
+    if (!_keyboard->ConnectionStatus())
+        {
+            delete _keyboard;
+            _keyboard = new Keyboard();
+            
+        }
+    
+   
+    
 }
 

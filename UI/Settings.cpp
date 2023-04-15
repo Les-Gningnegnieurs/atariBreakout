@@ -125,25 +125,7 @@ void Settings::save_clicked() {
 	emit save_click();
 }
 void Settings::apply_clicked() {
-	switch (_COM) {
-	case 0:
-		emit com1Selected();
-		break;
-	case 1:
-		emit com2Selected();
-		break;
-	case 2:
-		com3Selected();
-		break;
-	case 3:
-		com4Selected();
-		break;
-	case 4:
-		com5Selected();
-		break;
-
-
-	}
+	emit comSelected(_COM + 1);
 
 	if (!_playingMode)
 		emit joystickSelected();
@@ -156,7 +138,10 @@ void Settings::apply_clicked() {
 		emit controllerSelected();
 
 	emit apply_click();
+
+
 }
+	
 
 void Settings::click_playingMode() {
 	if (_playingMode)

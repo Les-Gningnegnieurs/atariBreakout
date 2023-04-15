@@ -15,31 +15,30 @@ GameLoop::GameLoop(QApplication* app, QObject* parent) : QObject(parent) {
     timer = new QTimer();
     timer->setInterval(SLEEP);
     QObject::connect(timer, &QTimer::timeout, this, &GameLoop::MainGameLoop);
-    //temporaire
-    _menu.Set_playing(1);
-    Start();
-    //_window->showMenu();
+    QObject::connect(_window, &MainWindow::startGame, this,&GameLoop::Start);
+    QObject::connect(this, &GameLoop::gameOver, _window, &MainWindow::showGameOver);
+    QObject::connect(_window, &MainWindow::restartGame, this, &GameLoop::Restart);
+    
 }
 
 void GameLoop::Start() {
 
-    /*while (!_menu.Is_over())
-    {
-        _menu.print(std::cout);
-    }*/
-
+ 
+    over = false;
     _controller = _menu.Get_Controller();
     _controller->setPower(true);
-
-
+ 
+    
     _canevas->erase();
-    if (_menu.Is_playing())
-    {
-        _gameState = Running;
-        timer->start();
-    }
-    else
-        Stop();
+   
+    
+    loadFile();
+    _window->updateScene(_canevas->getScene());
+    
+     _gameState = Running;
+     timer->start();
+    
+   
 
     //_window->showGame();
 }
@@ -58,12 +57,14 @@ void GameLoop::Stop() {
 
 void GameLoop::Restart()
 {
-    stopGameLoop();
+   
     _canevas->resetScore();
-    _gameState = Starting;
+    _canevas->erase();
+
     loadFile();
     over = false;
-    _menu.Reset();
+    _window->updateScene(_canevas->getScene());
+    timer->start();
 
 }
 
@@ -71,18 +72,16 @@ void GameLoop::GameOver() {
     if (_canevas->Is_GameOver())
     {
         Stop();
-        _canevas->erase();
         over = true;
+        emit gameOver();
     }
 }
 
 void GameLoop::update() {
-    if (_gameState == Starting)
-        Start();
-
+  
     _controller->receiveInputs();
     
-    if (_gameState == Running) {
+     
         _canevas->update(*_controller, _menu.Is_modeAccelerometer());
         if (_controller->getButton(2))
         {
@@ -102,15 +101,15 @@ void GameLoop::update() {
                 over = true;
             }
         }
-    }
+    
     GameOver();
 
     _controller->sendOutputs();
 }
 
 void GameLoop::loadFile() {
-    //int value = _menu.Get_Level();
-    int value = 1;
+    int value = _menu.Get_Level();
+  
     std::stringstream str;
     std::string levelPath;
     str << "level/" << value << ".txt";

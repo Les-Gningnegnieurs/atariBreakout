@@ -3,7 +3,6 @@
 
 #include "Controller.h"
 #include <string>
-
 #include "../lib/SerialPort.hpp"
 #include "../lib/json.hpp"
 using json = nlohmann::json;
