@@ -6,13 +6,14 @@ MainWindow::MainWindow(QApplication *app, QWidget* parent, QGraphicsScene* game,
 	_view = new QGraphicsView();
 	_game = game;
 	_menuGame = menu;
+	_app = app;
 
 	_view->setParent(this);
 	_game->setParent(this);
 	QPointer<MainMenu> _menuTemp = new MainMenu(app, this);
 	QPointer<SelectLevel> _selectLevelTemp = new SelectLevel(app, this);
 	QPointer<Settings> _settingsTemp = new Settings(app, this);
-	QPointer<GameOver> _gameOverTemp = new GameOver(app, this);
+	QPointer<GameOver> _gameOverTemp = new GameOver(app, _score, this);
 
 
 
@@ -78,12 +79,19 @@ void MainWindow::showSelectLevel() {
 	
 }
 
-void MainWindow::showGameOver()
+void MainWindow::showGameOver(int a)
 {
+	_score = "Score : " + QString::number(a);
+	QPointer<GameOver> _gameOverTemp = new GameOver(_app, _score, this);
+	QObject::connect(_gameOverTemp, &GameOver::replayClick, this, &MainWindow::restartGameRequested);
+	QObject::connect(_gameOverTemp, &GameOver::menuClick, this, &MainWindow::showMenu);
+	delete _gameOver;
+	_gameOver = _gameOverTemp;
+
 	setFixedSize(1200, 800);
 	_view->setFixedSize(1200, 800);
 	_view->setScene(_gameOver);
-
+	
 }
 
 void MainWindow::restartGameRequested()

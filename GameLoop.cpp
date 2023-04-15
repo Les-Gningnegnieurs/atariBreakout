@@ -74,7 +74,7 @@ void GameLoop::GameOver() {
         _controller->setReverse(false);
         Stop();
         over = true;
-        emit gameOver();
+        emit gameOver(_canevas->get_score());
     }
 }
 

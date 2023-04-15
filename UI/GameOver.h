@@ -10,11 +10,12 @@ class GameOver : public QGraphicsScene
 {
 	Q_OBJECT
 public:
-	GameOver(QApplication* app, QWidget* parent = nullptr);
+	GameOver(QApplication* app, QString score, QWidget* parent = nullptr);
 	void initUI();
 private:
 	QPointer<MenuUtils> _utils;
 	QApplication* _app;
+	QString _score;
 
 signals:
 	void replayClick();
