@@ -50,6 +50,7 @@ void GameLoop::Pause()
 }
 
 void GameLoop::Stop() {
+    _controller->setReverse(false);
     timer->stop();
     //_window->showMenu();
 }
