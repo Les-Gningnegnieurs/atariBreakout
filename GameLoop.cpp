@@ -84,24 +84,6 @@ void GameLoop::update() {
     
     if (_gameState == Running) {
         _canevas->update(*_controller, _menu.Is_modeAccelerometer());
-        if (_controller->getButton(2))
-        {
-            _controller->receiveInputs();
-           
-            while (!_controller->getButton(2) && !_controller->getButton(1))
-            {
-                
-                _controller->receiveInputs();
-               
-
-            }
-            if (_controller->getButton(1))
-            {
-                Stop();
-                _canevas->erase();
-                over = true;
-            }
-        }
     }
     GameOver();
 
