@@ -33,7 +33,7 @@ public slots:
 	void showGame();
 	void showSettings();
 	void showSelectLevel();
-	void showGameOver();
+	void showGameOver(int a);
 	void restartGameRequested();
 	void connectionFailed();
 signals:
@@ -50,5 +50,7 @@ private:
 	QGraphicsScene* _selectLevel;
 	QGraphicsScene* _gameOver;
 	Menu *_menuGame;
+	QString _score;
+	QApplication* _app;
 };
 #endif
