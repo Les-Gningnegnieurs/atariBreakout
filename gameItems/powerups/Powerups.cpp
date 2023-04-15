@@ -55,7 +55,7 @@ bool Powerups::checkCollisions(Plateforme _plateforme)
 	
 	if (state == Falling)
 	{
-		if (pos.y >= posPlat.y - platHeight)
+		if (pos.y + height >= posPlat.y && pos.y < posPlat.y + platHeight)
 		{
 			if (pos.x + lenght >= posPlat.x && pos.x <= posPlat.x + platLenght)
 			{
@@ -66,6 +66,11 @@ bool Powerups::checkCollisions(Plateforme _plateforme)
 				return true;
 
 			}
+		}
+		else if (pos.y > 550)
+		{
+			state = OutOfBounds;
+			hide_powerup();
 		}
 	}
 	return false;
