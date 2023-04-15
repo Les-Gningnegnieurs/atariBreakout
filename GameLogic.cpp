@@ -150,14 +150,14 @@ void GameLogic:: update(Controller& c, bool accelmode)
             for (int i = 0; i < 10; i++)
             {
                 if (nbLeds > i)
-                    c.setBargraph(i, 1);
-                else
                     c.setBargraph(i, 0);
-                    
+                else
+                    c.setBargraph(i, 1);
             }
-            
-            
 
+            c.setPower(true);
+            c.setLED(0, 1, 255, 255, 255);
+            c.setLED(1, 1, 255, 255, 255);
             
         }
         

@@ -26,6 +26,7 @@ private:
     QGraphicsScene* _scene;
     int Window_X;
     int Window_Y;
+    bool reverseactive = false;
 public:
     Plateforme();
     Plateforme(LevelInfos I, QGraphicsScene* scene);
@@ -37,7 +38,7 @@ public:
     Position getPos(){return pos;}
     int getLenght() { return sizeX; }
     int getHeight() { return sizeY; }
-    void setLenght(int l);
+    void setLenght(int powerup, int l);
     Plati* getplat() { return rect; }
     void update2();
     void move2();

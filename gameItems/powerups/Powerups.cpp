@@ -55,7 +55,7 @@ bool Powerups::checkCollisions(Plateforme _plateforme)
 	
 	if (state == Falling)
 	{
-		if (pos.y >= posPlat.y - platHeight)
+		if (pos.y + height >= posPlat.y && pos.y < posPlat.y + platHeight)
 		{
 			if (pos.x + lenght >= posPlat.x && pos.x <= posPlat.x + platLenght)
 			{
@@ -66,6 +66,11 @@ bool Powerups::checkCollisions(Plateforme _plateforme)
 				return true;
 
 			}
+		}
+		else if (pos.y > 550)
+		{
+			state = OutOfBounds;
+			hide_powerup();
 		}
 	}
 	return false;
@@ -81,7 +86,7 @@ void Powerups::modifyPlateform(Plateforme& platform, bool reset )
 {
 
 }
-void Powerups::modifyControler(Controller& controller, bool reset )
+void Powerups::modifyControler(Controller& controller, Plateforme& platform, bool reset )
 {
 
 }
@@ -90,14 +95,14 @@ void Powerups::setPowerups(std::vector<Balle*>& ball, Plateforme& platform, Cont
 {
 	modifyBall(ball,platform);
 	modifyPlateform(platform);
-	modifyControler(controller);
+	modifyControler(controller, platform);
 
 }
 void Powerups::resetPowerups(std::vector<Balle*> &ball, Plateforme& platform, Controller& controller)
 {
 	modifyBall(ball,platform,true);
 	modifyPlateform(platform,true);
-	modifyControler(controller,true);
+	modifyControler(controller, platform, true);
 
 }
 

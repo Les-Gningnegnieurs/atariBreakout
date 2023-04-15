@@ -5,12 +5,12 @@ void Extendplatform::modifyPlateform(Plateforme& platform, bool reset)
 	int change = 0;
 	if (reset) {
 		change = platform.getLenght() / EXTENDFACTOR <= MINSIZE ? MINSIZE : platform.getLenght() / EXTENDFACTOR;
-		platform.setLenght(change);
+		platform.setLenght(1, change);
 	}
 	else 
 	{
 		change = platform.getLenght() * EXTENDFACTOR >= MAXSIZE ? MAXSIZE : platform.getLenght() * EXTENDFACTOR;
-		platform.setLenght(change);
+		platform.setLenght(1, change);
 	}
 }
 
