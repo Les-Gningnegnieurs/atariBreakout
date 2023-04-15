@@ -30,6 +30,7 @@ Addballs::Addballs(QGraphicsScene* _scene, Position positionDestroyed, int heigh
 {
 	graphic_powerup = new PowerX3("ressources/powerup_x3.png");
 	ledInfo.hasTimer = false;
+	ledInfo.color = 'b';
 	name = "Addballs";
 	graphic_powerup->setPos(positionDestroyed.x, positionDestroyed.y);
 	_scene->addItem(graphic_powerup);

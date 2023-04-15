@@ -127,21 +127,28 @@ void GameLogic:: update(Controller& c, bool accelmode)
         _powers[i]->update();
         if (_powers[i]->getState() == Active && _powers[i]->getLedinfo().hasTimer && !foundTimer)
         {
-            //caller la couleur juste une fois au début, pas à chaque Tick
-            //caller turnOn/turnOff pour faire flasher
-            /*if (_powers[i]->getLedinfo().color == 'r')
-            {
-                c.setLED(0, 1, 255, 0, 0);
-                c.setLED(1, 1, 255, 0, 0);
+
+            if (c.statusLed(0) || c.statusLed(1)) {
+                c.setLED(0, 0, 0, 0, 0);
+                c.setLED(1, 0, 0, 0, 0);
             }
-            else
-            {
-                c.setLED(0, 1, 0, 255, 0);
-                c.setLED(1, 1, 0, 255, 0);
-            }*/
+            else {
+                if (_powers[i]->getLedinfo().color == 'r') {
+                    c.setLED(0, 1, 255, 0, 0);
+                    c.setLED(1, 1, 255, 0, 0);
+                }
+
+                else if (_powers[i]->getLedinfo().color == 'g') {
+                    c.setLED(0, 1, 0, 255, 0);
+                    c.setLED(1, 1, 0, 255, 0);
+                }
+                else if (_powers[i]->getLedinfo().color == 'b') {
+                    c.setLED(0, 1, 0, 0, 255);
+                    c.setLED(1, 1, 0, 0, 255);
+                }
+            }
            
             foundTimer = true;
-            
             
             //Logique a revoir
             int timer = _powers[i]->getTimer();
@@ -156,9 +163,6 @@ void GameLogic:: update(Controller& c, bool accelmode)
             }
 
             c.setPower(true);
-            c.setLED(0, 1, 255, 255, 255);
-            c.setLED(1, 1, 255, 255, 255);
-            
         }
         
         

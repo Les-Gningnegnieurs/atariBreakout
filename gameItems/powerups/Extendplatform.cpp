@@ -18,6 +18,7 @@ Extendplatform::Extendplatform(QGraphicsScene* _scene, Position positionDestroye
 {
 	graphic_powerup = new PowerX3("ressources/heart2.png");
 	name = "Extendplatform";
+	ledInfo.color = 'g';
 	graphic_powerup->setPos(positionDestroyed.x, positionDestroyed.y);
 	_scene->addItem(graphic_powerup);
 	state = Falling;
