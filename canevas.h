@@ -26,6 +26,7 @@ public:
 	void update (Controller& c, bool modeaccel);
 	void update2();
 	bool Is_GameOver();
+	bool isCompleted();
 	void resetScore() { _game->resetScore(); }
 	QGraphicsScene* getScene() { return _scene; }
 	int get_score() { return _game->getScoreInfo(); };

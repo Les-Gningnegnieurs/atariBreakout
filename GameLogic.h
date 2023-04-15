@@ -52,6 +52,7 @@ public:
     int getScoreInfo();
     Plateforme& getPlaform();
     void resetScore() { _score->resetScore(); } //a voir
+    bool isCompleted();
 
     friend std::istream& operator>>(std::istream& s, GameLogic &gl);
 };
