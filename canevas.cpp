@@ -12,6 +12,7 @@ Canevas::Canevas()
 }
 
 Canevas::~Canevas() {
+	_scene->clear();
 	delete _scene;
 }
 void Canevas::update2() {
