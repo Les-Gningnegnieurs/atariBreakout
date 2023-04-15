@@ -31,7 +31,7 @@ private slots:
     void MainGameLoop();
     void Start();
 signals:
-    void gameOver();
+    void gameOver(int a);
     void pauseRequested();
     
 public:
