@@ -19,6 +19,8 @@ PhysicalController::~PhysicalController() {
     _outputChanged.power = true;
     power.power = false;
     sendOutputs();
+    _arduino->closeSerial();
+    delete _arduino;
 }
 
 bool PhysicalController::ConnectionStatus(){
@@ -82,7 +84,8 @@ bool PhysicalController::receiveInputs(){
     std::string raw_msg;
     // Reception d'un message venant du Arduino
     if(!RcvFromSerial(_arduino, raw_msg)){
-        return false;
+        qDebug() << "msg pas complet : " << raw_msg.c_str() << "\n";
+        //return false;
     }
 
      qDebug() << "input : " << raw_msg.c_str() << "\n";
@@ -183,6 +186,12 @@ bool PhysicalController::RcvFromSerial(SerialPort *arduino, std::string &msg){
     //     {std::cout<<"char_buffer: "<<char_buffer<<'\n';
     //     std::cout<<"str_buffer: "<<str_buffer<<'\n';
     //     std::cout<<"msg avant filtre: "<<msg<<'\n';}
+    if (msg.std::string::find_last_of('{') != std::string::npos && msg.find_last_of('}') != std::string::npos && msg.size() > 0)
+    {
+        msg = msg.substr(0, msg.find('}') + 1);
+        return true;
+    }
 
-    return true;
+    return false;
+    //return true;
 }

@@ -33,7 +33,7 @@ MainWindow::MainWindow(QApplication *app, QWidget* parent, QGraphicsScene* game,
 	QObject::connect(_settingsTemp, &Settings::controllerSelected, _menuGame, &Menu::controllerModeRequested);
 	QObject::connect(_settingsTemp, &Settings::joystickSelected, _menuGame, &Menu::joystickModeRequested);
 	QObject::connect(_settingsTemp, &Settings::accelSelected, _menuGame, &Menu::accelModeRequested);
-	QObject::connect(_settingsTemp, &Settings::apply_click, _menuGame, &Menu::updateSettingsRequested);
+	
 	QObject::connect(_settingsTemp, &Settings::save_click, _menuGame, &Menu::saveSettingsRequested);
 	QObject::connect(_settingsTemp, &Settings::load_click, _menuGame, &Menu::loadSettingsRequested);
 	QObject::connect(_gameOverTemp, &GameOver::replayClick, this, &MainWindow::restartGameRequested);
