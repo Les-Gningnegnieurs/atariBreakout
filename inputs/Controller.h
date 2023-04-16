@@ -25,7 +25,7 @@ public:
     virtual bool sendOutputs() = 0;
 
     Controller();
-    ~Controller();
+    virtual ~Controller();
     Joystick getJoystick();
     void setBargraph(int id, bool val);
     void setLED(int id, int status, int R, int G, int B);

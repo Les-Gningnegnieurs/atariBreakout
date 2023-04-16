@@ -11,15 +11,14 @@ PhysicalController::PhysicalController(std::string com){
         _bargraph.status[i] = 0;
     }
 
-
     sendOutputs();
 }
 
 PhysicalController::~PhysicalController() {
-    _outputChanged.power = true;
+    _outputChanged.power = false;
     power.power = false;
     sendOutputs();
-    _arduino->closeSerial();
+    //_arduino->closeSerial();
     delete _arduino;
 }
 
@@ -83,14 +82,14 @@ bool PhysicalController::receiveInputs(){
     json j_msg_rcv;
     std::string raw_msg;
     // Reception d'un message venant du Arduino
-    if(!RcvFromSerial(_arduino, raw_msg)){
-        qDebug() << "msg pas complet : " << raw_msg.c_str() << "\n";
+    if(RcvFromSerial(_arduino, raw_msg)){
+        //qDebug() << "msg pas complet : " << raw_msg.c_str() << "\n";
         //return false;
-    }
+    //}****
 
      qDebug() << "input : " << raw_msg.c_str() << "\n";
     // Impression du message de l'Arduino si valide
-    if(raw_msg.size()>0){
+    //if(raw_msg.size()>0){*******
     // Transfert du message en json
         if (raw_msg.find('{') == std::string::npos || raw_msg.find('}') == std::string::npos)
             return false;
@@ -167,7 +166,7 @@ bool PhysicalController::SendToSerial(SerialPort *arduino, json j_msg){
 }
 
 
-bool PhysicalController::RcvFromSerial(SerialPort *arduino, std::string &msg){
+bool PhysicalController::(SerialPort *arduino, std::string &msg){
     // Return 0 if error
     // Message output in msg
     std::string str_buffer;
@@ -179,7 +178,7 @@ bool PhysicalController::RcvFromSerial(SerialPort *arduino, std::string &msg){
     // cout<< arduino->readSerialPort(char_buffer, MSG_MAX_SIZE) << endl;
 
     // Version fonctionnelle dans VScode et Visual Studio
-    buffer_size = arduino->readSerialPort1(char_buffer, MSG_MAX_SIZE);
+    buffer_size = arduino->readSerialPort(char_buffer, MSG_MAX_SIZE);
     str_buffer.assign(char_buffer, buffer_size);
     msg.append(str_buffer);
     // if (buffer_size>0)
