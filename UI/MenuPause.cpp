@@ -35,7 +35,7 @@ void MenuPause::initUI()
 
 	CustomButton* _button1 = _utils->add_button("resume.png", nullptr);
 	_button1->move(x - _button1->width(), imageY);
-	QObject::connect(_button1, &QPushButton::clicked, this, &MenuPause::replayRequested);
+	QObject::connect(_button1, &QPushButton::clicked, this, &MenuPause::resumeRequested);
 	addWidget(_button1);
 	CustomButton* _button2 = _utils->add_button("quit.png", nullptr);
 	_button2->move(x + lab->width() / 2 - _button2->width(), imageY);
@@ -49,7 +49,7 @@ void MenuPause::menuRequested()
 {
 	emit menuClick();
 }
-void MenuPause::replayRequested()
+void MenuPause::resumeRequested()
 {
-	emit replayClick();
+	emit resumeClick();
 }

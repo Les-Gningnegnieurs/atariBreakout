@@ -17,6 +17,7 @@
 #include <QMessageBox>
 #include "GameOver.h"
 #include "GameCompleted.h"
+#include "MenuPause.h"
 
 #define W_RESOLUTION_X 1200
 #define W_RESOLUTION_Y 800
@@ -41,9 +42,12 @@ public slots:
 	void levelConfirm(int x);
 	void nextLevel();
 	void showGameCompleted(int x);
+	void showPauseMenu(int x);
+	void resumeGameRequested();
 signals:
 	void startGame();
 	void restartGame();
+	void resumeGame();
 
 
 
@@ -55,6 +59,7 @@ private:
 	QGraphicsScene* _selectLevel;
 	QGraphicsScene* _gameOver;
 	QGraphicsScene* _gameCompleted;
+	QGraphicsScene* _menuPause;
 	Menu *_menuGame;
 	QString _score;
 	QApplication* _app;

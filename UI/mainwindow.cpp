@@ -8,6 +8,7 @@ MainWindow::MainWindow(QApplication *app, QWidget* parent, QGraphicsScene* game,
 	_menuGame = menu;
 	_app = app;
 	setWindowIcon(QIcon("image/icon.png"));
+	_menuPause = nullptr;
 
 	_view->setParent(this);
 	_game->setParent(this);
@@ -153,5 +154,30 @@ void MainWindow::showGameCompleted(int x)
 	setFixedSize(1200, 800);
 	_view->setFixedSize(1200, 800);
 	_view->setScene(_gameCompleted);
+
+}
+
+
+
+void MainWindow::showPauseMenu(int x)
+{
+	if (_menuPause != nullptr)
+		delete _menuPause;
+	_score = "Score : " + QString::number(x);
+	QPointer<MenuPause> menuPauseTemp = new MenuPause(_app, _score, this);
+	QObject::connect(menuPauseTemp, &MenuPause::resumeClick, this, &MainWindow::resumeGameRequested);
+	QObject::connect(menuPauseTemp, &MenuPause::menuClick, this, &MainWindow::showMenu);
+	_menuPause = menuPauseTemp;
+
+	setFixedSize(1200, 800);
+	_view->setFixedSize(1200, 800);
+	_view->setScene(_menuPause);
+
+}
+
+void MainWindow::resumeGameRequested()
+{
+	_view->setScene(_game);
+	emit resumeGame();
 
 }

@@ -18,8 +18,9 @@ GameLoop::GameLoop(QApplication* app, QObject* parent) : QObject(parent) {
     QObject::connect(_window, &MainWindow::startGame, this,&GameLoop::Start);
     QObject::connect(this, &GameLoop::gameOver, _window, &MainWindow::showGameOver);
     QObject::connect(_window, &MainWindow::restartGame, this, &GameLoop::Restart);
-    QObject::connect(this, &GameLoop::pauseRequested, _window, &MainWindow::showMenu);
+    QObject::connect(this, &GameLoop::pauseRequested, _window, &MainWindow::showPauseMenu);
     QObject::connect(this, &GameLoop::gameCompleted, _window, &MainWindow::showGameCompleted);
+    QObject::connect(_window, &MainWindow::resumeGame, this, &GameLoop::Resume);
     
 }
 
@@ -48,6 +49,7 @@ void GameLoop::Start() {
 
 void GameLoop::Pause()
 {
+    timer->stop();
 }
 
 void GameLoop::Stop() {
@@ -75,7 +77,7 @@ void GameLoop::GameOver() {
         _controller->setReverse(false);
         Stop();
         over = true;
-        emit gameOver(_score+_canevas->get_score());
+        emit gameOver(_canevas->get_score());
     }
 }
 
@@ -96,11 +98,10 @@ void GameLoop::update() {
             
      if (_controller->getButton(2))
      {
-          Stop();
-          emit pauseRequested();
+          Pause();
+          emit pauseRequested(_canevas->get_score());
           
 
-          over = true;
      }
         
     
@@ -154,4 +155,9 @@ void GameLoop::IsgameCompleted()
         _score += _canevas->get_score();
         emit gameCompleted(_score);
     }
+}
+
+void GameLoop::Resume()
+{
+    timer->start();
 }
