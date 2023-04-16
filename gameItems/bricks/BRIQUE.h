@@ -44,6 +44,7 @@ public:
 
 	void setstate(state s);
 	int GetHauteur() { return _sizeY; }
+	int getPv() { return _PV; }
 
 	//void draw(char UI[RESMAX_Y][RESMAX_X]);
 	void draw();

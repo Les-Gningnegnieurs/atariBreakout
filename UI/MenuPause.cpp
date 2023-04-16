@@ -1,7 +1,7 @@
-#include "GameOver.h"
+#include "MenuPause.h"
 
 
-GameOver::GameOver(QApplication* app, QString score, QWidget* parent) : QGraphicsScene(parent)
+MenuPause::MenuPause(QApplication* app, QString score, QWidget* parent) : QGraphicsScene(parent)
 {
 	setBackgroundBrush(Qt::black);
 	_utils = new MenuUtils(this, app);
@@ -11,14 +11,14 @@ GameOver::GameOver(QApplication* app, QString score, QWidget* parent) : QGraphic
 }
 
 
-void GameOver::initUI()
+void MenuPause::initUI()
 {
-	QLabel* lab = _utils->import_image_up("image/title/gameOver.png", 1);
+	QLabel* lab = _utils->import_image_up("image/title/paused.png", 1);
 	int imageY = lab->height();
 	int x = lab->pos().x() + lab->width() / 2;
 
 	QGraphicsTextItem* textItem = new QGraphicsTextItem(_score);
-	
+
 	// Définir la police du texte
 	QFont font;
 	font.setFamily("Helvetica");
@@ -33,23 +33,23 @@ void GameOver::initUI()
 	textItem->moveBy(x - lab->width() / 2, imageY);
 	imageY += 50;
 
-	CustomButton* _button1 = _utils->add_button("replay.png", nullptr);
+	CustomButton* _button1 = _utils->add_button("resume.png", nullptr);
 	_button1->move(x - _button1->width(), imageY);
-	QObject::connect(_button1, &QPushButton::clicked, this, &GameOver::replayRequested);
+	QObject::connect(_button1, &QPushButton::clicked, this, &MenuPause::resumeRequested);
 	addWidget(_button1);
-	CustomButton* _button2 = _utils->add_button("menu.png", nullptr);
-	_button2->move(x + lab->width()/2 - _button2->width(), imageY);
+	CustomButton* _button2 = _utils->add_button("quit.png", nullptr);
+	_button2->move(x + (_button1->width() -_button2->width()) /2, imageY);
 	addWidget(_button2);
 	//qDebug() << _score;
-	QObject::connect(_button2, &QPushButton::clicked, this, &GameOver::menuRequested);
-	
+	QObject::connect(_button2, &QPushButton::clicked, this, &MenuPause::menuRequested);
+
 }
 
-void GameOver:: menuRequested()
+void MenuPause::menuRequested()
 {
 	emit menuClick();
 }
-void GameOver::replayRequested()
+void MenuPause::resumeRequested()
 {
-	emit replayClick();
+	emit resumeClick();
 }

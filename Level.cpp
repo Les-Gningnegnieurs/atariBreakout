@@ -4,6 +4,7 @@ Level::Level(LevelInfos I, Score* score, QGraphicsScene* scene): _scene(scene), 
     columns = I.columns;
     BrickHeigth = I.Brick_heigth;
     BrickLength = I.Brick_length;
+    maxScore = 0;
 }
 Level::Level() {
 }
@@ -322,7 +323,8 @@ std::istream& operator >> (std::istream& s, Level& I){
                     I._board[i][j] = new Briquetest(j*I.getLength()+CONTOUR, i*I.getHeigth()+CONTOUR, I.getLength(), I.getHeigth()); 
                     I._board[i][j]->setPos(j * I.BrickLength + CONTOUR,  i * I.BrickHeigth + CONTOUR);
                     I._scene->addItem(I._board[i][j]);
-                    I.maxScore += 100;
+                    
+
                 }
                 else if (x == 0) {
                     I._board[i][j] = new BriqueVoid(j * I.getLength() + CONTOUR, i * I.getHeigth() + CONTOUR, I.getLength(), I.getHeigth());
@@ -333,22 +335,22 @@ std::istream& operator >> (std::istream& s, Level& I){
                     I._board[i][j] = new BriqueB(j * I.getLength() + CONTOUR, i * I.getHeigth() + CONTOUR, I.getLength(), I.getHeigth());
                     I._board[i][j]->setPos(j * I.BrickLength + CONTOUR, i * I.BrickHeigth + CONTOUR);
                     I._scene->addItem(I._board[i][j]);
-                    I.maxScore += 100;
                 }
                 
                 else if (x == 3) {
                     I._board[i][j] = new BriqueC(j * I.getLength() + CONTOUR, i * I.getHeigth() + CONTOUR, I.getLength(), I.getHeigth());
                     I._board[i][j]->setPos(j * I.BrickLength + CONTOUR, i * I.BrickHeigth + CONTOUR);
                     I._scene->addItem(I._board[i][j]);
-                    I.maxScore += 100;
                 }
 
                 else if (x == 8) {
                     I._board[i][j] = new BriqueT(j * I.getLength() + CONTOUR, i * I.getHeigth() + CONTOUR, I.getLength(), I.getHeigth());
                     I._board[i][j]->setPos(j * I.BrickLength + CONTOUR, i * I.BrickHeigth + CONTOUR);
                     I._scene->addItem(I._board[i][j]);
-                    I.maxScore += 100;
+                  
                 }
+                
+                I.maxScore += I._board[i][j]->getPv() * 100;
                 
             }
         }

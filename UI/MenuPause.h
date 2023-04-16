@@ -6,11 +6,11 @@
 #include "Settings.h"
 #include <QObject>
 
-class GameCompleted : public QGraphicsScene
+class MenuPause : public QGraphicsScene
 {
 	Q_OBJECT
 public:
-	GameCompleted(QApplication* app, QString score, QWidget* parent = nullptr);
+	MenuPause(QApplication* app, QString score, QWidget* parent = nullptr);
 	void initUI();
 private:
 	QPointer<MenuUtils> _utils;
@@ -18,11 +18,11 @@ private:
 	QString _score;
 
 signals:
-	void nextLevelClick();
+	void resumeClick();
 	void menuClick();
 
 public slots:
-	void nextlevelRequested();
+	void resumeRequested();
 	void menuRequested();
 };
 

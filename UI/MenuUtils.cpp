@@ -75,6 +75,7 @@ CustomButton* MenuUtils::add_button(QString path, QWidget* widget)
 void MenuUtils::set_as_sure()
 {
 	QMainWindow* win = new QMainWindow();
+	win->setWindowIcon(QIcon("image/icon.png"));
 	win->setStyleSheet("background-color: black;");
 	QWidget* centralWidget = new QWidget(win);
 	win->setCentralWidget(centralWidget);

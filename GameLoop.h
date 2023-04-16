@@ -26,14 +26,17 @@ private:
     gameState _gameState;
     QTimer* timer;
     int bg = 0;
+    int _score = 0;
 
 private slots:
     void MainGameLoop();
     void Start();
+    void Pause();
+    void Resume();
 signals:
     void gameOver(int a);
-    void pauseRequested();
-    
+    void pauseRequested(int x);
+    void gameCompleted(int x);
 public:
     Controller* _controller;
 
@@ -41,7 +44,7 @@ public:
     GameLoop(QApplication* app, QObject* parent = nullptr);
 
     void Stop();
-    void Pause();
+    
     void update();
     void GameOver();
     void Restart();
@@ -49,7 +52,7 @@ public:
     void loadFile();
     void startGameLoop();
     void stopGameLoop();
-    void gameCompleted();
+    void IsgameCompleted();
 
 };
 

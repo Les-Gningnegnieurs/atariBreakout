@@ -334,4 +334,5 @@ Plateforme& GameLogic::getPlaform() { return _platform; }
 bool GameLogic::isCompleted() {
     if (_score->getScore() >= _level->getmaxScore())
         return true;
+    return false;
 }
