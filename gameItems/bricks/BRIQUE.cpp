@@ -192,7 +192,7 @@ void Brique::addPowerUp(std::vector<Powerups*>& p, QGraphicsScene* _scene, Contr
     std::default_random_engine generator(rd());
     int y = distribution(generator);
     _etat = Destroyed;
-    if (y <= c.getRand() * 10) { //y<=20
+    if (y <= c.getRand() * 5) { //y<=20
         //int x = rand();
         int x = c.getRand();
         switch (x%3){ //x%3
