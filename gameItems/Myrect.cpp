@@ -76,3 +76,9 @@ PowerX3::PowerX3(QString filepath) {
 	setPixmap(scaledPixmap);
 }
 
+Control_mode::Control_mode(int heigth, int length, QString filepath) {
+	setPos(0, 0);
+	QPixmap pixmap(filepath);
+	QPixmap scaledPixmap = pixmap.scaled(heigth, length, Qt::KeepAspectRatioByExpanding);
+	setPixmap(scaledPixmap);
+}

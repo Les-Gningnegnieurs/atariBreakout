@@ -1,5 +1,5 @@
 #include "Brique.h"
-#define CORNER_FACTOR 8
+#define CORNER_FACTOR 10
 #define SIDE_FACTOR 15
 Brique:: Brique(int x, int y, int l, int h, state s){
     setRect(0, 0, 10, 10);
@@ -82,14 +82,19 @@ Collision Brique::checkCollision(Balle* b) {
         //    (posBa.x <= _posBrique.x + _sizeX -1 && posBa.x > _posBrique.x + _sizeX -1 - CORNER_FACTOR && posBa.y + rayon*2 >= _posBrique.y && posBa.y + rayon*2 < _posBrique.y + CORNER_FACTOR && speed.x < 0 && speed.y > 0)||    //coin sup�rieur droit
         //    (posBa.x <= _posBrique.x + _sizeX - 1 && posBa.x > _posBrique.x + _sizeX - 1 - CORNER_FACTOR && posBa.y <= _posBrique.y + _sizeY-1 && posBa.y > _posBrique.y + _sizeY-1 - CORNER_FACTOR && speed.x<0 && speed.y < 0 ))  //coin inf�rieur droit
         //collision down
-        if (Y_next <= _posBrique.y + (_sizeY - 1) && Y_next > _posBrique.y && speed.y < 0)
+        if ((posBa.x + rayon * 2 >= _posBrique.x && posBa.x < _posBrique.x + CORNER_FACTOR && posBa.y + rayon * 2 >= _posBrique.y && posBa.y + rayon * 2 < _posBrique.y + CORNER_FACTOR && speed.x > 0 && speed.y > 0) || //coin sup�rieur gauche
+            (posBa.x + rayon * 2 >= _posBrique.x && posBa.x < _posBrique.x + CORNER_FACTOR && posBa.y <= _posBrique.y + _sizeY - 1 && posBa.y > _posBrique.y + _sizeY - 1 + CORNER_FACTOR && speed.x > 0 && speed.y < 0) ||    //coin inf�rieur gauche
+            (posBa.x <= _posBrique.x + _sizeX - 1 && posBa.x > _posBrique.x + _sizeX - 1 - CORNER_FACTOR && posBa.y + rayon * 2 >= _posBrique.y && posBa.y + rayon * 2 < _posBrique.y + CORNER_FACTOR && speed.x < 0 && speed.y > 0) ||    //coin sup�rieur droit
+            (posBa.x <= _posBrique.x + _sizeX - 1 && posBa.x > _posBrique.x + _sizeX - 1 - CORNER_FACTOR && posBa.y <= _posBrique.y + _sizeY - 1 && posBa.y > _posBrique.y + _sizeY - 1 - CORNER_FACTOR && speed.x < 0 && speed.y < 0))  //coin inf�rieur droit
+            return CN;
+        if (Y_next <= _posBrique.y + (_sizeY-1) && Y_next > _posBrique.y && speed.y < 0)
         {
             if (posBa.x + rayon*2 > _posBrique.x && posBa.x < _posBrique.x + _sizeX - 1)
             //if (posBa.x + rayon * 2 > _posBrique.x && posBa.x < _posBrique.x + _sizeX - 1)
                 return DN;
         }
         //collision top
-        if (Y_next + rayon*2 >= _posBrique.y && Y_next + rayon*2 < _posBrique.y +_sizeY-1 && speed.y > 0)
+        if (Y_next + rayon*2 > _posBrique.y && Y_next + rayon*2 < _posBrique.y +_sizeY-1 && speed.y > 0)
         {
             //if (posBa.x + rayon*2 > _posBrique.x && posBa.x < _posBrique.x + _sizeX - 1)
             if (posBa.x + rayon*2  > _posBrique.x && posBa.x < _posBrique.x + _sizeX - 1)
@@ -98,22 +103,15 @@ Collision Brique::checkCollision(Balle* b) {
         //collision left
         if (X_next + rayon*2 > _posBrique.x && X_next + rayon*2 <_posBrique.x + SIDE_FACTOR && speed.x > 0)
         {
-            //if (posBa.y < _posBrique.y + (_sizeY - 1) && posBa.y + rayon * 2 > _posBrique.y)
             if (Y_next < _posBrique.y + (_sizeY - 1) && Y_next + rayon * 2 > _posBrique.y)
                 return LT;
         }
         //collision right
         if (X_next < _posBrique.x + (_sizeX - 1) && X_next > _posBrique.x + _sizeX-1 - SIDE_FACTOR && speed.x < 0)
         {
-            //if (posBa.y < _posBrique.y + (_sizeY - 1) && posBa.y + rayon * 2 > _posBrique.y)
             if (Y_next < _posBrique.y + (_sizeY - 1) && Y_next + rayon * 2 > _posBrique.y)
                 return RT;
         }
-        if ((X_next + rayon * 2 >= _posBrique.x && X_next < _posBrique.x + CORNER_FACTOR && Y_next + rayon * 2 >= _posBrique.y && Y_next + rayon * 2 < _posBrique.y + CORNER_FACTOR && speed.x > 0 && speed.y > 0) || //coin sup�rieur gauche
-            (X_next + rayon * 2 >= _posBrique.x && X_next < _posBrique.x + CORNER_FACTOR && Y_next <= _posBrique.y + _sizeY - 1 && Y_next > _posBrique.y + _sizeY - 1 + CORNER_FACTOR && speed.x > 0 && speed.y < 0) ||    //coin inf�rieur gauche
-            (X_next <= _posBrique.x + _sizeX - 1 && X_next > _posBrique.x + _sizeX - 1 - CORNER_FACTOR && Y_next + rayon * 2 >= _posBrique.y && Y_next + rayon * 2 < _posBrique.y + CORNER_FACTOR && speed.x < 0 && speed.y > 0) ||    //coin sup�rieur droit
-            (X_next <= _posBrique.x + _sizeX - 1 && X_next > _posBrique.x + _sizeX - 1 - CORNER_FACTOR && Y_next <= _posBrique.y + _sizeY - 1 && Y_next > _posBrique.y + _sizeY - 1 - CORNER_FACTOR && speed.x < 0 && speed.y < 0))  //coin inf�rieur droit
-            return CN;
         return NO;
     }
     return NO;
@@ -194,7 +192,7 @@ void Brique::addPowerUp(std::vector<Powerups*>& p, QGraphicsScene* _scene) {
     _etat = Destroyed;
     if (y <= 100) { //y<=20
         //int x = rand();
-        int x = 2;
+        int x = 1;
         switch (x%3){ //x%3
             case 0:
                 p.push_back(new Swapcontrol(_scene,_posBrique));

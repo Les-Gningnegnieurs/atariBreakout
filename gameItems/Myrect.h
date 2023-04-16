@@ -54,4 +54,8 @@ public:
 	PowerX3(QString filepath = "ressources/powerup_x3.png");
 };
 
+class Control_mode : public QGraphicsPixmapItem {
+public:
+	Control_mode(int height, int length, QString filepath = "ressources/controller.png");
+};
 #endif MYRECT_H

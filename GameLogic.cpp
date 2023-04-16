@@ -44,7 +44,7 @@ GameLogic:: GameLogic(LevelInfos i, QGraphicsScene* scene) : _scene(scene)
 
     QGraphicsPixmapItem* side_bot = new QGraphicsPixmapItem();
     side_bot->setPixmap(bot);
-    side_bot->setPos(0, 600);
+    side_bot->setPos(0, 650);
 
     _scene->addItem(side_left);
     _scene->addItem(side_right);
@@ -99,6 +99,10 @@ GameLogic:: GameLogic(LevelInfos i, QGraphicsScene* scene) : _scene(scene)
     _score = new Score();
     _score->setPos(30, i._windowResolutionY - 127);
     scene->addItem(_score);
+
+    control_image = new Control_mode(150,80);
+    control_image->setPos(i._windowResolutionX - 200, i._windowResolutionY - 100);
+    scene->addItem(control_image);
     _level = new Level(_info, _score, _scene);
 
 }
@@ -210,8 +214,11 @@ void GameLogic::checkCollisions(Controller &control) {
 
     for (int i = 0; i < _powers.size(); i++)
     {
-        if (_powers[i]->getPos().y + _powers[i]->getHeight() >= _info._windowResolutionY-150)
-            _powers[i]->setState(OutOfBounds); 
+        if (_powers[i]->getPos().y + _powers[i]->getHeight() >= _info._windowResolutionY - 110)
+        {
+            _powers[i]->setState(OutOfBounds);
+            _powers[i]->hide_powerup();
+        }
         
         if (_powers[i]->checkCollisions(_platform)) {
             bool typefound = false;
@@ -253,7 +260,7 @@ void GameLogic::checkCollisions(Controller &control) {
         Velocity speed = _balls[i]->getSpeed();
         int rayon = _balls[i]->getrayon();
         _platform.checkCollision(_balls[i]);
-        if (pos.y + rayon*2 > 650 && speed.y > 0) //check si mort 
+        if (pos.y + rayon*2 > _platform.getPos().y + _platform.getHeight() + 50 && speed.y > 0) //check si mort 
         {
             //_balls[i]->changeVelocity(0, 1); //faire bounce dans le bas
             delete _balls[i];
@@ -270,9 +277,9 @@ void GameLogic::checkCollisions(Controller &control) {
             }
 
             //check walls collision
-            if (pos.x < 49 && speed.x < 0)
+            if (pos.x < 50 && speed.x < 0)
                 _balls[i]->changeVelocity(1, 0); //inverse le vecteur X pour éloigner du mur
-            if(pos.x + rayon*2 > _info._windowResolutionX - 49 && speed.x > 0)
+            if(pos.x + rayon*2 > _info._windowResolutionX - 50 && speed.x > 0)
                 _balls[i]->changeVelocity(1, 0); //inverse le vecteur X pour éloigner du mur
         }
     }

@@ -38,6 +38,7 @@ private:
     Health* _vies3;
     Score* _score;
     QGraphicsRectItem* _rect;
+    Control_mode* control_image;
  
 
     void checkCollisions(Controller& control);

@@ -67,11 +67,11 @@ bool Powerups::checkCollisions(Plateforme _plateforme)
 
 			}
 		}
-		else if (pos.y > 550)
+		/*else if (pos.y > pos.y + platHeight)
 		{
 			state = OutOfBounds;
 			hide_powerup();
-		}
+		}*/
 	}
 	return false;
 
