@@ -48,6 +48,7 @@ signals:
 	void startGame();
 	void restartGame();
 	void resumeGame();
+	void nextLevelRequested();
 
 
 

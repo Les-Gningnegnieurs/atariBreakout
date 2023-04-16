@@ -33,6 +33,8 @@ private slots:
     void Start();
     void Pause();
     void Resume();
+
+    void nextLevel();
 signals:
     void gameOver(int a);
     void pauseRequested(int x);

@@ -91,7 +91,7 @@ void MainWindow::showSelectLevel() {
 
 void MainWindow::showGameOver(int a)
 {
-	_score = "Score : " + QString::number(a);
+	_score = "Score final : " + QString::number(a);
 	QPointer<GameOver> _gameOverTemp = new GameOver(_app, _score, this);
 	QObject::connect(_gameOverTemp, &GameOver::replayClick, this, &MainWindow::restartGameRequested);
 	QObject::connect(_gameOverTemp, &GameOver::menuClick, this, &MainWindow::showMenu);
@@ -138,13 +138,14 @@ void MainWindow::levelConfirm(int x)
 void MainWindow::nextLevel()
 {
 	_menuGame->Set_Level(_menuGame->Get_Level() + 1);
-	showGame();
+	emit nextLevelRequested();
+	_view->setScene(_game);
 }
 
 
 void MainWindow::showGameCompleted(int x)
 {
-	_score = "Score final : " + QString::number(x);
+	_score = "Score : " + QString::number(x);
 	QPointer<GameCompleted> _gameCompletedTemp = new GameCompleted(_app, _score, this);
 	QObject::connect(_gameCompletedTemp, &GameCompleted::nextLevelClick, this, &MainWindow::nextLevel);
 	QObject::connect(_gameCompletedTemp, &GameCompleted::menuClick, this, &MainWindow::showMenu);
