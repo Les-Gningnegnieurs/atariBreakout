@@ -21,6 +21,7 @@ GameLoop::GameLoop(QApplication* app, QObject* parent) : QObject(parent) {
     QObject::connect(this, &GameLoop::pauseRequested, _window, &MainWindow::showPauseMenu);
     QObject::connect(this, &GameLoop::gameCompleted, _window, &MainWindow::showGameCompleted);
     QObject::connect(_window, &MainWindow::resumeGame, this, &GameLoop::Resume);
+    QObject::connect(_window, &MainWindow::nextLevelRequested, this, &GameLoop::nextLevel);
     
 }
 
@@ -31,7 +32,7 @@ void GameLoop::Start() {
     _controller = _menu.Get_Controller();
     _controller->setPower(true);
  
-    
+    _score = 0;
     _canevas->erase();
    
     
@@ -77,6 +78,7 @@ void GameLoop::GameOver() {
         Stop();
         over = true;
         emit gameOver(_canevas->get_score() + _score);
+        _score = 0;
     }
 }
 
@@ -159,4 +161,16 @@ void GameLoop::IsgameCompleted()
 void GameLoop::Resume()
 {
     timer->start();
+}
+
+void GameLoop::nextLevel()
+{
+    _canevas->erase();
+
+
+    loadFile();
+    _window->updateScene(_canevas->getScene());
+
+    timer->start();
+
 }

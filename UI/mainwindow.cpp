@@ -138,7 +138,8 @@ void MainWindow::levelConfirm(int x)
 void MainWindow::nextLevel()
 {
 	_menuGame->Set_Level(_menuGame->Get_Level() + 1);
-	showGame();
+	emit nextLevelRequested();
+	_view->setScene(_game);
 }
 
 
