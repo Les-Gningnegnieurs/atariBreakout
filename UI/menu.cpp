@@ -21,6 +21,7 @@ Menu::Menu()
 
     LoadConfig();
 
+    modeAccelerometer = false;
     over = false;
     index = 1;
 }

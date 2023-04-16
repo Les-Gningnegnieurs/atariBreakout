@@ -38,7 +38,6 @@ void GameLoop::Start() {
     loadFile();
     _window->updateScene(_canevas->getScene());
     
-     _gameState = Running;
      timer->start();
     
    
