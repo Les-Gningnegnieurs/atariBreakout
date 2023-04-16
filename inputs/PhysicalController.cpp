@@ -166,7 +166,7 @@ bool PhysicalController::SendToSerial(SerialPort *arduino, json j_msg){
 }
 
 
-bool PhysicalController::(SerialPort *arduino, std::string &msg){
+bool PhysicalController::RcvFromSerial(SerialPort *arduino, std::string &msg){
     // Return 0 if error
     // Message output in msg
     std::string str_buffer;
