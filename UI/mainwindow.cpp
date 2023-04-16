@@ -142,7 +142,7 @@ void MainWindow::nextLevel()
 
 void MainWindow::showGameCompleted(int x)
 {
-	_score = "Score : " + QString::number(x);
+	_score = "Score final : " + QString::number(x);
 	QPointer<GameCompleted> _gameCompletedTemp = new GameCompleted(_app, _score, this);
 	QObject::connect(_gameCompletedTemp, &GameCompleted::nextLevelClick, this, &MainWindow::nextLevel);
 	QObject::connect(_gameCompletedTemp, &GameCompleted::menuClick, this, &MainWindow::showMenu);

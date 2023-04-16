@@ -13,7 +13,7 @@ GameCompleted::GameCompleted(QApplication* app, QString score, QWidget* parent) 
 
 void GameCompleted::initUI()
 {
-	QLabel* lab = _utils->import_image_up("image/title/gameOver.png", 1);
+	QLabel* lab = _utils->import_image_up("image/title/niveauAccompli.png", 1);
 	int imageY = lab->height();
 	int x = lab->pos().x() + lab->width() / 2;
 
@@ -35,14 +35,13 @@ void GameCompleted::initUI()
 	textItem->moveBy(x - lab->width() / 2, imageY);
 	imageY += 50;
 
-	CustomButton* _button1 = _utils->add_button("replay.png", nullptr);
+	CustomButton* _button1 = _utils->add_button("next_level.png", nullptr);
 	_button1->move(x - _button1->width(), imageY);
 	QObject::connect(_button1, &QPushButton::clicked, this, &GameCompleted::nextlevelRequested);
 	addWidget(_button1);
 	CustomButton* _button2 = _utils->add_button("menu.png", nullptr);
 	_button2->move(x + lab->width() / 2 - _button2->width(), imageY);
 	addWidget(_button2);
-	//qDebug() << _score;
 	QObject::connect(_button2, &QPushButton::clicked, this, &GameCompleted::menuRequested);
 
 }

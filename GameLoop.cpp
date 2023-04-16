@@ -75,7 +75,7 @@ void GameLoop::GameOver() {
         _controller->setReverse(false);
         Stop();
         over = true;
-        emit gameOver(_canevas->get_score());
+        emit gameOver(_score+_canevas->get_score());
     }
 }
 
@@ -151,6 +151,7 @@ void GameLoop::IsgameCompleted()
     if (_canevas->isCompleted())
     {
         Stop();
-        emit gameCompleted(_canevas->get_score());
+        _score += _canevas->get_score();
+        emit gameCompleted(_score);
     }
 }

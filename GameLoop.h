@@ -26,6 +26,7 @@ private:
     gameState _gameState;
     QTimer* timer;
     int bg = 0;
+    int _score = 0;
 
 private slots:
     void MainGameLoop();

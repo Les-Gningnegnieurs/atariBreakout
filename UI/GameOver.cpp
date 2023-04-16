@@ -17,10 +17,6 @@ void GameOver::initUI()
 	int imageY = lab->height();
 	int x = lab->pos().x() + lab->width() / 2;
 
-	
-	//QString qstringValue = QString::number(*_score);
-	qDebug() << _score << "Tats iy";
-	// Créer un objet texte
 	QGraphicsTextItem* textItem = new QGraphicsTextItem(_score);
 	
 	// Définir la police du texte
