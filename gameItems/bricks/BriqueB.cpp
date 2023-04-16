@@ -23,3 +23,7 @@ BriqueB::~BriqueB() {
 void BriqueB::afficher(std::ostream& s) {
     s << "B:" << _posBrique.x << ", " << _posBrique.y << ", " << _sizeX << ", " << _sizeY << std::endl;
 }
+void BriqueB::update_hurt(int pv) {
+    if (pv == 1)
+        setBrush(Qt::darkCyan);
+}

@@ -180,6 +180,7 @@ void GameLogic:: update(Controller& c, bool accelmode)
                 else
                     c.setBargraph(i, 1);
             }
+            //setvirtualbargraph(c);
             setvirtualbargraph(c);
 
             c.setPower(true);
@@ -189,11 +190,10 @@ void GameLogic:: update(Controller& c, bool accelmode)
         if (_powers[i]->getState() == Done || _powers[i]->getState() == OutOfBounds)
         {
             if (_powers[i]->getState() == Done)
-            
                 _powers[i]->resetPowerups(_balls, _platform, c);
-            //UI[_powers[i]->getPos().y][_powers[i]->getPos().x] = ' ';
             delete _powers[i];
-;           _powers.erase(_powers.begin() + i);
+           _powers.erase(_powers.begin() + i);
+            reset_virtual_bargraph();
             
         }
     }
@@ -214,6 +214,11 @@ void GameLogic:: update(Controller& c, bool accelmode)
             c.TurnOffLed(1);
     }
    
+}
+
+void GameLogic::reset_virtual_bargraph() {
+    for (int i = 0; i < 20; i++)
+        array[i]->hide();
 }
 
 bool GameLogic::isGameOver()
@@ -315,7 +320,7 @@ void GameLogic::checkCollisions(Controller &control) {
         Position posb; 
         posb.x = _info.pos_Ball_iniX; 
         posb.y = _info.pos_Ball_iniY ;
-        Balle* p1 = new Balle(_scene, posb,_info.ball_radius, control.getRand());
+        Balle* p1 = new Balle(_scene, posb,_info.ball_radius, _info.speed_B_x, _info.speed_B_y, control.getRand());
         _balls.push_back(p1);
     }
 

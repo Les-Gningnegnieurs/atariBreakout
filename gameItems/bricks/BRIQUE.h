@@ -50,6 +50,7 @@ public:
 	void draw();
 	virtual void afficher(std::ostream& s) = 0;
 	virtual void addPowerUp(std::vector<Powerups*>& p, QGraphicsScene* _scene, Controller& c);
+	virtual void update_hurt(int pv)=0;
 protected:
 	Position _posBrique;
 	state _etat;

@@ -5,8 +5,8 @@ Balle::Balle(LevelInfos I, QGraphicsScene* scene, int rand) :_scene(scene)
     pos.y = I.pos_Ball_iniY;
     oldPosX = pos.x;
     oldPosY = pos.y;
-    speed.y = I.speed_B_x;
-    speed.x = I.speed_B_y;
+    speed.y = I.speed_B_y;
+    speed.x = I.speed_B_x;
     rayon = I.ball_radius;
     MaxSpeed = I.maxspeed_B;
     circle = new QGraphicsEllipseItem(0,0,rayon*2,rayon*2);

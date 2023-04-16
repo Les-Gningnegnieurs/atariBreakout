@@ -136,7 +136,10 @@ bool Brique::increase_Damage(std::vector<Powerups*>& p, QGraphicsScene* _scene, 
             this->hide();
         }
         else
+        {
             _etat = Hurt;
+            update_hurt(_PV);
+        }
         return true;
     }
     return false;

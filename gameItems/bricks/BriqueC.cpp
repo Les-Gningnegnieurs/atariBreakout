@@ -22,3 +22,11 @@ BriqueC::~BriqueC() {
 void BriqueC::afficher(std::ostream& s) {
     s << "C:" << _posBrique.x << ", " << _posBrique.y << ", " << _sizeX << ", " << _sizeY << std::endl;
 }
+
+void BriqueC::update_hurt(int pv) {
+    if(pv == 2)
+        setBrush(QColor(34, 139, 34));
+    else if (pv == 1) {
+        setBrush(QColor(Qt::darkGreen));
+    }
+}
