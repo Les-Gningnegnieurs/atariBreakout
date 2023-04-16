@@ -7,6 +7,7 @@ MainWindow::MainWindow(QApplication *app, QWidget* parent, QGraphicsScene* game,
 	_game = game;
 	_menuGame = menu;
 	_app = app;
+	setWindowIcon(QIcon("image/icon.png"));
 
 	_view->setParent(this);
 	_game->setParent(this);
