@@ -33,7 +33,7 @@ private slots:
 signals:
     void gameOver(int a);
     void pauseRequested();
-    
+    void gameCompleted(int x);
 public:
     Controller* _controller;
 
@@ -49,7 +49,7 @@ public:
     void loadFile();
     void startGameLoop();
     void stopGameLoop();
-    void gameCompleted();
+    void IsgameCompleted();
 
 };
 

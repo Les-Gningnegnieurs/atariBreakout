@@ -115,7 +115,7 @@ public:
 	void Set_screenHeight(int value) { screenHeight = value; };
 	void Set_modeAccelerometer() { modeAccelerometer = true; modeJoystick = false; };
 	void Set_modeJoystick() { modeJoystick = true; modeAccelerometer = false; };
-    void Set_Level(int value) { level = value; };
+	void Set_Level(int value) { if (value > 6) value = 1;  level = value; };
 	void Set_playing(bool p) { play = p; };
 	void Set_choice(short c) { choice = c; };
 	void Set_controllerMode(bool mode) { controllerMode = mode;  };

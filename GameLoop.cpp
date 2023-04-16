@@ -10,7 +10,6 @@ GameLoop::GameLoop(QApplication* app, QObject* parent) : QObject(parent) {
     _menu.Set_Controller(_controller);
 
     _gameState = gameState(0);
-    loadFile();
     over = false;
 
     timer = new QTimer();
@@ -20,6 +19,7 @@ GameLoop::GameLoop(QApplication* app, QObject* parent) : QObject(parent) {
     QObject::connect(this, &GameLoop::gameOver, _window, &MainWindow::showGameOver);
     QObject::connect(_window, &MainWindow::restartGame, this, &GameLoop::Restart);
     QObject::connect(this, &GameLoop::pauseRequested, _window, &MainWindow::showMenu);
+    QObject::connect(this, &GameLoop::gameCompleted, _window, &MainWindow::showGameCompleted);
     
 }
 
@@ -105,6 +105,7 @@ void GameLoop::update() {
         
     
     GameOver();
+    IsgameCompleted();
 
     _controller->sendOutputs();
 }
@@ -145,7 +146,11 @@ void GameLoop::MainGameLoop() {
     }
 }
 
-void GameLoop::gameCompleted()
+void GameLoop::IsgameCompleted()
 {
-
+    if (_canevas->isCompleted())
+    {
+        Stop();
+        emit gameCompleted(_canevas->get_score());
+    }
 }

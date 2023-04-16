@@ -37,7 +37,7 @@ void GameCompleted::initUI()
 
 	CustomButton* _button1 = _utils->add_button("replay.png", nullptr);
 	_button1->move(x - _button1->width(), imageY);
-	QObject::connect(_button1, &QPushButton::clicked, this, &GameCompleted::replayRequested);
+	QObject::connect(_button1, &QPushButton::clicked, this, &GameCompleted::nextlevelRequested);
 	addWidget(_button1);
 	CustomButton* _button2 = _utils->add_button("menu.png", nullptr);
 	_button2->move(x + lab->width() / 2 - _button2->width(), imageY);
@@ -51,7 +51,7 @@ void GameCompleted::menuRequested()
 {
 	emit menuClick();
 }
-void GameCompleted::replayRequested()
+void GameCompleted::nextlevelRequested()
 {
-	emit replayClick();
+	emit nextLevelClick();
 }

@@ -18,11 +18,11 @@ private:
 	QString _score;
 
 signals:
-	void replayClick();
+	void nextLevelClick();
 	void menuClick();
 
 public slots:
-	void replayRequested();
+	void nextlevelRequested();
 	void menuRequested();
 };
 

@@ -158,13 +158,13 @@ void Menu::Change_Controller() {
         std::string c = "com" + std::to_string(Get_comPort());
         _keyboard = new PhysicalController(c);
     }
-    /* if (!_keyboard->ConnectionStatus())
+    if (!_keyboard->ConnectionStatus())
         {
             emit connectionFailed();
             delete _keyboard;
             _keyboard = new Keyboard();
             
-        }*/
+        }
     
    
     
