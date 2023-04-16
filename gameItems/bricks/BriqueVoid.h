@@ -12,6 +12,6 @@ public:
 
 	void afficher(std::ostream& s); //pour les testcran
 
-	void update_hurt(int pv){}
+	void update_hurt(int pv, QGraphicsScene* _scene){}
 };
 #endif

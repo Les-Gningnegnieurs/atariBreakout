@@ -23,7 +23,12 @@ BriqueB::~BriqueB() {
 void BriqueB::afficher(std::ostream& s) {
     s << "B:" << _posBrique.x << ", " << _posBrique.y << ", " << _sizeX << ", " << _sizeY << std::endl;
 }
-void BriqueB::update_hurt(int pv) {
+void BriqueB::update_hurt(int pv, QGraphicsScene* _scene) {
     if (pv == 1)
+    {
         setBrush(Qt::darkCyan);
+        fissure = new QGraphicsPixmapItem(QPixmap("ressources/fissure2.png"));
+        fissure->setPos(_posBrique.x, _posBrique.y);
+        _scene->addItem(fissure);
+    }
 }

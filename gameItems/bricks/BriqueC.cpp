@@ -23,10 +23,19 @@ void BriqueC::afficher(std::ostream& s) {
     s << "C:" << _posBrique.x << ", " << _posBrique.y << ", " << _sizeX << ", " << _sizeY << std::endl;
 }
 
-void BriqueC::update_hurt(int pv) {
-    if(pv == 2)
+void BriqueC::update_hurt(int pv, QGraphicsScene* _scene) {
+    if (pv == 2)
+    {
         setBrush(QColor(34, 139, 34));
+        fissure = new QGraphicsPixmapItem(QPixmap("ressources/fissure1.png"));
+        fissure->setPos(_posBrique.x, _posBrique.y);
+        _scene->addItem(fissure);
+    }
     else if (pv == 1) {
+        delete fissure;
         setBrush(QColor(Qt::darkGreen));
+        fissure = new QGraphicsPixmapItem(QPixmap("ressources/fissure2.png"));
+        fissure->setPos(_posBrique.x, _posBrique.y);
+        _scene->addItem(fissure);
     }
 }

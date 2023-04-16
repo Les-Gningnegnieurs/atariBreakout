@@ -48,9 +48,10 @@ public:
 
 	//void draw(char UI[RESMAX_Y][RESMAX_X]);
 	void draw();
+	void hide_();
 	virtual void afficher(std::ostream& s) = 0;
 	virtual void addPowerUp(std::vector<Powerups*>& p, QGraphicsScene* _scene, Controller& c);
-	virtual void update_hurt(int pv)=0;
+	virtual void update_hurt(int pv, QGraphicsScene* _scene)=0;
 protected:
 	Position _posBrique;
 	state _etat;
@@ -58,7 +59,8 @@ protected:
 	int _sizeY;
 	int _PV;
 	std::random_device rd;
-	QGraphicsScene* _scene;
+	//QGraphicsScene* _scene;
+	QGraphicsPixmapItem* fissure = nullptr;
 	
 };
 

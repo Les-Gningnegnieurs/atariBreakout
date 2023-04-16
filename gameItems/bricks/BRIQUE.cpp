@@ -133,12 +133,12 @@ bool Brique::increase_Damage(std::vector<Powerups*>& p, QGraphicsScene* _scene, 
         if (_PV <= 0)
         {
             addPowerUp(p, _scene, c);
-            this->hide();
+            hide_();
         }
         else
         {
             _etat = Hurt;
-            update_hurt(_PV);
+            update_hurt(_PV, _scene);
         }
         return true;
     }
@@ -148,62 +148,15 @@ void Brique::draw(){
     if(!est_Detruite())
         setPos(_posBrique.x, _posBrique.y);
 }
-/*
-void Brique::draw(char UI[RESMAX_Y][RESMAX_X]) {
-    if (est_Detruite()) {
-        if (_sizeX == 1 && _sizeY == 1)
-        {
-            UI[_posBrique.y][_posBrique.x] = ' ';
-        }
-        else {
-            for (int i = _posBrique.y; i < _posBrique.y + _sizeY; i++) {
-                for (int j = _posBrique.x; j < _posBrique.x + _sizeX; j++) {
-                    UI[i][j] = ' ';
-                }
-            }
-        }
-    }
 
-    else
-    {
-        if (_sizeX == 1)
-        {
-            if (_etat == Alive)
-                UI[_posBrique.y][_posBrique.x] = 'X';
-            else if (_etat == Indestructible)
-                UI[_posBrique.y][_posBrique.x] = '�';
-            else if (_etat == Hurt)
-                UI[_posBrique.y][_posBrique.x] = '#';
-        }
-        else {
-            for (int i = _posBrique.y; i < _posBrique.y + _sizeY; i++) {
-                int j = _posBrique.x;
-                UI[i][j] = '[';
-                j++;
-                for (j; j < _posBrique.x + _sizeX-1; j++) {
-                    if (_etat == Alive)
-                        UI[i][j] = 'X';
-                    else if (_etat == Hurt)
-                        UI[i][j] = 'x';
-                    else if (_etat == Indestructible) {
-                        UI[i][j] = '%';
-                    }
-                }
-                UI[i][j] = ']';
-            }
-        }
-    }
-}
-*/
 void Brique::addPowerUp(std::vector<Powerups*>& p, QGraphicsScene* _scene, Controller& c) {
     std::uniform_real_distribution<double> distribution(0, 99);
     std::default_random_engine generator(rd());
-    //int y = distribution(generator);
+    int y = distribution(generator);
     _etat = Destroyed;
-    int y = 1;
     if (y <= c.getRand() * 5) { //y<=20
-        int x = 3;
-        //int x = c.getRand();
+        //int x = 3;
+        int x = c.getRand();
         switch (x%3){ //x%3
             case 0:
                 p.push_back(new Swapcontrol(_scene,_posBrique));
@@ -218,4 +171,9 @@ void Brique::addPowerUp(std::vector<Powerups*>& p, QGraphicsScene* _scene, Contr
         }
         
     }
+}
+void Brique::hide_() {
+    if(fissure!=nullptr)
+        delete fissure;
+    this->hide();
 }
