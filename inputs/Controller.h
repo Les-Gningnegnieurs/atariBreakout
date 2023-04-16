@@ -38,5 +38,6 @@ public:
     void setPower(bool mode);
     int getRand() { return _rand; }
     virtual bool ConnectionStatus()=0;
+    Bargraph getBargraph() { return _bargraph; }
 };
 #endif 

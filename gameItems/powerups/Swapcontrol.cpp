@@ -2,7 +2,7 @@
 
 Swapcontrol::Swapcontrol(QGraphicsScene* _scene, Position positionDestroyed, int height, int lenght) :Powerups(_scene,positionDestroyed, height, lenght)
 {
-	graphic_powerup = new PowerX3("ressources/powerup_x3.png");
+	graphic_powerup = new PowerX3("ressources/reverse_control.png");
 	isStackable = false;
 	ledInfo.color = 'r';
 	name = "Swapcontrol";

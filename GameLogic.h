@@ -38,6 +38,7 @@ private:
     Health* _vies3;
     Score* _score;
     QGraphicsRectItem* _rect;
+    QGraphicsRectItem* array[22];
  
 
     void checkCollisions(Controller& control);
@@ -53,6 +54,8 @@ public:
     Plateforme& getPlaform();
     void resetScore() { _score->resetScore(); } //a voir
     bool isCompleted();
+    void init_virtual_bar();
+    void setvirtualbargraph(Controller& c);
 
     friend std::istream& operator>>(std::istream& s, GameLogic &gl);
 };

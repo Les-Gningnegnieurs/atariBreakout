@@ -4,7 +4,7 @@ class Swapcontrol:public Powerups
 {
 public:
 	void modifyControler(Controller& controller, Plateforme& platform, bool reset = false);
-	Swapcontrol(QGraphicsScene* _scene, Position positionDestroyed, int height = 1, int lenght = 1);
+	Swapcontrol(QGraphicsScene* _scene, Position positionDestroyed, int height = 40, int lenght = 40);
 	void draw();
 	void hide_powerup();
 private:

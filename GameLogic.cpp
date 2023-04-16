@@ -14,9 +14,9 @@ GameLogic:: GameLogic(LevelInfos i, QGraphicsScene* scene) : _scene(scene)
    /* _plat = new  MyRect(i);
     _plat->setPos(i.pos_Plat_iniX, i.pos_Plat_iniY);
     _scene->addItem(_plat);*/
-    QPen pen(Qt::black);  // Create a black pen
-    pen.setWidth(50);      // Set the width of the pen to 2
-    pen.setStyle(Qt::SolidLine);  // Set the pen style to solid
+    //QPen pen(Qt::black);  // Create a black pen
+    //pen.setWidth(50);      // Set the width of the pen to 2
+    //pen.setStyle(Qt::SolidLine);  // Set the pen style to solid
     //QGraphicsLineItem* left_contour = new QGraphicsLineItem(0, 0, 0, i._windowResolutionY - 200);
     //QGraphicsLineItem* top_contour = new QGraphicsLineItem(0, 0, i._windowResolutionX, 0);
     //QGraphicsLineItem* right_contour = new QGraphicsLineItem(i._windowResolutionX - 50, 0, i._windowResolutionX - 50, i._windowResolutionY - 200);
@@ -44,7 +44,7 @@ GameLogic:: GameLogic(LevelInfos i, QGraphicsScene* scene) : _scene(scene)
 
     QGraphicsPixmapItem* side_bot = new QGraphicsPixmapItem();
     side_bot->setPixmap(bot);
-    side_bot->setPos(0, 600);
+    side_bot->setPos(0, 650);
 
     _scene->addItem(side_left);
     _scene->addItem(side_right);
@@ -99,10 +99,24 @@ GameLogic:: GameLogic(LevelInfos i, QGraphicsScene* scene) : _scene(scene)
     _score = new Score();
     _score->setPos(30, i._windowResolutionY - 127);
     scene->addItem(_score);
+
+    Plati* _bargraph = new Plati(200, 50, "ressources/bar3.png");
+    _bargraph->setPos(450, i._windowResolutionY-110);
+    _scene->addItem(_bargraph);
+    init_virtual_bar();
     _level = new Level(_info, _score, _scene);
 
 }
-
+void GameLogic::init_virtual_bar() {
+    int starting = 488;
+    for (int j = 0; j < 20; j++)
+    {
+        array[j] = new QGraphicsRectItem(starting + (j * 15) + 2, _info._windowResolutionY - 104, 14, 35);
+        array[j]->setBrush(Qt::red);
+        _scene->addItem(array[j]);
+        array[j]->hide();
+    }
+}
 GameLogic::~GameLogic(){
     for (int i = 0; i < _powers.size(); i++)
     {
@@ -162,9 +176,11 @@ void GameLogic:: update(Controller& c, bool accelmode)
             {
                 if (nbLeds > i)
                     c.setBargraph(i, 0);
+                //rajouter une methode qui va update les carrés rouges
                 else
                     c.setBargraph(i, 1);
             }
+            setvirtualbargraph(c);
 
             c.setPower(true);
         }
@@ -218,8 +234,11 @@ void GameLogic::checkCollisions(Controller &control) {
 
     for (int i = 0; i < _powers.size(); i++)
     {
-        if (_powers[i]->getPos().y + _powers[i]->getHeight() >= _info._windowResolutionY-150)
-            _powers[i]->setState(OutOfBounds); 
+        if (_powers[i]->getPos().y + _powers[i]->getHeight() >= _info._windowResolutionY - 110)
+        {
+            _powers[i]->setState(OutOfBounds);
+            _powers[i]->hide_powerup();
+        }
         
         if (_powers[i]->checkCollisions(_platform)) {
             bool typefound = false;
@@ -261,7 +280,7 @@ void GameLogic::checkCollisions(Controller &control) {
         Velocity speed = _balls[i]->getSpeed();
         int rayon = _balls[i]->getrayon();
         _platform.checkCollision(_balls[i]);
-        if (pos.y + rayon*2 > 650 && speed.y > 0) //check si mort 
+        if (pos.y + rayon*2 > _platform.getPos().y + _platform.getHeight() + 50 && speed.y > 0) //check si mort 
         {
             //_balls[i]->changeVelocity(0, 1); //faire bounce dans le bas
             delete _balls[i];
@@ -278,9 +297,9 @@ void GameLogic::checkCollisions(Controller &control) {
             }
 
             //check walls collision
-            if (pos.x < 49 && speed.x < 0)
+            if (pos.x < 50 && speed.x < 0)
                 _balls[i]->changeVelocity(1, 0); //inverse le vecteur X pour éloigner du mur
-            if(pos.x + rayon*2 > _info._windowResolutionX - 49 && speed.x > 0)
+            if(pos.x + rayon*2 > _info._windowResolutionX - 50 && speed.x > 0)
                 _balls[i]->changeVelocity(1, 0); //inverse le vecteur X pour éloigner du mur
         }
     }
@@ -294,7 +313,7 @@ void GameLogic::checkCollisions(Controller &control) {
         else if (_livesLeft == 0)
             delete _vies1;
         Position posb; 
-        posb.x = _info.pos_Ball_iniX+4; 
+        posb.x = _info.pos_Ball_iniX; 
         posb.y = _info.pos_Ball_iniY ;
         Balle* p1 = new Balle(_scene, posb,_info.ball_radius, control.getRand());
         _balls.push_back(p1);
@@ -335,4 +354,22 @@ bool GameLogic::isCompleted() {
     if (_score->getScore() >= _level->getmaxScore())
         return true;
     return false;
+}
+void GameLogic::setvirtualbargraph(Controller& c) {
+    int j = 0;
+    for (int i = 0; i < 10; i++)
+    {
+        if (c.getBargraph().status[i] == 0)
+        {
+            array[i + j]->hide();
+            array[i + 1 + j]->hide();
+        }
+
+        else
+        {
+            array[i + j]->show();
+            array[i + 1 + j]->show();
+        }
+        j++;
+    }
 }

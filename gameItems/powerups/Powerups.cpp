@@ -7,7 +7,6 @@ Powerups::Powerups()
 
 Powerups::~Powerups()
 {
-
 }
 Powerups::Powerups(QGraphicsScene* scene, Position positionDestroyed,int _height , int _lenght) : _scene(scene)
 {
@@ -67,11 +66,11 @@ bool Powerups::checkCollisions(Plateforme _plateforme)
 
 			}
 		}
-		else if (pos.y > 550)
+		/*else if (pos.y > 550)
 		{
 			state = OutOfBounds;
 			hide_powerup();
-		}
+		}*/
 	}
 	return false;
 

@@ -16,7 +16,7 @@ void Extendplatform::modifyPlateform(Plateforme& platform, bool reset)
 
 Extendplatform::Extendplatform(QGraphicsScene* _scene, Position positionDestroyed,  int height , int lenght ) :Powerups(_scene, positionDestroyed,    height ,  lenght )
 {
-	graphic_powerup = new PowerX3("ressources/heart2.png");
+	graphic_powerup = new PowerX3("ressources/expand_plat.png");
 	name = "Extendplatform";
 	ledInfo.color = 'g';
 	graphic_powerup->setPos(positionDestroyed.x, positionDestroyed.y);

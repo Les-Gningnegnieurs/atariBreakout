@@ -30,25 +30,55 @@ Balle::Balle(QGraphicsScene* scene, Position posB, int radius, int speedX, int s
 }
 
 QBrush Balle::getRandColor(int rand) {
-    switch (rand % 6)
+    switch (rand % 16)
     {
     case 0:
-        return Qt::black;
+        return QColor(64,224,208); //turquoise
         break;
     case 1: 
-        return Qt::blue;
+        return QColor(0, 168, 107); //jade
         break;
     case 2:
-        return Qt::red;
+        return QColor(0, 15, 137); //phtalloblue
         break;
     case 3:
-        return Qt::green;
+        return QColor(220, 20, 60); //cramoisi
         break;
     case 4:
-        return Qt::cyan;
+        return QColor(36, 68, 92);
         break;
     case 5:
-        return Qt::magenta;
+        return QColor(56, 148, 178); //bleu ceruleen
+        break;
+    case 6:
+        return QColor(26, 140, 102); //vert viridien 26, 140, 102
+        break;
+    case 7:
+        return QColor(92, 58, 147);    //violet dioxazine
+        break;
+    case 8:
+        return QColor(34, 120, 15);    //vert de vessie
+        break;
+    case 9:
+        return QColor(223, 175, 44);     //jaune ocre
+        break;
+    case 10:
+        return QColor(248, 235, 0);    // jaune cadmium
+        break;
+    case 11:
+        return QColor(88, 65, 15);    //jaune indien
+        break;
+    case 12:
+        return QColor(218, 40, 41);     //rouge pyrol
+        break;
+    case 13:
+        return QColor(103, 113, 121);      //gris de payne
+        break;
+    case 14:
+        return QColor(69, 73, 78);     //GRIS DE GRAPHITE  
+        break;
+    case 15:
+        return QColor(8, 24, 31);     //violet quiller
         break;
     }
 }

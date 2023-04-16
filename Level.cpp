@@ -84,7 +84,7 @@ void Level::checkColl_DOWN_RIGHT(Balle* b, std::vector <Powerups*>& p, Controlle
 }
 void Level::checkColl_DOWN_LEFT(Balle* b,std::vector <Powerups*>& p, Controller& c){
     int i_max = (b->getPos().y / BrickHeigth) + 2;
-    int j_max = (b->getPos().x / BrickLength) - 1;
+    int j_max = (b->getPos().x / BrickLength) - 2;
     if (i_max > rows )
         i_max = rows;
     if (j_max < 0)
@@ -140,7 +140,7 @@ void Level::checkColl_DOWN_LEFT(Balle* b,std::vector <Powerups*>& p, Controller&
     }
 }
 void Level::checkColl_UP_RIGHT(Balle* b, std::vector <Powerups*>& p, Controller& c){
-    int i_max = (b->getPos().y / BrickHeigth) - 1;
+    int i_max = (b->getPos().y / BrickHeigth) - 2;
     int j_max = (b->getPos().x / BrickLength) + 2;
     if (i_max < 0)
         i_max = 0;
@@ -196,8 +196,8 @@ void Level::checkColl_UP_RIGHT(Balle* b, std::vector <Powerups*>& p, Controller&
     }
 }
 void Level::checkColl_UP_LEFT(Balle* b, std::vector <Powerups*>& p, Controller& c){
-    int i_max = (b->getPos().y / BrickHeigth) - 1;
-    int j_max = (b->getPos().x / BrickLength) - 1;
+    int i_max = (b->getPos().y / BrickHeigth) - 2;
+    int j_max = (b->getPos().x / BrickLength) - 2;
     if (i_max < 0)
         i_max = 0;
     if (j_max < 0)
