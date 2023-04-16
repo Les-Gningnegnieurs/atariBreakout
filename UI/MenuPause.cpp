@@ -38,7 +38,7 @@ void MenuPause::initUI()
 	QObject::connect(_button1, &QPushButton::clicked, this, &MenuPause::resumeRequested);
 	addWidget(_button1);
 	CustomButton* _button2 = _utils->add_button("quit.png", nullptr);
-	_button2->move(x + lab->width() / 2 - _button2->width(), imageY);
+	_button2->move(x + (_button1->width() -_button2->width()) /2, imageY);
 	addWidget(_button2);
 	//qDebug() << _score;
 	QObject::connect(_button2, &QPushButton::clicked, this, &MenuPause::menuRequested);
