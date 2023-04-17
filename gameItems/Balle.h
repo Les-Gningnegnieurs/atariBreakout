@@ -28,7 +28,7 @@ private:
 
     QBrush getRandColor(int rand);
 public:
-    Balle(QGraphicsScene* scene, Position posB, int radius, int speedX =-1, int speedY=-4, int rand = 5);
+    Balle(QGraphicsScene* scene, Position posB, int radius, int speedX =-1, int speedY=-6, int rand = 5);
     Balle(LevelInfos I, QGraphicsScene* scene, int rand = 5);
     ~Balle();
     void setVelocity(int x, int y);

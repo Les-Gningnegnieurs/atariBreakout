@@ -152,12 +152,11 @@ void Brique::draw(){
 void Brique::addPowerUp(std::vector<Powerups*>& p, QGraphicsScene* _scene, Controller& c) {
     std::uniform_real_distribution<double> distribution(0, 99);
     std::default_random_engine generator(rd());
-    //int y = distribution(generator);
-     int y = 1;
+    int y = distribution(generator);
+    
     _etat = Destroyed;
     if (y <= c.getRand() * 5) { //y<=20
-        int x = 2;
-        //int x = c.getRand();
+        int x = c.getRand();
         switch (x%3){ //x%3
             case 0:
                 p.push_back(new Swapcontrol(_scene,_posBrique));

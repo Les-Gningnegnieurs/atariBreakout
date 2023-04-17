@@ -2,7 +2,7 @@
 #define EXTENDPLATFORM_H
 #define EXTENDFACTOR 1.5
 #define MAXSIZE 473
-#define MINSIZE 140
+#define MINSIZE 90
 #include "Powerups.h"
 
 class Extendplatform :public Powerups {
