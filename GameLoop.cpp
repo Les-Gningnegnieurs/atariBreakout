@@ -50,11 +50,15 @@ void GameLoop::Start() {
 void GameLoop::Pause()
 {
     timer->stop();
+    _controller->setPower(0);
+
 }
 
 void GameLoop::Stop() {
     _controller->setReverse(false);
     timer->stop();
+    _controller->setPower(0);
+
     //_window->showMenu();
 }
 
@@ -77,6 +81,10 @@ void GameLoop::GameOver() {
         _controller->setReverse(false);
         Stop();
         over = true;
+        for (int i = 0; i < 10; i++)
+        {
+            _controller->setBargraph(i, 0);
+        }
         emit gameOver(_canevas->get_score() + _score);
         _score = 0;
     }
@@ -153,6 +161,10 @@ void GameLoop::IsgameCompleted()
     if (_canevas->isCompleted())
     {
         Stop();
+        for(int i=0;i<10;i++)
+        {
+            _controller->setBargraph(i, 0);
+        }
         _score += _canevas->get_score();
         emit gameCompleted(_score);
     }
@@ -161,6 +173,7 @@ void GameLoop::IsgameCompleted()
 void GameLoop::Resume()
 {
     timer->start();
+    _controller->setPower(1);
 }
 
 void GameLoop::nextLevel()
