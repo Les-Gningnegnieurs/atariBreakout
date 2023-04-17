@@ -62,9 +62,9 @@ void Plateforme::setLenght(int powerup, int l)
     }
     else if (powerup == 1)
     {
-        if (sizeX == 90 && reverseactive == true)
+        if (sizeX == 140 && reverseactive == true)
             rect = new Plati(sizeX, sizeY, "ressources/bar4.png");
-        else if (sizeX == 90)
+        else if (sizeX == 140)
             rect = new Plati(sizeX, sizeY);
         else if(reverseactive == true)
             rect = new Plati(sizeX, sizeY, "ressources/bar4.png");
