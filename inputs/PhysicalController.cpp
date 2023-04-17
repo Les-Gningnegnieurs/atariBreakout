@@ -73,6 +73,10 @@ bool PhysicalController::sendOutputs() {
     }
     else {
         qDebug() << j_msg_send.dump().c_str() << "\n";
+        for (int i = 0; i < 2; i++)
+        {
+            SendToSerial(_arduino, j_msg_send);
+        }
         return SendToSerial(_arduino, j_msg_send);
     }
 }
