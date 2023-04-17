@@ -1,5 +1,5 @@
 #include "Balle.h"
-Balle::Balle(LevelInfos I, QGraphicsScene* scene, int randi) :_scene(scene)
+Balle::Balle(LevelInfos I, QGraphicsScene* scene, int rand) :_scene(scene)
 {
     pos.x = I.pos_Ball_iniX;
     pos.y = I.pos_Ball_iniY;
@@ -11,10 +11,10 @@ Balle::Balle(LevelInfos I, QGraphicsScene* scene, int randi) :_scene(scene)
     MaxSpeed = I.maxspeed_B;
     circle = new QGraphicsEllipseItem(0,0,rayon*2,rayon*2);
     circle->setPos(pos.x, pos.y);
-    circle->setBrush(getRandColor(randi));
+    circle->setBrush(getRandColor(rand));
     _scene->addItem(circle);
 }
-Balle::Balle(QGraphicsScene* scene, Position posB, int radius, int speedX, int speedY, int randi) :_scene(scene) {
+Balle::Balle(QGraphicsScene* scene, Position posB, int radius, int speedX, int speedY, int rand) :_scene(scene) {
     pos.x = posB.x;
     pos.y = posB.y;
     oldPosX = pos.x;
@@ -25,7 +25,7 @@ Balle::Balle(QGraphicsScene* scene, Position posB, int radius, int speedX, int s
     MaxSpeed = sqrt(pow(speed.x, 2) + pow(speed.y, 2));
     circle = new QGraphicsEllipseItem(0,0,rayon*2, rayon*2);
     circle->setPos(pos.x, pos.y);
-    circle->setBrush(getRandColor(randi * rand()));
+    circle->setBrush(getRandColor(rand));
     _scene->addItem(circle);
 }
 
