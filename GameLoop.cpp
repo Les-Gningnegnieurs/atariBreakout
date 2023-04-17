@@ -176,6 +176,8 @@ void GameLoop::Resume()
 
     timer->start();
     _controller->setPower(1);
+    _controller->receiveInputs();
+
 }
 
 void GameLoop::nextLevel()
@@ -184,6 +186,8 @@ void GameLoop::nextLevel()
     _controller->resetButton();
     _controller->resetJoystick();
     _controller->setPower(1);
+    _controller->receiveInputs();
+
     _canevas->erase();
 
 

@@ -226,7 +226,7 @@ void GameLogic:: update(Controller& c, bool accelmode)
                 _powers[i]->resetPowerups(_balls, _platform, c);
             delete _powers[i];
            _powers.erase(_powers.begin() + i);
-            reset_virtual_bargraph();
+
             
         }
     }
@@ -240,6 +240,11 @@ void GameLogic:: update(Controller& c, bool accelmode)
     draw();
     if (!foundTimer)
     {
+        reset_virtual_bargraph();
+        for (int i = 0; i < 10; i++)
+        {
+            c.setBargraph(i, 0);
+        }
         if (c.statusLed(0))
             c.TurnOffLed(0);
 
