@@ -31,7 +31,7 @@ void MyRect::keyPressEvent(QKeyEvent *event) {
 }
 Plati::Plati(int plat_length, int plat_heigth, QString filepath) {
 	setPos(0, 0);
-	QPixmap pixmap(filepath);
+ 	QPixmap pixmap(filepath);
 	QPixmap scaledPixmap = pixmap.scaled(plat_length, plat_heigth, Qt::KeepAspectRatioByExpanding);
 	setPixmap(scaledPixmap);  
 }
