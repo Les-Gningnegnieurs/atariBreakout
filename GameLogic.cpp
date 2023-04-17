@@ -246,9 +246,9 @@ void GameLogic:: update(Controller& c, bool accelmode)
             c.setBargraph(i, 0);
         }
        
-            c.TurnOffLed(0);
+        c.setLED(0, 0, 0, 0);
 
-            c.TurnOffLed(1);
+        c.setLED(1, 0, 0, 0);
     }
    
 }
