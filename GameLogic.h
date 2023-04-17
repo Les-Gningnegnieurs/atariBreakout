@@ -39,6 +39,8 @@ private:
     Score* _score;
     QGraphicsRectItem* _rect;
     QGraphicsRectItem* array[20];
+    QGraphicsPixmapItem* expand_img;
+    QGraphicsPixmapItem* swap_img;
     bool waiting = false;
  
 
@@ -59,6 +61,7 @@ public:
     void setvirtualbargraph(Controller& c);
     void reset_virtual_bargraph();
     friend std::istream& operator>>(std::istream& s, GameLogic &gl);
+    void powerup_img(std::string power, bool on=true);
 };
 
 
