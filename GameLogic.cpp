@@ -240,15 +240,14 @@ void GameLogic:: update(Controller& c, bool accelmode)
     draw();
     if (!foundTimer)
     {
-        reset_virtual_bargraph();
+        setvirtualbargraph(c); 
         for (int i = 0; i < 10; i++)
         {
             c.setBargraph(i, 0);
         }
-        if (c.statusLed(0))
+       
             c.TurnOffLed(0);
 
-        if (c.statusLed(1))
             c.TurnOffLed(1);
     }
    
