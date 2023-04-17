@@ -63,3 +63,4 @@ debug/
 *.vcxproj.*
 *.sln
 *.suo
+config/game.config
