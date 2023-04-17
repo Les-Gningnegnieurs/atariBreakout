@@ -31,6 +31,7 @@ void GameLoop::Start() {
     over = false;
     _controller = _menu.Get_Controller();
     _controller->setPower(true);
+    _controller->sendOutputs();
  
     _score = 0;
     _canevas->erase();
@@ -51,6 +52,7 @@ void GameLoop::Pause()
 {
     timer->stop();
     _controller->setPower(0);
+    _controller->sendOutputs();
 
 }
 
@@ -58,6 +60,7 @@ void GameLoop::Stop() {
     _controller->setReverse(false);
     timer->stop();
     _controller->setPower(0);
+    _controller->sendOutputs();
 
     //_window->showMenu();
 }
@@ -67,6 +70,8 @@ void GameLoop::Restart()
    
     _canevas->resetScore();
     _canevas->erase();
+    _controller->setPower(1);
+    _controller->sendOutputs();
 
     loadFile();
     over = false;
@@ -85,6 +90,9 @@ void GameLoop::GameOver() {
         _controller->resetJoystick();
 
         _controller->setReverse(false);
+        _controller->setPower(0);
+        _controller->sendOutputs();
+   
         Stop();
         over = true;
         for (int i = 0; i < 10; i++)
@@ -181,6 +189,7 @@ void GameLoop::Resume()
     _controller->setPower(1);
     _controller->receiveInputs();
     _controller->resetButton();
+    _controller->sendOutputs();
 
     timer->start();
 
@@ -196,6 +205,7 @@ void GameLoop::nextLevel()
     _controller->resetAccel();
     _controller->resetButton();
     _controller->resetJoystick();
+    _controller->sendOutputs();
 
     _canevas->erase();
 
