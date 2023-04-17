@@ -78,6 +78,12 @@ void GameLoop::Restart()
 void GameLoop::GameOver() {
     if (_canevas->Is_GameOver())
     {
+      
+        _controller->receiveInputs();
+        _controller->resetAccel();
+        _controller->resetButton();
+        _controller->resetJoystick();
+
         _controller->setReverse(false);
         Stop();
         over = true;
@@ -172,21 +178,23 @@ void GameLoop::IsgameCompleted()
 
 void GameLoop::Resume()
 {
+    _controller->receiveInputs();
     _controller->resetButton();
 
     timer->start();
     _controller->setPower(1);
-    _controller->receiveInputs();
+    
 
 }
 
 void GameLoop::nextLevel()
 {
+   
+    _controller->setPower(1);
+    _controller->receiveInputs();
     _controller->resetAccel();
     _controller->resetButton();
     _controller->resetJoystick();
-    _controller->setPower(1);
-    _controller->receiveInputs();
 
     _canevas->erase();
 
