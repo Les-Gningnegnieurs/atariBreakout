@@ -87,4 +87,23 @@ Controller::Controller(){
 Controller::~Controller(){}
 
 
+void Controller::resetJoystick()
+{
+    _joystick.x = 0;
+    _joystick.y = 0;
+}
 
+void Controller::resetButton()
+{
+    _buttons[0] = 0;
+    _buttons[1] = 0;
+    _buttons[2] = 0;
+    _buttons[3] = 0;
+}
+
+void Controller::resetAccel()
+{
+    _accelerometre.x = 0;
+    _accelerometre.y = 0;
+    _accelerometre.z = 0;
+}

@@ -172,12 +172,18 @@ void GameLoop::IsgameCompleted()
 
 void GameLoop::Resume()
 {
+    _controller->resetButton();
+
     timer->start();
     _controller->setPower(1);
 }
 
 void GameLoop::nextLevel()
 {
+    _controller->resetAccel();
+    _controller->resetButton();
+    _controller->resetJoystick();
+    _controller->setPower(1);
     _canevas->erase();
 
 
