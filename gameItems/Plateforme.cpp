@@ -31,7 +31,7 @@ void Plateforme::move2() {
 }
 void Plateforme::move(int joystickvalueX)
 {
-    speed.x = joystickvalueX*12;
+    speed.x = joystickvalueX*8;
 }
 
 void Plateforme::update()

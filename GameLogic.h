@@ -39,9 +39,10 @@ private:
     Score* _score;
     QGraphicsRectItem* _rect;
     QGraphicsRectItem* array[20];
+    bool waiting = false;
  
 
-    void checkCollisions(Controller& control);
+    void checkCollisions(Controller& control, bool accelmode);
 public:
     GameLogic(QGraphicsScene* scene);
     GameLogic(LevelInfos _info, QGraphicsScene* scene);

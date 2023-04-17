@@ -203,7 +203,7 @@ void GameLogic:: update(Controller& c, bool accelmode)
     {
         _balls[i]->update();
     }
-    checkCollisions(c);
+    checkCollisions(c, accelmode);
     draw();
     if (!foundTimer)
     {
@@ -234,7 +234,7 @@ bool GameLogic::isGameOver()
 //Retirer les valeurs de limite hardcodé et enovyer balle en reference 
 //dans les check collision pour utiliser leur vélocité pour savoir d'ou elles arrivent pour le check colision
 //et determiner l'angle de renvoi
-void GameLogic::checkCollisions(Controller &control) {
+void GameLogic::checkCollisions(Controller &control, bool accelmode) {
     Position pos;
 
     for (int i = 0; i < _powers.size(); i++)
@@ -310,18 +310,34 @@ void GameLogic::checkCollisions(Controller &control) {
     }
     if(_balls.empty())
     {
-        _livesLeft--;
-        if (_livesLeft == 2)
-            delete _vies3;
-        else if (_livesLeft == 1)
-            delete _vies2;
-        else if (_livesLeft == 0)
-            delete _vies1;
+        if (!waiting)
+        {
+            _livesLeft--;
+            if (_livesLeft == 2 && _vies3 != nullptr)
+                delete _vies3;
+            else if (_livesLeft == 1 && _vies2 != nullptr)
+                delete _vies2;
+            else if (_livesLeft == 0 && _vies1 != nullptr)
+                delete _vies1;
+        }
         Position posb; 
-        posb.x = _info.pos_Ball_iniX; 
+        //posb.x = _info.pos_Ball_iniX; 
         posb.y = _info.pos_Ball_iniY ;
-        Balle* p1 = new Balle(_scene, posb,_info.ball_radius, _info.speed_B_x, _info.speed_B_y, control.getRand());
-        _balls.push_back(p1);
+        posb.x = _platform.getPos().x + _platform.getLenght()/2;
+        waiting = true;
+        if (control.getButton(0) == 1)
+        {
+            //control.receiveInputs();
+            //if (accelmode)
+            //    _platform.move(control.getAccelerometre().x);
+            //else
+            //    _platform.move(control.getJoystick().x);
+            //_platform.update(); //update la position
+            //_platform.draw();
+            Balle* p1 = new Balle(_scene, posb, _info.ball_radius, _info.speed_B_x, _info.speed_B_y, control.getRand());
+            _balls.push_back(p1);
+            waiting = false;
+        }
     }
 
 }
