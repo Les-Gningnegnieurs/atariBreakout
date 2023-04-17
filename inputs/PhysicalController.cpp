@@ -1,4 +1,5 @@
 #include "PhysicalController.h"
+#include <QDebug>
 
 PhysicalController::PhysicalController(std::string com){
     _com = com;
@@ -9,13 +10,16 @@ PhysicalController::PhysicalController(std::string com){
     {
         _bargraph.status[i] = 0;
     }
+
     sendOutputs();
 }
 
 PhysicalController::~PhysicalController() {
-    _outputChanged.power = true;
+    _outputChanged.power = false;
     power.power = false;
     sendOutputs();
+    //_arduino->closeSerial();
+    delete _arduino;
 }
 
 bool PhysicalController::ConnectionStatus(){
@@ -33,7 +37,7 @@ bool PhysicalController::sendOutputs() {
     json j_msg_send;
     if (_outputChanged.power)
     {
-        j_msg_send["s"] = power.power;
+        j_msg_send["s"] = power.power ? 1 : 0;
         _outputChanged.power = false;
     }
 
@@ -67,8 +71,10 @@ bool PhysicalController::sendOutputs() {
         j_msg_send["t"] = 0;
         SendToSerial(_arduino, j_msg_send);
     }
-    else
+    else {
+        qDebug() << j_msg_send.dump().c_str() << "\n";
         return SendToSerial(_arduino, j_msg_send);
+    }
 }
 
 bool PhysicalController::receiveInputs(){
@@ -76,13 +82,14 @@ bool PhysicalController::receiveInputs(){
     json j_msg_rcv;
     std::string raw_msg;
     // Reception d'un message venant du Arduino
-    if(!RcvFromSerial(_arduino, raw_msg)){
-        return false;
-    }
+    if(RcvFromSerial(_arduino, raw_msg)){
+        //qDebug() << "msg pas complet : " << raw_msg.c_str() << "\n";
+        //return false;
+    //}****
 
-
+     qDebug() << "input : " << raw_msg.c_str() << "\n";
     // Impression du message de l'Arduino si valide
-    if(raw_msg.size()>0){
+    //if(raw_msg.size()>0){*******
     // Transfert du message en json
         if (raw_msg.find('{') == std::string::npos || raw_msg.find('}') == std::string::npos)
             return false;
@@ -110,11 +117,18 @@ bool PhysicalController::receiveInputs(){
         _joystick.x = j_msg_rcv["j"][0] != 0 ? j_msg_rcv["j"][0] > 0 ? 1 : -1 : 0;
         _joystick.y = j_msg_rcv["j"][1] != 0 ? j_msg_rcv["j"][1] > 0 ? 1 : -1 : 0;
 
+
         if (_reversemode)
         {
             _joystick.x = -1 * _joystick.x;
         }
     }
+
+    //Reset les bouttons
+    _buttons[0] = 0;
+    _buttons[1] = 0;
+    _buttons[2] = 0;
+    _buttons[3] = 0;
 
     //{"b": [b1,b2,b3,b4]} (0/1)
     if(j_msg_rcv["b"] != json::value_t::null){
@@ -133,6 +147,11 @@ bool PhysicalController::receiveInputs(){
         _accelerometre.y = j_msg_rcv["a"][1];
         _accelerometre.z = j_msg_rcv["a"][2];
     }
+
+    if (j_msg_rcv["r"] != json::value_t::null) {
+        _rand = j_msg_rcv["r"];
+    }
+
 
     return true;
     
@@ -155,13 +174,23 @@ bool PhysicalController::RcvFromSerial(SerialPort *arduino, std::string &msg){
     int buffer_size;
 
     msg.clear(); // clear string
+    // Read serialport until '\n' character (Blocking)
+    // cout<< arduino->readSerialPort(char_buffer, MSG_MAX_SIZE) << endl;
 
     // Version fonctionnelle dans VScode et Visual Studio
-    buffer_size = arduino->readSerialPort1(char_buffer, MSG_MAX_SIZE);
+    buffer_size = arduino->readSerialPort(char_buffer, MSG_MAX_SIZE);
     str_buffer.assign(char_buffer, buffer_size);
     msg.append(str_buffer);
+    // if (buffer_size>0)
+    //     {std::cout<<"char_buffer: "<<char_buffer<<'\n';
+    //     std::cout<<"str_buffer: "<<str_buffer<<'\n';
+    //     std::cout<<"msg avant filtre: "<<msg<<'\n';}
+    if (msg.std::string::find_last_of('{') != std::string::npos && msg.find_last_of('}') != std::string::npos && msg.size() > 0)
+    {
+        msg = msg.substr(0, msg.find('}') + 1);
+        return true;
+    }
 
- 
-
-    return true;
+    return false;
+    //return true;
 }

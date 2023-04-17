@@ -56,7 +56,33 @@ Accelerometre Controller::getAccelerometre(){
 }
 
 
-Controller::Controller(){}
+Controller::Controller(){
+    _accelerometre.x = 0;
+    _accelerometre.y = 0;
+    _accelerometre.z = 0;
+    _joystick.x = 0;
+    _joystick.y = 0;
+    for (int i = 0; i < 4; i++)
+    {
+        _buttons[i] = 0;
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        _leds[i].status = 0;
+        _leds[i].R = 0;
+        _leds[i].G = 0;
+        _leds[i].B = 0;
+        _outputChanged.leds = true;
+
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        _bargraph.status[i] = 0;
+        _outputChanged.bargraph = true;
+    }
+    power.power = false;
+    _outputChanged.power = false;
+}
 
 Controller::~Controller(){}
 

@@ -13,6 +13,9 @@
 #include "Balle.h"
 #include <vector>
 #include "Powerups.h"
+#include <QGraphicsScene>
+#include "Myrect.h"
+
 
 
 class Level{
@@ -23,12 +26,16 @@ class Level{
         int BrickHeigth;
         int BrickLength;
         Brique *_board[RESMAX_Y][RESMAX_X];
+        QGraphicsScene* _scene;
+        Score* _score;
+        int maxScore;
+
     public:
-        Level(LevelInfos I);
+        Level(LevelInfos I, Score* score, QGraphicsScene* scene);
         Level();
         ~Level();
 
-        void draw(char UI[RESMAX_Y][RESMAX_X]);
+        void draw();
 
         void setRows(int rows);
 
@@ -40,15 +47,17 @@ class Level{
 
         int getHeigth();
 
+        int getmaxScore() { return maxScore; }
+
         int getLength();
         int I(int i_start, int i_end, int i);
         int J(int j_start, int j_end, int j);
 
-        void checkColl_DOWN_RIGHT(Balle* b, int& score, std::vector <Powerups*>& p);
-        void checkColl_DOWN_LEFT(Balle* b, int& score, std::vector <Powerups*>& p);
-        void checkColl_UP_RIGHT(Balle* b, int& score, std::vector <Powerups*>& p);
-        void checkColl_UP_LEFT(Balle* b, int& score, std::vector <Powerups*>& p);
-        void checkCollision(Balle *b, int& score,std::vector <Powerups*> &p);
+        void checkColl_DOWN_RIGHT(Balle* b, std::vector <Powerups*>& p, Controller& c);
+        void checkColl_DOWN_LEFT(Balle* b, std::vector <Powerups*>& p, Controller& c);
+        void checkColl_UP_RIGHT(Balle* b, std::vector <Powerups*>& p, Controller& c);
+        void checkColl_UP_LEFT(Balle* b, std::vector <Powerups*>& p, Controller& c);
+        void checkCollision(Balle *b, std::vector <Powerups*> &p, Controller& c);
 
         Brique* getBrique(int row_idx, int column_idx); //utile pour set le level au debut
 
@@ -56,7 +65,6 @@ class Level{
 
 
         void afficher(std::ostream& s);
-        void levelDrawline(std::ostream &s,int ligne );
 
 
         friend std::istream& operator >>(std::istream& s, Level& I);

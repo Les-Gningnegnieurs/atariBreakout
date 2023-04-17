@@ -66,6 +66,8 @@ bool Keyboard::receiveInputs(){
         _joystick.x = -1 * _joystick.x;
     }
 
+    _rand = rand() % 10;
+
     return true;
 };
 
@@ -73,3 +75,24 @@ bool Keyboard::sendOutputs(){
     //do nothing
     return false;
 }
+
+//void Keyboard::keyPressEvent(QKeyEvent* event) {
+//    if (event->key() == Qt::Key_Left)
+//        _joystick.x = -1;
+//    else if (event->key() == Qt::Key_Right)
+//        _joystick.x = 1;
+//    else if (event->key() == Qt::Key_Up)
+//        _joystick.y = -1;
+//    else if (event->key() == Qt::Key_Down)
+//        _joystick.y = 1;
+//}
+//void Keyboard::keyReleaseEvent(QKeyEvent* event) 
+//{
+//    if (event->key() == Qt::Key_Left || event->key() == Qt::Key_Right)
+//        _joystick.x = 0;
+//    else if (event->key() == Qt::Key_Up || event->key() == Qt::Key_Down)
+//        _joystick.y = 0;
+//
+//    // Handle button events
+//    // ...
+//}

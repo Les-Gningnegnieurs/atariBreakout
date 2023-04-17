@@ -2,126 +2,127 @@
 
 #include "GameLoop.h"
 
-GameLoop::GameLoop() {
+GameLoop::GameLoop(QApplication* app, QObject* parent) : QObject(parent) {   
     _canevas = new Canevas();
+    _window = new MainWindow(app, nullptr, _canevas->getScene(),&_menu);
     _controller = new Keyboard();
+    //_controller = new PhysicalController("com4");
     _menu.Set_Controller(_controller);
-    _gameState = Starting;
-    loadFile();
+
+    _gameState = gameState(0);
     over = false;
+
+    timer = new QTimer();
+    timer->setInterval(SLEEP);
+    QObject::connect(timer, &QTimer::timeout, this, &GameLoop::MainGameLoop);
+    QObject::connect(_window, &MainWindow::startGame, this,&GameLoop::Start);
+    QObject::connect(this, &GameLoop::gameOver, _window, &MainWindow::showGameOver);
+    QObject::connect(_window, &MainWindow::restartGame, this, &GameLoop::Restart);
+    QObject::connect(this, &GameLoop::pauseRequested, _window, &MainWindow::showPauseMenu);
+    QObject::connect(this, &GameLoop::gameCompleted, _window, &MainWindow::showGameCompleted);
+    QObject::connect(_window, &MainWindow::resumeGame, this, &GameLoop::Resume);
+    QObject::connect(_window, &MainWindow::nextLevelRequested, this, &GameLoop::nextLevel);
+    
 }
 
 void GameLoop::Start() {
 
-    while (!_menu.Is_over())
-    {
-        _menu.print(std::cout);
-    }
-
+    
+    over = false;
     _controller = _menu.Get_Controller();
     _controller->setPower(true);
-
-
+ 
+    _score = 0;
     _canevas->erase();
-    if (_menu.Is_playing())
-        _gameState = Running;
-    else
-        Stop();
+   
+    
+    loadFile();
+    _window->updateScene(_canevas->getScene());
+    
+     timer->start();
+    
+   
+
+    //_window->showGame();
 }
 
 
 void GameLoop::Pause()
 {
-    _gameState = Paused;
+    timer->stop();
+    _controller->setPower(0);
+
 }
 
 void GameLoop::Stop() {
-    _gameState = Stopped;
+    _controller->setReverse(false);
+    timer->stop();
+    _controller->setPower(0);
+
+    //_window->showMenu();
 }
 
 void GameLoop::Restart()
 {
+   
     _canevas->resetScore();
-    _gameState = Starting;
+    _canevas->erase();
+
     loadFile();
     over = false;
-    _menu.Reset();
+    _window->updateScene(_canevas->getScene());
+    timer->start();
 
 }
 
 void GameLoop::GameOver() {
     if (_canevas->Is_GameOver())
     {
+        _controller->setReverse(false);
         Stop();
-        _canevas->erase();
         over = true;
+        for (int i = 0; i < 10; i++)
+        {
+            _controller->setBargraph(i, 0);
+        }
+        emit gameOver(_canevas->get_score() + _score);
+        _score = 0;
     }
-
-
-
 }
-#include <conio.h>
-void GameLoop::update() {
-    if (_gameState == Starting)
-        Start();
 
+void GameLoop::update() {
+  
     _controller->receiveInputs();
     
-    if (_gameState == Running) {
-        _canevas->update(*_controller, _menu.Is_modeAccelerometer());
-        if (_controller->getButton(2))
-        {
-            
-
-
-            std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
-            std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
-            std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
-            std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
-            std::cout << std::endl << std::endl << "Paused\t" << "ESC : Resume\t" << "ENTER : QUIT";
-
-            Sleep(200);
-            _controller->receiveInputs();
+     
+    _canevas->update(*_controller, _menu.Is_modeAccelerometer());
+        
+        
            
-            while (!_controller->getButton(2) && !_controller->getButton(1))
-            {
+           
                 
-                _controller->receiveInputs();
+               
                
 
-            }
-            if (_controller->getButton(1))
-            {
-                Stop();
-                _canevas->erase();
-                over = true;
-            }
+            
+     if (_controller->getButton(2))
+     {
+          Pause();
+          emit pauseRequested(_canevas->get_score());
+          
 
-            Sleep(150);
-            system("CLS");
-
-
-        }
-    }
+     }
+        
+    
     GameOver();
+    IsgameCompleted();
 
-    /*if (bg >= 10)
-        bg = 0;
-    else
-        bg++;
- 
-    for (int i = 0; i < 10; i++) {
-        if (i < bg)
-            _controller->setBargraph(i, 1);
-        else
-            _controller->setBargraph(i, 0);
-    }
-    Sleep(1000);*/
     _controller->sendOutputs();
 }
 
 void GameLoop::loadFile() {
     int value = _menu.Get_Level();
+  
     std::stringstream str;
     std::string levelPath;
     str << "level/" << value << ".txt";
@@ -133,6 +134,56 @@ void GameLoop::loadFile() {
 
 void GameLoop::draw()
 {
-    _canevas->draw(std::cout);
+    _canevas->draw();
 }
 
+void GameLoop::startGameLoop() {
+    Start();
+}
+
+void GameLoop::stopGameLoop() {
+    //� v�rifier
+    timer->stop();
+}
+
+
+void GameLoop::MainGameLoop() {
+    if (!over) {
+        update();
+    }
+    else {
+        Restart();
+    }
+}
+
+void GameLoop::IsgameCompleted()
+{
+    if (_canevas->isCompleted())
+    {
+        Stop();
+        for(int i=0;i<10;i++)
+        {
+            _controller->setBargraph(i, 0);
+        }
+        _score += _canevas->get_score();
+        emit gameCompleted(_score);
+    }
+}
+
+void GameLoop::Resume()
+{
+    timer->start();
+    _controller->setPower(1);
+}
+
+void GameLoop::nextLevel()
+{
+    _canevas->erase();
+
+
+    loadFile();
+    _window->updateScene(_canevas->getScene());
+
+    timer->start();
+
+}
