@@ -178,11 +178,12 @@ void GameLoop::IsgameCompleted()
 
 void GameLoop::Resume()
 {
+    _controller->setPower(1);
     _controller->receiveInputs();
     _controller->resetButton();
 
     timer->start();
-    _controller->setPower(1);
+
     
 
 }
