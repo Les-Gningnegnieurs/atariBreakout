@@ -2,7 +2,7 @@
 
 BriqueB::BriqueB(int x, int y, int l, int h) {
     setRect(0,0,l,h);
-    setBrush(Qt::cyan);
+    setBrush(QColor(64, 224, 208));
     _posBrique.x = x;
     _posBrique.y = y;
     _sizeX = l;

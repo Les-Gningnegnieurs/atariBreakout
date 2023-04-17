@@ -38,7 +38,7 @@ Plati::Plati(int plat_length, int plat_heigth, QString filepath) {
 
 Score::Score(QGraphicsItem* parent) : QGraphicsTextItem(parent) {
 	score = 0;
-	setPlainText(QString("Score: ") + QString::number(score));
+	setPlainText(QString("SCORE: ") + QString::number(score));
 	setDefaultTextColor(Qt::black);
 	QFont font("Ad Lib BT", 14);
 	font.setBold(true);
@@ -46,7 +46,7 @@ Score::Score(QGraphicsItem* parent) : QGraphicsTextItem(parent) {
 }
 void Score::increase() {
 	score+=100;
-	setPlainText(QString("Score: ") + QString::number(score));
+	setPlainText(QString("SCORE: ") + QString::number(score));
 }	
 void Score::resetScore() {
 	score = 0;

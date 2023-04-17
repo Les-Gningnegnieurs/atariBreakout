@@ -46,7 +46,7 @@ void SelectLevel::initUI()
 
 	addWidget(_images[4]);
 
-	_images[5] = utils->add_button("level_1.png", temp);
+	_images[5] = utils->add_button("level_6.png", temp);
 	_images[5]->move(4* this->width() / 5 - _images[5]->width() / 2 + offset, imageY);
 	addWidget(_images[5]);
 	QObject::connect(_images[5], &QPushButton::clicked, this, &SelectLevel::level6Requested);

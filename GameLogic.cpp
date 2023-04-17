@@ -76,10 +76,12 @@ GameLogic:: GameLogic(LevelInfos i, QGraphicsScene* scene) : _scene(scene)
 
     _balls.push_back(new Balle(_info, _scene));
     QGraphicsTextItem* VIES = new QGraphicsTextItem();
-    VIES->setPlainText(QString("Health: "));
+    VIES->setPlainText(QString("VIES: "));
     VIES->setDefaultTextColor(Qt::red);
-    VIES->setFont(QFont("Helvetica", 14));
-    VIES->setPos(10, i._windowResolutionY - 70);
+    QFont font("Helvetica", 14);
+    font.setBold(true);
+    VIES->setFont(font);
+    VIES->setPos(13, i._windowResolutionY - 70);
     scene->addItem(VIES);
     _vies1 = new Health();
     _vies2 = new Health();
@@ -116,6 +118,19 @@ void GameLogic::init_virtual_bar() {
         _scene->addItem(array[j]);
         array[j]->hide();
     }
+    QPixmap pixmap("ressources/expand_plat.png");
+    QPixmap scaledPixmap = pixmap.scaled(35, 25, Qt::KeepAspectRatioByExpanding);
+    expand_img = new QGraphicsPixmapItem(scaledPixmap);
+    expand_img->setPos(starting + 40, _info._windowResolutionY - 145);
+    _scene->addItem(expand_img);
+    expand_img->hide();
+
+    QPixmap pixmap2("ressources/reverse_control.png");
+    QPixmap scaledPixmap2 = pixmap2.scaled(36, 30, Qt::KeepAspectRatioByExpanding);
+    swap_img = new QGraphicsPixmapItem(scaledPixmap2);
+    swap_img->setPos(starting + 180, _info._windowResolutionY - 148);
+    _scene->addItem(swap_img);
+    swap_img->hide();
 }
 GameLogic::~GameLogic(){
     for (int i = 0; i < _powers.size(); i++)
@@ -129,6 +144,23 @@ void GameLogic::update2() {
     /*_plat->setFlag(QGraphicsItem::ItemIsFocusable);
     _plat->setFocus();*/
     _scene->setFocusItem(_platform.getplat());
+}
+void GameLogic::powerup_img(std::string power, bool on){
+    if(power=="Extendplatform")
+    {
+        if (on)
+            expand_img->show();
+
+        else
+            expand_img->hide();
+    }
+    else if (power == "Swapcontrol")
+    {
+        if (on)
+            swap_img->show();
+        else
+            swap_img->hide();
+    }
 }
 void GameLogic:: update(Controller& c, bool accelmode)
 {
@@ -145,7 +177,7 @@ void GameLogic:: update(Controller& c, bool accelmode)
         _powers[i]->update();
         if (_powers[i]->getState() == Active && _powers[i]->getLedinfo().hasTimer && !foundTimer)
         {
-
+            powerup_img(_powers[i]->getName(), true);
             if (c.statusLed(0) || c.statusLed(1)) {
                 c.setLED(0, 0, 0, 0, 0);
                 c.setLED(1, 0, 0, 0, 0);
@@ -189,11 +221,12 @@ void GameLogic:: update(Controller& c, bool accelmode)
         
         if (_powers[i]->getState() == Done || _powers[i]->getState() == OutOfBounds)
         {
+            powerup_img(_powers[i]->getName(), false);
             if (_powers[i]->getState() == Done)
                 _powers[i]->resetPowerups(_balls, _platform, c);
             delete _powers[i];
            _powers.erase(_powers.begin() + i);
-            reset_virtual_bargraph();
+
             
         }
     }
@@ -207,11 +240,15 @@ void GameLogic:: update(Controller& c, bool accelmode)
     draw();
     if (!foundTimer)
     {
-        if (c.statusLed(0))
-            c.TurnOffLed(0);
+        setvirtualbargraph(c); 
+        for (int i = 0; i < 10; i++)
+        {
+            c.setBargraph(i, 0);
+        }
+       
+        c.setLED(0, 0, 0, 0);
 
-        if (c.statusLed(1))
-            c.TurnOffLed(1);
+        c.setLED(1, 0, 0, 0);
     }
    
 }
