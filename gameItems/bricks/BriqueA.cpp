@@ -1,14 +1,14 @@
 #include "BriqueA.h"
 
 BriqueA::BriqueA(int x, int y, int l, int h) {
-    setBrush(Qt::blue);
+    setRect(0, 0, l, h);
+    setBrush(QColor(92, 58, 147));
     _posBrique.x = x;
     _posBrique.y = y;
     _sizeX = l;
     _sizeY = h;
     _PV = 1;
     _etat = Alive;
-    setRect(x, y, l, h);
 
     //length et height peut-etre a definir
 }
